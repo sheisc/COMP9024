@@ -5,7 +5,7 @@
 As suggested by the [TIOBE Index](https://www.tiobe.com/tiobe-index/), Python and C stand out as the two most 
 popular programming languages.
 
-Python provides a higher-level abstraction (e.g., garbage collection).
+Python, introduced in COMP9021, provides a higher-level abstraction (e.g., garbage collection).
 Known for its simplicity and versatility, Python has gained widespread adoption in various domains, 
 from web development and software security to AI. 
 
