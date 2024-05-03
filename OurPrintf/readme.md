@@ -93,15 +93,14 @@ int main(void) {
 ## 3. Variadic functions on a 64-bit system 
 
 Since some function arguments are passed via physical registers 
-[System V AMD64 ABI](https://en.wikipedia.org/wiki/X86_calling_conventions) 
+([System V AMD64 ABI](https://en.wikipedia.org/wiki/X86_calling_conventions))
 in AMD64 or Intel's CPU x86_64,
 the memory layout of a variadic function on a 64-bit system is much more complex.
 
 **OurPrintf32_V3()** is only used to show what's going on under the hood on a 32-bit system. 
 It is not portable.
 
-But the high-level usage of va_list, va_start, va_arg, and va_end on a 64-bit system
-is still the same as a 32-bit system.
+The high-level usage of *va_list*, *va_start*, *va_arg*, and *va_end* remains consistent between 32-bit and 64-bit systems.
 
 If we understand **OurPrintf32_V3()** and the **Call Stack**, a variadic function can be much easier to us.
 
