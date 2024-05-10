@@ -31,7 +31,8 @@ OBJ_FILES_IN_BUILD =$(subst src/,$(BUILD_DIR)/,$(TMP_OBJ_FILES))
 
 
 CC= gcc
-CFLAGS = -m32 -g -no-pie --save-temps -I $(PROJ_ROOT_PATH)/src 
+#CFLAGS = -m32 -g -no-pie --save-temps -I $(PROJ_ROOT_PATH)/src
+CFLAGS = -g -no-pie --save-temps -I $(PROJ_ROOT_PATH)/src 
 #CFLAGS = -no-pie --save-temps -fno-asynchronous-unwind-tables -I $(PROJ_ROOT_PATH)/src 
 
 # create a directory  

@@ -26,7 +26,7 @@ typedef int BiTreeNodeValue;
 
       SideTrack:
 
-            struct BiTree *root;          // root is variable.
+            struct BiTree *root;          // root is a variable.
     
   (3) The above two type definitions can be merged into one.
 
@@ -43,7 +43,7 @@ struct BiTree {
     // right sub-tree
     struct BiTree *right;
 
-    // A operand node or a operator node
+    // An operand node or an operator node
     BiTreeNodeKind kind;
     // the value of the node
     BiTreeNodeValue val;
@@ -65,7 +65,7 @@ typedef struct BiTree {
     // right sub-tree
     struct BiTree *right;
 
-    // A operand node or a operator node
+    // An operand node or an operator node
     BiTreeNodeKind kind;
     // the value of the node
     BiTreeNodeValue val;

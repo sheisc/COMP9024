@@ -2,7 +2,7 @@
 #include <stdarg.h>
 
 // 32-bit x86
-#define ON_A_32_BIT_SYSTEM
+//#define ON_A_32_BIT_SYSTEM
 
 /*
     Use va_start() and va_arg() to access the unnamed parameters of a variadic function in C.

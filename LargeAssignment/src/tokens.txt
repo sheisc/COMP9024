@@ -1,0 +1,44 @@
+#ifndef TOKEN
+#error "You must define TOKEN macro before include this file"
+#endif
+
+// TK_NA,  Not Available,just place-holder
+TOKEN(TK_NA, "")
+TOKEN(TK_ADD, "+")
+TOKEN(TK_SUB, "-")
+TOKEN(TK_MUL, "*")
+TOKEN(TK_DIV, "/")
+TOKEN(TK_ID, "id")
+TOKEN(TK_COMMA, ",")
+TOKEN(TK_NUM, "num")
+TOKEN(TK_INT,       "long")
+TOKEN(TK_LPAREN,	      "(")
+TOKEN(TK_RPAREN,        ")")
+TOKEN(TK_LBRACKET,      "[")
+TOKEN(TK_RBRACKET,      "]")
+TOKEN(TK_EOF,"EOF")
+TOKEN(TK_LBRACE,        "{")
+TOKEN(TK_RBRACE,        "}")
+TOKEN(TK_ASSIGN,        "=")
+TOKEN(TK_SEMICOLON,     ";")
+TOKEN(TK_IF,        "if")
+TOKEN(TK_ELSE,      "else")
+TOKEN(TK_WHILE,     "while")
+TOKEN(TK_RETURN,     "return")
+TOKEN(TK_DO,     "do")
+
+//	In fact, we need to define AstNodeKind for AstNode, not TokenKind here.
+//	But to keep it simple, we do use TokenKind for AstNode->op.
+TOKEN(TK_ARRAY,			"[]")
+TOKEN(TK_FUNCTION,		"()")
+TOKEN(TK_POINTER,			"*")
+TOKEN(TK_COMPOUND,		"{}")
+TOKEN(TK_GLOBAL_DECL_STMT,		"globalDeclStmt")
+TOKEN(TK_LOCAL_DECL_STMT,		"localDeclStmt")
+TOKEN(TK_LABEL,		"label")
+TOKEN(TK_INPUT,		"input")
+TOKEN(TK_OUTPUT,		"output")
+TOKEN(TK_GLOBAL_DECL_STMTS,		"globalDeclStmts")
+TOKEN(TK_CALL,		"call")
+TOKEN(TK_FUNC,		"func")
+

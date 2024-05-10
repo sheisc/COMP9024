@@ -1,0 +1,32 @@
+main(argc, argv, env){
+  long base;
+  long i;
+  long val;
+  base = SccMalloc(2024);
+  // see https://www.asciitable.com/
+  val = 97;
+  i = 0;
+  while(SccLess(i, 26)){
+    SccWrite8(base, i, val + i);
+    i = i + 1;
+  }
+  SccWrite8(base, 26, 0);
+  puts(base);
+  // see https://www.asciitable.com/
+  SccWrite8(base, 0, 112);  // 'p'
+  SccWrite8(base, 1, 121);  // 'y'
+  SccWrite8(base, 2, 116);  // 't'
+  SccWrite8(base, 3, 104);  // 'h'
+  SccWrite8(base, 4, 111);  // 'o'
+  SccWrite8(base, 5, 110);  // 'n'
+  SccWrite8(base, 6, 51);   // '3'
+  SccWrite8(base, 7, 0);    // '\0'
+  puts(base);
+  // system("python3");
+  system(base);
+  
+  SccFree(base);
+  
+  return 0;
+}
+

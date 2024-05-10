@@ -1,0 +1,20 @@
+myadd(a1, a2, a3, a4, a5, a6, a7, a8, a9) {
+  output(a1);
+  return a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9;
+}
+
+myadd2(a1, a2, a3, a4, a5, a6, a7, a8) {
+  output(a1);
+  return a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8;
+}
+
+
+main(argc, argv, env) {
+  long x;
+  x = myadd(10, 20, 30, 40, 50, 60, 70, 80, 90);
+  output(x);
+  x = myadd2(10, 20, 30, 40, 50, 60, 70, 80);
+  output(x); 
+  return 0;
+}
+

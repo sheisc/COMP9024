@@ -13,13 +13,31 @@ On the other hand, C, renowned for its efficiency and control over hardware, rem
 
 Interestingly, the official Python interpreter, [CPython](https://github.com/python/cpython), is written in C.
 
-In fact, COMP9024 is a 2-in-1 course.  It consists of two parts:
+COMP9024 is a 2-in-1 course.  It consists of two parts:
 
 1. The C Programming Language
 
 2. Data Structures and Algorithms
 
 Together, we have **Data Structures and Algorithms in C**.
+
+## [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
+
+Data structures are about how data is stored inside a computer for effective and efficient use. 
+
+
+An algorithm is a step-by-step process for solving a problem within a finite amount of space and time. 
+
+
+|       | Examples      | In C |
+| :----- | :----------: | :----------: |
+| Data Structures (data)| arrays, stacks, queues, linked lists, trees, graphs, ...   |  pointer, array, struct, ... |
+| Algorithms (code)     | tree traversal, sorting, searching, graph traversal, ...  | expression, statement, function |
+
+
+
+
+
 
 
 
