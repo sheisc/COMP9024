@@ -14,7 +14,7 @@
 
 ## 1. How to download SCC in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
-Opean a terminal (Applications -> Terminal Emulator)
+Open a terminal (Applications -> Terminal Emulator)
 
 ```sh
 
@@ -86,18 +86,18 @@ Two configuration files (LargeAssignment/.vscode/launch.json and LargeAssignment
 In launch.json, "tests/Factorial.scc" is used as the default input file for SCC.
 
 
-#### 2.1 Open the project in VS Code
+#### 4.1 Open the project in VS Code
 
 In the window of Visual Studio Code, please click "File" and "Open Folder",
 
 select the folder "COMP9024/LargeAssignment", then click the "Open" button.
 
 
-#### 2.2 Build the project in VS Code
+#### 4.2 Build the project in VS Code
 
 click **Terminal -> Run Build Task**
 
-#### 2.3 Debug the project in VS Code
+#### 4.3 Debug the project in VS Code
 
 First, please open src/main.c, and click to add a breakpoint in line 150.
 
@@ -119,7 +119,7 @@ LargeAssignment
 │   ├── SccLib.h
 │   └── TestSccHeap.c                      // For testing our heap allocator
 ├── Makefile                               // Makefile for our large assignment
-├── readme.md
+├── README.md
 ├── src                                    // The source code of SCC
 │   ├── decl.c                             // Declaration, only supporting 'long'
 │   ├── decl.h                             
@@ -140,7 +140,7 @@ LargeAssignment
 └── tests                                  // Test cases for SCC
     ├── BinaryTree.scc                     // A binary tree implemented in SCC
     ├── DoWhile.scc                        // For testing do-while 
-    ├── EnvVars.scc                        // For outputing command-line arguments and environment variables.
+    ├── EnvVars.scc                        // For outputting command-line arguments and environment variables.
     ├── Factorial.scc                      // The default test case 
     ├── Makefile                           // For cleaning the *.s and *.exe generated
     ├── MultipleArguments.scc              // For testing multiple arguments

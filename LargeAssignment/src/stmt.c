@@ -180,7 +180,7 @@ static AstStmtNodePtr ExpressionStatement(void) {
                 goto label_false
 
             Statement_1
-            goto lable_next
+            goto label_next
 
     label_false:  //  this label is saved in IfStatement.kids[0]
             Statement_2
@@ -210,7 +210,7 @@ static AstStmtNodePtr IfStatement(void) {
   if (curToken.kind == TK_ELSE) {
     NEXT_TOKEN;
     ifStmt->elseStmt = Statement();
-    // label for the statement after if-statment
+    // label for the statement after if-statement
     ifStmt->kids[1] = CreateLabelNode();
   }
 
@@ -245,7 +245,7 @@ static AstStmtNodePtr WhileStatement(void) {
   whileStmt->expr = Expression();
   Expect(TK_RPAREN);
   whileStmt->thenStmt = Statement();
-  // lable for the statement after while
+  // label for the statement after while
   whileStmt->kids[1] = CreateLabelNode();
   return whileStmt;
 }
@@ -262,7 +262,7 @@ static AstStmtNodePtr WhileStatement(void) {
             if(Expression)
                 goto label_begin
 
-        lable_next:     //  saved in DoWhileStatement.kids[1]
+        label_next:     //  saved in DoWhileStatement.kids[1]
             ....
  **********************************************/
 static AstStmtNodePtr DoWhileStatement(void) {
@@ -281,7 +281,7 @@ static AstStmtNodePtr DoWhileStatement(void) {
     Q17. call Expression() to create an AST node for the Expression in do-while, and save the return value in doWhileStmt->expr.
     Q18. call Expect() to match TK_SEMICOLON in the input file
     Q19. call Expect() to match TK_RPAREN in the input file
-    Q20. call CreateLabelNode() to create an AST node for lable_next, and save the return value in doWhileStmt->kids[1]     
+    Q20. call CreateLabelNode() to create an AST node for label_next, and save the return value in doWhileStmt->kids[1]     
    */
   ////////////////////////////////////////////////////////////////////////////////////
   //

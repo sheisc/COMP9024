@@ -1,9 +1,56 @@
 # Variadic Functions in C
 
-## 1. Please install gcc-multilib and g++-multilib as follows.
+## 1. Introduction
+
+If necessary, please install gcc-multilib and g++-multilib as follows.
+
+```sh
+$ sudo apt-get install gcc-multilib g++-multilib
+```
+
+### 1.1 on a 64-bit system
+
+How to build 
+```sh
+CallStack$ make
+```
+
+How to run
+```sh
+CallStack$ ./main
+
+a = 30, b = 40, c = 50, d = 3.140000 
+OurPrintf_V1(): a = 30, b = 40, c = 50, d = 3.140000 
+OurPrintf_V2(): a = 30, b = 40, c = 50, d = 3.140000 
 
 ```
-sudo apt-get install gcc-multilib g++-multilib
+
+How to clean
+```sh
+CallStack$ make clean
+```
+
+### 1.2 on a 32-bit system
+
+How to build 
+```sh
+CallStack$ make CFLAGS="-g -D ON_A_32_BIT_SYSTEM -m32"
+```
+
+How to run
+```sh
+CallStack$ ./main
+
+a = 30, b = 40, c = 50, d = 3.140000 
+OurPrintf_V1(): a = 30, b = 40, c = 50, d = 3.140000 
+OurPrintf_V2(): a = 30, b = 40, c = 50, d = 3.140000 
+OurPrintf_V3(): a = 30, b = 40, c = 50, d = 3.140000 
+
+```
+
+How to clean
+```sh
+CallStack$ make clean
 ```
 
 ## 2. Variadic functions on a 32-bit system

@@ -25,39 +25,27 @@
 
   To keep it simple, let us assume an integer is only 8-bit long here.
 
-  Suppose the binary form of s is as follows: 
-    s  = xxxx????
+  For example, when s is 6, 
+
+  1.
+    s =  00000110
+
+  2. (1 << ALIGN) - 1)  when ALIGN is 4
+
     (1 << ALIGN) - 1) = 15 = 00001111
-    ~(1 << ALIGN) - 1)  =    11110000
-
-  (1) ((1 << ALIGN) - 1) + (s))
-
-       xxxx????
-     + 00001111
-     ------------------
-       zzzzyyyy    
-                            x, y, z, ? in {0, 1}
-                            ????, xxxx, yyyy, zzzz in {0000, 0001, 0010, ..., 1111}
-
-  (2)  (((1 << ALIGN) - 1) + (s)) & (~((1 << ALIGN) - 1))
-      
-       zzzzyyyy
-     & 11110000
-     ------------
-       hhhh0000             
-                            hhhh in {0000, 0001, 0010, ..., 1111}
-
-  (3) For example, when s is 6, 
-
-  s =  00000110
   
-   
+  3. ~(1 << ALIGN) - 1)
+
+    ~(1 << ALIGN) - 1) = 11110000
+
+  4. ((1 << ALIGN) - 1) + (s)
+  
        00000110       
      + 00001111
      ------------------
        00010101    
 
-   /////////////////////////////////////
+  5. (((1 << ALIGN) - 1) + (s)) & (~((1 << ALIGN) - 1))
 
        00010101
     &  11110000
@@ -75,7 +63,7 @@ void EmitPrologue(AstFuncDefNodePtr func) {
   /***********************************************************
   Generating the following assembly code at the entry of a function:
 
-  Two physical registers in X86_64 are used for accessing the call stack.
+  Two physical registers in x86_64 are used to access the call stack.
   See the stack layout in func.c for more about rbp.
 
   rbp
@@ -86,7 +74,7 @@ void EmitPrologue(AstFuncDefNodePtr func) {
   Example:
 
     pushq %rbp
-    movq %rsp, $rbp
+    movq %rsp, %rbp
     subq $80, %rsp
   ----------------------------------------------------------------
   The layout of a call stack when we are just entering a function.
@@ -117,7 +105,7 @@ void EmitPrologue(AstFuncDefNodePtr func) {
               |caller's rbp |  <----- rsp
               |             |
 
-  (2) movq %rsp, $rbp
+  (2) movq %rsp, %rbp
 
        Set callee's frame pointer by copying rsp to rbp
   
@@ -158,7 +146,7 @@ void EmitPrologue(AstFuncDefNodePtr func) {
     EmitComments("# Frame size = %d", func->frameSize);
     EmitComments("# Number of Parameters/Locals/Temps = %d(%d registers), %d, %d",
                  func->para_cnt, NUM_OF_ARGS_IN_REGS, func->local_vars_cnt, func->tmpVarNum);
-    // See the stack memory layour in func.c
+    // See the stack memory layout in func.c
     int result = (NUM_OF_ARGS_IN_REGS + func->local_vars_cnt + func->tmpVarNum) * CPU_WORD_SIZE_IN_BYTES;
     EmitComments("# Frame size = (%d + %d + %d) * %d = %d",
                  NUM_OF_ARGS_IN_REGS, 
@@ -281,7 +269,7 @@ void EmitEpilogue(void) {
   ---------------------------------
       f: 
               pushq %rbp        # Prologue
-              movq %rsp, $rbp
+              movq %rsp, %rbp
               subq $80, %rsp              
               ...
               movq $9024, %rax
@@ -301,82 +289,25 @@ void EmitEpilogue(void) {
 }
 
 /*
+  void DoEmitAssembly(int indents, const char *fmt, ...);
+
   DoEmitAssembly() is a variadic function in C.
-  It can take a variable number of arguments.
+  It can be called with a variable number of arguments.
   
   The number of arguments passed by its caller can be larger than
       the number of named parameters defined in DoEmitAssembly(),
 
-  DoEmitAssembly() has only one named parameter (i.e., fmt).
+  DoEmitAssembly() has only two named parameters (i.e., indents and fmt).
 
   So you can imagine that there are some unnamed parameters in a variadic function.
   
   To access these unnamed parameters, we can use the macros defined in <stdarg.h>.
-  (va_start, var_arg, ... )
-
-  Refer to:
-  https://www.geeksforgeeks.org/variadic-functions-in-c/
+  (va_start, var_arg, ... ).
 
   If you want to know it inside out, 
-  start with 32-bit variadic functions, where all the arguments are pushed on the call stack.
-  
-  ---------------------------------------------------------------------
-  $
-  $ sudo apt-get install gcc-multilib g++-multilib
-  $ gcc -m32 OurPrintf32.c -o OurPrintf32
-  $ ./OurPrintf32
-    a = 30, b = 40, c = 50
-  $
-  ---------------------------------------------------------------------- 
-  name    arguments pushed on call stack
-                                    
-                                    High  Address
-          |    50     |
-          |    40     |
-          |    30     |         
-  fmt     |  pointer  | ----------------------------->   "a = %d, b = %d, c = %d\n"  
-  np1     |    20     |                                  (This format string is stored in the global area)
-  np2     |    10     |
+  start with 32-bit variadic functions (see COMP9024/Stacks/CallStack/OurPrintf32.c), 
+  where all the arguments are pushed on the call stack.
 
-                                    Low  Address
-
-Ourprint32.c:
-
-void OurPrintf32(int np1, int np2, char *fmt, ...) {
-    // Get the address of fmt                   // typedef char * va_list
-    char *ap;                                   // va_list ap;
-    ap = ((char *) &fmt) + sizeof(char *);      // va_start(ap, fmt);
-    // Now, ap points to the unnamed parameters on the call stack (30).               
-    while (*fmt) {
-        if (*fmt == '%') { // parameter in the format string
-            fmt++;
-            if (*fmt == 'd') {
-                // 
-                // int val = (*(int *)((ap += sizeof(int)) - sizeof(int)));
-                //      
-                int val = *((int *) ap);        //  va_arg(ap, int)
-                ap += sizeof(int);
-                printf("%d", val);
-                fmt++;
-            } 
-            else {
-                //...
-            }
-        }
-        else {  // regular character
-            printf("%c", *fmt);
-            fmt++;
-        }
-    }
-}
-
-int main(void) {
-    int a = 30;
-    int b = 40;
-    int c = 50;
-    OurPrintf32(10, 20, "a = %d, b = %d, c = %d\n", a, b, c);
-    return 0;
-}
  */
 void DoEmitAssembly(int indents, const char *fmt, ...) {
   #define WHILE_SPACE_STRING  "        "

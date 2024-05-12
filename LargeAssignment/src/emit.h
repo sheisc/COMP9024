@@ -18,7 +18,7 @@ void DoEmitAssembly(int indents, const char *fmt, ...);
 
 /******************************************************************
                      Variadic Macros
- Eaxmple:
+ Example:
     Given a macro invocation
 
       EmitAssembly("subq $%d, %%rsp", STACK_SIZE_ALIGNED(frameSize))
@@ -48,6 +48,10 @@ void DoEmitAssembly(int indents, const char *fmt, ...);
 } while(0)
 
 #define EmitLabel(...) do { \
+  DoEmitAssembly(0, __VA_ARGS__); \
+} while(0)
+
+#define EmitIntroduction(...) do { \
   DoEmitAssembly(0, __VA_ARGS__); \
 } while(0)
 

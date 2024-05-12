@@ -1,0 +1,19 @@
+main(argc, argv, env){
+  long result;
+  
+  result = 2 + 3 + 4;
+  output(result); 
+  
+  result = 64 - 4 - 2;
+  output(result);  
+
+  result = 2 * 3 * 4;
+  output(result);
+
+  result = 64 / 4 / 2;
+  output(result);
+  
+    
+  return 0;
+}
+

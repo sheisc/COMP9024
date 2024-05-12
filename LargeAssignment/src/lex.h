@@ -29,7 +29,7 @@ typedef struct {
   Value value;
 } Token;
 
-// Define a funtion pointer type
+// Define a function pointer type
 typedef int (*NEXT_CHAR_FUNC)(void);
 
 // end of file

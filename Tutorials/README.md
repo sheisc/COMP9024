@@ -26,7 +26,7 @@ We will use **Visual Studio Code**, **make** and **gcc** in VLAB.
 
 You can also setup your own [Visual Studio Code](https://code.visualstudio.com/docs/setup/linux) in your own computers.
 
-Your comprehension of these programs will be assessed in our quizzes and examinations.
+Your comprehension of these programs will be assessed in quizzes and examinations.
 
 
 

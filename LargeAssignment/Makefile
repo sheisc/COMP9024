@@ -23,8 +23,8 @@ C_SRC_FILES = $(shell find ./src -name "*.c")
 H_SRC_FILES = $(shell find ./src -name "*.h")
 
 #ALL_SCC_SRC_FILES = $(shell find ./tests -name "*.scc")
-#ALL_SCC_SRC_FILES = ./tests/Factorial.scc ./tests/Stack.scc ./tests/BinaryTree.scc ./tests/EnvVars.scc ./tests/MultipleArguments.scc ./tests/DoWhile.scc ./tests/SystemPython3.scc
-ALL_SCC_SRC_FILES = ./tests/Factorial.scc ./tests/Stack.scc ./tests/BinaryTree.scc ./tests/EnvVars.scc ./tests/MultipleArguments.scc ./tests/SystemPython3.scc
+#ALL_SCC_SRC_FILES = ./tests/Factorial.scc ./tests/Stack.scc ./tests/BinaryTree.scc ./tests/EnvVars.scc ./tests/MultipleArguments.scc ./tests/DoWhile.scc ./tests/Associativity.scc ./tests/SystemPython3.scc
+ALL_SCC_SRC_FILES = ./tests/Factorial.scc ./tests/Stack.scc ./tests/BinaryTree.scc ./tests/EnvVars.scc ./tests/MultipleArguments.scc ./tests/Associativity.scc ./tests/SystemPython3.scc
 
 
 SCC_SRC_FILE = tests/Factorial.scc

@@ -10,11 +10,17 @@
 
 #define TEMP_VAR_NAME_FMT  "t%d"
 
+//#define ADD_RIGHT_ASSOCIATIVITY
+//#define MUL_RIGHT_ASSOCIATIVITY
+
 /////////////////////////////////////////////////////////////////////
 
+// the offset in the function frame
 static int offset;
+// the number of temporary variables
 static int tmpNo;
 
+// The first token of an expression in SCC
 static TokenKind prefixOfExpr[] = {TK_ID, TK_LPAREN, TK_NUM};
 /////////////////////////////////////////////////////////////////////
 
@@ -116,7 +122,7 @@ AstExprNodePtr FunctionCallExpression(Token savedToken) {
 
   expr = CreateAstExprNode(TK_CALL, &savedToken.value, NULL, NULL);  
   NEXT_TOKEN;
-  // Analysing "expr, expr, ..., expr" in a function call
+  // Analyzing "expr, expr, ..., expr" in a function call
   //    function call:  ID (expr, expr, ..., expr)
   int arg_cnt = 0;
   while (isPrefixOfExpression(curToken.kind)) {
@@ -200,14 +206,14 @@ static AstExprNodePtr PrimaryExpression(void) {
 
   -------------------------------------------------------------------------------
 
-  (1)  Left Associative
+  (1)  Left Associativity
 
   MultiplicativeExpression:
       MultiplicativeExpression * PrimaryExpression
       MultiplicativeExpression / PrimaryExpression
       PrimaryExpression
 
-  (2)  Right Associative
+  (2)  Right Associativity
 
   MultiplicativeExpression:
       PrimaryExpression * MultiplicativeExpression
@@ -215,7 +221,7 @@ static AstExprNodePtr PrimaryExpression(void) {
       PrimaryExpression
  */
 static AstExprNodePtr MultiplicativeExpression(void) {
-#ifndef MUL_RIGHT_ASSOCIATE
+#ifndef MUL_RIGHT_ASSOCIATIVITY
   AstExprNodePtr left;
   left = PrimaryExpression();
   while (curToken.kind == TK_MUL || curToken.kind == TK_DIV) {
@@ -232,14 +238,14 @@ static AstExprNodePtr MultiplicativeExpression(void) {
   }
   return left;
 #else
-  AstNodePtr left;
+  AstExprNodePtr left;
   left = PrimaryExpression();
   if (curToken.kind == TK_MUL || curToken.kind == TK_DIV) {
     Value value;
-    AstNodePtr expr;
+    AstExprNodePtr expr;
     memset(&value, 0, sizeof(value));
     snprintf(value.name, MAX_ID_LEN, TEMP_VAR_NAME_FMT, NewTemp());
-    expr = CreateAstNode(curToken.kind, &value, NULL, NULL);
+    expr = CreateAstExprNode(curToken.kind, &value, NULL, NULL);
     expr->offset = AllocFrameOffset();
     NEXT_TOKEN;
     expr->kids[0] = left;
@@ -262,14 +268,14 @@ static AstExprNodePtr MultiplicativeExpression(void) {
 
   -------------------------------------------------------------------------------             
 
-  (1)  Left Associative
+  (1)  Left Associativity
 
   AdditiveExpression:
       MultiplicativeExpression
       AdditiveExpression + MultiplicativeExpression
       AdditiveExpression - MultiplicativeExpression
 
-  (2)  Right Associative
+  (2)  Right Associativity
 
   AdditiveExpression:
       MultiplicativeExpression
@@ -277,7 +283,7 @@ static AstExprNodePtr MultiplicativeExpression(void) {
       MultiplicativeExpression - AdditiveExpression
  */
 static AstExprNodePtr AdditiveExpression(void) {
-#ifndef ADD_RIGHT_ASSOCIATE
+#ifndef ADD_RIGHT_ASSOCIATIVITY
   AstExprNodePtr left;
   left = MultiplicativeExpression();
   while (curToken.kind == TK_SUB || curToken.kind == TK_ADD) {
@@ -294,14 +300,14 @@ static AstExprNodePtr AdditiveExpression(void) {
   }
   return left;
 #else
-  AstNodePtr left;
+  AstExprNodePtr left;
   left = MultiplicativeExpression();
   if (curToken.kind == TK_SUB || curToken.kind == TK_ADD) {
     Value value;
-    AstNodePtr expr;
+    AstExprNodePtr expr;
     memset(&value, 0, sizeof(value));
     snprintf(value.name, MAX_ID_LEN, TEMP_VAR_NAME_FMT, NewTemp());
-    expr = CreateAstNode(curToken.kind, &value, NULL, NULL);
+    expr = CreateAstExprNode(curToken.kind, &value, NULL, NULL);
     expr->offset = AllocFrameOffset();
     NEXT_TOKEN;
     expr->kids[0] = left;
@@ -592,7 +598,7 @@ void EmitAstExprNode(AstExprNodePtr pNode) {
               pNode->kids[1] is the right operand
               pNode is the operator  
          
-         Eaxmple:
+         Example:
               movq  left, %rax                # move the 64-bit left operand to register %rax
                                               # the 'q' in 'movq' means it is a 64-bit operation.
 

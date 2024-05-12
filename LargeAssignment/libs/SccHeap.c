@@ -22,9 +22,11 @@
 #include "SccHeap.h"
 //
 #define HEAP_SIZE (4 * 1024 * 1024)
-//
+
+// 
 #define RESIDUE 8
-//
+
+// see the comments for STACK_SIZE_ALIGNED() in src/emit.c
 #define ALIGN 3
 #define ROUND(s) (((1 << ALIGN) - 1) + (s)) & (~((1 << ALIGN) - 1))
 
@@ -97,7 +99,7 @@ static void *OurMalloc(heap_size_t size) {
           Q1. Reset cur->size to be (cur->size - alignedSize - sizeof(heap_size_t)).
           Q2. Let ptr be (heap_size_t *)((char *)cur + cur->size + sizeof(heap_size_t)),
              i.e., skipping the HeapMemBLock managed by cur.
-          Q3. Save the value of alignedSize into the memory pointed by ptr.          
+          Q3. Save the value of alignedSize into the memory location pointed to by ptr.  
          */
 
         ////////////////////////////////////////////////////////////////////////////////////
@@ -182,7 +184,7 @@ static void OurFree(void *addr) {
   /*
                 WARNING
 
-    The field freeNode->size has already been set to alignedSize in OurMalloc().
+    The field freeNode->size has already been set to 'alignedSize' in OurMalloc().
     and it will be used in mergeIfAdjacent().
    */  
 
@@ -196,7 +198,7 @@ static void OurFree(void *addr) {
   /*
     1. When the control flow gets here, we are sure that 'first' is not NULL
 
-    2. The linked list is sorted by memory block addresses (from low to high).
+    2. The linked list is sorted by ascending memory block addresses (from low to high).
     
     3. The following loop tries to insert the freedNode into the linked list.      
    */

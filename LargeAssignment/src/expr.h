@@ -13,23 +13,33 @@
 /*
   The Abstract Syntax Tree Node for an expression.
  */
-typedef struct astExprNode {
+struct astExprNode {
+  // The kind of an expression.
+  // To keep it simple, we reuse the TokenKind defined in tokens.txt.  
   TokenKind op;
+  // The value got from lex.c
+  //      name of id,  integer values, ...  
   Value value;
-  struct astExprNode *kids[2];
+
   /////////////////////////////////////////////
+  // e.g.,  left and right operands of an binary operator (+, -, *, /)
+  struct astExprNode *kids[2];  
   // assembly  name  for this node
   char accessName[MAX_ID_LEN + 1];
+  // the offset for local/temporary variables, see The Stack Layout in func.c
   int offset;
   // for a function call in an expression
   struct astExprNode *args[MAX_ARG_CNT];
+  // number of arguments in a function call
   int arg_cnt;
   // "t1" in a function call "t1 = f()".
   char retValTmp[MAX_ID_LEN + 1];
-} * AstExprNodePtr;
+};
+typedef struct astExprNode *AstExprNodePtr;
 
 // void Expect(TokenKind tk);
 void DoExpect(char *sccFile, int sccLine, TokenKind tk);
+
 /*
   __FILE__ 
 

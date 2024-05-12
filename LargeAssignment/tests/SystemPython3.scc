@@ -2,12 +2,15 @@ main(argc, argv, env){
   long base;
   long i;
   long val;
+  long tmp;
   base = SccMalloc(2024);
   // see https://www.asciitable.com/
   val = 97;
   i = 0;
   while(SccLess(i, 26)){
     SccWrite8(base, i, val + i);
+    //tmp = SccRead8(base, i);
+    //SccWrite8(base, i, tmp);
     i = i + 1;
   }
   SccWrite8(base, 26, 0);

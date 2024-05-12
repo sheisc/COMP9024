@@ -46,22 +46,47 @@ SCC_INT_T SccLogicNot(SCC_INT_T a) {
 
 // Memory Read
 
-SCC_INT_8  SccRead8(char *base, SCC_INT_T offset) {
-  return *((SCC_INT_8 *)(base + offset));
+typedef unsigned char SCC_UINT_8;
+typedef unsigned short SCC_UINT_16;
+typedef unsigned int SCC_UINT_32;
+
+
+SCC_INT_T  SccRead8(char *base, SCC_INT_T offset) {
+  // zero extension (only 'long' is supported in SCC now)
+  return *((SCC_UINT_8 *)(base + offset));
 }
 
-SCC_INT_16  SccRead16(char *base, SCC_INT_T offset) {
-  return *((SCC_INT_16 *)(base + offset));
+SCC_INT_T  SccRead16(char *base, SCC_INT_T offset) {
+  // zero extension (only 'long' is supported in SCC now)
+  return *((SCC_UINT_16 *)(base + offset));
 }
 
-SCC_INT_32 SccRead32(char *base, SCC_INT_T offset) {
-  return *((SCC_INT_32 *)(base + offset));
+SCC_INT_T SccRead32(char *base, SCC_INT_T offset) {
+  // zero extension (only 'long' is supported in SCC now)
+  return *((SCC_UINT_32 *)(base + offset));
 }
 
 
-SCC_INT_64  SccRead64(char *base, SCC_INT_T offset) {
+SCC_INT_T  SccRead64(char *base, SCC_INT_T offset) {
   return *((SCC_INT_64 *)(base + offset));
 }
+
+// SCC_INT_8  SccRead8(char *base, SCC_INT_T offset) {
+//   return *((SCC_INT_8 *)(base + offset));
+// }
+
+// SCC_INT_16  SccRead16(char *base, SCC_INT_T offset) {
+//   return *((SCC_INT_16 *)(base + offset));
+// }
+
+// SCC_INT_32 SccRead32(char *base, SCC_INT_T offset) {
+//   return *((SCC_INT_32 *)(base + offset));
+// }
+
+
+// SCC_INT_64  SccRead64(char *base, SCC_INT_T offset) {
+//   return *((SCC_INT_64 *)(base + offset));
+// }
 
 // Memory Write
 

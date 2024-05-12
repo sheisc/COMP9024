@@ -78,8 +78,7 @@ StackPush(stack, item) {
   long items;
   long size;
   long newItems;
-  
-  // Now the stack is not full.
+    
   top = StackGetTop(stack);
   if (StackIsFull(stack)) {
     //output(top);
@@ -96,11 +95,9 @@ StackPush(stack, item) {
     StackSetItems(stack, newItems);
     // 
     items = newItems;
-    //putchar(120);
-    //putchar(120);
-    //putchar(10);
   }
 
+  // Now the stack is not full.
   // push the item
   SccWrite64(items, (top + 1) * 8, item);
   // update the stack pointer

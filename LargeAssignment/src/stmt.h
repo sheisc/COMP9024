@@ -4,16 +4,19 @@
 #include "lex.h"
 
 /*
-  AST node for different statments.
+  AST node for different statements.
   We use the field op to distinguish different statements.
  */
-typedef struct astStmtNode {
+struct astStmtNode {
   // The kind of a statement.
   // To keep it simple, we reuse the TokenKind defined in tokens.txt.
   TokenKind op;
   // The value got from lex.c
   //      name of id,  integer values, ...
   Value value;
+  
+  /////////////////////////////
+
   /*
     1. Used in IfStatement and WhileStatement for labels
         See the comments for IfStatement() in stmt.c.  
@@ -31,14 +34,16 @@ typedef struct astStmtNode {
           
           nextStmt
 
-     2. Other statements might reuse part of these fileds.
+     2. Other statements might reuse part of these fields.
         For example, WhileStatement only use expr, thenStmt, and next.
    */
   struct astExprNode *expr;
   struct astStmtNode *thenStmt;
   struct astStmtNode *elseStmt;
   struct astStmtNode *next;
-} * AstStmtNodePtr;
+};
+
+typedef struct astStmtNode *AstStmtNodePtr;
 
 AstStmtNodePtr CompoundStatement(void);
 AstStmtNodePtr GlobalDeclStatements(void);

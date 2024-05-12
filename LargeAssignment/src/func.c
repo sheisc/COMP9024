@@ -22,7 +22,7 @@
 
    --------------------------------------------------------------------
 
-            The Stack Layout When A Function Is Called
+            The Stack Layout in SCC When A Function Is Called
 
    The offset of the 7th parameter, counting from 1
    
@@ -230,14 +230,13 @@ void EmitFuncDefNode(AstFuncDefNodePtr func) {
   while (func) {
     SetCurFuncDef(func);
     /*********************************
-    .text
-    .globl	funcName
-    funcName:
+     The following 'paraNames' is used to save the parameter names in a function defintion.
+
+     e.g., 
+      "argc,argv,env" in main(argc,argv,env)
     **********************************/
-    // argNamesInComments is used in comments in assembly code
     char paraNames[MAX_PARAMETER_CNT * (MAX_ID_LEN+1)];
     memset(paraNames, 0, sizeof(paraNames));    
-    // evaluate argugments (as expressions) from left to right
     for (int i = 0; i < func->para_cnt; i++) {
       strcat(paraNames, GetNodeNameInIR(&func->paras[i]));
       if (i < func->para_cnt - 1) {
@@ -245,8 +244,14 @@ void EmitFuncDefNode(AstFuncDefNodePtr func) {
       }
     } 
     EmitComments("\n\n\n\n\n# *****************************  %s(%s)  *****************************",
-                  func->value.name, paraNames);
+                  func->value.name, paraNames);                  
     EmitComments("# Code Section");
+
+    /*********************************
+    .text
+    .globl	funcName
+    funcName:
+    **********************************/
     EmitLabel(".text");
     EmitLabel(".globl %s", func->value.name);
     EmitLabel("%s:", func->value.name);
