@@ -261,9 +261,9 @@ i = 20, j = 24
 
 ```
 
-## 6. MyWeek2
+## 6. MyCOMP9024/Tutorials/MyWeek2
 
-After fully grasping the program in Week2, you can create a directory COMP9024/Tutorials/MyWeek2, 
+After fully grasping the program in Week2, you can create a directory MyCOMP9024/Tutorials/MyWeek2, 
 and write the same program from scratch by yourselves in your own way.
 
 **In order to understand one's knowledge blind spots in programming, one must write code oneself.**

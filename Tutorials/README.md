@@ -22,7 +22,7 @@ Please start with reading, debugging and modifying a runnable program.
 
 Even adding a **printf()** into the program will help you further understand it.
 
-We will use **Visual Studio Code**, **make** and **gcc** in VLAB.
+We will use **Visual Studio Code**, **make** and **gcc** in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
 You can also setup your own [Visual Studio Code](https://code.visualstudio.com/docs/setup/linux) in your own computers.
 
