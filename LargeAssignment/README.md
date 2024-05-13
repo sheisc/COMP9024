@@ -138,6 +138,7 @@ LargeAssignment
 │   ├── stmt.h
 │   └── tokens.txt                         // Tokens' kind and name
 └── tests                                  // Test cases for SCC
+    ├── Associativity.scc                  // For testing left/right associativity
     ├── BinaryTree.scc                     // A binary tree implemented in SCC
     ├── DoWhile.scc                        // For testing do-while 
     ├── EnvVars.scc                        // For outputting command-line arguments and environment variables.
