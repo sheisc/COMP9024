@@ -260,3 +260,11 @@ i = 20, j = 24
         meaning it retrieves the value stored at that memory location.
 
 ```
+
+## 6. MyWeek2
+
+After fully grasping the program in Week2, you can create a directory COMP9024/Tutorials/MyWeek2, 
+and write the same program from scratch by yourselves in your own way.
+
+**In order to understand one's knowledge blind spots in programming, one must write code oneself.**
+
