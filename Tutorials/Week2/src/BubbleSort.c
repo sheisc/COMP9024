@@ -64,7 +64,7 @@ void BubbleSort(int *ptr, int n) {
             if (ptr[i] > ptr[i+1]) {
                 Swap(ptr + i, ptr + i + 1);
 
-                printf("After swapping (ptr[%d], ptr[%d]):\n", i, i+1);
+                printf("After swapping ptr[%d] and ptr[%d]:\n", i, i+1);
                 PrintArray(ptr, iMax + 2);
                 printf("\n");
             }
@@ -87,9 +87,9 @@ int main(void) {
     printf("\n\nWhy Swap2(i, j) doesn't work?\n\n");
     int i = 20, j = 24;
     printf("i = %d, j = %d\n\n", i, j);
+    printf("\nSwap2(i, j)\n");
     // The values of i and j are passed.
     Swap2(i, j);
-    printf("\nSwap2(i, j)\n");
     printf("i = %d, j = %d\n\n", i, j);
     return 0;
 }

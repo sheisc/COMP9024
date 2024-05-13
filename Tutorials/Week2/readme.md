@@ -81,13 +81,13 @@ Before sorting:
 30 50 20 10 60 40 
 
 
-After swapping (ptr[1], ptr[2]):
+After swapping ptr[1] and ptr[2]:
 30 20 50 10 60 40 
 
-After swapping (ptr[2], ptr[3]):
+After swapping ptr[2] and ptr[3]:
 30 20 10 50 60 40 
 
-After swapping (ptr[4], ptr[5]):
+After swapping ptr[4] and ptr[5]:
 30 20 10 50 40 60 
 
 ............... iMax = 3 ...............
@@ -95,13 +95,13 @@ After swapping (ptr[4], ptr[5]):
 30 20 10 50 40 
 
 
-After swapping (ptr[0], ptr[1]):
+After swapping ptr[0] and ptr[1]:
 20 30 10 50 40 
 
-After swapping (ptr[1], ptr[2]):
+After swapping ptr[1] and ptr[2]:
 20 10 30 50 40 
 
-After swapping (ptr[3], ptr[4]):
+After swapping ptr[3] and ptr[4]:
 20 10 30 40 50 
 
 ............... iMax = 2 ...............
@@ -109,8 +109,9 @@ After swapping (ptr[3], ptr[4]):
 20 10 30 40 
 
 
-After swapping (ptr[0], ptr[1]):
+After swapping ptr[0] and ptr[1]:
 10 20 30 40 
+
 
 ............... iMax = 1 ...............
 
@@ -130,10 +131,10 @@ Why Swap2(i, j) doesn't work?
 
 i = 20, j = 24
 
-a = 20, b = 24
-a = 24, b = 20
 
 Swap2(i, j)
+a = 20, b = 24
+a = 24, b = 20
 i = 20, j = 24
 
 
