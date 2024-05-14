@@ -34,6 +34,8 @@ or Last In First Out (LIFO).
 
 In this tutorial, we will delve into the creation of a stack and its practical application in generating string representations of integers.
 
+### Sidetracks
+
 Note that a call stack is a stack data structure that stores information about the active functions of a running program, 
 
 which is supported by the operating system and CPU (or by an interpreter).

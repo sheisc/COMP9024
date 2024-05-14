@@ -7,16 +7,16 @@
 // number of items, not in bytes
 #define INITIAL_STACK_SIZE   64
 
-// the top position when stack is empty
+// the top position when a stack is empty
 #define TOP_POS_FOR_EMPTY_STACK  -1
 
 // The type defintion of our Stack
 struct Stack {
-    // the current capacity of stack, in number of items, not in bytes
+    // the current capacity size of a stack, in the number of items, not in bytes
     long size;
     // the stack top position
     long top;
-    // items points to an array in heap
+    // pItems points to an array dynamically allocated in heap
     STACK_ITEM_T *pItems;
 };
 
