@@ -93,7 +93,6 @@ Then, click **Run -> Start Debugging**
 
 
 ## 3. The push/pop operations in printing the string representations of an integer (e.g., x)
-
 ``` sh
 Week3$ make
 
@@ -178,6 +177,50 @@ After popping (First In Last Out):
 
 ```
 
+### Algorithm
+
+```C
+void PrintInteger(STACK_ITEM_T x, int base) {
+    struct Stack *pStack = CreateStack();
+    int r;
+
+    x = (x >= 0 ? x : -x);
+    base = (base >= 0 ? base: -base);
+
+    printf("------------- x = %ld, base = %d -------------\n\n", (long) x, base);
+    
+    // push the remainders onto the stack
+    while(x != 0) {
+        r = x % base;
+        x = x / base;
+        printf("push %d\n", r);
+        StackPush(pStack, r);
+    }  
+
+    printf("\n\nAfter popping (First In Last Out):\n\n");
+    PrintPrefix(base);
+    // output the remainders in the FILO order
+    while(!StackIsEmpty(pStack)) {
+        r = StackPop(pStack);
+        // see https://www.asciitable.com/
+        if (r <= 9) {
+            // 1 --> '1' (0x31, 49); ...
+            // 1 + 48 == 49
+            printf("%c", r + 48);
+        } else if (r <= 15) {
+            // 10 --> 'A' (0x41, 65);  11 --> 'B', ...
+            // 10 + 55 == 65
+            printf("%c", r + 55);
+        } else {
+            // unknown base
+            printf("?");
+        }
+    }
+    ReleaseStack(pStack);
+    printf("\n");
+}
+
+```
 
 ## 4. How to increase the size of a stack dynamically?
 
