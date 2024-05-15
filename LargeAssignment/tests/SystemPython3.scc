@@ -3,7 +3,9 @@ main(argc, argv, env){
   long i;
   long val;
   long tmp;
+  
   base = SccMalloc(2024);
+  
   // see https://www.asciitable.com/
   val = 97;
   i = 0;
@@ -15,6 +17,7 @@ main(argc, argv, env){
   }
   SccWrite8(base, 26, 0);
   puts(base);
+  
   // see https://www.asciitable.com/
   SccWrite8(base, 0, 112);  // 'p'
   SccWrite8(base, 1, 121);  // 'y'

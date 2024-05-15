@@ -296,8 +296,8 @@ Please see comments and following functions in **COMP9024/LargeAssignment/tests/
 //
 // In SCC:
 //      We only have integers in our current implementation, but it is still possible 
-//      to allocate a heap object and treat it as a Stack.
-//      No high-level human-friendly symbols for field names.
+//      to allocate a heap object and treat it as a struct Stack object.
+//      No high-level human-friendly symbols for struct field names.
 //      Let us face the low-level field offsets and pointer arithmetic directly.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
