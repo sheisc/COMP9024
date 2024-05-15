@@ -108,7 +108,7 @@ STACK_ITEM_T StackPop(struct Stack *pStack) {
     return item;
 }
 
-// Peek the top item with popping
+// Peek the top item without popping
 STACK_ITEM_T StackPeek(struct Stack *pStack) {
     assert(!StackIsEmpty(pStack));
 

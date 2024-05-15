@@ -6,11 +6,15 @@
 
     1.  How to create a stack
 
-    2.  StackPush() and StackPop()
+    2.  struct in C (for describing the data structure of Stack)
 
-    3.  How to print the string representations of an integer x 
+    3.  StackPush() and StackPop()
+
+    4.  How to print the string representations of an integer x 
         (based on a stack)
 
+    5.  Low-level pointer arithmetic in accessing fields in a struct 
+        (see COMP9024/LargeAssignment/tests/Stack.scc)
 
                                              COMP9024 24T2
 
@@ -38,7 +42,7 @@ In this tutorial, we will delve into the creation of a stack and its practical a
 
 Note that a call stack is a stack data structure that stores information about the active functions of a running program, 
 
-which is supported by the operating system and CPU (or by an interpreter).
+which is supported by the operating system and CPU (or by an [interpreter](https://github.com/rocky/x-python/)).
 
 The call stack also operates on a LIFO principle. 
 
@@ -91,6 +95,35 @@ Open src/Int2Str.c, and click to add a breakpoint (say, line 71).
 
 Then, click **Run -> Start Debugging**
 
+## 3. Data structure and memory layout
+
+```sh
+////////////////////////////////////////////////////////////////////////////////////////
+// Stack:
+//
+//                -----------------------
+//                FieldName  FieldOffset                                     pItems[size-1]
+//                -----------------------                                       ...
+//  pStack -----> size         0                                             pItems[2]
+//                top          8                                             pItems[1]
+//                pItems      16           ----------------------------->    pItems[0]
+//                -----------------------   
+//                    struct Stack                                           
+//                                                                                                          
+// 
+// 
+// In C:   // See COMP9024/Tutorials/Week3/src/Stack.c      
+//      struct Stack {
+//          // the current capacity size of a stack, in the number of items, not in bytes
+//          long size;
+//          // the stack top position
+//          long top;
+//          // pItems points to an array dynamically allocated in heap
+//          STACK_ITEM_T *pItems;
+//      };
+//
+/////////////////////////////////////////////////////////////////////////////////////////
+```
 
 ## 3. The push/pop operations in printing the string representations of an integer (e.g., x)
 ``` sh
@@ -231,5 +264,72 @@ Please read the comments in StackPush() in src/Stack.c, and answer the questions
 You need to echo these questions in our weekly Quiz.
 
 
+## 5. Low-level pointer arithmetic in accessing struct fields
 
 
+Please see comments and following functions in **COMP9024/LargeAssignment/tests/Stack.scc**
+
+``` C
+////////////////////////////////////////////////////////////////////////////////////////
+// Stack:
+//
+//                -----------------------
+//                FieldName  FieldOffset                                     pItems[size-1]
+//                -----------------------                                       ...
+//  pStack -----> size         0                                             pItems[2]
+//                top          8                                             pItems[1]
+//                pItems      16           ----------------------------->    pItems[0]
+//                -----------------------   
+//                    Heap Space                                             Heap Space
+//                                                                                                          
+// 
+// 
+// In C:   // See COMP9024/Tutorials/Week3/src/Stack.c      
+//      struct Stack {
+//          // the current capacity size of a stack, in the number of items, not in bytes
+//          long size;
+//          // the stack top position
+//          long top;
+//          // pItems points to an array dynamically allocated in heap
+//          STACK_ITEM_T *pItems;
+//      };
+//
+// In SCC:
+//      We only have integers in our current implementation, but it is still possible 
+//      to allocate a heap object and treat it as a Stack.
+//      No high-level human-friendly symbols for field names.
+//      Let us face the low-level field offsets and pointer arithmetic directly.
+//
+////////////////////////////////////////////////////////////////////////////////////////
+
+// pStack->size
+StackGetSize(pStack) {
+  return SccRead64(pStack, 0);
+}
+
+// pStack->size = size
+StackSetSize(pStack, size) {
+  SccWrite64(pStack, 0, size);
+}
+
+// pStack->top
+StackGetTop(pStack) {
+  return SccRead64(pStack, 8);
+}
+
+// pStack->top = top
+StackSetTop(pStack, top) {
+  SccWrite64(pStack, 8, top);
+}
+
+// pStack->pItems
+StackGetItems(pStack) {
+  return SccRead64(pStack, 16);
+}
+
+// stack->pItems = pItems
+StackSetItems(pStack, pItems) {
+  SccWrite64(pStack, 16, pItems);
+}
+
+```

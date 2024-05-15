@@ -1,41 +1,71 @@
-
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 // Stack:
-//      size   0
-//      top    8
-//      items  16  --->  long [size]  in heap
-//////////////////////////////////////////////////
+//
+//                -----------------------
+//                FieldName  FieldOffset                                     pItems[size-1]
+//                -----------------------                                       ...
+//  pStack -----> size         0                                             pItems[2]
+//                top          8                                             pItems[1]
+//                pItems      16           ----------------------------->    pItems[0]
+//                -----------------------   
+//                    Heap Space                                             Heap Space
+//                                                                                                          
+// 
+// 
+// In C:   // See COMP9024/Tutorials/Week3/src/Stack.c      
+//      struct Stack {
+//          // the current capacity size of a stack, in the number of items, not in bytes
+//          long size;
+//          // the stack top position
+//          long top;
+//          // pItems points to an array dynamically allocated in heap
+//          STACK_ITEM_T *pItems;
+//      };
+//
+// In SCC:
+//      We only have integers in our current implementation, but it is still possible 
+//      to allocate a heap object and treat it as a Stack.
+//      No high-level human-friendly symbols for field names.
+//      Let us face the low-level field offsets and pointer arithmetic directly.
+//
+////////////////////////////////////////////////////////////////////////////////////////
 
-StackGetSize(stack) {
-  return SccRead64(stack, 0);
+// pStack->size
+StackGetSize(pStack) {
+  return SccRead64(pStack, 0);
 }
 
-StackSetSize(stack, size) {
-  SccWrite64(stack, 0, size);
+// pStack->size = size
+StackSetSize(pStack, size) {
+  SccWrite64(pStack, 0, size);
 }
 
-StackGetTop(stack) {
-  return SccRead64(stack, 8);
+// pStack->top
+StackGetTop(pStack) {
+  return SccRead64(pStack, 8);
 }
 
-StackSetTop(stack, topPos) {
-  SccWrite64(stack, 8, topPos);
+// pStack->top = top
+StackSetTop(pStack, top) {
+  SccWrite64(pStack, 8, top);
 }
 
-StackGetItems(stack) {
-  return SccRead64(stack, 16);
+// pStack->pItems
+StackGetItems(pStack) {
+  return SccRead64(pStack, 16);
 }
 
-StackSetItems(stack, pItems) {
-  SccWrite64(stack, 16, pItems);
+// stack->pItems = pItems
+StackSetItems(pStack, pItems) {
+  SccWrite64(pStack, 16, pItems);
 }
 
-ReleaseStack(stack) {
-  long items;
+ReleaseStack(pStack) {
+  long pItems;
   
-  items = StackGetItems(stack);
-  SccFree(items);
-  SccFree(stack);
+  pItems = StackGetItems(pStack);
+  SccFree(pItems);
+  SccFree(pStack);
 }
 
 CreateStack() {
@@ -56,34 +86,36 @@ CreateStack() {
   return pStack;
 }
 
-StackIsEmpty(stack) {
+// pStack->top == -1
+StackIsEmpty(pStack) {
   long top;
   
-  top = StackGetTop(stack);
+  top = StackGetTop(pStack);
   return SccEqual(top, 0 - 1);
 }
 
-StackIsFull(stack) {
+// pStack->top == pStack->size - 1
+StackIsFull(pStack) {
   long size;
   long top;
   
-  top = StackGetTop(stack);
-  size = StackGetSize(stack);
+  top = StackGetTop(pStack);
+  size = StackGetSize(pStack);
   return SccEqual(top, size - 1);
 }
 
 
-StackPush(stack, item) {
+StackPush(pStack, item) {
   long top;
   long items;
   long size;
   long newItems;
     
-  top = StackGetTop(stack);
-  if (StackIsFull(stack)) {
+  top = StackGetTop(pStack);
+  if (StackIsFull(pStack)) {
     //output(top);
-    size = StackGetSize(stack);
-    items = StackGetItems(stack);
+    size = StackGetSize(pStack);
+    items = StackGetItems(pStack);
     // double its size
     newItems = SccMalloc(size * 2 * 8);
     // copy existing contents
@@ -91,8 +123,8 @@ StackPush(stack, item) {
     // Release the old items
     SccFree(items);
     // update its size and newItems
-    StackSetSize(stack, size * 2);
-    StackSetItems(stack, newItems);
+    StackSetSize(pStack, size * 2);
+    StackSetItems(pStack, newItems);
     // 
     items = newItems;
   }
@@ -101,22 +133,22 @@ StackPush(stack, item) {
   // push the item
   SccWrite64(items, (top + 1) * 8, item);
   // update the stack pointer
-  StackSetTop(stack, top + 1);  
+  StackSetTop(pStack, top + 1);  
 }
 
-StackPop(stack) {
+StackPop(pStack) {
   long top;
   long items;
   long x;
   
-  if (StackIsEmpty(stack)) {
+  if (StackIsEmpty(pStack)) {
     exit(0-1);  
   }
 
-  top = StackGetTop(stack);   
-  items = StackGetItems(stack);
+  top = StackGetTop(pStack);   
+  items = StackGetItems(pStack);
   x = SccRead64(items, 8*top);
-  StackSetTop(stack, top-1);
+  StackSetTop(pStack, top-1);
   return x;
 }
 
@@ -156,25 +188,25 @@ GetAbsoluteValue(x) {
 //  base:   2, 8, 10, 16
 ///////////////////////////////////////////
 PrintInteger(x, base) {
-  long stack;
+  long pStack;
   long r;  
   
   // if x < 0, then x = 0 - x
   x = GetAbsoluteValue(x);
   base = GetAbsoluteValue(base);
 
-  stack = CreateStack();
+  pStack = CreateStack();
 
   while (SccNotEqual(x, 0)) {
     r = SccMod(x, base);
     x = x / base;
-    StackPush(stack, r);
+    StackPush(pStack, r);
   }  
   // 0x: hex  0b: bin 0o: oct
   PrintPrefix(base);
   // 
-  while (SccLogicNot(StackIsEmpty(stack))) {
-    r = StackPop(stack);
+  while (SccLogicNot(StackIsEmpty(pStack))) {
+    r = StackPop(pStack);
     if (SccLessEqual(r, 9)) {
       // 1 --> '1' (0x31, 49)
       // 1 + 48 == 49
@@ -188,7 +220,7 @@ PrintInteger(x, base) {
       putchar(63);
     }    
   }  
-  ReleaseStack(stack);
+  ReleaseStack(pStack);
   
   // '\n'
   putchar(10);
