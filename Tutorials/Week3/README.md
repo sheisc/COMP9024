@@ -302,9 +302,15 @@ You need to echo these questions in our weekly Quiz.
 //      No high-level human-friendly symbols for struct field names.
 //      Let us face the low-level field offsets and pointer arithmetic directly.
 //      
+//      ********  Low-level pointer arithmetic is essentially integer arithmetic,  *********
+//      ********  with the challenge lying in the type of the pointer (T *)        *********
+//      ********  and the size of T, determined by sizeof(T).                      *********
+// 
 //      *** only for explaining the low-level pointer arithmetic involved, NOT portable ***
-//      *** We assume sizeof(long) == 8 and sizeof(char *) == 8 on a 64-bit system      ***
-//      ***                                                                             ***
+//      *** We assume sizeof(long) == 8                                                 ***
+//      ***           sizeof(char *) == 8                                               ***
+//      ***           sizeof(char) == 1                                                 ***
+//      ***           on a 64-bit system.                                               ***
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 ```
@@ -344,14 +350,12 @@ StackSetItems(pStack, pItems) {
 
 // See COMP9024/LargeAssignment/libs/SccLib.c
 
-typedef long  SCC_INT_T;
-
-SCC_INT_T  SccRead64(char *base, SCC_INT_T offset) {
-  return *((SCC_INT_64 *)(base + offset));
+long SccRead64(char *base, long offset) {
+  return *((long *)(base + offset));
 }
 
-void SccWrite64(char *base, SCC_INT_T offset, SCC_INT_64 val) {
-  *((SCC_INT_64 *)(base + offset)) = val;
+void SccWrite64(char *base, long offset, long val) {
+  *((long *)(base + offset)) = val;
 }
 
 ```
