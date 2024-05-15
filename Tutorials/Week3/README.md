@@ -13,7 +13,7 @@
     4.  How to print the string representations of an integer x 
         (based on a stack)
 
-    5.  Low-level pointer arithmetic in accessing fields in a struct 
+    5.  Low-level pointer arithmetic in accessing struct fields
         (see COMP9024/LargeAssignment/tests/Stack.scc)
 
                                              COMP9024 24T2
@@ -37,6 +37,9 @@ or Last In First Out (LIFO).
 
 
 In this tutorial, we will delve into the creation of a stack and its practical application in generating string representations of integers.
+
+A stack can be implemented using an array (as demonstrated in this tutorial) or with a linked list for storing stack items / elements.
+
 
 ### Sidetracks
 
@@ -101,14 +104,14 @@ Then, click **Run -> Start Debugging**
 ////////////////////////////////////////////////////////////////////////////////////////
 // Stack:
 //
-//                -----------------------
+//                -----------------------                                    --------------
 //                FieldName  FieldOffset                                     pItems[size-1]
 //                -----------------------                                       ...
 //  pStack -----> size         0                                             pItems[2]
 //                top          8                                             pItems[1]
 //                pItems      16           ----------------------------->    pItems[0]
-//                -----------------------   
-//                    struct Stack                                           
+//                -----------------------                                    ---------------  
+//                    struct Stack                                        an array for storing items
 //                                                                                                          
 // 
 // 
@@ -267,19 +270,18 @@ You need to echo these questions in our weekly Quiz.
 ## 6. Low-level pointer arithmetic in accessing struct fields
 
 
-Please see comments and following functions in **COMP9024/LargeAssignment/tests/Stack.scc**
 
-``` C
+```sh
 ////////////////////////////////////////////////////////////////////////////////////////
 // Stack:
-//
-//                -----------------------
+//                    struct Stack                                           items on the stack
+//                -----------------------                                    ---------------
 //                FieldName  FieldOffset                                     pItems[size-1]
 //                -----------------------                                       ...
 //  pStack -----> size         0                                             pItems[2]
 //                top          8                                             pItems[1]
 //                pItems      16           ----------------------------->    pItems[0]
-//                -----------------------   
+//                -----------------------                                    ---------------
 //                    Heap Space                                             Heap Space
 //                                                                                                          
 // 
@@ -301,8 +303,14 @@ Please see comments and following functions in **COMP9024/LargeAssignment/tests/
 //      Let us face the low-level field offsets and pointer arithmetic directly.
 //      
 //      *** only for explaining the low-level pointer arithmetic involved, NOT portable ***
-// 
+//      *** We assume sizeof(long) == 8 and sizeof(char *) == 8 on a 64-bit system      ***
+//      ***                                                                             ***
+//
 ////////////////////////////////////////////////////////////////////////////////////////
+```
+Please see comments and the following functions in **COMP9024/LargeAssignment/tests/Stack.scc**
+
+``` C
 
 // pStack->size
 StackGetSize(pStack) {
@@ -332,6 +340,18 @@ StackGetItems(pStack) {
 // stack->pItems = pItems
 StackSetItems(pStack, pItems) {
   SccWrite64(pStack, 16, pItems);
+}
+
+// See COMP9024/LargeAssignment/libs/SccLib.c
+
+typedef long  SCC_INT_T;
+
+SCC_INT_T  SccRead64(char *base, SCC_INT_T offset) {
+  return *((SCC_INT_64 *)(base + offset));
+}
+
+void SccWrite64(char *base, SCC_INT_T offset, SCC_INT_64 val) {
+  *((SCC_INT_64 *)(base + offset)) = val;
 }
 
 ```
