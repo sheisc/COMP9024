@@ -125,7 +125,7 @@ Then, click **Run -> Start Debugging**
 /////////////////////////////////////////////////////////////////////////////////////////
 ```
 
-## 3. The push/pop operations in printing the string representations of an integer (e.g., x)
+## 4. The push/pop operations in printing the string representations of an integer (e.g., x)
 ``` sh
 Week3$ make
 
@@ -255,7 +255,7 @@ void PrintInteger(STACK_ITEM_T x, int base) {
 
 ```
 
-## 4. How to increase the size of a stack dynamically?
+## 5. How to increase the size of a stack dynamically?
 
 **Double the capacity size of the stack when it is full.**
 
@@ -264,7 +264,7 @@ Please read the comments in StackPush() in src/Stack.c, and answer the questions
 You need to echo these questions in our weekly Quiz.
 
 
-## 5. Low-level pointer arithmetic in accessing struct fields
+## 6. Low-level pointer arithmetic in accessing struct fields
 
 
 Please see comments and following functions in **COMP9024/LargeAssignment/tests/Stack.scc**
@@ -299,7 +299,9 @@ Please see comments and following functions in **COMP9024/LargeAssignment/tests/
 //      to allocate a heap object and treat it as a struct Stack object.
 //      No high-level human-friendly symbols for struct field names.
 //      Let us face the low-level field offsets and pointer arithmetic directly.
-//
+//      
+//      *** only for explaining the low-level pointer arithmetic involved, NOT portable ***
+// 
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // pStack->size
