@@ -172,7 +172,7 @@ and 4194296 is the usable size of the memory block.
 
 See **struct HeapMemBlock** in libs/SccHeap.c for more details.
 
-The address (e.g., 0x564728956040) might differ due to Address Space Layout Randomization (ASLR).
+The address (e.g., 0x564728956040) might differ due to [Address Space Layout Randomization (ASLR)](https://pax.grsecurity.net/docs/aslr.txt).
 
 
 					
