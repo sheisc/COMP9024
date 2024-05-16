@@ -410,3 +410,5 @@ Changwei Zou, Dongjie He, Yulei Sui and Jingling Xue.
 | build_log_perftest      |  133,850                 | 174,170 |
 | manifest_parser_perftes | 134,088                  | 174,183 |
 
+
+**Our analysis environment consisted of a 3.50 GHz Intel Xeon E5 CPU, equipped with 512 GB of memory, and operated on a 64-bit Ubuntu 20.04 OS.**
