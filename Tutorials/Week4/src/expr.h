@@ -29,7 +29,7 @@ struct astExprNode {
   Value value;
 
   /////////////////////////////////////////////
-  // e.g.,  left and right operands of an binary operator (+, -, *, /)
+  // e.g.,  left and right operands of a binary operator (+, -, *, /)
   struct astExprNode *kids[2];  
 };
 
