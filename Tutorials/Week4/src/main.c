@@ -67,12 +67,12 @@ int main(int argc, char **argv, char **env) {
   printf("\"%s\" \n\n", srcCode);
   // Initialize the lexical analysis
   InitLexer(NextCharFromMem);
-  // Read the first token
+  // Get the first token
   NEXT_TOKEN;
   // Create a tree by parsing the arithmetic expression
   AstExprNodePtr expr = Expression();
   Expect(TK_EOF);
-  // Postorder traversal the tree
+  // Perform a postorder traversal of the tree
   long result = EvalExpression(expr);  
   // Output the result
   printf("\neval(\"%s\") == %ld\n", srcCode, result);

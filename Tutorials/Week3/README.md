@@ -52,7 +52,7 @@ The call stack also operates on a LIFO principle.
 **This implies that the function most recently invoked will be the first one to be removed from the call stack.**
 
 
-## 1. How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -67,7 +67,7 @@ Week3$
 ```
 
 
-## 2. How to start [Visual Studio Code](https://code.visualstudio.com/) to browse/edit/debug a project.
+## 2 How to start [Visual Studio Code](https://code.visualstudio.com/) to browse/edit/debug a project.
 
 
 ```sh
@@ -98,7 +98,7 @@ Open src/Int2Str.c, and click to add a breakpoint (say, line 71).
 
 Then, click **Run -> Start Debugging**
 
-## 3. Data structure and memory layout
+## 3 Data structure and memory layout
 
 ```sh
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -128,7 +128,7 @@ Then, click **Run -> Start Debugging**
 /////////////////////////////////////////////////////////////////////////////////////////
 ```
 
-## 4. The push/pop operations in printing the string representations of an integer (e.g., x)
+## 4 The push/pop operations in printing the string representations of an integer (e.g., x)
 ``` sh
 Week3$ make
 
@@ -258,7 +258,7 @@ void PrintInteger(STACK_ITEM_T x, int base) {
 
 ```
 
-## 5. How to increase the size of a stack dynamically?
+## 5 How to increase the size of a stack dynamically?
 
 **Double the capacity size of the stack when it is full.**
 
@@ -267,7 +267,7 @@ Please read the comments in StackPush() in src/Stack.c, and answer the questions
 You need to echo these questions in our weekly Quiz.
 
 
-## 6. Low-level pointer arithmetic in accessing struct fields
+## 6 Low-level pointer arithmetic in accessing struct fields
 
 
 

@@ -19,7 +19,7 @@
  *******************************************************************/
 ``` 
 
-## 1. How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -34,7 +34,7 @@ Week2$
 ```
 
 
-## 2. How to start [Visual Studio Code](https://code.visualstudio.com/) to browse/edit/debug a project.
+## 2 How to start [Visual Studio Code](https://code.visualstudio.com/) to browse/edit/debug a project.
 
 
 ```sh
@@ -66,7 +66,7 @@ Open src/BubbleSort.c, and click to add a breakpoint (say, line 63).
 Then, click **Run -> Start Debugging**
 
 
-## 3. The process of bubble sort
+## 3 The process of bubble sort
 
 ``` sh
 
@@ -141,7 +141,7 @@ i = 20, j = 24
 ```
 
 
-## 4. Access an array via its name (e.g., arr)
+## 4 Access an array via its name (e.g., arr)
 ``` C
     int arr[] = {30, 50, 20, 10, 60, 40};
     // calculate the number of elements
@@ -209,7 +209,7 @@ i = 20, j = 24
 ```
 
 
-## 5. Access an array via a pointer (e.g., ptr)
+## 5 Access an array via a pointer (e.g., ptr)
 
 ```C
     void PrintArray(int *ptr, int n) {
@@ -261,7 +261,7 @@ i = 20, j = 24
 
 ```
 
-## 6. MyCOMP9024/Tutorials/MyWeek2
+## 6 MyCOMP9024/Tutorials/MyWeek2
 
 After fully grasping the program in Week2, you can create a directory MyCOMP9024/Tutorials/MyWeek2, 
 and write the same program from scratch by yourselves in your own way.

@@ -2,7 +2,7 @@
 
 
 
-## 1. How to create/visit a binary tree?
+## 1 How to create/visit a binary tree?
 
 ```sh
 
@@ -33,7 +33,7 @@ Its intermediate representation (IR):
 ```    
 
 
-## 2. The real-world application of data structures and algorithms.
+## 2 The real-world application of data structures and algorithms.
 
 ```sh 
 

@@ -12,7 +12,7 @@
 # ***********************************************************************************#
 ```
 
-## 1. How to download SCC in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download SCC in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -27,7 +27,7 @@ LargeAssignment$
 ```
 
 
-## 2. How to build/run a test case in the directory *tests*
+## 2 How to build/run a test case in the directory *tests*
 
 
 ```sh
@@ -53,7 +53,7 @@ we can get a brief overview of SCC.
 More details will be discussed in classes.
 
 
-## 3. How to build/run all test cases in the directory *tests*
+## 3 How to build/run all test cases in the directory *tests*
 
 
 
@@ -72,7 +72,7 @@ LargeAssignment$ make runAll
 ```
 
 
-## 4. How to start [Visual Studio Code](https://code.visualstudio.com/) to browse/edit/debug our LargeAssignment.
+## 4 How to start [Visual Studio Code](https://code.visualstudio.com/) to browse/edit/debug our LargeAssignment.
 
 
 ```sh
@@ -106,7 +106,7 @@ Then, click **Run -> Start Debugging**
 
 
 
-## 5. Directory
+## 5 Directory
 
 ```C
 
@@ -153,7 +153,7 @@ LargeAssignment
 **Please complete the code in Q1-Q10 (libs/SccHeap.c) and Q11-Q20 (src/stmt.c)**.
 
 
-## 6. How to test our heap allocator (based on a Single Linked List) 
+## 6 How to test our heap allocator (based on a Single Linked List) 
 
 **After completing the code (Q1-Q10) in libs/SccHeap.c**, we can run the following commands in VLAB
 
@@ -217,7 +217,7 @@ The address (e.g., 0x564728956040) might differ due to [Address Space Layout Ran
 ```
 
 
-## 7. How to test our do-while statement (based on a Tree) 
+## 7 How to test our do-while statement (based on a Tree) 
 
 **After completing the code (Q11-Q20) in the function DoWhileStatement() in src/stmt.c** , 
 

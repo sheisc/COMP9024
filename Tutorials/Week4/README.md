@@ -44,7 +44,7 @@ and its practical application in representing and evaluating an arithmetic expre
 
 
 
-## 1. How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -59,7 +59,7 @@ Week4$
 ```
 
 
-## 2. How to start [Visual Studio Code](https://code.visualstudio.com/) to browse/edit/debug a project.
+## 2 How to start [Visual Studio Code](https://code.visualstudio.com/) to browse/edit/debug a project.
 
 
 ```sh
@@ -90,7 +90,7 @@ Open src/main.c, and click to add a breakpoint (say, line 67).
 
 Then, click **Run -> Start Debugging**
 
-## 3. Data structure 
+## 3 Data structure 
 
 ### Introduction
 ```C
@@ -176,7 +176,7 @@ typedef enum {
 } TokenKind;
 
 ```
-## 4. Algorithm
+## 4 Algorithm
 
 ## 4.1  Overview
 
@@ -189,14 +189,14 @@ int main(int argc, char **argv, char **env) {
 
   // Initialize the lexical analysis
   InitLexer(NextCharFromMem);
-  // Read the first token
+  // Get the first token
   NEXT_TOKEN;
 
   // Create a tree by parsing the arithmetic expression
   AstExprNodePtr expr = Expression();
   Expect(TK_EOF);
 
-  // Postorder traversal the tree
+  // Perform a postorder traversal of the tree
   long result = EvalExpression(expr);  
 
   // Output the result
@@ -326,7 +326,7 @@ It is used to describe an additive expression like 9000 + 6 * 4 or a multiplicat
         AdditiveExpression
 ```
 
-## 6. How to write a parser based on the grammar of an arithmetic expression
+## 6 How to write a parser based on the grammar of an arithmetic expression
 
 
 Take "9000  +  ( 6  *  4 )" as an example.
@@ -383,7 +383,7 @@ static AstExprNodePtr AdditiveExpression(void) {
     expr->kids[1] = MultiplicativeExpression();
     /*
       If the current token is '+' or '-', The while-loop will iterate once more.
-      Otherwise, the while-loop will stop, meaning our parser have recognized an additive expression
+      Otherwise, the while-loop will stop, meaning our parser has recognized an additive expression
       in the input stream.
 
       In this simple example, now, the current token is TK_EOF (end of file).
@@ -404,7 +404,7 @@ The function MultiplicativeExpression() in expr.c can be analyzed similarly.
 
 **Please debug this program in VS Code and follow the recursive functions in expr.c step by step.**
 
-## 6  Lexical analysis
+## 7  Lexical analysis
 
 The lexical analysis is used to recognize tokens (i.e., words).
 

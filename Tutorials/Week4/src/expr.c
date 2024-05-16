@@ -156,7 +156,7 @@ static AstExprNodePtr AdditiveExpression(void) {
     expr->kids[1] = MultiplicativeExpression();
     /*
       If the current token is '+' or '-', The while-loop will iterate once more.
-      Otherwise, the while-loop will stop, meaning our parser have recognized an additive expression
+      Otherwise, the while-loop will stop, meaning our parser has recognized an additive expression
       in the input stream.
 
       In this simple example, now, the current token is TK_EOF (end of file).

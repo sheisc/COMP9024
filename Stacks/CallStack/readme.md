@@ -1,6 +1,6 @@
 # Variadic Functions in C
 
-## 1. Introduction
+## 1 Introduction
 
 If necessary, please install gcc-multilib and g++-multilib as follows.
 
@@ -53,7 +53,7 @@ How to clean
 CallStack$ make clean
 ```
 
-## 2. Variadic functions on a 32-bit system
+## 2 Variadic functions on a 32-bit system
 
 ### Call Stack Memory Layout
 
@@ -137,7 +137,7 @@ int main(void) {
 
 ```                                                       
 
-## 3. Variadic functions on a 64-bit system 
+## 3 Variadic functions on a 64-bit system 
 
 Since some function arguments are passed via physical registers 
 ([System V AMD64 ABI](https://en.wikipedia.org/wiki/X86_calling_conventions))
