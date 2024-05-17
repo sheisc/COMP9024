@@ -4,7 +4,7 @@ A binary tree is a hierarchical data structure wherein each node can have a maxi
 
 known as the left child and the right child.
 
-## 1 Introduction
+## Introduction
 
 ```sh
 
@@ -34,7 +34,7 @@ Its intermediate representation (IR):
 
 ```    
 
-## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download COMP9024/Trees/BiTree in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -66,7 +66,7 @@ Two configuration files (BiTree/.vscode/[launch.json](https://code.visualstudio.
 
 In the window of Visual Studio Code, please click "File" and "Open Folder",
 
-select the folder "COMP9024/Tutorials/BiTree", then click the "Open" button.
+select the folder "COMP9024/Trees/BiTree", then click the "Open" button.
 
 
 #### 2.2 Build the project in VS Code
@@ -128,7 +128,7 @@ struct astExprNode {
     1. The kind of an expression node: 
          an operand (e.g., 300) or an operator (e.g., '+', '-', '*' and '/')
     
-    2. To keep it simple, we use the TokenKind defined in tokens.txt.  
+    2. To keep it simple, we use the TokenKind as mentioned above
          TK_NUM for 300, 400, ...
          TK_ADD for '+'
          TK_SUB for '-'
@@ -178,13 +178,13 @@ int main(int argc, char **argv, char **env) {
 }
 ```
 
-## 4.1 How to create a binary tree for "9000 + 6 * 4"
+## 4.2 How to create a binary tree for "9000 + 6 * 4"
 
 ```C
   Now, let's manually create the binary tree. 
   
   We can see why pointers (addresses) are so important.
-  A tree node (oneNode) can save/keep/store another node's address,
+  A tree node can save/keep/store another node's address,
   thus establishing a connection from one node to another node.
   
   =====================================================================
@@ -222,7 +222,7 @@ int main(int argc, char **argv, char **env) {
 ```
 
 
-## 4.2 How to evaluate the expression "9000 + 6 * 4"
+## 4.3 How to evaluate the expression "9000 + 6 * 4"
 
 **Perform a postorder traversal of its binary tree.**
 
@@ -401,10 +401,10 @@ Changwei Zou, Dongjie He, Yulei Sui and Jingling Xue.
 | llvm-ml           |   5,498,863                   | 8,777,931 |
 | FileCheck         |  944,214                      | 1,333,502 |
 | llvm-mt           |  888,408                      | 1,259,724  |
-| cmake_automoc_parser  |   1,923,808               | 3,181,915 |
-| moc                   |   2,236,289                | 3,646,680 |
-| tracegen              |  1,779,135                 | 2,977,068 |
-| tracepointgen         |  1,737,779                 | 2,906,594 |
+| cmake_automoc_parser (Qt)  |   1,923,808               | 3,181,915 |
+| moc (Qt)                  |   2,236,289                | 3,646,680 |
+| tracegen (Qt)             |  1,779,135                 | 2,977,068 |
+| tracepointgen (Qt)        |  1,737,779                 | 2,906,594 |
 | ninja                 |   174,825                  | 236,430 |
 | ninja_test (GoogleTest) |   1,371,169              | 2,148,449 |
 | build_log_perftest      |  133,850                 | 174,170 |

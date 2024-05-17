@@ -46,7 +46,7 @@ struct astExprNode {
     1. The kind of an expression node: 
          an operand (e.g., 300) or an operator (e.g., '+', '-', '*' and '/')
     
-    2. To keep it simple, we use the TokenKind defined in tokens.txt.  
+    2. To keep it simple, we use the TokenKind as mentioned above  
          TK_NUM for 300, 400, ...
          TK_ADD for '+'
          TK_SUB for '-'
