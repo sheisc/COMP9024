@@ -211,13 +211,18 @@ int main(int argc, char **argv, char **env) {
           /  \ 
          6    4 
 
+
   // Now, let's manually create the binary tree. 
   // We will write a parser to create the tree for us later.
-  AstExprNodePtr left = CreateAstExprNode(TK_NUM, 9000, "", NULL, NULL);
-  AstExprNodePtr rightLeft = CreateAstExprNode(TK_NUM, 6, "", NULL, NULL);
-  AstExprNodePtr rightRight = CreateAstExprNode(TK_NUM, 4, "", NULL, NULL);
-  AstExprNodePtr right = CreateAstExprNode(TK_MUL, 0, "*", rightLeft, rightRight);
-  AstExprNodePtr root = CreateAstExprNode(TK_ADD, 0, "+", left, right); 
+  AstExprNodePtr Expression(void) {
+    AstExprNodePtr left = CreateAstExprNode(TK_NUM, 9000, "", NULL, NULL);
+    AstExprNodePtr rightLeft = CreateAstExprNode(TK_NUM, 6, "", NULL, NULL);
+    AstExprNodePtr rightRight = CreateAstExprNode(TK_NUM, 4, "", NULL, NULL);
+    AstExprNodePtr right = CreateAstExprNode(TK_MUL, 0, "*", rightLeft, rightRight);
+    AstExprNodePtr root = CreateAstExprNode(TK_ADD, 0, "+", left, right);
+
+    return root;
+  }
 
 ```
 
@@ -284,6 +289,16 @@ long EvalExpression(AstExprNodePtr root) {
         }
         return result;
     } 
+}
+
+// Release the heap space
+void ReleaseAstExpr(AstExprNodePtr root) {
+  if (root) {
+    ReleaseAstExpr(root->leftChild);
+    ReleaseAstExpr(root->rightChild);
+    // Postorder traversal
+    free(root);
+  }
 }
 ```
 

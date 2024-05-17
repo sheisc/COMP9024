@@ -73,8 +73,6 @@ AstExprNodePtr Expression(void) {
   // Q2. How to visit a binary tree?
   //
   ///////////////////////////////////////////////////////////////////
-  Value value;
-  memset(&value, 0, sizeof(value));
 
   // Now, let's manually create the binary tree. 
   // We will write a parser to create the tree for us later.
