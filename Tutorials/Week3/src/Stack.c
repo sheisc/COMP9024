@@ -60,21 +60,21 @@ void ReleaseStack(struct Stack *pStack) {
 void StackPush(struct Stack *pStack, STACK_ITEM_T item) {
     if (StackIsFull(pStack)) {
         /*
-            Please complete the following code.
+            Please complete the following code in Q1-Q5.
 
-            Q1. call malloc() to allocate pStack->size * 2 * sizeof(STACK_ITEM_T) bytes of heap memory,
-                and saved the return value in a pointer variable named as newItems
-            Q2. call assert() to make sure newItems is not NULL
-            Q3. call memcpy() to copy the items pointed to by pStack->pItems 
+            Q1. call malloc() to allocate enough bytes of heap memory,
+                and saved the return value in a pointer variable named as newItems           
+          
+            Q2. call memcpy() to copy the items pointed to by pStack->pItems 
                 to the heap memory pointed to by newItems
 
                 For help, please type 'man memcpy' in the command line.
 
                 $ man memcpy
              
-            Q4. call free() to release the heap memory pointed to by pStack->pItems
-            Q5. double the capacity size of the stack
-            Q6. let pStack->pItems point to the heap space allocated in Q1
+            Q3. call free() to release the unused heap memory
+            Q4. double the capacity size of the stack
+            Q5. let pStack->pItems point to the heap space allocated in Q1
 
             You need to echo these questions in our weekly Quiz.
             Our tutors will NOT answer these questions in the tutorial.
@@ -83,14 +83,13 @@ void StackPush(struct Stack *pStack, STACK_ITEM_T item) {
          */
     
         // Double the capacity of the stack        
-
         
         // Q1. ___________________
+        // assert(newItems);
         // Q2. ___________________
         // Q3. ___________________
         // Q4. ___________________
         // Q5. ___________________
-        // Q6. ___________________
     }
 
     // Now the stack is not full. Let us do the push operation.

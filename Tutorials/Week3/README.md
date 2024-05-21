@@ -258,16 +258,8 @@ void PrintInteger(STACK_ITEM_T x, int base) {
 
 ```
 
-## 5 How to increase the size of a stack dynamically?
 
-**Double the capacity size of the stack when it is full.**
-
-Please read the comments in StackPush() in src/Stack.c, and answer the questions Q1-Q6.
-
-You need to echo these questions in our weekly Quiz.
-
-
-## 6 Low-level pointer arithmetic in accessing struct fields
+## 5 Low-level pointer arithmetic in accessing struct fields
 
 
 
@@ -359,3 +351,16 @@ void SccWrite64(char *base, long offset, long val) {
 }
 
 ```
+
+## 6 Practical Exercise
+
+
+
+### How to increase the size of a stack dynamically?
+```sh
+Double the capacity of the stack when it is full.
+```
+
+**Our tutors will NOT answer these questions in tutorials.**
+
+**Please complete the code in StackPush() in src/Stack.c and then answer the questions in Quiz 2 (Week 3) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
