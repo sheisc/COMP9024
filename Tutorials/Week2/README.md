@@ -269,8 +269,9 @@ and write the same program from scratch by yourselves in your own way.
 **In order to understand one's knowledge blind spots in programming, one must write code oneself.**
 
 
-## 7 Practical Exercise
-**Our tutors will NOT answer these questions in tutorials.**
+## 7 Practical exercise
+
+**Our tutors will NOT answer the following questions in tutorials.**
 
 **Please complete the following code in Q1-Q5 and then answer the questions in Quiz 1 (Week 2) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 

@@ -352,15 +352,15 @@ void SccWrite64(char *base, long offset, long val) {
 
 ```
 
-## 6 Practical Exercise
+## 6 Practical exercise
 
-
+**Our tutors will NOT answer the following questions in tutorials.**
 
 ### How to increase the size of a stack dynamically?
 ```sh
 Double the capacity of the stack when it is full.
 ```
 
-**Our tutors will NOT answer these questions in tutorials.**
 
 **Please complete the code in StackPush() in src/Stack.c and then answer the questions in Quiz 2 (Week 3) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+

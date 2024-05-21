@@ -409,15 +409,15 @@ The lexical analysis is used to recognize tokens (i.e., words).
 
 The code is in src/lex.c.
 
-## 8 Practical Exercise
+## 8 Practical exercise
 
-
+**Our tutors will NOT answer the following questions in tutorials.**
 
 **1. Debug this program in VS Code and follow the recursive functions in expr.c step by step during parsing "9000 + (6 * 4)".**
 
 
-**2. Complete Q1-Q10 in the parse tree with function names and then answer the questions in Quiz 3 (Week 4) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+**2. Complete Q1-Q10 in the parse tree with function names you discovered during debugging and then answer the questions in Quiz 3 (Week 4) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
 <img src="ParseTree.png" width="60%" height="60%">
 
-**Our tutors will NOT answer these questions in tutorials.**
+
