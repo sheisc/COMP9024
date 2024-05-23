@@ -152,6 +152,8 @@ LargeAssignment
 
 **Please complete the code in Q1-Q10 (libs/SccHeap.c) and Q11-Q20 (src/stmt.c)**.
 
+Smaller projects such as [COMP9024/Trees/BiTree](../Trees/BiTree/README.md) and [COMP9024/Tutorials/Week4](../Tutorials/Week4/README.md)
+are introduced to help you comprehend the large assignment step by step.
 
 ## 6 How to test our heap allocator (based on a Single Linked List) 
 
