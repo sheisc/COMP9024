@@ -4,7 +4,16 @@
 
 
 /*
-  The Abstract Syntax Tree Node for an expression.  
+  The Abstract Syntax Tree Node for an expression.
+  
+  In an abstract syntax tree, syntactic details such as parentheses in expressions 
+  like "(20 + 30) * 40" are considered redundant and thus ignored.
+
+           * 
+         /   \
+        +     40
+      /   \ 
+     20   30  
  */
 struct astExprNode {
   /*

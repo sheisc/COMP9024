@@ -124,7 +124,16 @@ Its intermediate representation (IR):
 ```C
 
 /*
-  The Abstract Syntax Tree Node for an expression.  
+  The Abstract Syntax Tree Node for an expression.
+
+  In an abstract syntax tree, syntactic details such as parentheses in expressions 
+  like "(20 + 30) * 40" are considered redundant and thus ignored.
+
+           * 
+         /   \
+        +     40
+      /   \ 
+     20   30
  */
 struct astExprNode {
   /*
@@ -152,6 +161,8 @@ struct astExprNode {
   // e.g.,  left and right operands of a binary operator (+, -, *, /)
   struct astExprNode *kids[2];  
 };
+
+typedef struct astExprNode *AstExprNodePtr;
 
 // token value
 typedef struct {

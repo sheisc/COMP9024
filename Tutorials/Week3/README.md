@@ -362,5 +362,5 @@ Double the capacity of the stack when it is full.
 ```
 
 
-**Please complete the code in StackPush() in src/Stack.c and then answer the questions in Quiz 2 (Week 3) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+**Please complete the code (Q1-Q5) in StackPush() in src/Stack.c and then answer the questions in Quiz 2 (Week 3) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
