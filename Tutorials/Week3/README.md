@@ -13,9 +13,6 @@
     4.  How to print the string representations of an integer x 
         (based on a stack)
 
-    5.  Low-level pointer arithmetic in accessing struct fields
-        (see COMP9024/LargeAssignment/tests/Stack.scc)
-
                                              COMP9024 24T2
 
  *******************************************************************/
@@ -100,32 +97,34 @@ Then, click **Run -> Start Debugging**
 
 ## 3 Data structure and memory layout
 
-```sh
-////////////////////////////////////////////////////////////////////////////////////////
-// Stack:
-//
-//                -----------------------                                    --------------
-//                FieldName  FieldOffset                                     pItems[size-1]
-//                -----------------------                                       ...
-//  pStack -----> size         0                                             pItems[2]
-//                top          8                                             pItems[1]
-//                pItems      16           ----------------------------->    pItems[0]
-//                -----------------------                                    ---------------  
-//                    struct Stack                                        an array for storing items
-//                                                                                                          
-// 
-// 
-// In C:   // See COMP9024/Tutorials/Week3/src/Stack.c      
-//      struct Stack {
-//          // the current capacity size of a stack, in the number of items, not in bytes
-//          long size;
-//          // the stack top position
-//          long top;
-//          // pItems points to an array dynamically allocated in heap
-//          STACK_ITEM_T *pItems;
-//      };
-//
-/////////////////////////////////////////////////////////////////////////////////////////
+```C
+
+ Stack:
+
+                -----------------------                                    --------------
+                FieldName  FieldOffset                                     pItems[size-1]
+                -----------------------                                       ...
+  pStack -----> size         0                                             pItems[2]
+                top          8                                             pItems[1]
+                pItems      16           ----------------------------->    pItems[0]
+                -----------------------                                    ---------------  
+                    struct Stack                                        an array for storing items
+                                                                                                          
+ 
+ 
+ In C:    
+
+      typedef long STACK_ITEM_T;
+
+      struct Stack {
+          // the current capacity size of a stack, in the number of items, not in bytes
+          long size;
+          // the stack top position
+          long top;
+          // pItems points to an array dynamically allocated in heap
+          STACK_ITEM_T *pItems;
+      };
+
 ```
 
 ## 4 The push/pop operations in printing the string representations of an integer (e.g., x)
@@ -216,6 +215,8 @@ After popping (First In Last Out):
 ### Algorithm
 
 ```C
+typedef long STACK_ITEM_T;
+
 void PrintInteger(STACK_ITEM_T x, int base) {
     struct Stack *pStack = CreateStack();
     int r;
@@ -259,104 +260,11 @@ void PrintInteger(STACK_ITEM_T x, int base) {
 ```
 
 
-## 5 Low-level pointer arithmetic in accessing struct fields
-
-
-
-```sh
-////////////////////////////////////////////////////////////////////////////////////////
-// Stack:
-//                    struct Stack                                           items on the stack
-//                -----------------------                                    ---------------
-//                FieldName  FieldOffset                                     pItems[size-1]
-//                -----------------------                                       ...
-//  pStack -----> size         0                                             pItems[2]
-//                top          8                                             pItems[1]
-//                pItems      16           ----------------------------->    pItems[0]
-//                -----------------------                                    ---------------
-//                    Heap Space                                             Heap Space
-//                                                                                                          
-// 
-// 
-// In C:   // See COMP9024/Tutorials/Week3/src/Stack.c      
-//      struct Stack {
-//          // the current capacity size of a stack, in the number of items, not in bytes
-//          long size;
-//          // the stack top position
-//          long top;
-//          // pItems points to an array dynamically allocated in heap
-//          STACK_ITEM_T *pItems;
-//      };
-//
-// In SCC:
-//      We only have integers in our current implementation, but it is still possible 
-//      to allocate a heap object and treat it as a struct Stack object.
-//      No high-level human-friendly symbols for struct field names.
-//      Let us face the low-level field offsets and pointer arithmetic directly.
-//      
-//      ********  Low-level pointer arithmetic is essentially integer arithmetic,  *********
-//      ********  with the challenge lying in the type of the pointer (T *)        *********
-//      ********  and the size of T, determined by sizeof(T).                      *********
-// 
-//      *** only for explaining the low-level pointer arithmetic involved, NOT portable ***
-//      *** We assume sizeof(long) == 8                                                 ***
-//      ***           sizeof(char *) == 8                                               ***
-//      ***           sizeof(char) == 1                                                 ***
-//      ***           on a 64-bit system.                                               ***
-//
-////////////////////////////////////////////////////////////////////////////////////////
-```
-Please see comments and the following functions in **COMP9024/LargeAssignment/tests/Stack.scc**
-
-``` C
-
-// pStack->size
-StackGetSize(pStack) {
-  return SccRead64(pStack, 0);
-}
-
-// pStack->size = size
-StackSetSize(pStack, size) {
-  SccWrite64(pStack, 0, size);
-}
-
-// pStack->top
-StackGetTop(pStack) {
-  return SccRead64(pStack, 8);
-}
-
-// pStack->top = top
-StackSetTop(pStack, top) {
-  SccWrite64(pStack, 8, top);
-}
-
-// pStack->pItems
-StackGetItems(pStack) {
-  return SccRead64(pStack, 16);
-}
-
-// stack->pItems = pItems
-StackSetItems(pStack, pItems) {
-  SccWrite64(pStack, 16, pItems);
-}
-
-// See COMP9024/LargeAssignment/libs/SccLib.c
-
-long SccRead64(char *base, long offset) {
-  return *((long *)(base + offset));
-}
-
-void SccWrite64(char *base, long offset, long val) {
-  *((long *)(base + offset)) = val;
-}
-
-```
-
-## 6 Practical exercise
+## 5 Practical exercise
 
 **Our tutors will NOT answer the following questions in tutorials.**
 
-### How to increase the size of a stack dynamically?
+### How to increase the size of a stack (based on an array) dynamically?
 ```sh
 Double the capacity of the stack when it is full.
 ```
