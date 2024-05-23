@@ -252,3 +252,6 @@ MAKELEVEL=1
 
 ```
 
+## 8 Assessed online via Moodle
+
+Please complete the code in Q1-Q20 and then answer questions (more than 20) in Large Assignment (Week 10) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).
