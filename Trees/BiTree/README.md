@@ -340,6 +340,19 @@ in COMP9024 find extensive practical application in real-world interpreters and 
     >>> eval(code)
     9024
 
+    >>> code = compile("a + b * 4", "", "eval")
+    >>> import dis
+    >>> dis.dis(code)
+      1           0 LOAD_NAME                0 (a)
+                  2 LOAD_NAME                1 (b)
+                  4 LOAD_CONST               0 (4)
+                  6 BINARY_MULTIPLY
+                  8 BINARY_ADD
+                10 RETURN_VALUE
+    >>> eval(code, None, {"a":9000, "b":6})
+    9024
+
+
     >>> help(eval)
 
     eval(source, globals=None, locals=None)
