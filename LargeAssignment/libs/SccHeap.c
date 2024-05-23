@@ -1,7 +1,7 @@
 /***************************************************************************************
                 A customized heap allocator.
 
-  (1) Based on a free memory-block list (i.e., a single linked list) 
+  (1) Based on a free memory-block list (i.e., a singly linked list)
       
   (2) Some low-level pointer arithmetic involved.
   
