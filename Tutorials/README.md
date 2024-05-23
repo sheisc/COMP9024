@@ -20,7 +20,7 @@ especially considering that many of you did not major in Computer Science and En
 
 Please start with reading, debugging and modifying a runnable program.
 
-Even adding a [printf()](../Tutorials/Week2/README.md#3-the-process-of-bubble-sort) into the program will help you further understand it.
+Even adding a [printf()](./Week2/src/BubbleSort.c) into the program will help you further understand it.
 
 We will use **Visual Studio Code**, **make** and **gcc** in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
