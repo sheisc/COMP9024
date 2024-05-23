@@ -209,7 +209,7 @@ i = 20, j = 24
 ```
 
 
-## 5 Access an array via a pointer (e.g., ptr)
+## 5 Access an array via a pointer variable (e.g., ptr)
 
 ```C
     void PrintArray(int *ptr, int n) {
@@ -304,7 +304,7 @@ typedef int (*ComparatorFuncPtr)(int, int);
 
 
 void BubbleSort(int *ptr, int n, ComparatorFuncPtr compare) {
-    for (int iMax = n - 2; iMax >= 0; iMax++) {         
+    for (int iMax = n - 2; iMax >= 0; iMax--) {
         for (int i = 0; ____Q1_____; _____Q2____) {
             if (_____Q3_____) {
                 ____Q4____;
