@@ -72,23 +72,54 @@ Two configuration files (Week4/.vscode/[launch.json](https://code.visualstudio.c
 
 
 
-#### 2.1 Open the project in VS Code
+### 2.1 Open the project in VS Code
 
 In the window of Visual Studio Code, please click "File" and "Open Folder",
 
 select the folder "COMP9024/Tutorials/Week4", then click the "Open" button.
 
 
-#### 2.2 Build the project in VS Code
+### 2.2 Build the project in VS Code
 
 click **Terminal -> Run Build Task**
 
 
-#### 2.3 Debug the project in VS Code
+### 2.3 Debug the project in VS Code
 
 Open src/main.c, and click to add a breakpoint (say, line 67).
 
 Then, click **Run -> Start Debugging**
+
+
+
+### 2.4 Directory
+
+```sh
+├── Makefile             defining set of tasks to be executed (the input file of the 'make' command)
+|
+├── README.md            introduction to this tutorial
+|
+├── src                  containing *.c and *.h
+|    |
+|    ├── error.c         reporting an error
+|    ├── error.h
+|    ├── expr.c          create a tree by parsing an arithmetic expression (e.g., "9000 + (6 * 4)") and evaluate its value     
+|    ├── expr.h
+|    ├── lex.c           lexical analysis for recognizing a token (i.e., a word), such as 9000, +, (, ...
+|    ├── lex.h      
+|    ├── main.c          main()
+|    └── tokens.txt      containing the token kinds and names
+|
+└── .vscode              containing configuration files for Visual Studio Code
+    |
+    ├── launch.json      specifying which program to debug and with which debugger,
+    |                    used when you click "Run -> Start Debugging"
+    |
+    └── tasks.json       specifying which task to run (e.g., 'make' or 'make clean')
+                         used when you click "Terminal -> Run Build Task" or "Terminal -> Run Task"
+```
+
+
 
 ## 3 Data structure 
 
