@@ -77,23 +77,51 @@ Two configuration files (Week3/.vscode/[launch.json](https://code.visualstudio.c
 
 
 
-#### 2.1 Open the project in VS Code
+### 2.1 Open the project in VS Code
 
 In the window of Visual Studio Code, please click "File" and "Open Folder",
 
 select the folder "COMP9024/Tutorials/Week3", then click the "Open" button.
 
 
-#### 2.2 Build the project in VS Code
+### 2.2 Build the project in VS Code
 
 click **Terminal -> Run Build Task**
 
 
-#### 2.3 Debug the project in VS Code
+### 2.3 Debug the project in VS Code
 
 Open src/Int2Str.c, and click to add a breakpoint (say, line 71).
 
 Then, click **Run -> Start Debugging**
+
+
+
+### 2.4 Directory
+
+```sh
+├── Makefile             defining set of tasks to be executed (the input file of the 'make' command)
+|
+├── README.md            introduction to this tutorial
+|
+├── src                  containing *.c and *.h
+|    |
+|    ├── Int2Str.c       print an integer as a string (based on a stack)
+|    ├── Int2Str.h
+|    ├── main.c          main()
+|    ├── Stack.c         the implementation of an array-based stack
+|    └── Stack.h         the header file of the stack
+|
+|
+└── .vscode              containing configuration files for Visual Studio Code
+    |
+    ├── launch.json      specifying which program to debug and with which debugger,
+    |                    used when you click "Run -> Start Debugging"
+    |
+    └── tasks.json       specifying which task to run (e.g., 'make' or 'make clean')
+                         used when you click "Terminal -> Run Build Task" or "Terminal -> Run Task"
+```
+
 
 ## 3 Data structure and memory layout
 
@@ -128,6 +156,10 @@ Then, click **Run -> Start Debugging**
 ```
 
 ## 4 The push/pop operations in printing the string representations of an integer (e.g., x)
+
+
+**In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
+
 ``` sh
 Week3$ make
 
