@@ -111,12 +111,12 @@ Then, click **Run -> Start Debugging**
 HowToMake$ make
 
 make main
-make[1]: Entering directory '/home/iron/github/PrivateCOMP9024/C/HowToMake'
-gcc -g -I /home/iron/github/PrivateCOMP9024/C/HowToMake/src  -c src/myadd.c -o build/myadd.o
-gcc -g -I /home/iron/github/PrivateCOMP9024/C/HowToMake/src  -c src/main.c -o build/main.o
-gcc -g -I /home/iron/github/PrivateCOMP9024/C/HowToMake/src  -c src/mysub.c -o build/mysub.o
-gcc -g -I /home/iron/github/PrivateCOMP9024/C/HowToMake/src  -o main ./build/myadd.o ./build/main.o ./build/mysub.o
-make[1]: Leaving directory '/home/iron/github/PrivateCOMP9024/C/HowToMake'
+make[1]: Entering directory 'COMP9024/C/HowToMake'
+gcc -g -I COMP9024/C/HowToMake/src  -c src/myadd.c -o build/myadd.o
+gcc -g -I COMP9024/C/HowToMake/src  -c src/main.c -o build/main.o
+gcc -g -I COMP9024/C/HowToMake/src  -c src/mysub.c -o build/mysub.o
+gcc -g -I COMP9024/C/HowToMake/src  -o main ./build/myadd.o ./build/main.o ./build/mysub.o
+make[1]: Leaving directory 'COMP9024/C/HowToMake'
 
 HowToMake$ ./main
 
@@ -127,7 +127,7 @@ sub(9000, 24) = 8976
 
 HowToMake$ pwd
 
-/home/iron/github/PrivateCOMP9024/C/HowToMake
+COMP9024/C/HowToMake
 
 HowToMake$ find ./src -name "*.c"
 
