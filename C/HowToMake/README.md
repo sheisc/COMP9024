@@ -211,7 +211,25 @@ clean:
 ```
 
 
-## 5 The rules in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2)
+## 5 The implicit Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake/Makefile](./Makefile)
+
+
+<img src="images/MakefileDAG.png" width="60%" height="60%">
+
+
+### How Does 'make' Work?
+
+The make utility compares the modification time of the target file with that of the dependency files. 
+
+If any dependency file has a modification time more recent than its corresponding target file, 
+
+it necessitates the recreation of the target file.
+
+For example, if **src/main.c** is newer than **build/main.o**, then **build/main.o** and **main** will be rebuilt in turn.
+
+
+
+## 6 The rules in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2)
 
 **The key point in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2) is to use gcc to generate prerequisites automatically for us.**
 
@@ -237,22 +255,6 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 ```
 
 **For simplicity, we will reuse [COMP9024/C/HowToMake/Makefile](./Makefile), rather than [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2), in other projects.**
-
-## 6 The implicit Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake/Makefile](./Makefile)
-
-
-<img src="images/MakefileDAG.png" width="60%" height="60%">
-
-
-### How Does 'make' Work?
-
-The make utility compares the modification time of the target file with that of the dependency files. 
-
-If any dependency file has a modification time more recent than its corresponding target file, 
-
-it necessitates the recreation of the target file.
-
-For example, if **src/main.c** is newer than **build/main.o**, then **build/main.o** and **main** will be rebuilt in turn.
 
 ## 7 Four steps of the gcc driver in generating an executable program
 
