@@ -255,7 +255,7 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 ```
 
 
-## 5 The implicit Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake/Makefile](./Makefile)
+## 5 The internal Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake/Makefile](./Makefile)
 
 
 <img src="images/MakefileDAG.png" width="60%" height="60%">
@@ -394,7 +394,9 @@ HowToMake$ ./test
 ```
 
 
-### Sidetracks: [Python Interpreter](https://github.com/python/cpython.git)
+### 8 Sidetracks
+
+### 8.1 [Python Interpreter](https://github.com/python/cpython.git)
 
 (1) Generate Python bytecode (compiling)
 
@@ -450,7 +452,86 @@ HowToMake$ ./test
 
 BTW, [X-Python](https://github.com/rocky/x-python) is a Python bytecode interpreter written Python.
 
-## 8 If you are interested in system programming, you can start with MIT's [xv6](https://github.com/mit-pdos/xv6-public) when you are confident in C.
+
+
+### 8.2 [the operator precedence table](https://en.cppreference.com/w/c/language/operator_precedence)
+
+
+```sh
+   
+    Bruce Eckel, the author of the book (Thinking in C++):
+
+        "If you memorize the operator precedence table (I never did), you can write clever code. 
+        But if you have to think about it, it will confuse the reader/maintainer of that code. 
+        So forget about precedence, and use parentheses when things aren’t clear."     
+    
+```
+
+**Worse still, the operator precedence in Python differs slightly from that in C.**
+
+#### [In Python](https://docs.python.org/3/reference/expressions.html#operator-precedence)
+
+Bitwise AND has a higher precedence than identity tests (e.g., ==) in Python.
+
+```sh
+
+ $ python3
+>>> x = (2 & 4 == 0)
+>>> x
+True
+>>> x = ((2 & 4) == 0)
+>>> x
+True
+
+>>> 2 & 4
+0
+>>> 0 == 0
+True
+
+        
+```
+
+#### [In C](https://en.cppreference.com/w/c/language/operator_precedence)
+
+The identity/equality test == has a higher precedence than bitwise AND in C
+
+```C
+// test2.c
+#include <stdio.h>
+int main(void) {
+  int x = (2 & 4 == 0);
+  printf("x = %d\n", x);
+  x = (2 & (4 == 0));
+  printf("x = %d\n", x);
+  return 0;
+}
+
+$ gcc test2.c -o test2
+$ ./test2
+x = 0
+x = 0
+
+```
+
+
+### Readability counts.
+
+```Sh
+
+$ python3
+>>> import this
+The Zen of Python, by Tim Peters
+
+...
+Simple is better than complex.
+...
+
+Readability counts.
+...
+
+```
+
+## 9 If you are interested in system programming, you can start with MIT's [xv6](https://github.com/mit-pdos/xv6-public) when you are confident in C.
 
 **Reading xv6's code has changed my life.**
 
@@ -459,7 +540,7 @@ BTW, [X-Python](https://github.com/rocky/x-python) is a Python bytecode interpre
 By implementing a simple C-like compiler, [our large assignment](../../LargeAssignment/README.md) will pave the road for you to read MIT's [xv6](https://github.com/mit-pdos/xv6-public).
 
 
-### 8.1 [xv6: a simple, Unix-like teaching operating system](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
+### 9.1 [xv6: a simple, Unix-like teaching operating system](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
 
 
 [mit-pdos/xv6-public on GitHub](https://github.com/mit-pdos/xv6-public)
@@ -471,7 +552,7 @@ to Peer Communications; ISBN: 1-57398-013-7; 1st edition (June 14,
 provides pointers to on-line resources for v6.
 ```
 
-### 8.2 [Lions' Commentary on UNIX 6th Edition](https://en.wikipedia.org/wiki/A_Commentary_on_the_UNIX_Operating_System)
+### 9.2 [Lions' Commentary on UNIX 6th Edition](https://en.wikipedia.org/wiki/A_Commentary_on_the_UNIX_Operating_System)
 
 John Lions, Department of Computer Science, The University of New South Wales
 
@@ -482,7 +563,7 @@ Lions' great book is on show.
 <img src="images/showcase.jpg" width="50%" height="50%">
 
 
-### 8.3 Read The Source Code
+### 9.3 Read The Source Code
 
 ```
 Read The Source Code.
@@ -494,6 +575,6 @@ Read The Source Code.
 <img src="images/Linus.jpg" width="50%" height="50%">
 
 
-### 8.4 [You will when you believe](https://www.youtube.com/watch?v=LKaXY4IdZ40&ab_channel=whitneyhoustonVEVO)
+### 9.4 [You will when you believe](https://www.youtube.com/watch?v=LKaXY4IdZ40&ab_channel=whitneyhoustonVEVO)
 
 <img src="images/WhenYouBelieve.png" width="50%" height="50%">
