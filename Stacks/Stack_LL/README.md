@@ -99,6 +99,32 @@ Open src/Int2Str.c, and click to add a breakpoint (say, line 71).
 
 Then, click **Run -> Start Debugging**
 
+### 2.4 Directory
+
+```sh
+├── Makefile             defining set of tasks to be executed (the input file of the 'make' command)
+|
+├── README.md            introduction to this tutorial
+|
+├── src                  containing *.c and *.h
+|    |
+|    ├── Int2Str.c       print an integer as a string (based on a stack)
+|    ├── Int2Str.h
+|    ├── main.c          main()
+|    ├── Stack.c         the implementation of a linked-list-based stack
+|    └── Stack.h         the header file of the stack
+|
+|
+└── .vscode              containing configuration files for Visual Studio Code
+    |
+    ├── launch.json      specifying which program to debug and with which debugger,
+    |                    used when you click "Run -> Start Debugging"
+    |
+    └── tasks.json       specifying which task to run (e.g., 'make' or 'make clean')
+                         used when you click "Terminal -> Run Build Task" or "Terminal -> Run Task"
+```
+Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
+
 ## 3 Data structure and memory layout
 
 ```C

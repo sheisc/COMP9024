@@ -35,7 +35,7 @@ or Last In First Out (LIFO).
 
 In this tutorial, we will delve into the creation of a stack and its practical application in generating string representations of integers.
 
-A stack can be implemented using an array (as demonstrated in this tutorial) or with a linked list for storing stack items / elements.
+A stack can be implemented using an array (as demonstrated in this tutorial) or with a linked list ([COMP9024/Stacks/Stack_LL](../../Stacks/Stack_LL/README.md)) for storing stack items / elements.
 
 
 ### Sidetracks
