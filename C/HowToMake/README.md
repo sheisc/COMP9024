@@ -448,6 +448,8 @@ HowToMake$ ./test
         or a code object as returned by compile().
 ```
 
+BTW, [X-Python](https://github.com/rocky/x-python) is a Python bytecode interpreter written Python.
+
 ## 8 If you are interested in system programming, you can start with MIT's [xv6](https://github.com/mit-pdos/xv6-public) when you are confident in C.
 
 **Reading xv6's code has changed my life.**
