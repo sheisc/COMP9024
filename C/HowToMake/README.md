@@ -368,7 +368,7 @@ HowToMake$ ./test
 
 **I hope they can also inspire you.**
 
-By implementing a simple C-like compiler, our large assignment will pave the road for you to read MIT's [xv6](https://github.com/mit-pdos/xv6-public).
+By implementing a simple C-like compiler, [our large assignment](../../LargeAssignment/README.md) will pave the road for you to read MIT's [xv6](https://github.com/mit-pdos/xv6-public).
 
 
 ### 8.1 [xv6: a simple, Unix-like teaching operating system](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
@@ -394,10 +394,10 @@ Lions' great book is on show.
 <img src="images/showcase.jpg" width="50%" height="50%">
 
 
-### 8.3 Read The Fxxxing Source Code
+### 8.3 Read The Source Code
 
 ```
-Read The Fxxxing Source Code.
+Read The Source Code.
 
                 Linus Torvalds 
                 The creator and lead developer of the Linux kernel
