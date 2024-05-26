@@ -86,6 +86,7 @@ Then, click **Run -> Start Debugging**
                          used when you click "Terminal -> Run Build Task" or "Terminal -> Run Task"
 ```
 
+Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ## 3 The process of bubble sort
 

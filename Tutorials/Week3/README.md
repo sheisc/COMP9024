@@ -121,7 +121,7 @@ Then, click **Run -> Start Debugging**
     └── tasks.json       specifying which task to run (e.g., 'make' or 'make clean')
                          used when you click "Terminal -> Run Build Task" or "Terminal -> Run Task"
 ```
-
+Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ## 3 Data structure and memory layout
 
