@@ -48,7 +48,7 @@ $(TARGET_EXE):  $(OBJ_FILES_IN_BUILD)
 	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD)
 
 # How to generate a "build/*.o" from a "src/*.c"
-# To generate prerequisites automatically, please see Makefile.V2
+# To generate prerequisites automatically, please see COMP9024/C/HowToMake/Makefile.V2
 # https://www.gnu.org/software/make/manual/html_node/Automatic-Prerequisites.html
 $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	@mkdir -p $(shell dirname $@)
