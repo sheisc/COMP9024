@@ -1,5 +1,17 @@
 # Binary Tree
 
+``` sh
+/*******************************************************************
+
+    1.  How to create a binary tree manually for an arithmetic expression (e.g., "9000 + 6 * 4")
+
+    2.  How to evaluate an expression (based on its tree representation)
+
+                                             COMP9024 24T2
+
+ *******************************************************************/
+``` 
+
 A binary tree is a hierarchical data structure wherein each node can have a maximum of two children,
 
 known as the left child and the right child.
@@ -79,6 +91,32 @@ click **Terminal -> Run Build Task**
 Open src/expr.c, and click to add a breakpoint (say, line 105).
 
 Then, click **Run -> Start Debugging**
+
+### 2.4 Directory
+
+```sh
+├── Makefile             defining set of tasks to be executed (the input file of the 'make' command)
+|
+├── README.md            introduction to this tutorial
+|
+├── src                  containing *.c and *.h
+|   |
+│   ├── expr.c           arithmetic expression
+│   ├── expr.h
+│   └── main.c           main()
+|
+|── images
+|
+└── .vscode              containing configuration files for Visual Studio Code
+    |
+    ├── launch.json      specifying which program to debug and with which debugger,
+    |                    used when you click "Run -> Start Debugging"
+    |
+    └── tasks.json       specifying which task to run (e.g., 'make' or 'make clean')
+                         used when you click "Terminal -> Run Build Task" or "Terminal -> Run Task"
+```
+
+Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ## 3 Data structures
 

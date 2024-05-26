@@ -34,7 +34,7 @@ CC= gcc
 #CFLAGS = -m32 -g -no-pie --save-temps -I $(PROJ_ROOT_PATH)/src
 #CFLAGS = -g -no-pie --save-temps -I $(PROJ_ROOT_PATH)/src 
 #CFLAGS = -no-pie --save-temps -fno-asynchronous-unwind-tables -I $(PROJ_ROOT_PATH)/src 
-CFLAGS = -g -I $(PROJ_ROOT_PATH)/src 
+CFLAGS = -g -D ON_A_32_BIT_SYSTEM -m32 -I $(PROJ_ROOT_PATH)/src 
 
 # create a directory  
 $(shell mkdir -p $(BUILD_DIR))

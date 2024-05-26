@@ -14,16 +14,19 @@ void OurPrintf_V1(const char *fmt, ...) {
     va_start(ap, fmt);
     printf("OurPrintf_V1(): ");        
     while (*fmt) {
-        if (*fmt == '%') { // 
+        if (*fmt == '%') { // %: This is the leading sign that denotes the beginning of the format specifier
             fmt++;
             if (*fmt == 'd') {
                 int val = va_arg(ap, int);
                 printf("%d", val);
+                // flush the buffered data, for debugging
+                fflush(stdout);
                 fmt++;
             }
             else if (*fmt == 'f') {
                 double val = va_arg(ap, double);
                 printf("%f", val);
+                fflush(stdout);
                 fmt++;
             }              
             else {
@@ -32,6 +35,7 @@ void OurPrintf_V1(const char *fmt, ...) {
         }
         else {  // regular character
             printf("%c", *fmt);
+            fflush(stdout);
             fmt++;
         }
     }
@@ -73,12 +77,15 @@ void OurPrintf32_V3(char *fmt, ...) {
                 ap += sizeof(int);
 
                 printf("%d", ival);
+                // flush the buffered data, for debugging
+                fflush(stdout);
                 fmt++;
             }
             else if (*fmt == 'f') {  
                 double fval = *((double *) ap);  // similar with va_arg(ap, double)
                 ap += sizeof(double);
                 printf("%f", fval);
+                fflush(stdout);
                 fmt++;
             }
             else {
@@ -87,6 +94,7 @@ void OurPrintf32_V3(char *fmt, ...) {
         }
         else {  // regular character
             printf("%c", *fmt);
+            fflush(stdout);
             fmt++;
         }
     }
