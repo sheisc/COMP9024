@@ -393,7 +393,62 @@ HowToMake$ gcc test.c -o test
 HowToMake$ ./test
 ```
 
-## 8 Sidetracks: if you are interested in system programming, you can start with MIT's [xv6](https://github.com/mit-pdos/xv6-public) when you are confident in C.
+
+### Sidetracks: [Python Interpreter](https://github.com/python/cpython.git)
+
+(1) Generate Python bytecode (compiling)
+
+(2) Interpret the bytecode (evaluating).
+
+```sh                                                       
+
+    $ python3
+
+    >>> eval("9000 + 6 * 4")
+    9024
+
+    >>> code = compile("a + b * 4", "", "eval")
+    >>> import dis
+    >>> dis.dis(code)
+      1           0 LOAD_NAME                0 (a)
+                  2 LOAD_NAME                1 (b)
+                  4 LOAD_CONST               0 (4)
+                  6 BINARY_MULTIPLY
+                  8 BINARY_ADD
+                10 RETURN_VALUE
+    >>> eval(code, None, {"a":9000, "b":6})
+    9024
+
+
+    >>> help(compile)
+
+    Help on built-in function compile in module builtins:
+
+    compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1, *, _feature_version=-1)
+        Compile source into a code object that can be executed by exec() or eval().
+
+        The source code may represent a Python module, statement or expression.
+        The filename will be used for run-time error messages.
+        The mode must be 'exec' to compile a module, 'single' to compile a
+        single (interactive) statement, or 'eval' to compile an expression.
+        The flags argument, if present, controls which future statements influence
+        the compilation of the code.
+        The dont_inherit argument, if true, stops the compilation inheriting
+        the effects of any future statements in effect in the code calling
+        compile; if absent or false these statements do influence the compilation,
+        in addition to any features explicitly specified.
+
+
+    >>> help(eval)
+
+    eval(source, globals=None, locals=None)
+
+        Evaluate the given source in the context of globals and locals.
+        The source may be a string representing a Python expression
+        or a code object as returned by compile().
+```
+
+## 8 If you are interested in system programming, you can start with MIT's [xv6](https://github.com/mit-pdos/xv6-public) when you are confident in C.
 
 **Reading xv6's code has changed my life.**
 
