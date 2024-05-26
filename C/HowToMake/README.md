@@ -84,6 +84,8 @@ Then, click **Run -> Start Debugging**
 |
 ├── images               containing image files (*.png and *.jpg)
 |
+|── test.c               for demonstrating the four stages of gcc
+|
 ├── src                  containing *.c and *.h
 │   ├── main.c
 │   ├── main.h
@@ -211,6 +213,8 @@ clean:
 ```
 
 
+
+
 ## 5 The implicit Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake/Makefile](./Makefile)
 
 
@@ -254,6 +258,12 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	${CC} ${CFLAGS} -c $< -o $@
 ```
 
+```sh
+  $@      
+        the name of the target being generated,  e.g., build/main.o
+  @<      
+        the first prerequisite (usually a source file), e.g., src/main.c
+```
 **For simplicity, we will reuse [COMP9024/C/HowToMake/Makefile](./Makefile), rather than [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2), in other projects.**
 
 ## 7 Four steps of the gcc driver in generating an executable program
@@ -262,26 +272,25 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 
 ### test.c
 ```C
-$ cat test.c
-int lineNumber;
-char *fileName;
-#define THIS_YEAR 2024
-int main(void) {
-    long year = THIS_YEAR;
-    lineNumber = __LINE__;
-    fileName = __FILE__;
-    return 0;
-}
-
+HowToMake$ cat -n test.c
+     1	int lineNumber;
+     2	char *fileName;
+     3	#define THIS_YEAR 2024
+     4	int main(void) {
+     5	    long year = THIS_YEAR;
+     6	    lineNumber = __LINE__;
+     7	    fileName = __FILE__;
+     8	    return 0;
+     9	}
 ```
 
-### Preprocessor
+### 7.1 Preprocessor
 
 
-```sh
-$ gcc -E test.c -o test.i
+```C
+HowToMake$ gcc -E test.c -o test.i
 
-$ cat test.i
+HowToMake$ cat test.i
 
 ...
 
@@ -297,16 +306,23 @@ int main(void) {
 
 ```
 
-### Compiler
+### 7.2 Compiler
 ```sh
-$ gcc -c -S test.i -o test.s
-$ cat test.s
+HowToMake$ gcc -c -S test.i -o test.s
+HowToMake$ cat test.s
+
+    .bss
+...
 
 lineNumber:
 	.zero	4
 
 fileName:
 	.zero	8
+
+
+    .text
+...
 
 main:
     ...
@@ -320,11 +336,11 @@ main:
 
 ```
 
-### Assembler
+### 7.3 Assembler
 ```sh
-$ gcc -c test.s -o test.o
+HowToMake$ gcc -c test.s -o test.o
 
-$ readelf -h test.o
+HowToMake$ readelf -h test.o
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
   Class:                             ELF64
@@ -332,15 +348,21 @@ ELF Header:
 
 ```
 
-### Linker
+### 7.4 Linker
 
 ```sh
-$ gcc test.o -o test
-$ ./test
+HowToMake$ gcc test.o -o test
+HowToMake$ ./test
 ```
 
+### Four steps in one
 
-## 7 Sidetracks: if you are interested in system programming, you can start with MIT's [xv6](https://github.com/mit-pdos/xv6-public) when you are confident in C.
+```
+HowToMake$ gcc test.c -o test
+HowToMake$ ./test
+```
+
+## 8 Sidetracks: if you are interested in system programming, you can start with MIT's [xv6](https://github.com/mit-pdos/xv6-public) when you are confident in C.
 
 **Reading xv6's code has changed my life.**
 
@@ -349,7 +371,7 @@ $ ./test
 By implementing a simple C-like compiler, our large assignment will pave the road for you to read MIT's [xv6](https://github.com/mit-pdos/xv6-public).
 
 
-### 7.1 [xv6: a simple, Unix-like teaching operating system](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
+### 8.1 [xv6: a simple, Unix-like teaching operating system](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
 
 
 [mit-pdos/xv6-public on GitHub](https://github.com/mit-pdos/xv6-public)
@@ -361,15 +383,29 @@ to Peer Communications; ISBN: 1-57398-013-7; 1st edition (June 14,
 provides pointers to on-line resources for v6.
 ```
 
-### 7.2 [Lions' Commentary on UNIX 6th Edition](https://en.wikipedia.org/wiki/A_Commentary_on_the_UNIX_Operating_System)
+### 8.2 [Lions' Commentary on UNIX 6th Edition](https://en.wikipedia.org/wiki/A_Commentary_on_the_UNIX_Operating_System)
 
 John Lions, Department of Computer Science, The University of New South Wales
 
 Come to the mini museum at level 1, K17.
 
-Lion's great book is on show.
+Lions' great book is on show.
 
 <img src="images/showcase.jpg" width="50%" height="50%">
 
 
+### 8.3 Read The Fxxxing Source Code
 
+```
+Read The Fxxxing Source Code.
+
+                Linus Torvalds 
+                The creator and lead developer of the Linux kernel
+```
+
+<img src="images/Linus.jpg" width="50%" height="50%">
+
+
+### 8.4 [You will when you believe](https://www.youtube.com/watch?v=LKaXY4IdZ40&ab_channel=whitneyhoustonVEVO)
+
+<img src="images/WhenYouBelieve.png" width="50%" height="50%">

@@ -56,7 +56,7 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 
 # clean all the files generated	
 clean:
-	rm -rf $(TARGET_EXE) $(BUILD_DIR) 
+	rm -rf $(TARGET_EXE) $(BUILD_DIR)
 	find . -name "*.o" | xargs rm -f
 	find . -name "*.s" | xargs rm -f
 	find . -name "*.i" | xargs rm -f
