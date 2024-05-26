@@ -78,7 +78,7 @@ click **Terminal -> Run Build Task**
 
 #### 2.3 Debug the project in VS Code
 
-Open src/Int2Str.c, and click to add a breakpoint (say, line 71).
+Open src/Queue.c, and click to add a breakpoint (say, line 112).
 
 Then, click **Run -> Start Debugging**
 
