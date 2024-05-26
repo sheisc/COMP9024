@@ -78,7 +78,7 @@ Then, click **Run -> Start Debugging**
 ```sh
 ├── Makefile             defining set of tasks to be executed (the input file of the 'make' command)
 |
-├── Makefile.V2          Generating prerequisites automatically, but more complex.
+├── Makefile.V2          Generating prerequisites automatically, more precise than Makefile, but more complex.
 |
 ├── README.md            introduction to this tutorial
 |
@@ -125,6 +125,20 @@ HowToMake$ ./main
 Hello COMP9024
 add(9000, 24) = 9024
 sub(9000, 24) = 8976
+
+HowToMake$ make
+make main
+make[1]: Entering directory 'COMP9024/C/HowToMake'
+make[1]: 'main' is up to date.
+make[1]: Leaving directory 'COMP9024/C/HowToMake'
+
+// If we modify src/myadd.c, only the modified parts (i.e., 'build/myadd.o' and 'main') need to be recreated.
+HowToMake$ make
+make main
+make[1]: Entering directory '/home/iron/github/COMP9024/C/HowToMake'
+gcc -g -I COMP9024/C/HowToMake/src  -c src/myadd.c -o build/myadd.o
+gcc -g -I COMP9024/C/HowToMake/src  -o main ./build/myadd.o ./build/main.o ./build/mysub.o
+make[1]: Leaving directory '/home/iron/github/COMP9024/C/HowToMake'
 
 
 HowToMake$ pwd
@@ -212,7 +226,33 @@ clean:
 	find . -name "*.bc" | xargs rm -f
 ```
 
+In the following rule in [COMP9024/C/HowToMake/Makefile](./Makefile),
 
+we simply and conservatively assume a *.o file (e.g., 'build/myadd.o') depends on all *.h files (specified by H_SRC_FILES).
+```sh
+$(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
+	@mkdir -p $(shell dirname $@)
+	${CC} ${CFLAGS} -c $< -o $@
+```
+**Explanation of the above rule in [COMP9024/C/HowToMake/Makefile](./Makefile)**
+```sh
+
+  $@      
+        the name of the target being generated,  e.g., build/myadd.o
+  @<      
+        the first prerequisite (usually a source file), e.g., src/myadd.c
+
+  Take 'build/myadd.o' as an example.
+
+        The target 'build/myadd.o' conservatively depends on 'src/myadd.c', 'src/myadd.h', 'src/mysub.h', 'src/main.h'.
+
+        To generate 'build/myadd.o', the 'make' tool will run the following commands:
+
+        mkdir -p build
+        gcc -g -I COMP9024/C/HowToMake/src  -c src/myadd.c -o build/myadd.o 
+
+      
+```
 
 
 ## 5 The implicit Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake/Makefile](./Makefile)
@@ -235,7 +275,11 @@ For example, if **src/main.c** is newer than **build/main.o**, then **build/main
 
 ## 6 The rules in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2)
 
-**The key point in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2) is to use gcc to generate prerequisites automatically for us.**
+**More precise than [COMP9024/C/HowToMake/Makefile](./Makefile), but more complex.**
+
+**The key point in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2) is to use gcc to generate prerequisites automatically for us**
+
+**and then include these dependencies into Makefile.V2.**
 
 ```
 HowToMake$ gcc -MM src/main.c
@@ -249,22 +293,9 @@ mysub.o: src/mysub.c src/mysub.h
 
 ```
 
-By contrast, in the following rule in [COMP9024/C/HowToMake/Makefile](./Makefile),
-
-we simply and conservatively assume a *.o file (e.g., myadd.o) depends on all *.h files (specified by H_SRC_FILES).
-```sh
-$(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
-	@mkdir -p $(shell dirname $@)
-	${CC} ${CFLAGS} -c $< -o $@
-```
-
-```sh
-  $@      
-        the name of the target being generated,  e.g., build/main.o
-  @<      
-        the first prerequisite (usually a source file), e.g., src/main.c
-```
 **For simplicity, we will reuse [COMP9024/C/HowToMake/Makefile](./Makefile), rather than [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2), in other projects.**
+
+**If you are interested in the details of Makefile.V2, please read the comments in the file.**
 
 ## 7 Four steps of the gcc driver in generating an executable program
 
