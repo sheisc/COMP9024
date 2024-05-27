@@ -227,9 +227,10 @@ struct Date date = {28, 5, 2024};
 
 ## 6 Access memory by variable names
 
+
 ### 6.1 Access 'int arr[4]' and 'struct Date date'
 
-#### (arr+i) is equivalent to arr[i], where arr is an array.
+#### *(arr+i) is equivalent to arr[i], where arr is an array.
 
 ```C
 static void AccessMemoryByVariableNames(void) {
@@ -393,7 +394,10 @@ t is also used as a Bitwise AND operator in "2 & 4"
 
 **For example**
 
+```C
+char cVar = 'A';
 char *pCharVar = &cVar;
+```
 
 ### 7.1  Pointer variables which point to primary types
 ```C
