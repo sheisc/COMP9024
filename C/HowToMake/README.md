@@ -271,7 +271,11 @@ it necessitates the recreation of the target file.
 
 For example, if **src/main.c** is newer than **build/main.o**, then **build/main.o** and **main** will be rebuilt in turn.
 
+The rules in [COMP9024/C/HowToMake/Makefile](./Makefile) tell the 'make' tool how to construct the internal Directed Acyclic Graph (DAG) for a project.
 
+<div style="color:red">
+The target and dependency files serve as nodes within the DAG, with the dependency relationships forming the edges of the DAG.
+</div>
 
 ## 6 The rules in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2)
 
