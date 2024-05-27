@@ -28,6 +28,10 @@
 
     4.   Low-level pointer arithmetic via MemoryRead() and MemoryWrite().
 
+         Low-level pointer arithmetic is essentially integer arithmetic,
+         with the challenge lying in the type of the pointer (T *)
+         and the size of T, determined by sizeof(T).
+
     5.   Tested on a 64-bit system (Intel x86_64).
 
                                                                     COMP9024 24T2
@@ -39,6 +43,25 @@
 ## CPU and Memory
 
 <img src="images/CpuAndMemory.png" width="100%" height="100%">
+
+Memory Management Unit ([MMU](https://en.wikipedia.org/wiki/Memory_management_unit)) and [cache](https://en.wikipedia.org/wiki/Cache_(computing)) are out of the scope of this course.
+
+Functions like MemoryRead64() and MemoryWrite64() in the figure are modeled to explain low-level pointer arithmetic.
+
+Low-level pointer arithmetic is essentially integer arithmetic.
+
+When you are puzzled about the memory operations of a C expression (e.g., *(pArr+1)),
+
+you can cast a pointer into a 64-bit integer and use these functions to verify whether your understanding is correct or not.
+
+But, in most cases, to be portable, we should access memory via variables names and pointer variables, rather than MemoryRead64() and MemoryWrite64().
+
+**Which do you like? www.google.com or 142.251.221.68 ?**
+
+| Human-Readable Names  |  IP or memory Addresses |
+|:-------------|:------------|
+|  www.google.com | 142.251.221.68 |
+|   &arr[0]   |   0x5611dc43d030 |
 
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
