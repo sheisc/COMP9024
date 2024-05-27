@@ -273,9 +273,9 @@ For example, if **src/main.c** is newer than **build/main.o**, then **build/main
 
 The rules in [COMP9024/C/HowToMake/Makefile](./Makefile) tell the 'make' tool how to construct the internal Directed Acyclic Graph (DAG) for a project.
 
-<font color='red'>
-The target and dependency files serve as nodes within the DAG, with the dependency relationships forming the edges of the DAG.
-</font>
+
+**The target and dependency files serve as nodes within the DAG, with the dependency relationships forming the edges of the DAG.**
+
 
 ## 6 The rules in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2)
 
