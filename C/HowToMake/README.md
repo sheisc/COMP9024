@@ -20,11 +20,14 @@
 
  *******************************************************************/
 ``` 
-## [Make (software)](https://en.wikipedia.org/wiki/Make_(software))
+## [make](https://en.wikipedia.org/wiki/Make_(software))
 
-In software development, Make is a build automation tool that builds executable programs and libraries 
+In software development, **make** is a build automation tool that helps build executable programs and libraries from source code. 
 
-from source code by reading files called makefiles which specify how to derive the target program. 
+It does this by following rules specified in files called makefiles.
+
+These rules (e.g. [COMP9024/C/HowToMake/Makefile](./Makefile)) tell the 'make' tool how to construct an internal Directed Acyclic Graph (DAG) for a project.
+
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
