@@ -1,6 +1,6 @@
 # COMP9024
 
-## Introduction
+
 
 As suggested by the [TIOBE Index](https://www.tiobe.com/tiobe-index/), Python and C stand out as the two most 
 popular programming languages.
@@ -35,7 +35,9 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 | Algorithms (code)     | tree traversal, sorting, searching, graph traversal, ...  | expression, statement, function |
 
 
+## Slides
 
+<a href="https://sheisc.github.io/slides/COMP9024/24T2/week01/slides.html" target="_blank">Introduction</a>
 
 
 
