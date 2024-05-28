@@ -126,7 +126,7 @@ and maintained in [lines 553-566 in LargeAssignment/src/stmt.c](../../LargeAssig
 
 **Heap allocator** is customized in  [OurMalloc() and OurFree() of our large assignment](../../LargeAssignment/libs/SccHeap.c).
 
-**Global memory area** is also managed in [EmitGlobalDeclarationNode() of our large assignment](../../LargeAssignment/src/decl.c).
+**Global variables** are generated in [EmitGlobalDeclarationNode() of our large assignment](../../LargeAssignment/src/decl.c).
 
 **Code** is generated in [EmitFuncDefNode() of our large assignment](../../LargeAssignment/src/func.c).
 
