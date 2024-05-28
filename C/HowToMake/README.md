@@ -261,7 +261,7 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 ## 5 The internal Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake/Makefile](./Makefile)
 
 
-<img src="images/MakefileDAG.png" width="60%" height="60%">
+<img src="images/MakefileDAG.png" width="100%" height="100%">
 
 
 ### How Does 'make' Work?
@@ -306,7 +306,7 @@ mysub.o: src/mysub.c src/mysub.h
 
 ## 7 Four steps of the gcc driver in generating an executable program
 
-<img src="images/FourSteps.png" width="60%" height="60%">
+<img src="images/FourSteps.png" width="100%" height="100%">
 
 ### test.c
 ```C
