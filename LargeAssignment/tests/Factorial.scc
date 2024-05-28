@@ -14,14 +14,10 @@ f(n) {
 main(argc, argv, env) {
   long i;
   
-  i = 1;
-  // f(i) = 1 * 2 * ... * i
-  while (SccLessEqual(i, 5)) { // i <= 5
-    result = f(i);
-    output(result);
-    i = i + 1;
-  }
+  i = 4;
+  result = f(i);
+  output(result);
+
   return 0;
 }
-
 
