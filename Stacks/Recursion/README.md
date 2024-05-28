@@ -121,7 +121,7 @@ Data area
 ```
 
 
-**Call stack** is studied in [Stacks/CallStack](../CallStack/readme.md) and [Stacks/Recursion](./README.md), 
+**Call stack** is studied in [Stacks/CallStack](../CallStack/README.md) and [Stacks/Recursion](./README.md), 
 and maintained in [lines 553-566 in LargeAssignment/src/stmt.c](../../LargeAssignment/src/stmt.c)
 
 **Heap allocator** is customized in  [OurMalloc() and OurFree() of our large assignment](../../LargeAssignment/libs/SccHeap.c).
