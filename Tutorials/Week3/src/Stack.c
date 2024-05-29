@@ -63,7 +63,7 @@ void StackPush(struct Stack *pStack, STACK_ITEM_T item) {
             Please complete the following code in Q1-Q5.
 
             Q1. call malloc() to allocate enough bytes of heap memory,
-                and saved the return value in a pointer variable named as newItems           
+                and save the return value in a pointer variable named as newItems           
           
             Q2. call memcpy() to copy the items pointed to by pStack->pItems 
                 to the heap memory pointed to by newItems
