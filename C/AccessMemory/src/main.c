@@ -370,9 +370,9 @@ static void TestCString(void) {
     // character arrays
     char charBuf1[] = "CSE@UNSW"; // 
     char charBuf2[] = {'C', 'S', 'E', '@', 'U', 'N', 'S', 'W', '\0'};
-    printf("%s, sizeof(charBuf1) == %ld, strlen() == %ld \n", 
+    printf("%s, sizeof(charBuf1) == %ld, strlen(charBuf1) == %ld \n",
             charBuf1, sizeof(charBuf1), strlen(charBuf1));
-    printf("%s, sizeof(charBuf2) == %ld, strlen() == %ld  \n\n", 
+    printf("%s, sizeof(charBuf2) == %ld, strlen(charBuf2) == %ld  \n\n",
             charBuf2, sizeof(charBuf2), strlen(charBuf2));
 }
 

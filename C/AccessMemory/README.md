@@ -727,6 +727,8 @@ static void TestCString(void) {
 
 ```sh
 
+// man stands for manual
+
 $ man strlen
 
 size_t strlen(const char *s);
@@ -740,6 +742,6 @@ size_t strlen(const char *s);
 ```sh
 Hello 9024
 "Hello 9024", sizeof(str) == 8, strlen(str) == 10 
-CSE@UNSW, sizeof(charBuf1) == 9, strlen() == 8 
-CSE@UNSW, sizeof(charBuf2) == 9, strlen() == 8
+CSE@UNSW, sizeof(charBuf1) == 9, strlen(charBuf1) == 8
+CSE@UNSW, sizeof(charBuf2) == 9, strlen(charBuf2) == 8
 ```
