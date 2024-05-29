@@ -232,7 +232,7 @@ static void OurFree(void *addr) {
           Let us insert freedNode into the position between pre and cur.     
           
           Q7. Let freedNode be the successor of pre
-          Q8. Let cur be the sucessor of freedNode
+          Q8. Let cur be the successor of freedNode
           Q9. Merge freedNode and cur if they are adjacent
           Q10. Merge pre and freedNode if they are adjacent         
          */        
