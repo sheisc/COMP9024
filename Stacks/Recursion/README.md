@@ -115,21 +115,26 @@ Code area
 Data area
 
     Global memory area
-        contains global/static variables and constant strings.
-        Their lifetime extends throughout the entire execution of the program.
+        contains global/static variables and constant strings.        
         Its size is often determined by the compiler and linker when building the program, not at run time.
 
         global/static variables in C:
 
+        Their lifetime extends throughout the entire execution of the program.
+
         // global variable, visible in all *.c files
         long year = 2024;
+
         // visible in current .c file
         static int number = 5;
 
+        // "CSE@UNSW" is a constant string.
+        // cptr is a pointer which points to the first character of "CSE@UNSW"
+        char *cptr ="CSE@UNSW";
+
         void f(void){
             // 'count' is only visible in f()
-            static int count = 0;
-            
+            static int count = 0;            
 
         }
 
