@@ -184,7 +184,7 @@ Data area
 
 
 **Call stack** is studied in [Stacks/CallStack](../CallStack/README.md) and [Stacks/Recursion](./README.md), 
-and maintained in [lines 553-566 in LargeAssignment/src/stmt.c](../../LargeAssignment/src/stmt.c)
+and maintained in [lines 553-566 in LargeAssignment/src/stmt.c](../../LargeAssignment/src/stmt.c), [lines 498-581 in LargeAssignment/src/expr.c](../../LargeAssignment/src/expr.c), and [lines 142-161 and 284-288 in LargeAssignment/src/emit.c](../../LargeAssignment/src/emit.c).
 
 **Heap allocator** is customized in  [OurMalloc() and OurFree() of our large assignment](../../LargeAssignment/libs/SccHeap.c).
 
@@ -406,6 +406,12 @@ You can take a look at [Factorial.scc.s](../Factorial.scc.s).
 The assembly code is clearly commented line by line.
 
 If you want to know "The Stack Layout in SCC When A Function Is Called", please refer to [LargeAssignment/src/func.c](../../LargeAssignment/src/func.c).
+
+The comments in [EmitAstExprNode() in LargeAssignment/src/expr.c](../../LargeAssignment/src/expr.c), and [EmitPrologue() and EmitEpilogue() in LargeAssignment/src/emit.c](../../LargeAssignment/src/emit.c) 
+
+could help you understand the assembly code in [Factorial.scc.s](../Factorial.scc.s).
+
+You can also refer to [Guide to x86-64](https://web.stanford.edu/class/cs107/guide/x86-64.html).
 
 We will discuss the details in the coming weeks.
 
