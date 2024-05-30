@@ -135,7 +135,8 @@ Data area
         void f(void){
             // 'count' is only visible in f()
             static int count = 0;            
-
+            // How many times f() has been called
+            count++;
         }
 
 
@@ -171,9 +172,9 @@ Data area
         Local variables are declared within a function and are only accessible within that function's scope.
         Their lifetime is limited to the duration of the function call in which they are declared.
 
-        Local variables in C
+        Parameters and Local variables in C:
 
-        void g(int n){
+        static void g(int n){
             int x;
             int *ptr = &n;
             // ...
