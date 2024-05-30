@@ -131,26 +131,78 @@ static int test2(void) {
     // How many times test2() has been called
     count++;
 
-    printf("\ntest2() has been called %d times\n", count);
+    printf("test2() has been called %d times\n", count);
     return 2025;
 }
 
 // Define a function pointer type, which points to a function whose type is 'int (void)'.
 typedef int (*FuncPtrTy)(void);
 
-// Parameters and local variables in C
-static void g(int n){
-    int x;    
-    int *ptr = &n;
-    /*
-                   ---------
-        ptr ----->          
-                   ---------
-                     int n
-     */
-    x = *ptr;
-    printf("x = %d\n", x);
+
+
+// local variables in C
+static void g(){
+    int x = 30;    
+
+    printf("g(): x = %d\n", x);
  }
+
+// Parameters in C
+void TestPolymorphism(FuncPtrTy fptr) {
+    printf("\nInside TestPolymorphism(): \n");
+    /*
+        Memory Layout
+
+        When TestPolymorphism(&test2) is invoked:
+
+                               ----------------
+        --------                test2:
+         &test2     ------->       machine instruction
+        --------                   machine instruction
+    FuncPtrTy fptr                 ...
+                                   ret               // the 'ret' instruction will pop the return address from the call stack
+
+                                test1:
+                                   machine instruction
+                                   machine instruction
+                                   ...
+                                   ret
+
+     
+                     TestPolymorphism:
+                                   ...               // The address of the instruction after 'a call instruction' is its return address.
+                                   
+                                   call *fptr        // Save 'return_addr1' on the call stack and jump to the target function
+                    return_addr1:                                   
+                                   ...
+     
+                                   call g            // Save 'return_addr2' on the call stack and jump to the target function
+                    return_addr2:
+                                   ...
+                               -----------------
+        Data Area                 Code Area
+
+     */    
+    /*
+     fptr() is an indirect function call (as shown in the 'call *fptr' above),
+        where the address of the target function needs to be loaded from 'fptr' in the data area. 
+
+     Polymorphism:
+        The same machine code (i.e., call *fptr) in the code area 
+        demonstrates different behaviors 
+
+        (1) when TestPolymorphism(test1) is invoked, 
+            'call *fptr' will call test1()
+
+        (2) when TestPolymorphism(&test2) is invoked,
+            'call *fptr' will call test2()
+    
+     */
+    int val = fptr();
+    printf("fptr() == %d\n", val);
+    // g(2024) is a direct function call, where the address of g() is hard-coded in the code area
+    g(2024);    
+}
 
 void TestMemoryLayout(void){
     /*
@@ -160,46 +212,17 @@ void TestMemoryLayout(void){
                     heap-allocated variable (unnamed)
      */
     long *pLong = (long *) malloc(sizeof(long));
-    *pLong = 2024;    
+    *pLong = 2024;
+    printf("\n\n*pLong == %ld\n\n", *pLong);    
 
-    /*
-        Memory Layout
-
-                               ----------------
-        --------                test2:
-         &test2     ------->       machine code
-        --------                   machine code
-    FuncPtrTy fptr                 ...
-                                   ret               // the 'ret' instruction will pop the return address from the call stack
-
-     
-                               TestMemoryLayout:
-                                   ...               // The address of the instruction after 'a call instruction' is its return address.
-                                   
-                                   call *fptr        // Save 'return_addr1' on the call stack and jump to the target function
-                    return_addr1:                                   
-                                   ...
-                                   call *fptr        // Save 'return_addr2' on the call stack and jump to the target function
-                    return_addr2:
-                                   ...
-     
-                                   call g            // Save 'return_addr3' on the call stack and jump to the target function
-                    return_addr3:
-                                   ...
-                               -----------------
-        Data Area                 Code Area
-
-     */
-    FuncPtrTy fptr = &test2;    
-    // fptr() is an indirect function call
-    // where the target function address of the indirect call needs to be loaded from 'fptr' in the data area.    
-    fptr();
-    // Both '&test2' and 'test2' represent the function address of test2
-    fptr = test2;
-    fptr();
-
-    // g(2024) is a direct function call, where the address of g() is hard-coded in the code area
-    g(2024);
+    // C compiler treats the function name specially.    
+    // Both 'test1' and '&test1' represent the function address of test1
+    TestPolymorphism(test1);
+    
+    // C compiler treats the function name specially.
+    // Both 'test2' and '&test2' represent the function address of test2
+    TestPolymorphism(&test2);   
+    
     free(pLong);
 }
 

@@ -12,6 +12,7 @@
  ******************************************************************************************/
 
 #include <stdio.h>     // printf(), scanf()
+#include "MemoryLayout.h"
 
 long Factorial(long n) {
     printf("Factorial(): n = %ld, &n = %p\n", n, &n);
@@ -33,5 +34,6 @@ int main(void) {
 
     printf("\nFactorial(%ld) = %ld\n", n, x);    
 
+    TestMemoryLayout();
     return 0;
 }
