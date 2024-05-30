@@ -582,6 +582,12 @@ Read The Source Code.
 <img src="images/Linus.jpg" width="50%" height="50%">
 
 
-### 9.4 [You will when you believe](https://www.youtube.com/watch?v=LKaXY4IdZ40&ab_channel=whitneyhoustonVEVO)
+### 9.4 A diagram showing the key Unix and Unix-like operating systems
+
+<a href="https://en.wikipedia.org/wiki/History_of_Unix#/media/File:Unix_history-simple.svg">Unix History</a>
+
+
+
+### 9.5 [You will when you believe](https://www.youtube.com/watch?v=LKaXY4IdZ40&ab_channel=whitneyhoustonVEVO)
 
 <img src="images/WhenYouBelieve.png" width="50%" height="50%">
