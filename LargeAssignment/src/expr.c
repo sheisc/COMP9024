@@ -500,7 +500,7 @@ void EmitAstExprNode(AstExprNodePtr pNode) {
     // argNamesInComments is used in comments in assembly code
     char argNamesInComments[MAX_ARG_CNT * (MAX_ID_LEN+1)];
     memset(argNamesInComments, 0, sizeof(argNamesInComments));    
-    // evaluate argugments (as expressions) from left to right
+    // evaluate arguments (as expressions) from left to right
     while (cnt < pNode->arg_cnt) {
       EmitAstExprNode(pNode->args[cnt]);
       strcat(argNamesInComments, GetNodeNameInIR(pNode->args[cnt]));
@@ -513,7 +513,7 @@ void EmitAstExprNode(AstExprNodePtr pNode) {
     // move arguments to registers as required by SysV ABI
     for (cnt = 0; cnt < numOfRegs; ++cnt) {
       /**********************************************************************
-       The foramt string %%%s consists of two parts.
+       The format string %%%s consists of two parts.
       
            %% is escaped as '%'
            %s corresponds to a register name like 'rdi'
