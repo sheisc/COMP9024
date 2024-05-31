@@ -99,11 +99,12 @@ More details are discussed in COMP9024/C/AccessMemory
 #include <stdlib.h>   // for malloc() and free()
 
 
-// global variable, visible in all *.c files
+// global variable, visible in all *.c files in the same C project
 long year = 2024;
 
 // The default value of a global/static variable is 0
-// The static variable 'number' is visible in the current C file
+// The static variable 'number' is visible in the current C file.
+// In this way, we can hide the implementation and expose a smaller interface (declarations in *.h) to other C files.
 static int number;
 
 /* 
@@ -118,7 +119,7 @@ static int number;
 
 char *cptr ="CSE@UNSW";
 
-// test1() is a global function, visible in all *.c files
+// test1() is a global function, visible in all *.c files in the same C project
 int test1(void) {
     printf("test1()\n");
     return 2024;
@@ -126,7 +127,7 @@ int test1(void) {
 
 // test2() is a static function, visible in the current *.c file
 static int test2(void) {
-    // 'count' is only visible in f()
+    // 'count' is a static variable (NOT on call stack), but only visible in test2()
     static int count = 0;            
     // How many times test2() has been called
     count++;
@@ -139,16 +140,15 @@ static int test2(void) {
 typedef int (*FuncPtrTy)(void);
 
 
-
-// local variables in C
-static void g(){
+static void g(void){
+    // 'x' is a local variable
     int x = 30;    
 
-    printf("g(): x = %d\n", x);
+    printf("g(): x == %d, &x == %p\n", x, &x);
  }
 
-// Parameters in C
-void TestPolymorphism(FuncPtrTy fptr) {
+// 'fptr' is a function parameter
+static void TestPolymorphism(FuncPtrTy fptr) {
     printf("\nInside TestPolymorphism(): \n");
     /*
         Memory Layout
@@ -156,31 +156,31 @@ void TestPolymorphism(FuncPtrTy fptr) {
         When TestPolymorphism(&test2) is invoked:
 
                                ----------------
-        --------                test2:
-         &test2     ------->       machine instruction
-        --------                   machine instruction
-    FuncPtrTy fptr                 ...
-                                   ret               // the 'ret' instruction will pop the return address from the call stack
+        --------                  test2:
+         &test2    ---------->       machine instruction
+        --------                     machine instruction
+    FuncPtrTy fptr                   ...
+                                     ret               // the 'ret' instruction will pop the return address from the call stack
 
-                                test1:
-                                   machine instruction
-                                   machine instruction
-                                   ...
-                                   ret
+                                  test1:
+                                     machine instruction
+                                     machine instruction
+                                     ...
+                                     ret
 
      
-                     TestPolymorphism:
-                                   ...               // The address of the instruction after 'a call instruction' is its return address.
-                                   
-                                   call *fptr        // Save 'return_addr1' on the call stack and jump to the target function
-                    return_addr1:                                   
-                                   ...
+                       TestPolymorphism:
+                                     ...               // The address of the instruction after 'a call instruction' is its return address.
+                                     
+                                     call *fptr        // Save 'return_addr1' on the call stack and jump to the target function
+                      return_addr1:                                   
+                                     ...
      
-                                   call g            // Save 'return_addr2' on the call stack and jump to the target function
-                    return_addr2:
-                                   ...
-                               -----------------
-        Data Area                 Code Area
+                                     call g            // Save 'return_addr2' on the call stack and jump to the target function
+                      return_addr2:
+                                     ...
+                                 -----------------
+        Data Area                   Code Area
 
      */    
     /*
@@ -188,8 +188,7 @@ void TestPolymorphism(FuncPtrTy fptr) {
         where the address of the target function needs to be loaded from 'fptr' in the data area. 
 
      Polymorphism:
-        The same machine code (i.e., call *fptr) in the code area 
-        demonstrates different behaviors 
+        The identical machine code, represented by 'call *fptr', within the code area, exhibits varying behaviors. 
 
         (1) when TestPolymorphism(test1) is invoked, 
             'call *fptr' will call test1()
@@ -199,9 +198,9 @@ void TestPolymorphism(FuncPtrTy fptr) {
     
      */
     int val = fptr();
-    printf("fptr() == %d\n", val);
-    // g(2024) is a direct function call, where the address of g() is hard-coded in the code area
-    g(2024);    
+    printf("fptr() == %d, fptr == %p, &fptr == %p\n", val, fptr, &fptr);
+    // g() is a direct function call, where the address of g() is hard-coded in the code area ('call g')
+    g();    
 }
 
 void TestMemoryLayout(void){
@@ -213,14 +212,14 @@ void TestMemoryLayout(void){
      */
     long *pLong = (long *) malloc(sizeof(long));
     *pLong = 2024;
-    printf("\n\n*pLong == %ld\n\n", *pLong);    
+    printf("\n\n*pLong == %ld, pLong == %p, &pLong == %p\n\n", *pLong, pLong, &pLong);    
 
     // C compiler treats the function name specially.    
-    // Both 'test1' and '&test1' represent the function address of test1
+    // Both 'test1' and '&test1' represent the function address of test1()
     TestPolymorphism(test1);
     
     // C compiler treats the function name specially.
-    // Both 'test2' and '&test2' represent the function address of test2
+    // Both 'test2' and '&test2' represent the function address of test2()
     TestPolymorphism(&test2);   
     
     free(pLong);
