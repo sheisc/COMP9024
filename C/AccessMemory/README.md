@@ -422,7 +422,7 @@ char cVar = 'A';
 char *pCharVar = &cVar;
 ```
 
-### 7.1  Pointer variables which point to primary types
+### 7.1  Pointer variables for accessing primary type variables
 ```C
 /*
 
@@ -460,7 +460,7 @@ double *pDoubleVar = &dfVar;
 
 ```
 
-### 7.2 Pointer variables which point to aggregate types
+### 7.2 Pointer variables for accessing aggregate type variables
 
 ```C
 /*************************************************************
@@ -744,4 +744,109 @@ Hello 9024
 "Hello 9024", sizeof(str) == 8, strlen(str) == 10 
 CSE@UNSW, sizeof(charBuf1) == 9, strlen(charBuf1) == 8
 CSE@UNSW, sizeof(charBuf2) == 9, strlen(charBuf2) == 8
+```
+## 10 Empirical experience
+
+
+```sh        
+Given a variable name, d, whose type is T.
+       -------------------    
+       |                 |
+       |                 |
+       -------------------
+            T  d;
+```
+### Tip 1
+```sh
+(1)  In C, the variable name, d, is used to access the content/value of the memory block,
+     where T is the type of d, and T is in {primary type, struct type, pointer type}.
+
+     // Memory write/store, change the value of d
+     d = ...;
+     // Memory read/load, get the value of d
+     ... = d;
+```
+
+### Tip 2
+```sh
+(2)  &d represents the address of the memory block, 
+     where T is the type of d, and T is in {primary type, struct type, pointer type}.
+```
+
+### Tip 3
+```sh
+(3) Given a data pointer variable, ptr, whose type is T * and T is neither a function nor an array.
+ 
+    ----------                        -------------------    
+        ptr    --------------->       |                 |
+    ----------                        |                 |
+        T *                           -------------------
+                                     An object whose type is T, which occupies sizeof(T) bytes of data area. 
+
+     *ptr is used to access the value of the memory block pointed to by ptr.
+     
+     // memory write/store in data area
+     *ptr = ...;
+     // memory read/load in data area
+     ... = *ptr;     
+```
+
+### Tip 4 (special cases)
+```sh
+(4) Function names and array names are treated specially by C compiler.
+  
+    Function Name:
+   
+        // both f and &f are treated as the address of the function f().
+        void f(void) {
+        }
+
+    Array Name:
+
+        int arr[4];
+
+    (long) arr == (long) (&arr), 
+    but (long) (arr + 1) != (long) (&arr + 1).
+    
+    arr in (arr + 1) is treated as &arr[0]. The type of &arr[0] is (int *).
+    
+    &arr in (&arr + 1) has the type (ArrayTy *), where ArrayTy is int[4], defined by 'typedef int ArrayTy[4]'.
+       
+       
+    BTW, sizeof(arr) is 16, suppose sizeof(int) is 4 and sizeof (int [4]) is 16.
+
+    There are some inconsistencies in the meaning of the array name, arr, which might lead to confusion.
+```
+### Example
+```C
+#include <stdio.h>
+
+int arr[4];
+typedef int ArrayTy[4];
+
+int main(void) {
+    
+    printf("main == %p, &main === %p\n", main, &main);
+
+    printf("sizeof(ArrayTy) == %ld\n", sizeof(ArrayTy));
+    printf("sizeof(int) == %ld\n", sizeof(int));
+    printf("sizeof(arr) == %ld\n", sizeof(arr));
+    printf("sizeof(int[4]) == %ld\n", sizeof(int[4]));
+    printf("(long) arr == %ld, (long) (&arr) == %ld\n", (long) arr, (long)(&arr));
+    printf("(long) (arr + 1) == %ld, (long) (&arr + 1) == %ld\n", (long)(arr + 1), (long)(&arr + 1));
+    
+    return 0;
+}
+```    
+### Output
+```sh
+main == 0x55bfebce5149, &main === 0x55bfebce5149
+sizeof(ArrayTy) == 16
+sizeof(int) == 4
+sizeof(arr) == 16
+sizeof(int[4]) == 16
+(long) arr == 94282783293472, (long) (&arr) == 94282783293472
+(long) (arr + 1) == 94282783293476, (long) (&arr + 1) == 94282783293488
+
+
 ```
