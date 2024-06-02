@@ -35,17 +35,23 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 | Algorithms (code)     | tree traversal, sorting, searching, graph traversal, ...  | expression, statement, function |
 
 
-## Slides
+## Week 01
 
 <a href="https://sheisc.github.io/slides/COMP9024/24T2/week01/slides.html" target="_blank">Introduction</a>
 
-Our First Project 
+Our First Project
 
 [COMP9024/Stacks/Recursion](./Stacks/Recursion/README.md)
 
+## Week 02
 
+[COMP9024/C/HowToMake](./C/HowToMake/README.md)
 
+[COMP9024/C/AccessMemory](./C/AccessMemory/README.md)
 
+[COMP9024/Stacks/Stack_LL](./Stacks/Stack_LL/README.md)
+
+[COMP9024/Queues/Queue_LL](./Queues/Queue_LL/README.md)
 
 
 
