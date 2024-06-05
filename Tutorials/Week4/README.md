@@ -146,7 +146,7 @@ Then, we can evaluate its value with a postorder traversal of the binary tree.
 Its intermediate representation (IR): 
 
 	 t1 = 6 * 4
-	 t2 = 9000 + t1
+	 t0 = 9000 + t1
 
 
 ```
