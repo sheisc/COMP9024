@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "AccessMemory: make",
+            "label": "Environment Variables: make",
             "type": "shell",
             "command": "make",
             "problemMatcher": [],
@@ -14,7 +14,7 @@
             }
         },
         {
-            "label": "AccessMemory: make clean",
+            "label": "Environment Variables: make clean",
             "type": "shell",
             "command": "make clean",
             "problemMatcher": [],
