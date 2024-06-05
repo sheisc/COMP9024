@@ -411,9 +411,9 @@ It is also used as a multiplication operator in "30 * 40".
 **Address operator**
 
 
-It is denoted as the ampersand symbol, &.
+Denoted as the ampersand symbol, &.
 
-t is also used as a Bitwise AND operator in "2 & 4"
+It is also used as a Bitwise AND operator in "2 & 4"
 
 **For example**
 
