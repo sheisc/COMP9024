@@ -36,7 +36,7 @@ char commandBuf[MAX_LINE_LENGTH];
 int main(void) {
     printf("#############################   Simple Shell  ############################\n");
     printf("Press ctrl+c to exit.\n\n");
-	//print prompt
+    //print prompt
     printf("%% ");
     while (fgets(commandBuf, MAX_LINE_LENGTH, stdin) != NULL) {
         // replace newline with null
@@ -58,7 +58,7 @@ int main(void) {
     printf("#############################   Simple Shell  ############################\n");
     printf("Only supporting commands without any arguments: python3, who, pwd, ls, ...\n");
     printf("Press ctrl+c to exit.\n\n");
-	// print prompt
+    // print prompt
     printf("%% ");
     while (fgets(commandBuf, MAX_LINE_LENGTH, stdin) != NULL) {
         // replace newline with null

@@ -58,7 +58,7 @@ click **Terminal -> Run Build Task**
 
 ### 2.3 Debug the project in VS Code
 
-Open src/main.c, and click to add a breakpoint (say, line 401).
+Open src/main.c, and click to add a breakpoint (say, line 40).
 
 Then, click **Run -> Start Debugging**
 
@@ -123,7 +123,7 @@ char commandBuf[MAX_LINE_LENGTH];
 int main(void) {
     printf("#############################   Simple Shell  ############################\n");
     printf("Press ctrl+c to exit.\n\n");
-	//print prompt
+    //print prompt
     printf("%% ");
     while (fgets(commandBuf, MAX_LINE_LENGTH, stdin) != NULL) {
         // replace newline with null
