@@ -120,6 +120,8 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ``` sh
 
+EnvVars$ make
+
 EnvVars$ ./main aa bb cc dd
 
 *************** COMP9024 TestEnvironment() ***************
