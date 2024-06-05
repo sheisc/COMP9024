@@ -28,8 +28,11 @@
          
          The object allocated on heap (via malloc()) does not have any name.
          But the pointer variable 'ptr', which points to the heap object, has a name.
-
-         int *ptr = (int *) malloc(sizeof(int));
+         
+         void test(void) {
+            int *ptr = (int *) malloc(sizeof(int));
+            ...
+         }
 
          
          Memory Layout:
@@ -39,7 +42,7 @@
                         --------------
                            int
 
-        Again, we only take global variables as an example in this program.
+        Again, we only access the global memory area via pointer variables in this program.
         But global/local/heap memory areas can be accessed similarly via pointer variables.
 
     4.   Low-level pointer arithmetic via MemoryRead64() and MemoryWrite64()
