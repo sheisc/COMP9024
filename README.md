@@ -43,15 +43,21 @@ Our First Project
 
 [COMP9024/Stacks/Recursion](./Stacks/Recursion/README.md)
 
-## Week 02
+## Week 02 - 03
 
 [COMP9024/C/HowToMake](./C/HowToMake/README.md)
 
 [COMP9024/C/AccessMemory](./C/AccessMemory/README.md)
 
+[COMP9024/C/EnvVars](./C/EnvVars/README.md)
+
+[COMP9024/C/SimpleShell](./C/SimpleShell/README.md)
+
 [COMP9024/Stacks/Stack_LL](./Stacks/Stack_LL/README.md)
 
 [COMP9024/Queues/Queue_LL](./Queues/Queue_LL/README.md)
+
+[COMP9024/Trees/BiTree](./Trees/BiTree/README.md)
 
 
 
