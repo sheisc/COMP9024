@@ -721,7 +721,7 @@ lVar = 2025
 
 C strings (character arrays) are terminated by null character '\0' character with value zero.
 
-In [ASCII](https://www.asciitable.com/), he NUL control code has value 0 (0x00).
+In [ASCII](https://www.asciitable.com/), the NUL control code has value 0 (0x00).
 
 
 ```C
