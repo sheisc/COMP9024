@@ -1,0 +1,7 @@
+digraph "Call Graph" {
+	label="Call Graph";
+
+	Node0x55d27e1257b0 [shape=record,shape=box,label="{CallGraphNode ID: 0 \{fun: swap\}}"];
+	Node0x55d27e125840 [shape=record,shape=box,label="{CallGraphNode ID: 1 \{fun: main\}|{<s0>1}}"];
+	Node0x55d27e125840:s0 -> Node0x55d27e1257b0[color=black];
+}

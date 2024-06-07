@@ -1,0 +1,39 @@
+digraph "SVFIR" {
+	label="SVFIR";
+
+	Node0x55d8c4ac52d0 [shape=record,shape=box,label="{ValVar ID: 0\n i8* null \{ constant data \}}"];
+	Node0x55d8c4ac52d0 -> Node0x55d8c4ac5130[color=black];
+	Node0x55d8c4ac5130 [shape=record,shape=diamond,label="{DummyValVar ID: 1}"];
+	Node0x55d8c4ac4fe0 [shape=record,shape=tab,label="{DummyObjVar ID: 3}"];
+	Node0x55d8c4ac59b0 [shape=record,shape=box,label="{[swap] ValVar ID: 4\nFunction: swap }"];
+	Node0x55d8c4ac7750 [shape=record,shape=box3d,label="{[swap] FIObjVar ID: 5 (base object)\nFunction: swap }"];
+	Node0x55d8c4ac7750 -> Node0x55d8c4ac59b0[color=green];
+	Node0x55d8c4ac5af0 [shape=record,shape=box,label="{[swap] ValVar ID: 7\n i8** %p \{ 0th arg swap  \}}"];
+	Node0x55d8c4ac5af0 -> Node0x55d8c4ac5d70[color=red];
+	Node0x55d8c4ac5c30 [shape=record,shape=box,label="{[swap] ValVar ID: 8\n i8** %q \{ 1st arg swap  \}}"];
+	Node0x55d8c4ac5c30 -> Node0x55d8c4ac5eb0[color=red];
+	Node0x55d8c4ac5d70 [shape=record,shape=box,label="{[swap] ValVar ID: 9\n   %0 = load i8*, i8** %p, align 8 }"];
+	Node0x55d8c4ac5d70 -> Node0x55d8c4ac5c30[color=blue];
+	Node0x55d8c4ac5eb0 [shape=record,shape=box,label="{[swap] ValVar ID: 10\n   %1 = load i8*, i8** %q, align 8 }"];
+	Node0x55d8c4ac5eb0 -> Node0x55d8c4ac5af0[color=blue];
+	Node0x55d8c4ac63b0 [shape=record,shape=box,label="{[main] ValVar ID: 14\nFunction: main }"];
+	Node0x55d8c4ac7910 [shape=record,shape=box3d,label="{[main] FIObjVar ID: 15 (base object)\nFunction: main }"];
+	Node0x55d8c4ac7910 -> Node0x55d8c4ac63b0[color=green];
+	Node0x55d8c4ac82a0 [shape=record,shape=box,label="{[main] RetPN ID: 16 unique return node for function main}"];
+	Node0x55d8c4ac64f0 [shape=record,shape=box,label="{[main] ValVar ID: 17\n   %aa = alloca i8, align 1 }"];
+	Node0x55d8c4ac64f0 -> Node0x55d8c4ac6770[color=blue];
+	Node0x55d8c4ac7ad0 [shape=record,shape=box3d,label="{[main] FIObjVar ID: 18 (base object)\n   %aa = alloca i8, align 1 }"];
+	Node0x55d8c4ac7ad0 -> Node0x55d8c4ac64f0[color=green];
+	Node0x55d8c4ac6630 [shape=record,shape=box,label="{[main] ValVar ID: 20\n   %bb = alloca i8, align 1 }"];
+	Node0x55d8c4ac6630 -> Node0x55d8c4ac68b0[color=blue];
+	Node0x55d8c4ac7c90 [shape=record,shape=box3d,label="{[main] FIObjVar ID: 21 (base object)\n   %bb = alloca i8, align 1 }"];
+	Node0x55d8c4ac7c90 -> Node0x55d8c4ac6630[color=green];
+	Node0x55d8c4ac6770 [shape=record,shape=box,label="{[main] ValVar ID: 22\n   %pa = alloca i8*, align 8 }"];
+	Node0x55d8c4ac6770 -> Node0x55d8c4ac5af0[color=black,style=dashed];
+	Node0x55d8c4ac7e50 [shape=record,shape=box3d,label="{[main] FIObjVar ID: 23 (base object)\n   %pa = alloca i8*, align 8 }"];
+	Node0x55d8c4ac7e50 -> Node0x55d8c4ac6770[color=green];
+	Node0x55d8c4ac68b0 [shape=record,shape=box,label="{[main] ValVar ID: 24\n   %pb = alloca i8*, align 8 }"];
+	Node0x55d8c4ac68b0 -> Node0x55d8c4ac5c30[color=black,style=dashed];
+	Node0x55d8c4ac8010 [shape=record,shape=box3d,label="{[main] FIObjVar ID: 25 (base object)\n   %pb = alloca i8*, align 8 }"];
+	Node0x55d8c4ac8010 -> Node0x55d8c4ac68b0[color=green];
+}
