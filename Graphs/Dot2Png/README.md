@@ -73,7 +73,7 @@ find . -name "*.png" | sort | xargs feh
 
 | Undirected Graph | Undirected Graph (Visited) |  Undirected Graph with Labels |
 |:-------------:|:-------------:|:-------------:|
-| <img src="images/UndirectedGraph.png" width="100%" height="100%"> |  <img src="images/UndirectedGraphVisited.png" width="100%" height="100%"> | <img src="images/UndirectedGraphWithLabel.png" width="100%" height="100%"> |
+| <img src="images/UndirectedGraph.png" width="50%" height="50%"> |  <img src="images/UndirectedGraphVisited.png" width="50%" height="50%"> | <img src="images/UndirectedGraphWithLabel.png" width="50%" height="50%"> |
 
 
 ## [images/UndirectedGraphVisited.dot](./images/UndirectedGraphVisited.dot)
@@ -98,7 +98,7 @@ graph OurUndirectedGraph {
 
 | Directed Graph | Directed Graph (Visited) |  Directed Graph with Labels |
 |:-------------:|:-------------:|:-------------:|
-| <img src="images/DirectedGraph.png" width="100%" height="100%"> |  <img src="images/DirectedGraphVisited.png" width="100%" height="100%"> | <img src="images/DirectedGraphWithLabel.png" width="100%" height="100%"> |
+| <img src="images/DirectedGraph.png" width="50%" height="50%"> |  <img src="images/DirectedGraphVisited.png" width="50%" height="50%"> | <img src="images/DirectedGraphWithLabel.png" width="50%" height="50%"> |
 
 
 ## [images/DirectedGraphVisited.dot](./images/DirectedGraphVisited.dot)
