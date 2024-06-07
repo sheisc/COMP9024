@@ -196,7 +196,7 @@ and maintained in [lines 553-566 in LargeAssignment/src/stmt.c](../../LargeAssig
 
 **Code** is generated in [EmitFuncDefNode() of our large assignment](../../LargeAssignment/src/func.c).
 
-**The command line arguments and environment variables** are accessed in [LargeAssignment/tests/EnvVars.scc](../../LargeAssignment/tests/EnvVars.scc) and [int TestEnvironment(int argc, char **argv, char **env)](../../Trees/BiTree/README.md).
+**The command line arguments and environment variables** are accessed in [LargeAssignment/tests/EnvVars.scc](../../LargeAssignment/tests/EnvVars.scc) and [C/EnvVars](../../C/EnvVars/README.md).
 
 
 
