@@ -229,3 +229,37 @@ int main(int argc, char **argv, char **env) {
 ```
 
 
+## 5 A similar test case in [our large assignment](../../LargeAssignment/tests/EnvVars.scc)
+
+The following test case is not written in C, but with a simple language defined in our large assignment.
+
+You can see how low-level pointer arithmetic (e.g., SccRead64()) is used in [accessing memory](../../C/AccessMemory/README.md).
+
+```C
+
+// COMP9024/LargeAssignment/tests/EnvVars.scc
+
+printStrs(strs){
+  long i;
+  long s;
+  i = 0;
+  s = SccRead64(strs, i*8);
+  while(s){
+    puts(s);
+    i = i + 1;
+    s = SccRead64(strs, i*8);
+  }
+}
+
+main(argc, argv, env){
+  output(argc);
+  // Display command-line arguments
+  printStrs(argv);
+  // '\n'
+  putchar(10);
+  // Display environment variables
+  printStrs(env);
+  return 0;
+}
+
+```
