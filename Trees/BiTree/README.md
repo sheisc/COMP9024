@@ -3,7 +3,8 @@
 ``` sh
 /*******************************************************************
 
-    1.  How to create a binary tree manually for an arithmetic expression (e.g., "9000 + 6 * 4")
+    1.  How to create a binary tree manually for an arithmetic expression 
+        (e.g., "9000 + 6 * 4")
 
     2.  How to evaluate an expression (based on its tree representation)
 
@@ -16,23 +17,26 @@ A binary tree is a hierarchical data structure wherein each node can have a maxi
 
 known as the left child and the right child.
 
+
 ## Introduction
 
 ```sh
 
-    
-An expression (i.e., a string) from a user:
+An arithmetic expression (i.e., a string)
 
-   "9000 + 6 * 4" 
+   "9000 + (6 * 4)" 
 
-The input string will be represented as a binary tree:
-
+can be represented as an abstract syntax tree after parsing.
 
         + 
       /   \ 
     9000   * 
           /  \ 
          6    4 
+
+
+The abstract syntax tree is a binary tree in this case.
+
 
 After visiting/traversing each node of the binary tree:
 
@@ -41,10 +45,12 @@ After visiting/traversing each node of the binary tree:
 Its intermediate representation (IR): 
 
     t0 = 6 * 4
-    t1 = 9000 + t0
-   
-
+    t1 = 9000 + t0  
 ```    
+
+In this project, we create the binary tree manually. 
+
+**In [COMP9024/Tutorials/Week4](../../Tutorials/Week4/README.md), we will study how to parse the input string and create the abstract syntax tree with a parser.**
 
 ## 1 How to download COMP9024/Trees/BiTree in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
@@ -74,19 +80,19 @@ Two configuration files (BiTree/.vscode/[launch.json](https://code.visualstudio.
 
 
 
-#### 2.1 Open the project in VS Code
+### 2.1 Open the project in VS Code
 
 In the window of Visual Studio Code, please click "File" and "Open Folder",
 
 select the folder "COMP9024/Trees/BiTree", then click the "Open" button.
 
 
-#### 2.2 Build the project in VS Code
+### 2.2 Build the project in VS Code
 
 click **Terminal -> Run Build Task**
 
 
-#### 2.3 Debug the project in VS Code
+### 2.3 Debug the project in VS Code
 
 Open src/expr.c, and click to add a breakpoint (say, line 105).
 
@@ -118,7 +124,24 @@ Then, click **Run -> Start Debugging**
 
 Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
-## 3 Data structures
+## 3 Build and run the project in command line
+
+**In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
+
+``` sh
+
+COMP9024/Trees/BiTree$ make
+
+COMP9024/Trees/BiTree$ ./main
+
+t0 = 6 * 4
+t1 = 9000 + t0
+
+9000 + 6 * 4 == 9024
+
+```
+
+## 4 Data structures
 
 ```C
 
@@ -193,9 +216,9 @@ typedef struct astExprNode *AstExprNodePtr;
 
 ```
 
-## 4 Algorithms
+## 5 Algorithms
 
-## 4.1 Overview
+## 5.1 Overview
 
 ```C
 int main(int argc, char **argv, char **env) {
@@ -216,56 +239,79 @@ int main(int argc, char **argv, char **env) {
 }
 ```
 
-## 4.2 How to create a binary tree for "9000 + 6 * 4"
+## 5.2 How to create a binary tree for "9000 + 6 * 4"
 
-```C
-  Now, let's manually create the binary tree. 
+Now, let's manually create the binary tree. 
   
-  We can see why pointers (addresses) are so important.
-  A tree node can save/keep/store another node's address,
-  thus establishing a connection from one node to another node.
-  
-  =====================================================================
-          Pointers are just like hyper links in web pages.
-  =====================================================================
+We can see why pointers (addresses) are so important.
+
+A tree node can save/keep/store another node's address, thus establishing a connection from one node to another node.
+
+
+### Pointers in C are just like hyper links in web pages
+```C 
                       via a pointer           
   A tree node   ------------------------------->  another tree node 
   
   pOneNode->leftChild = address of another node
 
   The branch in the following binary tree represents a pointer.
+```
 
-  =====================================================================
+### A hyperlink in a web page
+```C
 
                       via a hyperlink
   one.html      ------------------------------->  two.html
   
   <a href="two.html">Neo</a>
-  ======================================================================
-
+```
+### Create the binary tree manually
+```
         + 
       /   \ 
     9000   * 
           /  \ 
          6    4 
+```
 
+```C
+static AstExprNodePtr CreateAstExprNode(TokenKind tk, long numVal, char *operator, AstExprNodePtr left,
+                         AstExprNodePtr right) {
+  AstExprNodePtr pNode = (AstExprNodePtr) malloc(sizeof(struct astExprNode));
+  assert(pNode != NULL);
 
-  // Now, let's manually create the binary tree. 
-  // We will write a parser to create the tree for us later.
-  AstExprNodePtr Expression(void) {
-    AstExprNodePtr left = CreateAstExprNode(TK_NUM, 9000, "", NULL, NULL);
-    AstExprNodePtr rightLeft = CreateAstExprNode(TK_NUM, 6, "", NULL, NULL);
-    AstExprNodePtr rightRight = CreateAstExprNode(TK_NUM, 4, "", NULL, NULL);
-    AstExprNodePtr right = CreateAstExprNode(TK_MUL, 0, "*", rightLeft, rightRight);
-    AstExprNodePtr root = CreateAstExprNode(TK_ADD, 0, "+", left, right);
+  memset(pNode, 0, sizeof(*pNode));
+  // The kind of an expression node
+  pNode->op = tk;
+  if (tk == TK_NUM) { // an operand like 9000
+    // 9000
+    pNode->value.numVal = numVal;
+    // "9000"
+    snprintf(pNode->value.name, MAX_ID_LEN, "%ld", numVal);    
+  } else { // an operator: + - * /
+    // A temporary variable's name: "t0", "t1" 
+    snprintf(pNode->value.name, MAX_ID_LEN, "t%d", NewTemp());  
+  }  
+  pNode->leftChild = left;
+  pNode->rightChild = right;
+  return pNode;
+}
 
-    return root;
-  }
-
+// Now, let's manually create the binary tree. 
+// We will write a parser to create the tree for us later.
+AstExprNodePtr Expression(void) {
+  AstExprNodePtr left = CreateAstExprNode(TK_NUM, 9000, "", NULL, NULL);
+  AstExprNodePtr rightLeft = CreateAstExprNode(TK_NUM, 6, "", NULL, NULL);
+  AstExprNodePtr rightRight = CreateAstExprNode(TK_NUM, 4, "", NULL, NULL);
+  AstExprNodePtr right = CreateAstExprNode(TK_MUL, 0, "*", rightLeft, rightRight);
+  AstExprNodePtr root = CreateAstExprNode(TK_ADD, 0, "+", left, right);
+  return root;
+}
 ```
 
 
-## 4.3 How to evaluate the expression "9000 + 6 * 4"
+## 5.3 How to evaluate the expression "9000 + 6 * 4"
 
 **Perform a postorder traversal of its binary tree.**
 
@@ -279,10 +325,16 @@ In this method, each node in the tree is visited in the following sequence:
 
 (3) Finally, the root node of the subtree is traversed.
 
+```
+        + 
+      /   \ 
+    9000   * 
+          /  \ 
+         6    4 
+```
+
 ```C
-
 #define EmitIR  printf
-
 // In fact, it is a simple interpreter
 long EvalExpression(AstExprNodePtr root) {    
     assert(root);
@@ -340,23 +392,9 @@ void ReleaseAstExpr(AstExprNodePtr root) {
 }
 ```
 
-## Build and run the program in the command line
 
-```sh
 
-COMP9024/Trees/BiTree$ make
-
-COMP9024/Trees/BiTree$ ./main
-
-t0 = 6 * 4
-t1 = 9000 + t0
-
-9000 + 6 * 4 == 9024
-
-COMP9024/Trees/BiTree$ make clean
-
-```
-
+<!-- 
 ## 5 The real-world application of data structures and algorithms.
 
 ```sh 
@@ -477,4 +515,4 @@ Changwei Zou, Dongjie He, Yulei Sui and Jingling Xue.
 | manifest_parser_perftes | 134,088                  | 174,183 |
 
 
-**Our analysis environment consisted of a 3.50 GHz Intel Xeon E5 CPU, equipped with 512 GB of memory, and operated on a 64-bit Ubuntu 20.04 OS.**
+**Our analysis environment consisted of a 3.50 GHz Intel Xeon E5 CPU, equipped with 512 GB of memory, and operated on a 64-bit Ubuntu 20.04 OS.** -->
