@@ -103,7 +103,7 @@ graph OurUndirectedGraph {
 
 ## [images/DirectedGraphVisited.dot](./images/DirectedGraphVisited.dot)
 ```sh
-graph OurDirectedGraph {    
+digraph OurDirectedGraph {
 "3" -> {"0"}
 "0" -> {"2"}
 "0" -> {"4"}
@@ -162,7 +162,7 @@ Proceedings of the 2021 International Conference on Management of Data (SIGMOD 2
 
 SVF is able to perform pointer alias analysis, value-flow tracking for program variables and memory error checking.
 
-## [Analyze a Simple C Program](https://github.com/svf-tools/SVF/wiki/Analyze-a-Simple-C-Program)
+## 5.3.1 [Analyze a Simple C Program](https://github.com/svf-tools/SVF/wiki/Analyze-a-Simple-C-Program)
 
 ```C
 
@@ -186,20 +186,112 @@ int main(void) {
 }
 
 ```
+### 5.3.2 LLVM IR (Intermediate Representation)
+```C
 
-## Program Assignment Graph
+; Function Attrs: noinline nounwind uwtable
+define dso_local void @swap(i8** noundef %p, i8** noundef %q) #0 {
+entry:
+  %0 = load i8*, i8** %p, align 8
+  %1 = load i8*, i8** %q, align 8
+  store i8* %1, i8** %p, align 8
+  store i8* %0, i8** %q, align 8
+  ret void
+}
+
+; Function Attrs: noinline nounwind uwtable
+define dso_local i32 @main() #0 {
+entry:
+  %aa = alloca i8, align 1
+  %bb = alloca i8, align 1
+  %pa = alloca i8*, align 8
+  %pb = alloca i8*, align 8
+  store i8 49, i8* %aa, align 1
+  store i8 50, i8* %bb, align 1
+  store i8* %aa, i8** %pa, align 8
+  store i8* %bb, i8** %pb, align 8
+  call void @swap(i8** noundef %pa, i8** noundef %pb)
+  ret i32 0
+}
+
+```
+
+## 5.3.3 Program Assignment Graph
 
 <img src="images/ProgramAssignmentGraph.png" width="100%" height="100%">
 
-## Constraint Graph
+## 5.3.4 Constraint Graphs
 
-<img src="images/ConstraintGraph.png" width="60%" height="60%">
+### Constraint Graph (Initial)
+<img src="images/ConstraintGraph_Initial.png" width="60%" height="60%">
 
-## Call Graph
+### Constraint Graph (Final, after propagating points-to information)
+<img src="images/ConstraintGraph_Final.png" width="60%" height="60%">
+
+
+### Edges in Constraint Graphs
+
+| Edges in a Constraint Graph | Instruction in LLVM IR | Meaning |
+| :----------------: | :------: | :----: |
+| <font color="green">Green</font>       |   %aa = alloca i8   | AddressOf |
+| <font color="black">Black</font>      |   %p = %pa,  (passing argument)   | Copy |
+| <font color="red">Red</font>      |   %0 = load i8*, i8** %p   | Memory Read/Load |
+| <font color="blue">Store</font>     |   store i8* %1, i8** %p   | Memory Write/Store |
+
+**GetElementOffset instructions (for accessing a struct field) are not included int this example.**
+
+### Nodes in Constraint Graphs
+
+| Node ID in a Constraint Graph | LLVM IR | in C |
+| :----------------: | :------: | :----: |
+| 9       |   %0   | *p |
+| 10      |   %1  | *q |
+| 18      |   alloca i8   | char aa |
+| 21      |   alloca i8   | char bb |
+
+## 5.3.5 Andersen's Points-to Results (Fast, but not precise enough)
+
+```sh
+
+NodeID 4 		PointsTo: { 5 }
+
+NodeID 7 		PointsTo: { 23 }
+
+NodeID 8 		PointsTo: { 25 }
+
+NodeID 9 		PointsTo: { 18 21 }
+
+NodeID 10 		PointsTo: { 18 21 }
+
+NodeID 14 		PointsTo: { 15 }
+
+NodeID 17 		PointsTo: { 18 }
+
+NodeID 20 		PointsTo: { 21 }
+
+NodeID 22 		PointsTo: { 23 }
+
+NodeID 24 		PointsTo: { 25 }
+
+...
+
+```
+
+
+
+## 5.3.6 Call Graph
 
 <img src="images/CallGraph.png" width="30%" height="30%">
 
-## Sparse Value Flow Graph
+## 5.3.7 Sparse Value Flow Graph (More precise)
+
+**An inter-procedural sparse value-flow graph (SVFG) for a program is a directed graph**
+
+**that captures the def-use chains of both top-level pointers and address-taken objects.**
+
 
 <img src="images/SparseValueFlowGraph.png" width="100%" height="100%">
+
+
+**For more details, please see [Software Security Analysis (COMP6131 24T2)](https://webcms3.cse.unsw.edu.au/COMP6131/24T2/).**
 
