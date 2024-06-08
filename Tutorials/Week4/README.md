@@ -36,9 +36,9 @@ In this method, each node in the tree is visited in the following sequence:
 
 (3) Finally, the root node of the subtree is traversed.
 
+In [COMP9024/Trees/BiTree](../../Trees/BiTree/README.md), we have studied how to create a binary tree manually.
 
-
-In this tutorial, we will delve into the creation of a binary tree 
+In this tutorial, we will delve into the creation of a binary tree (with a parser)
 
 and its practical application in representing and evaluating an arithmetic expression (e.g., "9000 + (6 * 4)").
 
