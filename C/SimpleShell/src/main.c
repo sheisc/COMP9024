@@ -74,10 +74,10 @@ int main(void) {
             fprintf(stderr, "couldn't execute: %s\n", commandBuf);
             exit(127);
         } else { // parent process
-			if ((pid = waitpid(pid, &status, 0)) < 0) {
-				fprintf(stderr, "waitpid error\n");
-			}
-		}
+            if ((pid = waitpid(pid, &status, 0)) < 0) {
+                fprintf(stderr, "waitpid error\n");
+            }
+        }
         printf("%% ");
     }
     return 0;
