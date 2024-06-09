@@ -30,7 +30,7 @@ void Graph2Dot(struct Graph *pGraph,
                int displayVisited);
 
 // Based on Graph2Dot()
-void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, int seqNo, int *visited);
+void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, long seqNo, int *visited);
 
 #endif
 

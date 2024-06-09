@@ -135,13 +135,13 @@ void PrintGraph(struct Graph *pGraph) {
 
 #define FILE_NAME_LEN  255
 
-void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, int seqNo, int *visited) {
+void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, long seqNo, int *visited) {
     char dotFileName[FILE_NAME_LEN+1] = {0};
     char pngFileName[FILE_NAME_LEN+1] = {0};
     char command[(FILE_NAME_LEN+1)*4] = {0};
     
-    snprintf(dotFileName, FILE_NAME_LEN, "%s_%04d.dot", fileName, seqNo);
-    snprintf(pngFileName, FILE_NAME_LEN, "%s_%04d.png", fileName, seqNo);
+    snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
+    snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
 
     Graph2Dot(pGraph, dotFileName, graphName, pGraph->isDirected, 0, visited, 1);
 
