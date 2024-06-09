@@ -172,7 +172,7 @@ void NonRecursiveDFS(struct Graph *pGraph, long u) {
     struct Stack *pStack = ______Q1______;
     assert(visited && pStack);
 
-    for (int i = 0; i < pGraph->n; i++) {
+    for (long i = 0; i < pGraph->n; i++) {
         visited[i] = 0;
     }
     GenOneImage(pGraph, "dfs", "images/NonRecursiveDFS", cnt, visited);
