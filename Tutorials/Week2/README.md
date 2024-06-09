@@ -329,9 +329,9 @@ typedef int (*ComparatorFuncPtr)(int, int);
 
 void BubbleSort(int *ptr, int n, ComparatorFuncPtr compare) {
     for (int iMax = n - 2; iMax >= 0; iMax--) {
-        for (int i = 0; ____Q1_____; _____Q2____) {
-            if (_____Q3_____) {
-                ____Q4____;
+        for (int i = 0; i<=imax; i++) {
+            if (compare(ptr[i],ptr[i+1]}) {
+                swap(&ptr[i],ptr[i+1]);
             }
         }       
     }
@@ -351,7 +351,7 @@ int main(void) {
     PrintArray(arr, len);
 
     // a function pointer variable which points to the function IsLess
-    fptr = ____Q5____;    
+    fptr = &IsLarger;   
     printf("\nBefore sorting:\n");
     PrintArray(arr, len);
     BubbleSort(arr, len, fptr);
