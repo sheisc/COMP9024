@@ -65,7 +65,7 @@ dot -T png images/UndirectedGraph.dot -o images/UndirectedGraph.png
 
 Dot2Png$ make view
 
-find . -name "*.png" | sort | xargs feh
+find . -name "*.png" | sort | xargs feh &
 
 ```
 
