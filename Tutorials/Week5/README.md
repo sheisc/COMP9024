@@ -276,7 +276,7 @@ void RecursiveDFS(struct Graph *pGraph, long u) {
   */
 void NonRecursiveDFS(struct Graph *pGraph, long u) {
     assert(IsLegalNodeNum(pGraph, u));
-    static int cnt = 0;
+    static long cnt = 0;
 
     int *visited = (int *) malloc(sizeof(int) * pGraph->n);
     struct Stack *pStack = ______Q1______;

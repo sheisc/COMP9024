@@ -136,13 +136,13 @@ void PrintGraph(struct Graph *pGraph) {
 
 #define FILE_NAME_LEN  255
 
-void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, int seqNo, int *visited) {
+void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, long seqNo, int *visited) {
     char dotFileName[FILE_NAME_LEN+1] = {0};
     char pngFileName[FILE_NAME_LEN+1] = {0};
     char command[(FILE_NAME_LEN+1)*4] = {0};
     
-    snprintf(dotFileName, FILE_NAME_LEN, "%s_%04d.dot", fileName, seqNo);
-    snprintf(pngFileName, FILE_NAME_LEN, "%s_%04d.png", fileName, seqNo);
+    snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
+    snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
 
     Graph2Dot(pGraph, dotFileName, graphName, pGraph->isDirected, 0, visited, 1);
 
@@ -166,7 +166,7 @@ void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, int seqN
   */
 void NonRecursiveDFS(struct Graph *pGraph, long u) {
     assert(IsLegalNodeNum(pGraph, u));
-    static int cnt = 0;
+    static long cnt = 0;
 
     int *visited = (int *) malloc(sizeof(int) * pGraph->n);
     struct Stack *pStack = ______Q1______;
@@ -211,7 +211,7 @@ static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
     visited[u] = 1;
     printf("visiting %s\n", pGraph->pNodes[u].name);
     
-    static int i = 0;
+    static long i = 0;
     i++; 
     GenOneImage(pGraph, "dfs", "images/RecursiveDFS", i, visited);      
 
