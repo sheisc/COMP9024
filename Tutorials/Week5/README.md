@@ -232,6 +232,10 @@ static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
     visited[u] = 1;
     printf("visiting %s\n", pGraph->pNodes[u].name);
     
+    static long i = 0;
+    i++;
+    GenOneImage(pGraph, "dfs", "images/RecursiveDFS", i, visited);
+
     // recursively visit the adjacent nodes of u, if they have not been visited yet
     for(long v = 0; v < pGraph->n; v++) {
         if (MatrixElement(pGraph, u, v) == CONNECTED && !visited[v]) {
@@ -246,6 +250,7 @@ void RecursiveDFS(struct Graph *pGraph, long u) {
     for (long v = 0; v < pGraph->n; v++) {
         visited[v] = 0;
     }
+    GenOneImage(pGraph, "dfs", "images/RecursiveDFS", 0, visited);
 
     DepthFirstSearch(pGraph, u, visited);
 
