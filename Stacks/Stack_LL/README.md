@@ -42,7 +42,7 @@ A stack can be implemented using an array ([COMP9024/Tutorials/Week3](../../Tuto
 
 Note that a call stack is a stack data structure that stores information about the active functions of a running program, 
 
-which is supported by the operating system and CPU (or by an [interpreter](https://github.com/rocky/x-python/)).
+which is supported by the operating system and CPU (or by an [interpreter](https://github.com/rocky/x-python/)) and discussed in [COMP9024/Stacks/Recursion](../Recursion/README.md).
 
 <!---
 Interestingly, recursive functions depend on the call stack ([COMP9024/Stacks/Recursion](../Recursion/README.md)).
