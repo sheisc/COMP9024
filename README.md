@@ -59,5 +59,5 @@ Our First Project
 
 [COMP9024/Trees/BiTree](./Trees/BiTree/README.md)
 
-
+[COMP9024/Complexity/Counting](./Complexity/Counting/README.md)
 
