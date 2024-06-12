@@ -235,7 +235,7 @@ click **Terminal -> Run Build Task**
 
 ### 3.3 Debug the project in VS Code
 
-Open src/main.c, and click to add a breakpoint (say, line 238).
+Open src/main.c, and click to add a breakpoint (say, line 239).
 
 Then, click **Run -> Start Debugging**
 
