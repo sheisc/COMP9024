@@ -167,7 +167,8 @@ void SeeYouIn22ndCentury(void) {
 }
 
 int main(void) {
-    SeeYouIn22ndCentury();   
+    SeeYouIn22ndCentury();
+    printf("Hello, 22nd or 23rd Century ???\n");
     return 0;
 }
 ```
