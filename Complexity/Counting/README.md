@@ -263,7 +263,7 @@ Then, click **Run -> Start Debugging**
 Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 
-## 3 The main procedure
+## 4 The main procedure
 
 **In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
 
@@ -336,7 +336,7 @@ pos = -1
 
 
 ```
-## 4 BinarySearch()
+## 5 BinarySearch()
 
 ```sh
    Time complexity:
@@ -410,7 +410,7 @@ int BinarySearch(int *arr, int n, int targetVal) {
 
 ```
 
-## 5 PrintSubSets()
+## 6 PrintSubSets()
 ```sh
     Time complexity:
 
@@ -457,7 +457,7 @@ void PrintSubSets(int *arr, int n) {
 
 ```
 
-## 6 [PrintPermutations()](./src/main.c)
+## 7 [PrintPermutations()](./src/main.c)
 
  <img src="images/CallTree.png" width="100%" height="100%">
 
