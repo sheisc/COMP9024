@@ -355,7 +355,7 @@ int main(void) {
     printf("\nBefore sorting:\n");
     PrintArray(arr, len);
     BubbleSort(arr, len, fptr);
-    // in an descending order
+    // in a descending order
     printf("After sorting:\n");
     PrintArray(arr, len);
     return 0;
