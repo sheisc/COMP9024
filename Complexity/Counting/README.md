@@ -160,9 +160,9 @@ $2^{n} \div (4 \times 10^{9}) = 2^{64} \div (4 \times 10^{9}) \approx 16 \times 
 
 void SeeYouIn22ndCentury(void) {
     // assume sizeof(long) == 8 bytes == 64 bits
-    for (long i = 1; i != 0; i++) { // i is in [1, (2**64 - 1)], about (2**64) iterations needed
+    for (unsigned long i = 1; i != 0; i++) { // i is in [1, (2**64 - 1)], about (2**64) iterations needed
         // In fact, the basic operation, printf(), can't be finished in one CPU cycle
-        printf("i = %ld\n", i);
+        printf("i = %lu\n", i);
     }
 }
 
