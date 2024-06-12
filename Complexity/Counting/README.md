@@ -459,7 +459,7 @@ void PrintSubSets(int *arr, int n) {
 
 ## 6 [PrintPermutations()](./src/main.c)
 
- <img src="images/CallTree.png" width="60%" height="60%"> 
+ <img src="images/CallTree.png" width="100%" height="100%">
 
 ### Number of recursive function calls in PrintPermutations(arr, 3, 0, 2)
 
