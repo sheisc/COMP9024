@@ -288,6 +288,12 @@ static void PrintDistancesAndVisited(struct Graph *pGraph, AdjMatrixElementTy *d
     }
     printf("\n");
 
+    printf("\t-----------");
+    for (long i = 0; i < pGraph->n; i++) {
+        printf("---------");
+    }
+    printf("\n");
+
     printf("\tdistances: ");
     for (long i = 0; i < pGraph->n; i++) {
         if (distances[i] == INFINITY_VALUE) {
@@ -334,7 +340,7 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
     distances[startNodeId] = 0;
     // Find the shortest distances
     for (long i = 0; i < pGraph->n; i++) {
-        printf("------------------------------------------ Step %ld ------------------------------------------\n\n", i+1);
+        printf("============================================== Step %ld ==============================================\n\n", i+1);
         long u = getNodeIdWithMinDistance(distances, visited, pGraph->n);
         PrintDistancesAndVisited(pGraph, distances, visited, NULL);
 
