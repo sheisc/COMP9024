@@ -50,7 +50,21 @@ Its intermediate representation (IR):
 
 In this project, we create the binary tree manually. 
 
+### Postorder Traversal
+
+Postorder traversal is a tree traversal method that adheres to the Left-Right-Root policy. 
+
+In this method, each node in the tree is visited in the following sequence:
+
+(1) The left subtree is traversed first.
+
+(2) Then the right subtree is traversed.
+
+(3) Finally, the root node of the subtree is traversed.
+
+
 **In [COMP9024/Tutorials/Week4](../../Tutorials/Week4/README.md), we will study how to parse the input string and create the abstract syntax tree with a parser.**
+
 
 ## 1 How to download COMP9024/Trees/BiTree in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
