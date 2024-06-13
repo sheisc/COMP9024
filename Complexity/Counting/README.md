@@ -35,7 +35,7 @@ $T(n) = (n^{2}) \times (2 + \dfrac{3}{n} + \dfrac{4}{n^{2}}) \approx (n^{2}) \ti
 
 $n \to +\infty$ 
 
-When n is very large, if we ignore constants (2, 3, and 4) and slower growing items ($3 \times n$ and 4) in T(n),
+When n is very large, if we ignore coefficient constants (2, 3, and 4) and slower growing items ($3 \times n$ and 4) in T(n),
 
 we could say T(n) grows at the order of $n^{2}$.
 
