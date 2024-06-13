@@ -282,6 +282,12 @@ static long getNodeIdWithMinDistance(AdjMatrixElementTy *distances, int *visited
 }
 
 static void PrintDistancesAndVisited(struct Graph *pGraph, AdjMatrixElementTy *distances, int *visited, long *preNodeIds) {
+    printf("\t-----------");
+    for (long i = 0; i < pGraph->n; i++) {
+        printf("---------");
+    }
+    printf("\n");
+
     printf("\tnode id:   ");
     for (long i = 0; i < pGraph->n; i++) {
         printf("%9ld", i);
@@ -316,6 +322,13 @@ static void PrintDistancesAndVisited(struct Graph *pGraph, AdjMatrixElementTy *d
             printf("%9ld", preNodeIds[i]);                    
         }    
     }
+
+    printf("\n");
+    printf("\t-----------");
+    for (long i = 0; i < pGraph->n; i++) {
+        printf("---------");
+    }
+ 
     printf("\n\n");
 }
 
