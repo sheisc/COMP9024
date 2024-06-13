@@ -281,12 +281,16 @@ static long getNodeIdWithMinDistance(AdjMatrixElementTy *distances, int *visited
     return minIndex;
 }
 
-static void PrintDistancesAndVisited(struct Graph *pGraph, AdjMatrixElementTy *distances, int *visited, long *preNodeIds) {
+static void PrintTableLine(struct Graph *pGraph) {
     printf("\t-----------");
     for (long i = 0; i < pGraph->n; i++) {
         printf("---------");
     }
     printf("\n");
+}
+
+static void PrintDistancesAndVisited(struct Graph *pGraph, AdjMatrixElementTy *distances, int *visited, long *preNodeIds) {
+    PrintTableLine(pGraph);
 
     printf("\tnode id:   ");
     for (long i = 0; i < pGraph->n; i++) {
@@ -294,11 +298,7 @@ static void PrintDistancesAndVisited(struct Graph *pGraph, AdjMatrixElementTy *d
     }
     printf("\n");
 
-    printf("\t-----------");
-    for (long i = 0; i < pGraph->n; i++) {
-        printf("---------");
-    }
-    printf("\n");
+    PrintTableLine(pGraph);
 
     printf("\tdistances: ");
     for (long i = 0; i < pGraph->n; i++) {
@@ -324,12 +324,10 @@ static void PrintDistancesAndVisited(struct Graph *pGraph, AdjMatrixElementTy *d
     }
 
     printf("\n");
-    printf("\t-----------");
-    for (long i = 0; i < pGraph->n; i++) {
-        printf("---------");
-    }
+    
+    PrintTableLine(pGraph);
  
-    printf("\n\n");
+    printf("\n");
 }
 
 void Dijkstra(struct Graph *pGraph, long startNodeId) {
