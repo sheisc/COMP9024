@@ -66,7 +66,7 @@ static AstExprNodePtr PrimaryExpression(void) {
 }
 
 /*
-  Here, stands for a multiplicative operator.
+  Here, mop stands for a multiplicative operator.
 
   mop:
               *  
