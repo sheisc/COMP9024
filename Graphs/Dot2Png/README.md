@@ -37,6 +37,12 @@ For example, the Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake](../../C/
 
 The target and dependency files serve as nodes within the DAG, with the dependency relationships forming the edges of the DAG.
 
+## [DOT language](https://en.wikipedia.org/wiki/DOT_(graph_description_language))
+
+Graph visualization is a method of representing structural information as diagrams.
+
+DOT is the graph description language, which describes graphs, nodes, and edges.
+
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
