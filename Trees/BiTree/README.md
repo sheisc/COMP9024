@@ -60,7 +60,7 @@ In this method, each node in the tree is visited in the following sequence:
 
 (2) Then the right subtree is traversed.
 
-(3) Finally, the root node of the subtree is traversed.
+(3) Finally, the root node is traversed.
 
 
 **In [COMP9024/Tutorials/Week4](../../Tutorials/Week4/README.md), we will study how to parse the input string and create the abstract syntax tree with a parser.**
@@ -337,7 +337,7 @@ In this method, each node in the tree is visited in the following sequence:
 
 (2) Then the right subtree is traversed.
 
-(3) Finally, the root node of the subtree is traversed.
+(3) Finally, the root node is traversed.
 
 ```
         + 

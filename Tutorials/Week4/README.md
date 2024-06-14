@@ -34,7 +34,7 @@ In this method, each node in the tree is visited in the following sequence:
 
 (2) Then the right subtree is traversed.
 
-(3) Finally, the root node of the subtree is traversed.
+(3) Finally, the root node is traversed.
 
 In [COMP9024/Trees/BiTree](../../Trees/BiTree/README.md), we have studied how to create a binary tree manually.
 
