@@ -43,7 +43,7 @@ Our First Project
 
 [COMP9024/Stacks/Recursion](./Stacks/Recursion/README.md)
 
-## Week 02 - 03
+## Week 02 - 04
 
 [COMP9024/C/HowToMake](./C/HowToMake/README.md)
 
@@ -60,4 +60,10 @@ Our First Project
 [COMP9024/Trees/BiTree](./Trees/BiTree/README.md)
 
 [COMP9024/Complexity/Counting](./Complexity/Counting/README.md)
+
+[COMP9024/Graphs/Dot2Png](./Graphs/Dot2Png/README.md)
+
+[COMP9024/Graphs/DirectedGraph](./Graphs/DirectedGraph/README.md)
+
+[COMP9024/Graphs/UndirectedGraph](./Graphs/UndirectedGraph/README.md)
 
