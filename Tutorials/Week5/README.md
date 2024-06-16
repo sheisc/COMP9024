@@ -149,7 +149,7 @@ find . -name "*.png" | sort | xargs feh &
 
 ## Observe the procedure of DFS (starting from the node 3) via 'make view'
 
-**Click on the window of 'feh' to view images**.
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
