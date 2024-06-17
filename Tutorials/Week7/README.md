@@ -509,7 +509,7 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
 
 **Our tutors will NOT answer the following questions in tutorials.**
 
-**Please complete the following code in Q1-Q5 (Dijkstra2() in [Graph.c](./src/Graph.c)) and then answer the questions in Quiz 5 (Week 7) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+**Please complete the code in Q1-Q5 (Dijkstra2() in [Graph.c](./src/Graph.c)) and then answer the questions in Quiz 5 (Week 7) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
 
 
