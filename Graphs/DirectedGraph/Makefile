@@ -34,7 +34,7 @@ CC= gcc
 #CFLAGS = -m32 -g -no-pie --save-temps -I $(PROJ_ROOT_PATH)/src
 #CFLAGS = -g --save-temps -I $(PROJ_ROOT_PATH)/src
 #CFLAGS = -no-pie --save-temps -fno-asynchronous-unwind-tables -I $(PROJ_ROOT_PATH)/src 
-CFLAGS = -g -I $(PROJ_ROOT_PATH)/src 
+CFLAGS = -g -Wall -I $(PROJ_ROOT_PATH)/src 
 
 # create a directory  
 $(shell mkdir -p $(BUILD_DIR))
@@ -55,7 +55,7 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	${CC} ${CFLAGS} -c $< -o $@
 
 view:
-	find . -name "*.png" | sort | xargs feh &
+	find . -name "*.png" | sort | xargs feh -g 720x540 &
 
 # clean all the files generated	
 clean:
