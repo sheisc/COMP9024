@@ -512,7 +512,99 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
 
 **Please complete the code in Q1-Q5 (Dijkstra2() in [Graph.c](./src/Graph.c)) and then answer the questions in Quiz 5 (Week 7) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
+```C
+/*
+    Please complete the code in Q1-Q5.
 
+    Q1:  test whether u and v are the same node or not
+    Q2:  get v's predecessor and save the predecessor's node id in v
+    Q3:  get the name of node nid
+    Q4:  set node startNodeId to be the predecessor of itself
+    Q5:  set node u to be the predecessor of node v
+ */
+
+/*
+    Display the path from u to v.
+ */
+static void DisplayPath(struct Graph *pGraph, long *preNodeIds, long u, long v) {
+    struct Stack *pStack = CreateStack();
+    StackPush(pStack, v);
+    while (______Q1______) {     
+        ______Q2______;
+        StackPush(pStack, v);
+    }
+    printf("\t");
+    while(!StackIsEmpty(pStack)) {
+        STACK_ITEM_T nid = StackPop(pStack);
+        printf("%s",  ______Q3______);   
+        if (!StackIsEmpty(pStack)) {
+            printf(" --> ");
+        }
+    }
+    printf("\n");
+    ReleaseStack(pStack);
+
+}
+
+#define NO_PRE_NODE  -1
+
+void Dijkstra2(struct Graph *pGraph, long startNodeId) {
+    assert(IsLegalNodeNum(pGraph, startNodeId));
+
+    AdjMatrixElementTy *distances = pGraph->distances;
+    int *visited = (int *) malloc(pGraph->n * sizeof(int));
+    long *preNodeIds = (long *) malloc(pGraph->n * sizeof(long));
+
+    assert(visited && preNodeIds);
+
+    static long cnt = 0;          
+    
+    // 
+    for (long i = 0; i < pGraph->n; i++) {
+        distances[i] = INFINITY_VALUE;
+        visited[i] = 0;
+        preNodeIds[i] = NO_PRE_NODE;
+    }
+    GenOneImage(pGraph, "Dijkstra2", "images/Dijkstra2", cnt, visited);  
+    //
+    distances[startNodeId] = 0;
+    ______Q4______;
+
+    for (long i = 0; i < pGraph->n; i++) {
+        long u = getNodeIdWithMinDistance(distances, visited, pGraph->n);
+        visited[u] = 1;
+
+        cnt++;
+        GenOneImage(pGraph, "Dijkstra2", "images/Dijkstra2", cnt, visited);
+
+        for (long v = 0; v < pGraph->n; v++) {
+            if (!visited[v] && MatrixElement(pGraph, u, v) != 0 && distances[u] != INFINITY_VALUE) {
+                if (distances[u] + MatrixElement(pGraph, u, v) < distances[v]) {
+                    distances[v] = distances[u] + MatrixElement(pGraph, u, v);
+                    ______Q5______;
+                }
+            }
+        }
+    }
+    
+    for (long v = 0; v < pGraph->n; v++) {
+        if (distances[v] == INFINITY_VALUE) {
+            printf("Shortest path from node %s to node %s: INF \n", 
+                    pGraph->pNodes[startNodeId].name, 
+                    pGraph->pNodes[v].name);
+        } else {
+            printf("Shortest path from node %s to node %s: %ld\n", 
+                    pGraph->pNodes[startNodeId].name, 
+                    pGraph->pNodes[v].name, 
+                    (long) distances[v]);
+            DisplayPath(pGraph, preNodeIds, startNodeId, v);
+        }
+    }
+
+    free(preNodeIds);
+    free(visited);
+}
+```
 
 ## Once you have completed the code in Q1-Q5 correctly, you will see the following output.
 
