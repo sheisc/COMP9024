@@ -462,9 +462,34 @@ void PrintSubSets(int *arr, int n) {
 
  <img src="images/CallTree.png" width="100%" height="100%">
 
+### 7.1 Call Tree
+
+A call tree, in the context of computer science and software development, refers to a hierarchical representation of function or method calls within a program. 
+
+The call tree has not really been created during the execution of this program.
+
+It is used to analyze and illustrate the flow of execution as functions or procedures call each other during the runtime of the program. 
+
+Usually, there is an edge between a caller function and a callee function in a call tree.
+
+In this example, to display the values of 'int nums[]' before a function all and after a function call, 
+
+we add two edges between a caller and a callee: one from the caller to the callee, and the other from the callee to the caller.
+
+Strictly speaking, it is not a tree any more.
+
+
+### 7.2 Analysis of time complexity
+
 ### Number of recursive function calls in PrintPermutations(arr, 3, 0, 2)
 
 $3! \times (1 + \dfrac{1}{2} + \dfrac{1}{2 \times 3})  = 3! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!}) = 10 $
+
+### Number of recursive function calls in PrintPermutations(arr, 4, 0, 3)
+
+$ 4 \times (3! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!})) + 1  = 4! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!}) + 4! \times \dfrac{1}{4!} = 4! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!} + \dfrac{1}{4!}) $
+
+### ...
 
 ### Number of recursive function calls in PrintPermutations(arr, n, 0, n-1)
 
