@@ -478,7 +478,6 @@ we add two edges between a caller and a callee: one from the caller to the calle
 
 Strictly speaking, it is not a tree any more.
 
-
 ### 7.2 Analysis of time complexity
 
 ### Number of recursive function calls in PrintPermutations(arr, 3, 0, 2)
@@ -487,7 +486,7 @@ $3! \times (1 + \dfrac{1}{2} + \dfrac{1}{2 \times 3})  = 3! \times (1 + \dfrac{1
 
 ### Number of recursive function calls in PrintPermutations(arr, 4, 0, 3)
 
-$ 4 \times (3! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!})) + 1  = 4! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!}) + 4! \times \dfrac{1}{4!} = 4! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!} + \dfrac{1}{4!}) $
+$4 \times (3! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!})) + 1  = 4! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!}) + 4! \times \dfrac{1}{4!} = 4! \times (1 + \dfrac{1}{2!} + \dfrac{1}{3!} + \dfrac{1}{4!}) $
 
 ### ...
 
