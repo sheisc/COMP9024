@@ -12,6 +12,8 @@ digraph dfs {
 "1" [color=red]
 "2" [color=red]
 "3" [color=red]
+"4"
 "5" [color=red]
 "6" [color=red]
+"7"
 }
