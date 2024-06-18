@@ -254,14 +254,23 @@ void Graph2Dot(struct Graph *pGraph,
         /*
         "0" [color=red]
          */
-        if (displayVisited && visited) {
-            for (long i = 0; i < pGraph->n; i++) {
-                if (visited[i]) {
-                    char iDistance[MAX_ID_LEN+1] = {0};
-                    GenerateDistanceStr(pGraph, i, iDistance);
+        // if (displayVisited && visited) {
+        //     for (long i = 0; i < pGraph->n; i++) {
+        //         if (visited[i]) {
+        //             char iDistance[MAX_ID_LEN+1] = {0};
+        //             GenerateDistanceStr(pGraph, i, iDistance);
                    
-                    fprintf(dotFile, "\"Node %s:%s\" [color=red]\n", pGraph->pNodes[i].name, iDistance);
-                }
+        //             fprintf(dotFile, "\"Node %s:%s\" [color=red]\n", pGraph->pNodes[i].name, iDistance);
+        //         }
+        //     }
+        // }
+        for (long i = 0; i < pGraph->n; i++) {
+            char iDistance[MAX_ID_LEN+1] = {0};
+            GenerateDistanceStr(pGraph, i, iDistance);
+            if (displayVisited && visited && visited[i]) {                
+                fprintf(dotFile, "\"Node %s:%s\" [color=red]\n", pGraph->pNodes[i].name, iDistance);
+            } else {
+                fprintf(dotFile, "\"Node %s:%s\"\n", pGraph->pNodes[i].name, iDistance);
             }
         }        
         fprintf(dotFile, "}\n");
@@ -278,6 +287,7 @@ static long getNodeIdWithMinDistance(AdjMatrixElementTy *distances, int *visited
             minIndex = u;
         }
     }
+    assert(minIndex != -1);
     return minIndex;
 }
 

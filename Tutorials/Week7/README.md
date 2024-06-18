@@ -439,6 +439,7 @@ static long getNodeIdWithMinDistance(AdjMatrixElementTy *distances, int *visited
             minIndex = u;
         }
     }
+	assert(minIndex != -1);
     return minIndex;
 }
 
