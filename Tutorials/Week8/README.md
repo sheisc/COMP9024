@@ -351,6 +351,9 @@ For a non-recursive post-order traversal,
   we need to visit the top node on the stack when it is at state NS_FROM_RIGHT.
 
 ```
+
+**For more details about Deterministic Finite Automata (DFA) , please see [Programming Languages and Compilers (COMP3131/COMP9102)](https://webcms3.cse.unsw.edu.au/COMP3131/24T1/).**
+
 #### 5.2.2 Non-recursive pre-order traversal
 ```C
 void PreOrderTraversal2(BiTreeNodePtr root, NodeVisitor visit) {
