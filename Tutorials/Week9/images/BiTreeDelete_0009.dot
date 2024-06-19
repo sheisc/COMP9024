@@ -1,0 +1,7 @@
+digraph BiTreeDelete {
+"100" -> {"90"} [label="L"]
+"90" -> {"80"} [label="L"]
+"100" [color=red]
+"90" [color=red]
+"80" [color=red]
+}
