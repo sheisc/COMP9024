@@ -4,9 +4,10 @@
 /*******************************************************************
                     Tutorial 8    Maze
 
-    1.  How to explore a maze with a non-random algorithm
+    1.  How to explore a maze with a non-randomised algorithm
 
-    2.  How to explore a maze with a random algorithm
+    2.  How to explore a maze with a randomised algorithm 
+        (flip a coin or roll a dice)
 
                                              COMP9024 24T2
 
@@ -35,9 +36,9 @@ An animation in exploring a maze can be found at the following link.
 
 [Animation: Exploring a Maze in JavaScript](https://sheisc.github.io/slides/COMP9024/24T2/week10/maze.html)
 
-In this tutorial, we study how to explore a maze with a non-random algorithm.
+In this tutorial, we study how to explore a maze with a non-randomised algorithm.
 
-The random algorithm is left as the weekly practical exercise.
+The randomised algorithm is left as the weekly practical exercise.
 
 ## 1 How to download COMP9024/Tutorials/Week10 in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
@@ -374,7 +375,7 @@ void ExploreMaze(void) {
 
 ## Once you have completed the code in Q1-Q5 correctly, you will see the output similar as follows.
 
-**If you are lucky enough, your random algorithm may finish within 30 steps. Buy a lottery ticket if you wish.**
+**If you are lucky enough, your randomised algorithm may finish within 30 steps. Buy a lottery ticket if you wish.**
 
 
 ``` sh
