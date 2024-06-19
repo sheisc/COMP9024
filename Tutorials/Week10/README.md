@@ -23,6 +23,10 @@ As you move forward, you leave a marker (or push it onto the stack).
 
 If you reach a dead end, you need to backtrack by popping markers off the stack until you find a new path to explore.
 
+| Initial | Exploring  |  Completed  |
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/Maze_0000.png" width="50%" height="50%"> |  <img src="images/Maze_0001.png" width="50%" height="50%"> | <img src="images/Maze_0002.png" width="50%" height="50%"> |
+
 This method ensures that every possible path is explored until the exit is found or all available paths are exhausted. 
 
 By leveraging the stack, the algorithm maintains a record of where it has been, guiding the search towards the solution methodically.
