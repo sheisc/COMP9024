@@ -201,7 +201,7 @@ X   X   X   X           X       X
 
 ```
 
-## 3 Data structures
+## 4 Data structures
 
 ```C
 
@@ -262,9 +262,9 @@ static struct PositionInfo *pStartPos = &maze[1][0];
 
 ```
 
-## 4 Algorithms
+## 5 Algorithms
 
-## 4.1 Overview
+## 5.1 Overview
 
 ```C
 int main(int argc, char **argv, char **env) {
@@ -279,7 +279,7 @@ int main(int argc, char **argv, char **env) {
 ```
 
 
-## 4.2 ExploreMaze()
+## 5.2 ExploreMaze()
 
 ```C
 static int IsLegalPosition(int r, int c) {
@@ -360,7 +360,7 @@ void ExploreMaze(void) {
 
 
 
-## 5 Practical exercise
+## 6 Practical exercise
 
 **Our tutors will NOT answer the following questions in tutorials.**
 
