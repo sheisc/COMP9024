@@ -419,7 +419,7 @@ BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal) {
 
 Found: BiTreeSearch(root, 80) == 80
 
-BiTreeMinValueNode(root) == 10
+...
 
 
 
