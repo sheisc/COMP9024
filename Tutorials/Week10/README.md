@@ -292,7 +292,21 @@ int main(int argc, char **argv, char **env) {
 ```
 
 
-## 5.2 ExploreMaze()
+#### 5.2 Position States
+```sh
+We can use the following position states to represent different stages
+when we are at a position (row, column) in the maze.
+
+It is a simple finite-state machine, with the following state transition:
+
+ TO_RIGHT -> TO_DOWN -> TO_LEFT -> TO_UP -> FINISHED
+```
+<img src="images/PositionState.png" width="50%" height="50%">
+
+
+**For more details about Deterministic Finite Automata (DFA) , please see [Programming Languages and Compilers (COMP3131/COMP9102)](https://webcms3.cse.unsw.edu.au/COMP3131/24T1/).**
+
+## 5.3 ExploreMaze()
 
 ```C
 static int IsLegalPosition(int r, int c) {
