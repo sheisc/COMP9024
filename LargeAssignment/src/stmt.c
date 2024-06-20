@@ -279,8 +279,8 @@ static AstStmtNodePtr DoWhileStatement(void) {
     Q15. call Expect() to match TK_WHILE in the input file
     Q16. call Expect() to match TK_LPAREN in the input file
     Q17. call Expression() to create an AST node for the Expression in do-while, and save the return value in doWhileStmt->expr.
-    Q18. call Expect() to match TK_SEMICOLON in the input file
-    Q19. call Expect() to match TK_RPAREN in the input file
+    Q18. call Expect() to match TK_RPAREN in the input file
+    Q19. call Expect() to match TK_SEMICOLON in the input file
     Q20. call CreateLabelNode() to create an AST node for label_next, and save the return value in doWhileStmt->kids[1]     
    */
   ////////////////////////////////////////////////////////////////////////////////////
