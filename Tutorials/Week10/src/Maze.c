@@ -210,7 +210,7 @@ void ExploreMaze(void) {
 
 #if 0
 /*
-    This function returns the next unexplored state and also updates pCurPos->state.
+    This function returns the next unexplored state randomly and also updates pCurPos->state.
  */
 static PositionState NextUnexploredState(struct PositionInfo *pCurPos) {
     long x;
