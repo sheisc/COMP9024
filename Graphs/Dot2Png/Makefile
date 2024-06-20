@@ -29,7 +29,7 @@ images/%.png: images/%.dot
 
 
 view:
-	find . -name "*.png" | sort | xargs feh &
+	find . -name "*.png" | sort | feh -g 1024x768 &
 
 
 # clean all the files generated	
