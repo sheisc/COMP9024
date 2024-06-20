@@ -24,9 +24,17 @@ As you move forward, you leave a marker (or push it onto the stack).
 
 If you reach a dead end, you need to backtrack by popping markers off the stack until you find a new path to explore.
 
-| Initial | Exploring  |  Completed  |
-|:-------------:|:-------------:|:-------------:|
-| <img src="images/Maze_0000.png" width="50%" height="50%"> |  <img src="images/Maze_0001.png" width="50%" height="50%"> | <img src="images/Maze_0002.png" width="50%" height="50%"> |
+| Initial | 
+|:-------------:|
+| <img src="images/Maze_0000.png" width="50%" height="50%"> |
+
+| Exploring  |
+|:-------------:|
+|  <img src="images/Maze_0001.png" width="50%" height="50%"> |
+
+|  Completed  |
+|:-------------:|
+| <img src="images/Maze_0002.png" width="50%" height="50%"> |
 
 This method ensures that every possible path is explored until the exit is found or all available paths are exhausted. 
 
@@ -300,6 +308,21 @@ static int IsExitPosition(int r, int c) {
 }
 
 /*
+    If (r, c) is a legal position, it is not blocked and it has not been explored yet,
+    then
+        push its position information onto the data stack
+ */
+static void PushAdjacentPosition(struct Stack *pStack, int r, int c, PositionState initState) {
+    if (IsLegalPosition(r, c)) {
+        if (!maze[r][c].blocked && (maze[r][c].state == NOT_VISITED)) {
+            struct PositionInfo *pPos = &maze[r][c];
+            pPos->state = initState;
+            StackPush(pStack, pPos);
+        }
+    }
+}
+
+/*
   State transition:
 
        TO_RIGHT -> TO_DOWN -> TO_LEFT -> TO_UP -> FINISHED
@@ -371,7 +394,80 @@ void ExploreMaze(void) {
 
 **Please complete the code in Q1-Q5 (ExploreMazeRandomly() in [Maze.c](./src/Maze.c)) and then answer the questions in Quiz 8 (Week 10) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
+```C
+/*
+    This function returns the next unexplored state and also updates pCurPos->state.
+ */
+static PositionState NextUnexploredState(struct PositionInfo *pCurPos) {
+    long x;
+    long state = (long) (pCurPos->state);
+    assert(pCurPos->state != FINISHED);
+    // randomly generate an integer x in {0, 1, 2, 3},
+    // such that (1 << x) represents a state which has not been explored yet.
+    do {
+        x = random();
+        x %= 4;
+    } while (((1 << x) & state) != 0);
 
+    PositionState nextState = (PositionState)(1 << x);
+    pCurPos->state |= nextState;
+    return nextState;
+}
+
+
+void ExploreMazeRandomly(void) {
+    struct Stack *pStack = CreateStack();
+    // Initialize the maze
+    InitMaze();
+    char *stepName = "Random Step";
+    PrintMaze(stepName);
+
+    // pStartPos->state = NOT_VISITED;
+    StackPush(pStack, pStartPos);
+
+    while (!StackIsEmpty(pStack)) {
+        struct PositionInfo *pCurPos = StackPeek(pStack);
+        if (IsExitPosition(pCurPos->r, pCurPos->c)) {
+            break;
+        }
+        PositionState nextState;
+        if (pCurPos->state != FINISHED) {
+            nextState = ______Q1______;
+        } else {
+            nextState = FINISHED;
+        }
+        //
+        switch(nextState) {
+            case TO_RIGHT:
+                pCurPos->dirStr = rightArrowUnicodeStr;
+                ______Q2______;
+                break;
+            case TO_DOWN:
+                pCurPos->dirStr = downArrowUnicodeStr;
+                ______Q3______;
+                break;
+            case TO_LEFT:
+                pCurPos->dirStr = leftArrowUnicodeStr;
+                ______Q4______;
+                break;
+            case TO_UP:
+                pCurPos->dirStr = upArrowUnicodeStr;
+                ______Q5______;
+                break;
+            case FINISHED:
+                pCurPos->dirStr = NULL;
+                StackPop(pStack);
+                break;
+            default:
+                break;
+        }
+        PrintMaze(stepName);
+    }
+
+    ReleaseStack(pStack);
+    PrintMaze(stepName);
+}
+```
 
 ## Once you have completed the code in Q1-Q5 correctly, you will see the output similar as follows.
 
