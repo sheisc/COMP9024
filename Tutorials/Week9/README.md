@@ -187,29 +187,29 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 | Node to Be Deleted | Left Child |  Right Child   |
 |:-------------:|:-------------:|:-------------:|
-| Case 1 | NULL |  NULL   |
-| Case 2 | NULL |  NOT NULL   |
-| Case 3 | NOT NULL |  NULL   |
-| Case 4 | NOT NULL |  NOT NULL   |
+| Case 00 | NULL |  NULL   |
+| Case 01 | NULL |  NOT NULL   |
+| Case 10 | NOT NULL |  NULL   |
+| Case 11 | NOT NULL |  NOT NULL   |
 
-| Initial | Delete 50 (case 4 in the previous state, swapping 50 and 60, inconsistency) |  Delete 50 (case 1 in the previous state)  |
+| Initial | Delete 50 (case 11 in the previous state, swapping 50 and 60, inconsistency) |  Delete 50 (case 00 in the previous state)  |
 |:-------------:|:-------------:|:-------------:|
-| <img src="images/BiTreeDelete_0000.png" width="50%" height="50%"> |  <img src="images/BiTreeDelete_0001.png" width="50%" height="50%"> | <img src="images/BiTreeDelete_0002.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0000.png" width="240"> |  <img src="images/BiTreeDelete_0001.png" width="240"> | <img src="images/BiTreeDelete_0002.png" width="180"> |
 
 
-|Delete 20 (case 4 in the previous state, swapping 20 and 30, inconsistency) | Delete 20 (case 2 in the previous state)  |  Delete 10 (case 1 in the previous state)  |
+|Delete 20 (case 11 in the previous state, swapping 20 and 30, inconsistency) | Delete 20 (case 01 in the previous state)  |  Delete 10 (case 00 in the previous state)  |
 |:-------------:|:-------------:|:-------------:|
-| <img src="images/BiTreeDelete_0003.png" width="50%" height="50%"> |  <img src="images/BiTreeDelete_0004.png" width="50%" height="50%"> | <img src="images/BiTreeDelete_0005.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0003.png" width="180"> |  <img src="images/BiTreeDelete_0004.png" width="180"> | <img src="images/BiTreeDelete_0005.png" width="120"> |
 
 
-| Delete 30 (case 2 in the previous state) | Delete 40 (case 1 in the previous state)  |  Delete 70 (case 2 in the previous state) | Delete 60 (case 2 in the previous state) |
+| Delete 30 (case 01 in the previous state) | Delete 40 (case 00 in the previous state)  |  Delete 70 (case 01 in the previous state) | Delete 60 (case 01 in the previous state) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
-| <img src="images/BiTreeDelete_0006.png" width="50%" height="50%"> |  <img src="images/BiTreeDelete_0007.png" width="50%" height="50%"> | <img src="images/BiTreeDelete_0008.png" width="50%" height="50%"> | <img src="images/BiTreeDelete_0009.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0006.png" width="120"> |  <img src="images/BiTreeDelete_0007.png" width="60"> | <img src="images/BiTreeDelete_0008.png" width="60"> | <img src="images/BiTreeDelete_0009.png" width="60"> |
 
 
-| Delete 100 (case 3 in the previous state) | Delete 90 (case 3 in the previous state) |  Delete 80 (case 1 in the previous state) | 
+| Delete 100 (case 10 in the previous state) | Delete 90 (case 10 in the previous state) |  Delete 80 (case 00 in the previous state) | 
 |:-------------:|:-------------:|:-------------:|
-| <img src="images/BiTreeDelete_0010.png" width="50%" height="50%"> |  <img src="images/BiTreeDelete_0011.png" width="50%" height="50%"> | <img src="images/BiTreeDelete_0012.png" width="50%" height="50%"> | 
+| <img src="images/BiTreeDelete_0010.png" width="60"> |  <img src="images/BiTreeDelete_0011.png" width="60"> | <img src="images/BiTreeDelete_0012.png" width="60"> | 
 
 
 ## 4 Data structures
@@ -330,22 +330,22 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
 
                     0 child:
 
-                        leftChild == NULL && rightChild == NULL    // case 1
+                        leftChild == NULL && rightChild == NULL    // case 00
 
                     1 child:
 
-                        leftChild == NULL && rightChild != NULL    // case 2
+                        leftChild == NULL && rightChild != NULL    // case 01
 
                         or 
-                        leftChild != NULL && rightChild == NULL    // case 3
+                        leftChild != NULL && rightChild == NULL    // case 10
                  
                     2 children:
 
-                        leftChild != NULL && rightChild != NULL    // case 4
+                        leftChild != NULL && rightChild != NULL    // case 11
 
              **************************************************************************/
             
-            if (pNode->leftChild == NULL) {   // case 1 and case 2
+            if (pNode->leftChild == NULL) {   // case 00 and case 01
                 BiTreeNodePtr tmp = pNode->rightChild;
                 printf("deleting %ld\n", pNode->value.numVal);
                 free(pNode);
@@ -353,7 +353,7 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
 
                 cnt++;
                 GenOneImage(*pRoot, "BiTreeDelete", "images/BiTreeDelete", cnt);
-            } else if (pNode->rightChild == NULL) { // case 3
+            } else if (pNode->rightChild == NULL) { // case 10
                 BiTreeNodePtr tmp = pNode->leftChild;
                 printf("deleting %ld\n", pNode->value.numVal);      
                 free(pNode);
@@ -362,7 +362,7 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
                 cnt++;
                 GenOneImage(*pRoot, "BiTreeDelete", "images/BiTreeDelete", cnt);                
             } else {
-                // case 4:  with two children
+                // case 11:  with two children
                 // Get pNode's in-order successor, which is left-most node in its right sub-tree.
                 BiTreeNodePtr pSuccessor = BiTreeMinValueNode(pNode->rightChild);
 

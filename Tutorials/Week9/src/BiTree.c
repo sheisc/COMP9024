@@ -254,22 +254,22 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
 
                     0 child:
 
-                        leftChild == NULL && rightChild == NULL    // case 1
+                        leftChild == NULL && rightChild == NULL    // case 00
 
                     1 child:
 
-                        leftChild == NULL && rightChild != NULL    // case 2
+                        leftChild == NULL && rightChild != NULL    // case 01
 
                         or 
-                        leftChild != NULL && rightChild == NULL    // case 3
+                        leftChild != NULL && rightChild == NULL    // case 10
                  
                     2 children:
 
-                        leftChild != NULL && rightChild != NULL    // case 4
+                        leftChild != NULL && rightChild != NULL    // case 11
 
              **************************************************************************/
             
-            if (pNode->leftChild == NULL) {   // case 1 and case 2
+            if (pNode->leftChild == NULL) {   // case 00 and case 01
                 BiTreeNodePtr tmp = pNode->rightChild;
                 printf("deleting %ld\n", pNode->value.numVal);
                 free(pNode);
@@ -277,7 +277,7 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
 
                 cnt++;
                 GenOneImage(*pRoot, "BiTreeDelete", "images/BiTreeDelete", cnt);
-            } else if (pNode->rightChild == NULL) { // case 3
+            } else if (pNode->rightChild == NULL) { // case 10
                 BiTreeNodePtr tmp = pNode->leftChild;
                 printf("deleting %ld\n", pNode->value.numVal);      
                 free(pNode);
@@ -286,7 +286,7 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
                 cnt++;
                 GenOneImage(*pRoot, "BiTreeDelete", "images/BiTreeDelete", cnt);                
             } else {
-                // case 4:  with two children
+                // case 11:  with two children
                 // Get pNode's in-order successor, which is left-most node in its right sub-tree.
                 BiTreeNodePtr pSuccessor = BiTreeMinValueNode(pNode->rightChild);
 
