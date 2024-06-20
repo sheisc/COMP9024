@@ -211,7 +211,7 @@ struct Graph{
       
                           Element(n-1, 0), Element(n-1, 1),  ...,       Element(n-1, n-1)
                           ----------------------------------------------------------- 
-                                      Adjacent Matrix on Heap
+                                      Adjacency Matrix on Heap
 
      */
     AdjMatrixElementTy *pAdjMatrix;
