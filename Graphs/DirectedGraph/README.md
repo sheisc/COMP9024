@@ -194,7 +194,7 @@ int main(void) {
 // Storing information of a graph node
 struct GraphNode {
     char name[MAX_ID_LEN + 1]; 
-} GraphNode;
+};
 
 typedef long AdjMatrixElementTy;
 
