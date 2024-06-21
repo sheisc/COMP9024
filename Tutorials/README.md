@@ -29,6 +29,25 @@ You can also setup your own [Visual Studio Code](https://code.visualstudio.com/d
 Your comprehension of these programs will be assessed in quizzes and examinations.
 
 
+## Schedule
+
+[Week02 Bubble Sort](./Week2/README.md)
+
+[Week03 Stack](./Week3/README.md)
+
+[Week04 Binary Tree](./Week4/README.md)
+
+[Week05 Depth First Search](./Week5/README.md)
+
+[Week07 Dijkstra's algorithm](./Week7/README.md)
+
+[Week08 Tree Traversal](./Week8/README.md)
+
+[Week09 Binary Search Tree](./Week9/README.md)
+
+[Week10 Maze (Randomised Algorithm)](./Week10/README.md)
+
+
 
 
 
