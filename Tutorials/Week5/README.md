@@ -164,11 +164,13 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 | Visiting 3 | Visiting 0 |  Visiting 2 | Visiting 1 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{3}$ | Nodes on call stack: $\color{red}{0}$, 3 |Nodes on call stack: $\color{red}{2}$, 0, 3 |Nodes on call stack: $\color{red}{1}$, 2, 0, 3 |
 | <img src="images/RecursiveDFS_0001.png" width="50%" height="50%"> |  <img src="images/RecursiveDFS_0002.png" width="50%" height="50%"> | <img src="images/RecursiveDFS_0003.png" width="50%" height="50%"> | <img src="images/RecursiveDFS_0004.png" width="50%" height="50%"> | 
 
 
 | Visiting 5 | Visiting 6 |  Visiting 7 | Visiting 4 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{5}$, 1, 2, 0, 3 | Nodes on call stack: $\color{red}{6}$, 2, 0, 3 |Nodes on call stack: $\color{red}{7}$, 6, 2, 0, 3 | Nodes on call stack: $\color{red}{4}$, 0, 3 |
 | <img src="images/RecursiveDFS_0005.png" width="50%" height="50%"> |  <img src="images/RecursiveDFS_0006.png" width="50%" height="50%"> | <img src="images/RecursiveDFS_0007.png" width="50%" height="50%"> | <img src="images/RecursiveDFS_0008.png" width="50%" height="50%"> | 
 
 
