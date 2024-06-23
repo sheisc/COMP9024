@@ -19,6 +19,7 @@
 
 Dijkstra's algorithm is commonly used for finding the shortest path in a graph where the edge weights are non-negative. 
 
+To simplify our discussions, we assume the distance from one node to another (edge weight) is an positive integer.
 
 We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
 
