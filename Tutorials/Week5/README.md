@@ -74,7 +74,7 @@ click **Terminal -> Run Build Task**
 
 ### 2.3 Debug the project in VS Code
 
-Open src/main.c, and click to add a breakpoint (say, line 11).
+Open src/Graph.c, and click to add a breakpoint (say, line 216).
 
 Then, click **Run -> Start Debugging**
 
@@ -161,6 +161,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/RecursiveDFS_0000.png" width="50%" height="50%"> |  
 
 
+**When debugging this program in VS Code, you can set a breakpoint at line 216 in [src/Graph.c](./src/Graph.c) to observe the nodes on call stack.**
 
 | Visiting 3 | Visiting 0 |  Visiting 2 | Visiting 1 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
