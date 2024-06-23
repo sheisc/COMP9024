@@ -94,7 +94,7 @@ click **Terminal -> Run Build Task**
 
 #### 2.3 Debug the project in VS Code
 
-Open src/expr.c, and click to add a breakpoint (say, line 105).
+Open src/main.c, and click to add a breakpoint (say, line 8).
 
 Then, click **Run -> Start Debugging**
 
@@ -211,38 +211,45 @@ Week7$ make view
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
+### When debugging this program in VS Code, you can set a breakpoint at line 8 in [src/main.c](./src/main.c) to observe the nodes on call stack.
 
 #### 3.2.1 Pre-order traversal
 
-| Initial | Step 1  |  Step 2  |
+| Initial | Visiting 100  |  Visiting 98  |
 |:-------------:|:-------------:|:-------------:|
+| | Nodes on call stack: $\color{red}{100}$ | Nodes on call stack: $\color{red}{98}$, 100|
 | <img src="images/PreOrderTraversal2_0000.png" width="50%" height="50%"> |  <img src="images/PreOrderTraversal2_0001.png" width="50%" height="50%"> | <img src="images/PreOrderTraversal2_0002.png" width="50%" height="50%"> |
 
 
-| Step 3 | Step 4  |  Step 5  |
+| Visiting 97 | Visiting 99  |  Visiting 101  |
 |:-------------:|:-------------:|:-------------:|
+|Nodes on call stack: $\color{red}{97}$, 98, 100| Nodes on call stack: $\color{red}{99}$, 98, 100 | Nodes on call stack: $\color{red}{101}$, 100|
 | <img src="images/PreOrderTraversal2_0003.png" width="50%" height="50%"> |  <img src="images/PreOrderTraversal2_0004.png" width="50%" height="50%"> | <img src="images/PreOrderTraversal2_0005.png" width="50%" height="50%"> |
 
 #### 3.2.2 In-order traversal
 
-| Initial | Step 1  |  Step 2  |
+| Initial | Visiting 97  |  Visiting 98  |
 |:-------------:|:-------------:|:-------------:|
+| | Nodes on call stack: $\color{red}{97}$, 98, 100 | Nodes on call stack: $\color{red}{98}$, 100|
 | <img src="images/InOrderTraversal2_0000.png" width="50%" height="50%"> |  <img src="images/InOrderTraversal2_0001.png" width="50%" height="50%"> | <img src="images/InOrderTraversal2_0002.png" width="50%" height="50%"> |
 
 
-| Step 3 | Step 4  |  Step 5  |
+| Visiting 99 | Visiting 100  |  Visiting 101  |
 |:-------------:|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{99}$, 98, 100| Nodes on call stack: $\color{red}{100}$|Nodes on call stack: $\color{red}{101}$, 100|
 | <img src="images/InOrderTraversal2_0003.png" width="50%" height="50%"> |  <img src="images/InOrderTraversal2_0004.png" width="50%" height="50%"> | <img src="images/InOrderTraversal2_0005.png" width="50%" height="50%"> |
 
 #### 3.2.3 Post-order traversal
 
-| Initial | Step 1  |  Step 2  |
+| Initial | Visiting 97  |  Visiting 99  |
 |:-------------:|:-------------:|:-------------:|
+| | Nodes on call stack: $\color{red}{97}$, 98, 100 | Nodes on call stack: $\color{red}{99}$, 98, 100|
 | <img src="images/PostOrderTraversal2_0000.png" width="50%" height="50%"> |  <img src="images/PostOrderTraversal2_0001.png" width="50%" height="50%"> | <img src="images/PostOrderTraversal2_0002.png" width="50%" height="50%"> |
 
 
-| Step 3 | Step 4  |  Step 5  |
+| Visiting 98 | Visiting 101  |  Visiting 100  |
 |:-------------:|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{98}$, 100| Nodes on call stack: $\color{red}{101}$, 100|Nodes on call stack: $\color{red}{100}$|
 | <img src="images/PostOrderTraversal2_0003.png" width="50%" height="50%"> |  <img src="images/PostOrderTraversal2_0004.png" width="50%" height="50%"> | <img src="images/PostOrderTraversal2_0005.png" width="50%" height="50%"> |
 
 
