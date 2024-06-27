@@ -9,13 +9,13 @@ digraph DijkstraDirected {
 "Node 4:2" -> {"Node 2:6"} [label="4"]
 "Node 4:2" -> {"Node 6:7"} [label="5"]
 "Node 6:7" -> {"Node 5:11"} [label="5"]
-"Node 6:7" -> {"Node 7:10"} [label="3"]
+"Node 6:7" -> {"Node 7:INF"} [label="3"]
 "Node 0:4" [color=red]
-"Node 1:INF" [color=red]
+"Node 1:INF"
 "Node 2:6" [color=red]
 "Node 3:0" [color=red]
 "Node 4:2" [color=red]
-"Node 5:11" [color=red]
+"Node 5:11"
 "Node 6:7" [color=red]
-"Node 7:10" [color=red]
+"Node 7:INF"
 }

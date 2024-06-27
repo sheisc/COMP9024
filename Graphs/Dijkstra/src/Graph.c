@@ -381,15 +381,25 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
         } else {
             GenOneImage(pGraph, "DijkstraUndirected", "images/DijkstraUndirected", imgCnt, visited);
         }
-
+        int changed = 0;
         for (long v = 0; v < pGraph->n; v++) {
             if (!visited[v] && MatrixElement(pGraph, u, v) != 0 && distances[u] != INFINITY_VALUE) {
                 if (distances[u] + MatrixElement(pGraph, u, v) < distances[v]) {
                     printf("Updating distances[%ld]: %ld --> ... --> %ld --> %ld; distance from %ld to %ld is %ld\n\n", v, 
                             startNodeId, u, v, u, v,(long) MatrixElement(pGraph, u, v));
                     distances[v] = distances[u] + MatrixElement(pGraph, u, v);
+                    changed = 1;
                 }
             }
+        }
+        if (changed) {
+            imgCnt++;
+
+            if (pGraph->isDirected) {
+                GenOneImage(pGraph, "DijkstraDirected", "images/DijkstraDirected", imgCnt, visited);
+            } else {
+                GenOneImage(pGraph, "DijkstraUndirected", "images/DijkstraUndirected", imgCnt, visited);
+            }            
         }
         PrintDistancesAndVisited(pGraph, distances, visited, NULL);
     }

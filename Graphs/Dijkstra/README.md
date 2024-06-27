@@ -142,24 +142,42 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/DijkstraDirected_0000.png" width="50%" height="50%"> |  
 
 
-| Step 1 | Step 2  |
+| Step 1 |  |
 |:-------------:|:-------------:|
 | <img src="images/DijkstraDirected_0001.png" width="50%" height="50%"> |  <img src="images/DijkstraDirected_0002.png" width="50%" height="50%"> | 
 
 
-
-|Step 3 | Step 4 |
+| Step 2 |  |
 |:-------------:|:-------------:|
-|<img src="images/DijkstraDirected_0003.png" width="50%" height="50%"> | <img src="images/DijkstraDirected_0004.png" width="50%" height="50%"> | 
+| <img src="images/DijkstraDirected_0003.png" width="50%" height="50%"> |  <img src="images/DijkstraDirected_0004.png" width="50%" height="50%"> | 
 
 
-| Step 5 | Step 6|
+|Step 3 |  |
 |:-------------:|:-------------:|
-| <img src="images/DijkstraDirected_0005.png" width="50%" height="50%"> |  <img src="images/DijkstraDirected_0006.png" width="50%" height="50%"> | 
+|<img src="images/DijkstraDirected_0005.png" width="50%" height="50%"> |  | 
 
-| Step 7 | Step 8 |
+
+|Step 4 | |
 |:-------------:|:-------------:|
-| <img src="images/DijkstraDirected_0007.png" width="50%" height="50%"> | <img src="images/DijkstraDirected_0008.png" width="50%" height="50%"> | 
+|<img src="images/DijkstraDirected_0006.png" width="50%" height="50%"> | <img src="images/DijkstraDirected_0007.png" width="50%" height="50%"> | 
+
+
+| Step 5 | |
+|:-------------:|:-------------:|
+| <img src="images/DijkstraDirected_0008.png" width="50%" height="50%"> |  <img src="images/DijkstraDirected_0009.png" width="50%" height="50%"> | 
+
+| Step 6 | |
+|:-------------:|:-------------:|
+| <img src="images/DijkstraDirected_0010.png" width="50%" height="50%"> |   | 
+
+| Step 7 ||
+|:-------------:|:-------------:|
+| <img src="images/DijkstraDirected_0011.png" width="50%" height="50%"> | | 
+
+
+| Step 8 |  |
+|:-------------:|:-------------:|
+| <img src="images/DijkstraDirected_0012.png" width="50%" height="50%"> |  | 
 
 ### 3.3 More details
 
