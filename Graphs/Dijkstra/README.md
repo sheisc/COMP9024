@@ -398,281 +398,6 @@ Shortest path from node 3 to node 7: 10
 
 ## 4 The main procedure of Dijkstra in an undirected graph
 
-### 4.1 make and ./main
-
-**In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
-
-``` sh
-
-Dijkstra$ make
-
-Dijkstra$ ./main
-
-Shortest path from node 3 to node 0: 4
-Shortest path from node 3 to node 1: 8
-Shortest path from node 3 to node 2: 6
-Shortest path from node 3 to node 3: 0
-Shortest path from node 3 to node 4: 2
-Shortest path from node 3 to node 5: 10
-Shortest path from node 3 to node 6: 7
-Shortest path from node 3 to node 7: 10
-
-
-```
-
-### 4.2 make view
-
-**Ensure that you have executed 'make' and './main' before 'make view'.**
-
-Observe the procedure of Dijkstra's algorithm (starting from the node 3) via 'make view'
-```sh
-Dijkstra$ make view
-find . -name "*.png" | sort | xargs feh &
-```
-
-**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
-
-Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
-
-
-| Initial | 
-|:-------------:|
-| <img src="images/DijkstraUndirected_0000.png" width="50%" height="50%"> |  
-
-
-| Step 1 | Step 2  |
-|:-------------:|:-------------:|
-| <img src="images/DijkstraUndirected_0001.png" width="50%" height="50%"> |  <img src="images/DijkstraUndirected_0002.png" width="50%" height="50%"> | 
-
-
-
-|Step 3 | Step 4 |
-|:-------------:|:-------------:|
-|<img src="images/DijkstraUndirected_0003.png" width="50%" height="50%"> | <img src="images/DijkstraUndirected_0004.png" width="50%" height="50%"> | 
-
-
-| Step 5 | Step 6|
-|:-------------:|:-------------:|
-| <img src="images/DijkstraUndirected_0005.png" width="50%" height="50%"> |  <img src="images/DijkstraUndirected_0006.png" width="50%" height="50%"> | 
-
-| Step 7 | Step 8 |
-|:-------------:|:-------------:|
-| <img src="images/DijkstraUndirected_0007.png" width="50%" height="50%"> | <img src="images/DijkstraUndirected_0008.png" width="50%" height="50%"> | 
-
-### 4.3 More details
-
-```sh
-########################### TestDijkstra(undirected) ######################
-
-
-**********  The Adjacency Matrix ************* 
-0 0 3 4 4 0 0 0 
-0 0 2 0 0 2 0 0 
-3 2 0 0 4 5 0 0 
-4 0 0 0 2 0 0 0 
-4 0 4 2 0 0 5 0 
-0 2 5 0 0 0 5 0 
-0 0 0 0 5 5 0 3 
-0 0 0 0 0 0 3 0 
-
-****** Graph Nodes ********
-Graph Node 0: 0
-Graph Node 1: 1
-Graph Node 2: 2
-Graph Node 3: 3
-Graph Node 4: 4
-Graph Node 5: 5
-Graph Node 6: 6
-Graph Node 7: 7
-
-Dijkstra() starting from node 3:
-
-============================================== Step 1 ==============================================
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:       INF      INF      INF        0      INF      INF      INF      INF
-	visited:           0        0        0        0        0        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-Node 3 is selected
-
-Updating distances[0]: 3 --> ... --> 3 --> 0; distance from 3 to 0 is 4
-
-Updating distances[4]: 3 --> ... --> 3 --> 4; distance from 3 to 4 is 2
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4      INF      INF        0        2      INF      INF      INF
-	visited:           0        0        0        1        0        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-============================================== Step 2 ==============================================
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4      INF      INF        0        2      INF      INF      INF
-	visited:           0        0        0        1        0        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-Node 4 is selected
-
-Updating distances[2]: 3 --> ... --> 4 --> 2; distance from 4 to 2 is 4
-
-Updating distances[6]: 3 --> ... --> 4 --> 6; distance from 4 to 6 is 5
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4      INF        6        0        2      INF        7      INF
-	visited:           0        0        0        1        1        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-============================================== Step 3 ==============================================
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4      INF        6        0        2      INF        7      INF
-	visited:           0        0        0        1        1        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-Node 0 is selected
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4      INF        6        0        2      INF        7      INF
-	visited:           1        0        0        1        1        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-============================================== Step 4 ==============================================
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4      INF        6        0        2      INF        7      INF
-	visited:           1        0        0        1        1        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-Node 2 is selected
-
-Updating distances[1]: 3 --> ... --> 2 --> 1; distance from 2 to 1 is 2
-
-Updating distances[5]: 3 --> ... --> 2 --> 5; distance from 2 to 5 is 5
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       11        7      INF
-	visited:           1        0        1        1        1        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-============================================== Step 5 ==============================================
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       11        7      INF
-	visited:           1        0        1        1        1        0        0        0
-
-	-----------------------------------------------------------------------------------
-
-Node 6 is selected
-
-Updating distances[7]: 3 --> ... --> 6 --> 7; distance from 6 to 7 is 3
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       11        7       10
-	visited:           1        0        1        1        1        0        1        0
-
-	-----------------------------------------------------------------------------------
-
-============================================== Step 6 ==============================================
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       11        7       10
-	visited:           1        0        1        1        1        0        1        0
-
-	-----------------------------------------------------------------------------------
-
-Node 1 is selected
-
-Updating distances[5]: 3 --> ... --> 1 --> 5; distance from 1 to 5 is 2
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       10        7       10
-	visited:           1        1        1        1        1        0        1        0
-
-	-----------------------------------------------------------------------------------
-
-============================================== Step 7 ==============================================
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       10        7       10
-	visited:           1        1        1        1        1        0        1        0
-
-	-----------------------------------------------------------------------------------
-
-Node 7 is selected
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       10        7       10
-	visited:           1        1        1        1        1        0        1        1
-
-	-----------------------------------------------------------------------------------
-
-============================================== Step 8 ==============================================
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       10        7       10
-	visited:           1        1        1        1        1        0        1        1
-
-	-----------------------------------------------------------------------------------
-
-Node 5 is selected
-
-	-----------------------------------------------------------------------------------
-	node id:           0        1        2        3        4        5        6        7
-	-----------------------------------------------------------------------------------
-	distances:         4        8        6        0        2       10        7       10
-	visited:           1        1        1        1        1        1        1        1
-
-	-----------------------------------------------------------------------------------
-
-Shortest path from node 3 to node 0: 4
-Shortest path from node 3 to node 1: 8
-Shortest path from node 3 to node 2: 6
-Shortest path from node 3 to node 3: 0
-Shortest path from node 3 to node 4: 2
-Shortest path from node 3 to node 5: 10
-Shortest path from node 3 to node 6: 7
-Shortest path from node 3 to node 7: 10
-
-```
 
 ## 5 Data structure
 ```C
@@ -749,6 +474,7 @@ static long getNodeIdWithMinDistance(AdjMatrixElementTy *distances, int *visited
 
 static long imgCnt = 0;
 
+
 void Dijkstra(struct Graph *pGraph, long startNodeId) {
     assert(IsLegalNodeNum(pGraph, startNodeId));
 
@@ -788,15 +514,25 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
         } else {
             GenOneImage(pGraph, "DijkstraUndirected", "images/DijkstraUndirected", imgCnt, visited);
         }
-
+        int changed = 0;
         for (long v = 0; v < pGraph->n; v++) {
             if (!visited[v] && MatrixElement(pGraph, u, v) != 0 && distances[u] != INFINITY_VALUE) {
                 if (distances[u] + MatrixElement(pGraph, u, v) < distances[v]) {
                     printf("Updating distances[%ld]: %ld --> ... --> %ld --> %ld; distance from %ld to %ld is %ld\n\n", v, 
                             startNodeId, u, v, u, v,(long) MatrixElement(pGraph, u, v));
                     distances[v] = distances[u] + MatrixElement(pGraph, u, v);
+                    changed = 1;
                 }
             }
+        }
+        if (changed) {
+            imgCnt++;
+
+            if (pGraph->isDirected) {
+                GenOneImage(pGraph, "DijkstraDirected", "images/DijkstraDirected", imgCnt, visited);
+            } else {
+                GenOneImage(pGraph, "DijkstraUndirected", "images/DijkstraUndirected", imgCnt, visited);
+            }            
         }
         PrintDistancesAndVisited(pGraph, distances, visited, NULL);
     }
@@ -816,6 +552,7 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
 
     free(visited); 
 }
+
 
 ```
 
