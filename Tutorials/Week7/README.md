@@ -134,7 +134,7 @@ Shortest path from node 3 to node 7: 10
 Observe the procedure of Dijkstra's algorithm (starting from the node 3) via 'make view'
 ```sh
 Week7$ make view
-find . -name "*.png" | sort | xargs feh &
+find . -name "*.png" | sort | xargs feh -g 720x540 &
 ```
 
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
@@ -147,24 +147,38 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/Dijkstra_0000.png" width="50%" height="50%"> |  
 
 
-| Step 1 | Step 2  |
+| Step 1 |   |
 |:-------------:|:-------------:|
 | <img src="images/Dijkstra_0001.png" width="50%" height="50%"> |  <img src="images/Dijkstra_0002.png" width="50%" height="50%"> | 
 
-
-
-|Step 3 | Step 4 |
+| Step 2 |   |
 |:-------------:|:-------------:|
-|<img src="images/Dijkstra_0003.png" width="50%" height="50%"> | <img src="images/Dijkstra_0004.png" width="50%" height="50%"> | 
+| <img src="images/Dijkstra_0003.png" width="50%" height="50%"> |  <img src="images/Dijkstra_0004.png" width="50%" height="50%"> | 
 
-
-| Step 5 | Step 6|
+|Step 3 | |
 |:-------------:|:-------------:|
-| <img src="images/Dijkstra_0005.png" width="50%" height="50%"> |  <img src="images/Dijkstra_0006.png" width="50%" height="50%"> | 
+|<img src="images/Dijkstra_0005.png" width="50%" height="50%"> |  |
 
-| Step 7 | Step 8 |
+|Step 4 | |
 |:-------------:|:-------------:|
-| <img src="images/Dijkstra_0007.png" width="50%" height="50%"> | <img src="images/Dijkstra_0008.png" width="50%" height="50%"> | 
+|<img src="images/Dijkstra_0006.png" width="50%" height="50%"> | <img src="images/Dijkstra_0007.png" width="50%" height="50%"> | 
+
+
+| Step 5 | |
+|:-------------:|:-------------:|
+| <img src="images/Dijkstra_0008.png" width="50%" height="50%"> |  <img src="images/Dijkstra_0009.png" width="50%" height="50%"> |
+
+| Step 6 | |
+|:-------------:|:-------------:|
+| <img src="images/Dijkstra_0010.png" width="50%" height="50%"> |   |
+
+| Step 7 |  |
+|:-------------:|:-------------:|
+| <img src="images/Dijkstra_0011.png" width="50%" height="50%"> | | 
+
+| Step 8 |  |
+|:-------------:|:-------------:|
+| <img src="images/Dijkstra_0012.png" width="50%" height="50%"> |  |
 
 ### 3.3 More details
 
@@ -444,6 +458,7 @@ static long getNodeIdWithMinDistance(AdjMatrixElementTy *distances, int *visited
     return minIndex;
 }
 
+
 void Dijkstra(struct Graph *pGraph, long startNodeId) {
     assert(IsLegalNodeNum(pGraph, startNodeId));
 
@@ -465,7 +480,7 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
     distances[startNodeId] = 0;
     // Find the shortest distances
     for (long i = 0; i < pGraph->n; i++) {
-        printf("------------------------------------------ Step %ld ------------------------------------------\n\n", i+1);
+        printf("============================================== Step %ld ==============================================\n\n", i+1);
         long u = getNodeIdWithMinDistance(distances, visited, pGraph->n);
         PrintDistancesAndVisited(pGraph, distances, visited, NULL);
 
@@ -475,14 +490,20 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
         cnt++;
         GenOneImage(pGraph, "Dijkstra", "images/Dijkstra", cnt, visited);
 
+        int changed = 0;
         for (long v = 0; v < pGraph->n; v++) {
             if (!visited[v] && MatrixElement(pGraph, u, v) != 0 && distances[u] != INFINITY_VALUE) {
                 if (distances[u] + MatrixElement(pGraph, u, v) < distances[v]) {
                     printf("Updating distances[%ld]: %ld --> ... --> %ld --> %ld; distance from %ld to %ld is %ld\n\n", v, 
                             startNodeId, u, v, u, v,(long) MatrixElement(pGraph, u, v));
                     distances[v] = distances[u] + MatrixElement(pGraph, u, v);
+                    changed = 1;
                 }
             }
+        }
+        if (changed) {
+            cnt++;
+            GenOneImage(pGraph, "Dijkstra", "images/Dijkstra", cnt, visited);
         }
         PrintDistancesAndVisited(pGraph, distances, visited, NULL);
     }
@@ -502,6 +523,7 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
 
     free(visited); 
 }
+
 ```
 
 

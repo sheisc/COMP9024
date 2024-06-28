@@ -14,7 +14,7 @@ digraph Dijkstra {
 "Node 1:INF"
 "Node 2:INF"
 "Node 3:0" [color=red]
-"Node 4:2" [color=red]
+"Node 4:2"
 "Node 5:INF"
 "Node 6:INF"
 "Node 7:INF"
