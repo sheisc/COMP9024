@@ -490,7 +490,7 @@ int add(a, b) {
 int r;
 
 int main(void) {
-    r = MUL(3-1, 2-1);
+    r = MUL(3-1, 2-1);  // bug
     r = add(3-1, 2-1);
     return 0;
 }
