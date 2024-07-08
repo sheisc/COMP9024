@@ -21,7 +21,7 @@ void GraphAddNode(struct Graph *pGraph, long u, char *name);
 void PrintGraph(struct Graph *pGraph);
 
 
-void RecursiveDFS(struct Graph *pGraph, long u);
+void RecursiveDFS(struct Graph *pGraph);
 
 
 void Graph2Dot(struct Graph *pGraph, 

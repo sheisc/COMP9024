@@ -255,13 +255,20 @@ void Graph2Dot(struct Graph *pGraph,
 }
 
 
+#if 1
+static long dfsImageCnt = 0;
+
 static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
     visited[u] = 1;
     printf("visiting %s\n", pGraph->pNodes[u].name);
     
-    static long i = 0;
-    i++; 
-    GenOneImage(pGraph, "dfs", "images/RecursiveDFS", i, visited);      
+    dfsImageCnt++;
+
+    if (pGraph->isDirected) {
+        GenOneImage(pGraph, "DfsDirected", "images/DfsDirected", dfsImageCnt, visited);
+    } else {
+        GenOneImage(pGraph, "DfsUndirected", "images/DfsUndirected", dfsImageCnt, visited);
+    }
 
     // recursively visit the adjacent nodes of u, if they have not been visited yet
     for(long v = 0; v < pGraph->n; v++) {
@@ -271,17 +278,30 @@ static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
     }
 }
 
-void RecursiveDFS(struct Graph *pGraph, long u) {
+void RecursiveDFS(struct Graph *pGraph) {
     int *visited = (int *) malloc(pGraph->n * sizeof(int));
     //memset(visited, 0, sizeof(int) * pGraph->n);
     for (long v = 0; v < pGraph->n; v++) {
         visited[v] = 0;
     }
-    GenOneImage(pGraph, "dfs", "images/RecursiveDFS", 0, visited);
-    DepthFirstSearch(pGraph, u, visited);
+
+    dfsImageCnt = 0;
+
+    if (pGraph->isDirected) {
+        GenOneImage(pGraph, "DfsDirected", "images/DfsDirected", dfsImageCnt, visited);
+    } else {
+        GenOneImage(pGraph, "DfsUndirected", "images/DfsUndirected", dfsImageCnt, visited);
+    }
+
+    for (long u = 0; u < pGraph->n; u++) {
+        if (!visited[u]) {
+            DepthFirstSearch(pGraph, u, visited);
+        }
+    }
     printf("\n");
     free(visited);
 }
+#endif
 
 /*
     if v is already on stack

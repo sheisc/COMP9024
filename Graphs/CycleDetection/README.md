@@ -259,8 +259,8 @@ CycleDetection$ make view
 
 find . -name "*.png" | sort | xargs feh -g 720x540 &
 
-CycleDetection$ find . -name "*.c" -or -name "*.c" | xargs cat | wc -l
-718
+CycleDetection$ find . -name "*.c" -or -name "*.h" | xargs cat | wc -l
+819
 
 ```
 
