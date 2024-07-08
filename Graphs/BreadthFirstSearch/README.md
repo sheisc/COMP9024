@@ -361,7 +361,7 @@ MatrixElement(pGraph, 3 - 1, 1) will be expanded as (pGraph)->pAdjMatrix[(pGraph
 
 Apparently, **(pGraph)->pAdjMatrix[(pGraph)->n * 3 - 1 + 1]** is not the element the C programmer wants to access.
 
-That is why we need add a pair of parentheses for pGraph, u, and v in **(pGraph)->pAdjMatrix[(pGraph)->n * (u) + (v)]**.
+That is why we need to add a pair of parentheses for pGraph, u, and v in **(pGraph)->pAdjMatrix[(pGraph)->n * (u) + (v)]**.
 
 
 ## 6 Algorithm
