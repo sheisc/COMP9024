@@ -477,6 +477,41 @@ Apparently, **(pGraph)->pAdjMatrix[(pGraph)->n * 3 - 1 + 1]** is not the element
 
 That is why we need to add a pair of parentheses for pGraph, u, and v in **(pGraph)->pAdjMatrix[(pGraph)->n * (u) + (v)]**.
 
+### 5.2 Macro and Function
+
+```C
+// test.c
+#define MUL(a, b)  a * b
+
+int add(a, b) {
+    return a + b;
+}
+
+int r;
+
+int main(void) {
+    r = MUL(3-1, 2-1);
+    r = add(3-1, 2-1);
+    return 0;
+}
+```
+
+```sh
+$ gcc -E test.c
+
+int add(a, b) {
+    return a + b;
+}
+
+int r;
+
+int main(void) {
+    r = 3-1 * 2-1;
+    r = add(3-1, 2-1);
+    return 0;
+}
+
+```
 
 ## 6 Algorithm
 
