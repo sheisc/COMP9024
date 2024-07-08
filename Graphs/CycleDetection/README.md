@@ -109,7 +109,7 @@ click **Terminal -> Run Build Task**
 
 ### 2.3 Debug the project in VS Code
 
-Open src/main.c, and click to add a breakpoint (say, line 11).
+Open src/Graph.c, and click to add a breakpoint (say, line 337).
 
 Then, click **Run -> Start Debugging**
 
