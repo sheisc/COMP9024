@@ -73,4 +73,6 @@ Our First Project
 
 [COMP9024/Graphs/CycleDetection](./Graphs/CycleDetection/README.md)
 
+[COMP9024/Graphs/BreadthFirstSearch](./Graphs/BreadthFirstSearch/README.md)
+
 
