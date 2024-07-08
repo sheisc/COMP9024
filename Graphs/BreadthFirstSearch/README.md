@@ -47,6 +47,10 @@ Unlike the recursive implementation that relies on the [call stack](../../Stacks
 
 DFS goes as deep as possible from the starting node before backtracking to explore other branches.
 
+|[DFS](https://sheisc.github.io/slides/COMP9024/24T2/week10/maze.html)|
+|:-------------:|
+| <img src="diagrams/Maze.png" width="100%" height="100%"> |
+
 ## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
