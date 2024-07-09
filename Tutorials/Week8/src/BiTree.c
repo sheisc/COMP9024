@@ -269,7 +269,7 @@ static void DisplayVisited(FILE *dotFile, BiTreeNodePtr root) {
 /*
     Dot Files
 
-    We simple assume each node has a distinct key value.
+    We assume each node has a distinct key value.
 
    
           100
