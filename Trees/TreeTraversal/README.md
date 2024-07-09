@@ -53,7 +53,7 @@ Non-recursive in-order traversal is left as the weekly practical exercise in [Tu
 (3) The root node is traversed.
 
 
-## 1 How to download COMP9024/Trees/TreeTraversal in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 

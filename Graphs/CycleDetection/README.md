@@ -76,7 +76,7 @@ In other words, we have detected a cycle starting from node 0 to node 0 as follo
 ```
 
 
-## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -492,7 +492,7 @@ That is why we need to add a pair of parentheses for pGraph, u, and v in **(pGra
 // test.c
 #define MUL(a, b)  a * b
 
-int add(a, b) {
+int add(int a, int b) {
     return a + b;
 }
 
@@ -508,7 +508,7 @@ int main(void) {
 ```sh
 $ gcc -E test.c
 
-int add(a, b) {
+int add(int a, int b) {
     return a + b;
 }
 

@@ -51,7 +51,7 @@ DFS goes as deep as possible from the starting node before backtracking to explo
 |:-------------:|
 | <img src="diagrams/Maze.png" width="100%" height="100%"> |
 
-## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download this project  in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 

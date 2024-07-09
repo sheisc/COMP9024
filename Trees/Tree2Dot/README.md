@@ -52,7 +52,7 @@ digraph OurBiTree {
 | <img src="images/OurBiTree_0000.png" width="50%" height="50%">  |
 
 
-## 1 How to download COMP9024/Trees/Tree2Dot in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
