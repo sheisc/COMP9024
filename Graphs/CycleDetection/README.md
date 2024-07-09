@@ -64,7 +64,16 @@ In other words, we have detected a cycle starting from node 0 to node 0 as follo
 | Nodes on call stack: $\color{red}{4}$, 2, 0 |
 | <img src="images/HasCycleDirected_0005.png" width="50%" height="50%"> | 
 
+#### Special case in an undirected graph
 
+```sh
+   In an undirected graph,
+   an edge 'n0 -- n2' is represented as two directed edges:
+       n0 -> n2
+       n2 -> n0
+   
+   We should not treat n2 -> n0 and n0 -> n2 as a cycle in an undirected edge.
+```
 
 
 ## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
@@ -605,7 +614,6 @@ When DetectCycle() returns, the node is popped from the data stack.
        n2 -> n0
    
    We should not treat n2 -> n0 and n0 -> n2 as a cycle in an undirected edge.
-   So we need to check it here.  
 ```
 
 #### 6.2.3 The Macro STOP_DETECTION_AT_FIRST_CYCLE 
