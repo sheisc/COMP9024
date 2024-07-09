@@ -1,0 +1,8 @@
+digraph PostOrderTraversal2 {
+"100" -> {"98"} [label="L"]
+"100" -> {"101"} [label="R"]
+"98" -> {"97"} [label="L"]
+"98" -> {"99"} [label="R"]
+"97" [color=red]
+"99" [color=red]
+}
