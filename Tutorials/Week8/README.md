@@ -17,6 +17,7 @@
 
 There are three ways to traverse a binary tree in depth-first order: **in-order**, **pre-order** and **post-order**.
 
+We have discussed how to create a *.dot file in [COMP9024/Trees/Tree2Dot](../../Trees/Tree2Dot/README.md) for a binary tree.
 
 In this tutorial, we study how to traverse a binary tree in recursive functions.
 
