@@ -126,9 +126,9 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ``` sh
 
-Week7$ make
+Week9$ make
 
-Week7$ ./main
+Week9$ ./main
 
 *******************************  Testing BiTreeInsert() *******************************
 
@@ -159,7 +159,7 @@ After deleting 50
 
 
 ```sh
-Week7$ make view
+Week9$ make view
 ```
 
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
