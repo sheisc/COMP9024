@@ -149,9 +149,9 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ``` sh
 
-Week7$ make
+Week8$ make
 
-Week7$ ./main
+Week8$ ./main
 
 *****************  PreOrderTraversal() **********************
 Visiting 100
@@ -205,7 +205,7 @@ Visiting 100
 
 
 ```sh
-Week7$ make view
+Week8$ make view
 ```
 
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
