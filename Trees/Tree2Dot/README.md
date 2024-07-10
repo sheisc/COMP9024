@@ -14,6 +14,31 @@
 
  *******************************************************************/
 ``` 
+#### Non-recursive Depth First Search (DFS) is based on a stack
+
+Non-recursive DFS (in [Tutorial 4](../../Tutorials/Week5/README.md)) uses an explicit [stack](../../Stacks/Stack_LL/README.md) data structure. 
+
+Unlike the recursive implementation that relies on the [call stack](../../Stacks/Recursion/README.md), the non-recursive approach uses a stack to keep track of nodes to be visited.
+
+DFS goes as deep as possible from the starting node before backtracking to explore other branches.
+
+|[DFS](https://sheisc.github.io/slides/COMP9024/24T2/week10/maze.html)|
+|:-------------:|
+| <img src="diagrams/Maze.png" width="100%" height="100%"> |
+
+
+#### Breadth First Search (BFS) is based on a queue
+
+BFS uses a [queue](../../Queues/Queue_LL/README.md) data structure to facilitate its exploration strategy. 
+
+The queue operates on a First-In-First-Out (FIFO) principle, meaning nodes are processed in the order they are added.
+
+Breadth First Search propagates like ripples.
+
+|BFS|
+|:-------------:|
+| <img src="diagrams/ripple.jpeg" width="100%" height="100%"> |  
+
 
 Breadth First Search (BFS) visits nodes level by level (layer by layer).
 

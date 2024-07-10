@@ -54,7 +54,7 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	${CC} ${CFLAGS} -c $< -o $@
 
 view:
-	find . -name "*.png" -a -not -name  "*NodeState.png" | sort | xargs feh -g 720x540 &	
+	find ./images -name "*.png" | sort | xargs feh -g 720x540 &	
 
 # clean all the files generated	
 clean:
