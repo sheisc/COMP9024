@@ -27,7 +27,7 @@ This approach visits nodes level by level (layer by layer).
 We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
 
 
-#### Breadth First Search (BFS) is based on a queue:
+#### Breadth First Search (BFS) is based on a queue
 
 BFS uses a [queue](../../Queues/Queue_LL/README.md) data structure to facilitate its exploration strategy. 
 
