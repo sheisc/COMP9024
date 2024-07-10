@@ -239,6 +239,8 @@ BiTreeNodePtr BiTreeMinValueNode(BiTreeNodePtr root) {
     return cur;
 }
 
+// The parameter pRoot is only used for generating the image of the binary search tree.
+// In this recursive function, pNodePtr might point to a sub-tree in the BST.
 void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
     static long cnt = 0;
 
