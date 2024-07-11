@@ -54,7 +54,10 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	${CC} ${CFLAGS} -c $< -o $@
 
 view:
-	find ./images -name "*.png" | sort | xargs feh -g 720x540 &	
+	find ./images -name "*.png" | sort | xargs feh -g 720x540 &
+	
+tree:
+	python3 FractalTree.py &	
 
 # clean all the files generated	
 clean:
