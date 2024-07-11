@@ -469,8 +469,11 @@ For a non-recursive post-order traversal,
 
 ```
 
-**For more details about Deterministic Finite Automata (DFA) , please see [Programming Languages and Compilers (COMP3131/COMP9102)](https://webcms3.cse.unsw.edu.au/COMP3131/24T1/).**
+For more details about Deterministic Finite Automata (DFA) , please see [Programming Languages and Compilers (COMP3131/COMP9102)](https://webcms3.cse.unsw.edu.au/COMP3131/24T1/).
 
+**In this project, the state transition occurs when a binary tree node becomes the top element of the data stack.**
+
+**In the non-recursive DFS algorithm, the data stack mimics/imitates the behavior of the call stack in the recursive algorithm.**
 
 | State Transition |
 |:-------------:|
