@@ -28,7 +28,7 @@ DFS goes as deep as possible from the starting node before backtracking to explo
 
 #### Recursive Depth First Search (DFS) is based on the call stack
 
-Fractal is a curve or pattern that includes a smaller curve or pattern which has exactly the same shape.
+A fractal is a geometric shape or pattern that is self-similar at different scales.
 
 Fractal trees are defined by their recursive, self-similar structure, where each branch subdivides into smaller branches that resemble the whole tree. 
 
