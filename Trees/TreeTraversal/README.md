@@ -168,6 +168,8 @@ Then, click **Run -> Start Debugging**
 |
 |── images               containing *.dot and *.png files
 |
+|── diagrams             containing image files
+|
 └── .vscode              containing configuration files for Visual Studio Code
     |
     ├── launch.json      specifying which program to debug and with which debugger,
