@@ -34,6 +34,30 @@ Non-recursive in-order traversal is left as the weekly practical exercise in [Tu
 
 (3) The right subtree is traversed.
 
+```C
+/*
+
+Input:
+           100
+          /   \
+        98    101
+       /  \
+     97    99
+
+Output:
+
+     97  98  99 100 101
+ */
+
+// An example in this project (COMP9024/Trees/TreeTraversal)
+void InOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
+    if (root) {
+        InOrderTraversal(root->leftChild, visit);
+        visit(root);
+        InOrderTraversal(root->rightChild, visit);
+    }
+}
+```
 
 ### Pre-Order Traversal
 
@@ -43,6 +67,18 @@ Non-recursive in-order traversal is left as the weekly practical exercise in [Tu
 
 (3) The right subtree is traversed.
 
+```C
+// An example in COMP9024/Trees/Tree2Dot
+static void DisplayVisited(FILE *dotFile, BiTreeNodePtr root) {
+    if (root) {
+        if (root->visited) {
+            fprintf(dotFile, "\"%s\" [color=red]\n", root->value.name);
+        }
+        DisplayVisited(dotFile, root->leftChild);
+        DisplayVisited(dotFile, root->rightChild);
+    }
+}
+```
 
 ### Post-Order Traversal
 
@@ -51,6 +87,17 @@ Non-recursive in-order traversal is left as the weekly practical exercise in [Tu
 (2) The right subtree is traversed.
 
 (3) The root node is traversed.
+
+```C
+// An example in COMP9024/Trees/Tree2Dot
+void ReleaseBinaryTree(BiTreeNodePtr root) {
+    if (root) {
+        ReleaseBinaryTree(root->leftChild);
+        ReleaseBinaryTree(root->rightChild);
+        free(root);
+    }
+}
+```
 
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
