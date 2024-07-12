@@ -44,9 +44,9 @@ python3 FractalTree.py &
 
 **Recursion is beautiful**.
 
-|Fractal Tree|
-|:-------------:|
-| <img src="diagrams/FractalTree.png" width="60%" height="60%"> |
+|Fractal Tree (with 2 branches) |Fractal Tree (with 3 branches)|
+|:-------------:|:-------------:|
+| <img src="diagrams/FractalTree.png" width="60%" height="60%"> | <img src="diagrams/FractalTree3.png" width="60%" height="60%"> |
 
 To create graphics on the screen, we instruct the turtle (a pen) to move.
 
