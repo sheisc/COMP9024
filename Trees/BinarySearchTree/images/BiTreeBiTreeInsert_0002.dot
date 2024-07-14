@@ -1,0 +1,5 @@
+digraph BiTreeBiTreeInsert {
+"50" -> {"20"} [label="L"]
+"50" [color=red]
+"20" [color=red]
+}

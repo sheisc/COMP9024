@@ -1,0 +1,13 @@
+digraph BiTreeBiTreeInsert {
+"50" -> {"20"} [label="L"]
+"50" -> {"70"} [label="R"]
+"20" -> {"10"} [label="L"]
+"20" -> {"30"} [label="R"]
+"30" -> {"40"} [label="R"]
+"50" [color=red]
+"20" [color=red]
+"10" [color=red]
+"30" [color=red]
+"40" [color=red]
+"70" [color=red]
+}

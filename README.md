@@ -43,7 +43,7 @@ Our First Project
 
 [COMP9024/Stacks/Recursion](./Stacks/Recursion/README.md)
 
-## Week 02 - 07
+## Week 02 - 08
 
 [COMP9024/C/HowToMake](./C/HowToMake/README.md)
 
