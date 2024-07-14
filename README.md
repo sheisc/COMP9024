@@ -79,4 +79,6 @@ Our First Project
 
 [COMP9024/Trees/TreeTraversal](./Trees/TreeTraversal/README.md)
 
+[COMP9024/Trees/BinarySearchTree](./Trees/BinarySearchTree/README.md)
+
 
