@@ -81,4 +81,9 @@ Our First Project
 
 [COMP9024/Trees/BinarySearchTree](./Trees/BinarySearchTree/README.md)
 
+[COMP9024/HeapAllocator](./HeapAllocator/README.md)
+
+
+
+
 
