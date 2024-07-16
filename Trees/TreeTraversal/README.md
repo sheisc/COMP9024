@@ -274,6 +274,23 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 |:-------------:|
 | <img src="diagrams/PreOrderTraversal.png" width="80%" height="80%"> | 
 
+```C
+
+typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
+
+void PrintNodeInfo(BiTreeNodePtr pNode) {
+    printf("Visiting %s\n", pNode->value.name);
+    pNode->visited = 1;
+}
+
+void PreOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
+    if (root) {
+        visit(root);
+        PreOrderTraversal(root->leftChild, visit);
+        PreOrderTraversal(root->rightChild, visit);
+    }
+}
+```
 #### 3.2.2 In-order traversal
 
 | Initial | Visiting 97  |  Visiting 98  |
@@ -291,6 +308,25 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 |:-------------:|
 | <img src="diagrams/InOrderTraversal.png" width="80%" height="80%"> | 
 
+
+```C
+
+typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
+
+void PrintNodeInfo(BiTreeNodePtr pNode) {
+    printf("Visiting %s\n", pNode->value.name);
+    pNode->visited = 1;
+}
+
+void InOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
+    if (root) {
+        InOrderTraversal(root->leftChild, visit);
+        visit(root);
+        InOrderTraversal(root->rightChild, visit);
+    }
+}
+
+```
 #### 3.2.3 Post-order traversal
 
 | Initial | Visiting 97  |  Visiting 99  |
@@ -307,6 +343,24 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | Call Tree and Binary Tree | 
 |:-------------:|
 | <img src="diagrams/PostOrderTraversal.png" width="80%" height="80%"> | 
+
+```C
+
+typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
+
+void PrintNodeInfo(BiTreeNodePtr pNode) {
+    printf("Visiting %s\n", pNode->value.name);
+    pNode->visited = 1;
+}
+
+void PostOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
+    if (root) {
+        PostOrderTraversal(root->leftChild, visit);
+        PostOrderTraversal(root->rightChild, visit);
+        visit(root);
+    }
+}
+```
 
 ## 4 Data structures
 
