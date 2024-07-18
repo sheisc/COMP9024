@@ -64,7 +64,9 @@ That is, there is only one free memory block in the linked list after initializa
 
 ```
 
-We use a singly linked list to maintain all the free memory blocks.
+We use a singly-linked list to maintain all the free memory blocks.
+
+The singly-linked list is sorted by memory block addresses in ascending order.
 
 When an allocation request comes in, 
 
@@ -215,7 +217,9 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ## 3 The main procedure
 
-**In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
+**After completing the code in Q1-Q10 in SccHeap.c, we can build and run this program directly from the command line interface as follows.**
+
+
 
 ``` sh
 
@@ -297,6 +301,8 @@ static struct HeapMemBlock *first;
 
 ```
 
+**A singly-linked list sorted by memory block addresses in ascending order.**
+
 ## 5 Algorithms
 
 ## 5.1 Overview
@@ -350,7 +356,24 @@ int main() {
 }
 ```
 
+ALLOC(16)
 
+```C
+
+printf("\nvoid * ptr%d = SccMalloc(%d)\n\n\t", (16), (16));
+void *ptr16 = SccMalloc(16);
+printList();
+
+```
+
+FREE(16);
+```C
+
+printf("\nSccFree(ptr%d)\n\n\t", (16));
+SccFree(ptr16);
+printList();
+
+```
 ## 5.2 mergeIfAdjacent()
 
 ```C
@@ -380,7 +403,11 @@ static void mergeIfAdjacent(struct HeapMemBlock *one, struct HeapMemBlock *two) 
   }
 }
 ```
+### Why we need to merge smaller memory blocks which are adjacent
 
+To avoid memory fragmentation.
+
+A larger free memory block can accommodate larger heap memory requests.
 
 ## 5.3 printList()
 
