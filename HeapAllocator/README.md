@@ -366,7 +366,7 @@ printList();
 
 ```
 
-FREE(16);
+FREE(16)
 ```C
 
 printf("\nSccFree(ptr%d)\n\n\t", (16));
