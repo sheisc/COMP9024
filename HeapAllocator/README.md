@@ -479,6 +479,8 @@ void printList() {
   
   Step 3. ~(1 << ALIGN) - 1)
 
+    The tilde (~) operator is used for bitwise negation.
+
     ~((1 << ALIGN) - 1) = 11111000
 
   Step 4. ((1 << ALIGN) - 1) + (s)
