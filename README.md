@@ -89,6 +89,8 @@ Our First Project
 
 [COMP9024/Strings/FormatString](./Strings/FormatString/README.md)
 
+[COMP9024/Strings/HashMap](./Strings/HashMap/README.md)
+
 
 
 
