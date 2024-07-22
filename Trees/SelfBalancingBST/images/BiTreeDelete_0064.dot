@@ -1,0 +1,5 @@
+digraph BiTreeDelete {
+"90_H=2_B=1" -> {"80_H=1_B=0"} [label="L"]
+"90_H=2_B=1"
+"80_H=1_B=0"
+}

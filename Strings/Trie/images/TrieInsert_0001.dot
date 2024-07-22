@@ -1,0 +1,6 @@
+digraph TrieInsert {
+"Node0x5577a86522a0" -> {"Node0x5577a8652390"} [label="e"]
+"Node0x5577a8652390" -> {"Node0x5577a8652480"} [label="a"]
+"Node0x5577a8652480" -> {"Node0x5577a8652570"} [label="r"]
+"Node0x5577a8652570" [color=red]
+}

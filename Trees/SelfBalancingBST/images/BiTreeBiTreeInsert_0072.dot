@@ -1,0 +1,7 @@
+digraph BiTreeBiTreeInsert {
+"30_H=3_B=2" -> {"20_H=2_B=1"} [label="L"]
+"20_H=2_B=1" -> {"10_H=1_B=0"} [label="L"]
+"30_H=3_B=2" [color=red]
+"20_H=2_B=1"
+"10_H=1_B=0"
+}
