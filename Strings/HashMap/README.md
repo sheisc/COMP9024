@@ -568,7 +568,7 @@ double HashMapLoadFactor(struct HashMap *pMap) {
 
 ```
 
-### 5.6 HashMapToDot()
+### 5.7 HashMapToDot()
 ```C
 
 //////////////////////////// HashMap2Dot ////////////////////////////////////////
