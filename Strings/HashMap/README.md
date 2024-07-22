@@ -535,6 +535,7 @@ void HashMapDelete(struct HashMap *pMap, const char* key) {
 ```C
 static void HashMapResize(struct HashMap *pMap) {
     int newCapacity = pMap->capacity * 2;
+    assert(newCapacity > 0);
     struct BucketEntry **newBuckets = 
         (struct BucketEntry **) malloc(sizeof(struct BucketEntry *) * newCapacity);
     assert(newBuckets);
