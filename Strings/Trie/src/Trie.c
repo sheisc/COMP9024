@@ -116,10 +116,10 @@ void GenOneImage(Trie root, char *graphName, char *fileName, long seqNo) {
 
 /*
     digraph TrieInsert {
-    "Node0x587a961a42a0" -> {"Node0x587a961a4390"} [label="e"]
-    "Node0x587a961a4390" -> {"Node0x587a961a4480"} [label="a"]
-    "Node0x587a961a4480" -> {"Node0x587a961a4570"} [label="r"]
-    "Node0x587a961a4570" [color=red]
+    "0x587a961a42a0" -> {"0x587a961a4390"} [label="e"]
+    "0x587a961a4390" -> {"0x587a961a4480"} [label="a"]
+    "0x587a961a4480" -> {"0x587a961a4570"} [label="r"]
+    "0x587a961a4570" [color=red]
     }
  */
 void Trie2Dot(Trie root, char *filePath, char *graphName) {
@@ -140,13 +140,13 @@ void Trie2Dot(Trie root, char *filePath, char *graphName) {
                 // output current node
                 if (curNode->wordEnd) {
                     fprintf(dotFile, 
-                            "\"Node%p\" [color=red]\n",
+                            "\"%p\" [color=red]\n",
                             curNode);
                 }
                 // output the directed edge
                 for (int i = 0; i < ALPHABET_SIZE; i++) {
                     if (curNode->kids[i]) {
-                        fprintf(dotFile, "\"Node%p\" %s {\"Node%p\"} [label=\"%c\"]\n",
+                        fprintf(dotFile, "\"%p\" %s {\"%p\"} [label=\"%c\"]\n",
                                 curNode,
                                 edgeConnectorStr,                         
                                 curNode->kids[i],
