@@ -718,7 +718,7 @@ void BiTreeLeftRotate(BiTreeNodePtr *pNodePtr) {
 
 | Delete 80 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0066.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0067.png" width="50%" height="50%"> |
 
 
 
