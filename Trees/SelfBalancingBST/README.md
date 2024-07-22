@@ -670,11 +670,6 @@ void BiTreeLeftRotate(BiTreeNodePtr *pNodePtr) {
 |:-------------:|
 | <img src="images/BiTreeDelete_0054.png" width="50%" height="50%"> |
 
-| Delete 40 |
-|:-------------:|
-| <img src="images/BiTreeDelete_0055.png" width="50%" height="50%"> |
-
-
 
 | Delete 70 (Swap 70 and 80)|
 |:-------------:|
