@@ -20,7 +20,7 @@
 
 | Unbalanced BST ( degenerating into a structure that resembles a linked list) | 
 |:-------------:|
-| <img src="diagrams/UnbalancedBST45.png" width="50%" height="50%"> |
+| <img src="diagrams/UnbalancedBST45.png" width="80%" height="80%"> |
 
 
 A Binary Search Tree (BST) is a type of data structure that organizes data efficiently.
@@ -354,7 +354,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-| Left-Left | Right Rotation | <img src="images/BiTreeBiTreeInsert_0072.png" width="50%" height="50%"> | |<img src="images/BiTreeBiTreeInsert_0073.png" width="50%" height="50%"> |
+| Left-Left | Right Rotation | <img src="images/BiTreeBiTreeInsert_0072.png" width="80%" height="80%"> | |<img src="images/BiTreeBiTreeInsert_0073.png" width="80%" height="80%"> |
 
 ```C
 /*
@@ -391,7 +391,7 @@ void BiTreeRightRotate(BiTreeNodePtr *pNodePtr) {
 
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-| Right-Right | Left Rotation|<img src="images/BiTreeBiTreeInsert_0083.png" width="50%" height="50%">| | <img src="images/BiTreeBiTreeInsert_0084.png" width="50%" height="50%">|
+| Right-Right | Left Rotation|<img src="images/BiTreeBiTreeInsert_0083.png" width="80%" height="80%">| | <img src="images/BiTreeBiTreeInsert_0084.png" width="80%" height="80%">|
 
 ```C
 /*
@@ -428,292 +428,292 @@ void BiTreeLeftRotate(BiTreeNodePtr *pNodePtr) {
 
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-| Left-Right | Left Rotation, Right Rotation |<img src="images/BiTreeBiTreeInsert_0094.png" width="50%" height="50%">|<img src="images/BiTreeBiTreeInsert_0095.png" width="50%" height="50%">|<img src="images/BiTreeBiTreeInsert_0096.png" width="50%" height="50%">|
+| Left-Right | Left Rotation, Right Rotation |<img src="images/BiTreeBiTreeInsert_0094.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0095.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0096.png" width="80%" height="80%">|
 
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-| Right-Left | Right Rotation, Left Rotation |<img src="images/BiTreeBiTreeInsert_0106.png" width="50%" height="50%">|<img src="images/BiTreeBiTreeInsert_0107.png" width="50%" height="50%">|<img src="images/BiTreeBiTreeInsert_0108.png" width="50%" height="50%">|
+| Right-Left | Right Rotation, Left Rotation |<img src="images/BiTreeBiTreeInsert_0106.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0107.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0108.png" width="80%" height="80%">|
 
 
 #### 3.2.1 BiTreeInsert()
 
 | Insert 50 | 
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0001.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0001.png" width="80%" height="80%"> |
 
 | Insert 20 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0002.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0002.png" width="80%" height="80%"> |
 
 | Insert 20 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0003.png" width="50%" height="50%">  |
+| <img src="images/BiTreeBiTreeInsert_0003.png" width="80%" height="80%">  |
 
 | Insert 10 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0004.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0004.png" width="80%" height="80%"> |
 
 | Insert 10 (Left-Left Case: Right Rotate)|
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0005.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0005.png" width="80%" height="80%"> |
 
 | Insert 10 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0006.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0006.png" width="80%" height="80%"> |
 
 | Insert 30 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0007.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0007.png" width="80%" height="80%"> |
 
 | Insert 30 | 
 |:-------------:|
-|  <img src="images/BiTreeBiTreeInsert_0008.png" width="50%" height="50%"> |
+|  <img src="images/BiTreeBiTreeInsert_0008.png" width="80%" height="80%"> |
 
 | Insert 30 | 
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0009.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0009.png" width="80%" height="80%"> |
 
 | Insert 40 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0010.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0010.png" width="80%" height="80%"> |
 
 | Insert 40 (Left-Right Case: Left Rotate + Right Rotate) |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0011.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0011.png" width="80%" height="80%"> |
 
 | Insert 40 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0012.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0012.png" width="80%" height="80%"> |
 
 | Insert 40 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0013.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0013.png" width="80%" height="80%"> |
 
 | Insert 40 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0014.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0014.png" width="80%" height="80%"> |
 
 | Insert 70 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0015.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0015.png" width="80%" height="80%"> |
 
 | Insert 70  |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0016.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0016.png" width="80%" height="80%"> |
 
 
 | Insert 70 (Right-Right Case: Left Rotate)|
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0017.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0017.png" width="80%" height="80%"> |
 
 
 | Insert 70 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0018.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0018.png" width="80%" height="80%"> |
 
 
 | Insert 60 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0019.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0019.png" width="80%" height="80%"> |
 
 | Insert 60 (Right-Left Case: Right Rotate + Left Rotate) |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0020.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0020.png" width="80%" height="80%"> |
 
 
 | Insert 60 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0021.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0021.png" width="80%" height="80%"> |
 
 | Insert 60 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0022.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0022.png" width="80%" height="80%"> |
 
 | Insert 60 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0023.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0023.png" width="80%" height="80%"> |
 
 | Insert 100 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0024.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0024.png" width="80%" height="80%"> |
 
 | Insert 100 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0025.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0025.png" width="80%" height="80%"> |
 
 | Insert 100 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0026.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0026.png" width="80%" height="80%"> |
 
 | Insert 100 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0027.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0027.png" width="80%" height="80%"> |
 
 | Insert 90 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0028.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0028.png" width="80%" height="80%"> |
 
 | Insert 90 (Right-Left Case: Right Rotate + Left Rotate) |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0029.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0029.png" width="80%" height="80%"> |
 
 | Insert 90 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0030.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0030.png" width="80%" height="80%"> |
 
 | Insert 90 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0031.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0031.png" width="80%" height="80%"> |
 
 | Insert 90 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0032.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0032.png" width="80%" height="80%"> |
 
 | Insert 90 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0033.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0033.png" width="80%" height="80%"> |
 
 | Insert 80 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0034.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0034.png" width="80%" height="80%"> |
 
 | Insert 80 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0035.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0035.png" width="80%" height="80%"> |
 
 | Insert 80 (Right-Left Case: Right Rotate + Left Rotate)|
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0036.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0036.png" width="80%" height="80%"> |
 
 | Insert 80 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0037.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0037.png" width="80%" height="80%"> |
 
 | Insert 80 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0038.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0038.png" width="80%" height="80%"> |
 
 | Insert 80 |
 |:-------------:|
-| <img src="images/BiTreeBiTreeInsert_0039.png" width="50%" height="50%"> |
+| <img src="images/BiTreeBiTreeInsert_0039.png" width="80%" height="80%"> |
 
 #### 3.2.2 BiTreeDelete()
 
 
 | Delete 50 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0039.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0039.png" width="80%" height="80%"> |
 
 | Delete 50 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0040.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0040.png" width="80%" height="80%"> |
 
 | Delete 50 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0041.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0041.png" width="80%" height="80%"> |
 
 
 | Delete 50 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0042.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0042.png" width="80%" height="80%"> |
 
 | Delete 50 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0043.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0043.png" width="80%" height="80%"> |
 
 | Delete 20 (Swap 20 and 30) |
 |:-------------:|
-| <img src="images/BiTreeDelete_0044.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0044.png" width="80%" height="80%"> |
 
 | Delete 20 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0045.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0045.png" width="80%" height="80%"> |
 
 
 | Delete 20 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0046.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0046.png" width="80%" height="80%"> |
 
 | Delete 20 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0047.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0047.png" width="80%" height="80%"> |
 
 
 | Delete 10 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0048.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0048.png" width="80%" height="80%"> |
 
 
 | Delete 10 (Right-Right Case: Left Rotate)|
 |:-------------:|
-| <img src="images/BiTreeDelete_0049.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0049.png" width="80%" height="80%"> |
 
 | Delete 10 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0050.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0050.png" width="80%" height="80%"> |
 
 | Delete 30 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0051.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0051.png" width="80%" height="80%"> |
 
 
 | Delete 30 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0052.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0052.png" width="80%" height="80%"> |
 
 | Delete 30 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0053.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0053.png" width="80%" height="80%"> |
 
 
 | Delete 40 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0054.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0054.png" width="80%" height="80%"> |
 
 
 | Delete 70 (Swap 70 and 80)|
 |:-------------:|
-| <img src="images/BiTreeDelete_0057.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0057.png" width="80%" height="80%"> |
 
 
 | Delete 70 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0058.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0058.png" width="80%" height="80%"> |
 
 | Delete 70 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0059.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0059.png" width="80%" height="80%"> |
 
 | Delete 70 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0060.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0060.png" width="80%" height="80%"> |
 
 | Delete 60 (Right-Right Case: Left Rotate) |
 |:-------------:|
-| <img src="images/BiTreeDelete_0061.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0061.png" width="80%" height="80%"> |
 
 | Delete 60 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0062.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0062.png" width="80%" height="80%"> |
 
 
 | Delete 100 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0063.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0063.png" width="80%" height="80%"> |
 
 
 | Delete 100 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0064.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0064.png" width="80%" height="80%"> |
 
 
 | Delete 90 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0065.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0065.png" width="80%" height="80%"> |
 
 | Delete 80 |
 |:-------------:|
-| <img src="images/BiTreeDelete_0067.png" width="50%" height="50%"> |
+| <img src="images/BiTreeDelete_0067.png" width="80%" height="80%"> |
 
 
 
