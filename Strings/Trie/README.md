@@ -242,6 +242,8 @@ static char *meanings[] = {
 #define ALPHABET_SIZE 26
 #define FIRST_CHAR 'a'
 
+typedef char *ValueType;
+
 struct TrieNode;
 typedef struct TrieNode *Trie;
 
@@ -278,7 +280,7 @@ static char *meanings[] = {
 	"an application, especially as downloaded by a user to a mobile device", 
     "a playing card with a single spot on it", 
     "happening or done before the usual or expected time", 
-    "a British nobleman ", 
+    "a British nobleman",
     "the plural noun of the word ace"
 };    
 
