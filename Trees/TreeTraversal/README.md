@@ -151,7 +151,7 @@ Then, click **Run -> Start Debugging**
 ```sh
 ├── Makefile             defining set of tasks to be executed (the input file of the 'make' command)
 |
-├── README.md            introduction to this tutorial
+├── README.md            introduction to this project
 |
 ├── src                  containing *.c and *.h
 |   |
