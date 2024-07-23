@@ -149,7 +149,7 @@ FormatString$ make clean
 
 ## 4 Variadic functions on a 32-bit system
 
-### Call Stack Memory Layout
+### 4.1 OurPrintf32_V3()
 
 ```C
 
@@ -239,7 +239,67 @@ int main(void) {
       Low Address
                                                        
 
-```                                                       
+```
+
+
+### 4.2 OurPrintf_V1() and OurPrintf_V2()
+
+```C
+
+/*
+    Use va_start() and va_arg() to access the unnamed parameters of a variadic function in C.
+
+    int printf(const char *format, ...);
+ */
+void OurPrintf_V1(const char *fmt, ...) {
+    va_list ap;
+    va_start(ap, fmt);
+    printf("OurPrintf_V1(): ");
+    while (*fmt) {
+        if (*fmt == '%') { // %: This is the leading sign that denotes the beginning of the format specifier
+            fmt++;
+            if (*fmt == 'd') {
+                int val = va_arg(ap, int);
+                printf("%d", val);
+                // flush the buffered data, for debugging
+                fflush(stdout);
+                fmt++;
+            }
+            else if (*fmt == 'f') {
+                double val = va_arg(ap, double);
+                printf("%f", val);
+                fflush(stdout);
+                fmt++;
+            }
+            else {
+                //...
+            }
+        }
+        else {  // regular character
+            printf("%c", *fmt);
+            fflush(stdout);
+            fmt++;
+        }
+    }
+    va_end(ap);
+}
+
+
+/*
+    Pass a va_list to vprintf()
+
+        int vprintf(const char *format, va_list ap);
+
+ */
+void OurPrintf_V2(const char *fmt, ...) {
+    va_list ap;
+
+    va_start(ap, fmt);
+    printf("OurPrintf_V2(): ");
+    vprintf(fmt, ap);
+    va_end(ap);
+}
+```
 
 ## 5 Variadic functions on a 64-bit system 
 

@@ -46,7 +46,7 @@ void OurPrintf_V1(const char *fmt, ...) {
 /*
     Pass a va_list to vprintf()
 
-        int vdprintf(int fd, const char *format, va_list ap);
+        int vprintf(const char *format, va_list ap);
         
  */
 void OurPrintf_V2(const char *fmt, ...) {
