@@ -316,6 +316,7 @@ The high-level usage of **va_list**, **va_start**, **va_arg**, and **va_end** re
 
 If we understand **OurPrintf32_V3()** and the **Call Stack**, a variadic function can be much easier to us.
 
+The two functions **OurPrintf_V1()** and **OurPrintf_V2()** above work on both 32-bit and 64-bit systems.
 
 
 
