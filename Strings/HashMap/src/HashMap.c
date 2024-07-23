@@ -63,7 +63,7 @@ struct HashMap *CreateHashMap(void) {
 
 static void HashMapResize(struct HashMap *pMap) {
     int newCapacity = pMap->capacity * 2;
-    assert(newCapacity > 0);
+    assert(newCapacity > pMap->capacity);
     struct BucketEntry **newBuckets = 
         (struct BucketEntry **) malloc(sizeof(struct BucketEntry *) * newCapacity);
     assert(newBuckets);
@@ -76,6 +76,7 @@ static void HashMapResize(struct HashMap *pMap) {
         struct BucketEntry *current = pMap->buckets[i];
         while (current != NULL) {
             struct BucketEntry *tmp = current;
+            // rehash the element into a larger table.
             unsigned int index = GetHash(tmp->key) % newCapacity;
             current = current->next;
             // insert the BucketEntry at the head of the linked list pointed to by newBuckets[index]
@@ -85,6 +86,7 @@ static void HashMapResize(struct HashMap *pMap) {
     }
     // release the old buckets
     free(pMap->buckets);
+    // resize
     pMap->buckets = newBuckets;
     pMap->capacity = newCapacity;
 }
