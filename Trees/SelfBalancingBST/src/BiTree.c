@@ -339,7 +339,7 @@ static void BiTreeSelfBalance(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, lon
 
                              Suppose NodeC has a right child, NodeD.
                              When NodeD is deleted from the AVL Tree, NodeC becomes unbalanced.
-                             But NodeD's left child (NodeA) can be in-balance when NodeB exists.
+                             But NodeC's left child (NodeA) can be in-balance when NodeB exists.
 
                         *pNodePtr
                             .
@@ -398,7 +398,7 @@ static void BiTreeSelfBalance(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, lon
     }
     else if (bFactor < -1 && BiTreeBalanceFactor(pNode->rightChild) > 0) {
         /*
-            Right-Left Case:  the unbalance node is right-heavy, and its right child is left-heavy
+            Right-Left Case:  the unbalanced node is right-heavy, and its right child is left-heavy
 
                         *pNodePtr
                             .
@@ -512,7 +512,7 @@ BiTreeNodePtr BiTreeMinValueNode(BiTreeNodePtr root) {
 
 
 // The parameter pRoot is only used for generating the image of the binary search tree.
-// In this recursive function, pNodePtr might point to a sub-tree in the BST.
+// In this recursive function, *pNodePtr might point to a sub-tree in the BST.
 void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal, long *pCnt) {
     //static long cnt = 0;
     assert(pCnt);
