@@ -335,11 +335,11 @@ static void BiTreeSelfBalance(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, lon
 
     if (bFactor > 1 && BiTreeBalanceFactor(pNode->leftChild) >= 0) {
         /*
-            Left-Left Case:  the unbalanced node is left-heavy, and its left child is left-heavy or balanced
+            Left-Left Case:  the unbalanced node is left-heavy, and its left child is left-heavy or in-balance
 
                              Suppose NodeC has a right child, NodeD.
                              When NodeD is deleted from the AVL Tree, NodeC becomes unbalanced.
-                             But NodeD's left child (NodeA) can be balanced when NodeB exists.
+                             But NodeD's left child (NodeA) can be in-balance when NodeB exists.
 
                         *pNodePtr
                             .
@@ -357,7 +357,7 @@ static void BiTreeSelfBalance(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, lon
     }
     else if (bFactor < -1 && BiTreeBalanceFactor(pNode->rightChild) <= 0) {
         /*
-            Right-Right Case: the unbalanced node is right-heavy, and its right child is right-heavy or balanced
+            Right-Right Case: the unbalanced node is right-heavy, and its right child is right-heavy or in-balance
 
                     *pNodePtr
                         .
