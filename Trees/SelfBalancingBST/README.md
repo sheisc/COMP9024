@@ -35,7 +35,9 @@ In computer science, an AVL tree (named after inventors Adelson-Velsky and Landi
 
 An AVL tree with n nodes maintains a logarithmic height O(log(n)), ensuring efficient operations such as insertion, deletion, and search.
 
-
+| Self-Balancing Binary Search Tree (after inserting 50, 20, 10, 30, 40, 70, 60, 100, 90, and 80) |
+|:-------------:|
+| <img src="diagrams/AVLTree.png" width="80%" height="80%"> |
 
 ### Tree Height
 
