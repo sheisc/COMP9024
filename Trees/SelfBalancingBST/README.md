@@ -92,7 +92,7 @@ static void UpdateHeight(BiTreeNodePtr root) {
 ``` 
 
 ### Balance Factor
-Each node in an AVL tree has a balance factor, which is calculated as the difference between the heights of its left and right subtrees. The balance factor can be -1, 0, or +1. The tree is balanced if every node’s balance factor is within this range.
+Each node in an AVL tree has a balance factor, which is calculated as the difference between the heights of its left and right subtrees. The balance factor can be -1, 0, or 1. The tree is balanced if every node’s balance factor is within this range, that is, {-1, 0, 1}.
 
 In this project, the balance factor is defined as follows.
 
