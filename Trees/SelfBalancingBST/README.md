@@ -111,6 +111,8 @@ a tree node is **left-heavy** when its balance factor is larger than 0  (bf > 0)
 
 a tree node is **right-heavy** when its balance factor is smaller than 0 (bf < 0).
 
+a tree node is **balanced** when its balance factor is 0 (bf == 0).
+
 ### Self Balancing
 
 An AVL tree ensures that the balance factor of every node is within the specified range by performing rotations whenever necessary after insertion or deletion operations. These rotations restore the balance of the tree while maintaining the BST property.
