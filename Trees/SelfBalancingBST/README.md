@@ -111,7 +111,7 @@ a tree node is **left-heavy** when its balance factor is larger than 0  (bf > 0)
 
 a tree node is **right-heavy** when its balance factor is smaller than 0 (bf < 0).
 
-a tree node is **balanced** when its balance factor is 0 (bf == 0).
+a tree node is **unbalanced** when its balance factor is not in {-1, 0, 1} (that is, bf < -1 || bf > 1).
 
 ### Self Balancing
 
