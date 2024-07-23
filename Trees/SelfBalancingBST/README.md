@@ -46,18 +46,6 @@ We use BiTreeHeight(root) to represent the height of a BST tree.
 In this project, its height is defined as follows.
 we define the height of an empty tree (NULL node) to be 0.
 
-| A binary tree with 7 nodes (height = 3 = log($2^{3}$) $\approx$ log(7)) |
-|:-------------:|
-| <img src="diagrams/Nodes7.png" width="80%" height="80%"> |
-
-| A binary tree with 15 nodes (height = 4 = log($2^{4}$) $\approx$ log(15)) |
-|:-------------:|
-| <img src="diagrams/Nodes15.png" width="80%" height="80%"> |
-
-| A binary tree with 31 nodes (height = 5 = log($2^{5}$) $\approx$ log(31))|
-|:-------------:|
-| <img src="diagrams/Nodes31.png" width="100%" height="100%"> |
-
 For a non-empty tree, the height is the maximum of the heights of its left and right subtrees, plus one (to account for the current node).
 
 ```sh
@@ -69,6 +57,18 @@ else
     its height is Max(leftHeight, rightHeight) + 1
 ```
 Note that its height can be also defined as -1 when root is NULL.
+
+| A binary tree with 7 nodes (height = 3 = log($2^{3}$) $\approx$ log(7)) |
+|:-------------:|
+| <img src="diagrams/Nodes7.png" width="80%" height="80%"> |
+
+| A binary tree with 15 nodes (height = 4 = log($2^{4}$) $\approx$ log(15)) |
+|:-------------:|
+| <img src="diagrams/Nodes15.png" width="80%" height="80%"> |
+
+| A binary tree with 31 nodes (height = 5 = log($2^{5}$) $\approx$ log(31))|
+|:-------------:|
+| <img src="diagrams/Nodes31.png" width="100%" height="100%"> |
 
 ```C
 int GetMax(int h1, int h2) {
