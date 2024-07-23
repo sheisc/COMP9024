@@ -1,0 +1,8 @@
+digraph N7{
+"N1" -> {"N2"} [label="L"]
+"N1" -> {"N3"} [label="R"]
+"N2" -> {"N4"} [label="L"]
+"N2" -> {"N5"} [label="R"]
+"N3" -> {"N6"} [label="L"]
+"N3" -> {"N7"} [label="R"]
+}

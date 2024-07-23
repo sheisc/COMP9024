@@ -1,0 +1,16 @@
+digraph N15{
+"N1" -> {"N2"} [label="L"]
+"N1" -> {"N3"} [label="R"]
+"N2" -> {"N4"} [label="L"]
+"N2" -> {"N5"} [label="R"]
+"N3" -> {"N6"} [label="L"]
+"N3" -> {"N7"} [label="R"]
+"N4" -> {"N8"} [label="L"]
+"N4" -> {"N9"} [label="R"]
+"N5" -> {"N10"} [label="L"]
+"N5" -> {"N11"} [label="R"]
+"N6" -> {"N12"} [label="L"]
+"N6" -> {"N13"} [label="R"]
+"N7" -> {"N14"} [label="L"]
+"N7" -> {"N15"} [label="R"]
+}

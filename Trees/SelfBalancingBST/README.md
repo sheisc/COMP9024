@@ -27,8 +27,7 @@ A Binary Search Tree (BST) is a type of data structure that organizes data effic
 
 Each node has at most two children, with values smaller than the node on the left and values larger on the right. 
 
-However, in worst case, an unbalanced BST might degerate into a structure that resembles 
-a linked list, with O(n) time complexity in searching.
+However, in worst case, an unbalanced BST might degenerate into a structure that resembles a linked list, with O(n) time complexity in searching.
 
 Self-balancing trees are introduced to resolve this issue.
 
@@ -37,12 +36,25 @@ In computer science, an AVL tree (named after inventors Adelson-Velsky and Landi
 An AVL tree with n nodes maintains a logarithmic height O(log(n)), ensuring efficient operations such as insertion, deletion, and search.
 
 
+
 ### Tree Height
 
 We use BiTreeHeight(root) to represent the height of a BST tree.
 
 In this project, its height is defined as follows.
 we define the height of an empty tree (NULL node) to be 0.
+
+| A binary tree with 7 nodes (height = 3 = log($2^{3}$) $\approx$ log(7)) |
+|:-------------:|
+| <img src="diagrams/Nodes7.png" width="80%" height="80%"> |
+
+| A binary tree with 15 nodes (height = 4 = log($2^{4}$) $\approx$ log(15)) |
+|:-------------:|
+| <img src="diagrams/Nodes15.png" width="80%" height="80%"> |
+
+| A binary tree with 31 nodes (height = 5 = log($2^{5}$) $\approx$ log(31))|
+|:-------------:|
+| <img src="diagrams/Nodes31.png" width="100%" height="100%"> |
 
 For a non-empty tree, the height is the maximum of the heights of its left and right subtrees, plus one (to account for the current node).
 
@@ -976,7 +988,7 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal, lo
 
         BalanceFactor(pNode) = Height(pNode->left) - Height(pNode->right)
 
-    The height of a empty tree (pNode == NULL) is 0.
+    The height of an empty tree (pNode == NULL) is 0.
     BTW, some people define the height of the node (pointed to by pNode) to be -1 when pNode is NULL.
 
     A tree node is left-heavy when its balance factor is larger than 0  (bf > 0).
