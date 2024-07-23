@@ -372,6 +372,10 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 ### Four cases in self balancing
 
+
+**(1) Insert 30, 20, and 10**
+
+
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
 | Left-Left | Right Rotation | <img src="images/BiTreeBiTreeInsert_0072.png" width="80%" height="80%"> | |<img src="images/BiTreeBiTreeInsert_0073.png" width="80%" height="80%"> |
@@ -407,6 +411,8 @@ void BiTreeRightRotate(BiTreeNodePtr *pNodePtr) {
     *pNodePtr = pNodeA;
 }
 ```
+
+**(2) Insert 10, 20 and 30**
 
 
 | Case | Rotation |  Before   | Intermediate | After   |
@@ -445,10 +451,13 @@ void BiTreeLeftRotate(BiTreeNodePtr *pNodePtr) {
     *pNodePtr = pNodeC;
 }
 ```
+**(3) Insert 30, 10 and 20**
 
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
 | Left-Right | Left Rotation, Right Rotation |<img src="images/BiTreeBiTreeInsert_0094.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0095.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0096.png" width="80%" height="80%">|
+
+**(4) Insert 10, 30 and 20**
 
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
