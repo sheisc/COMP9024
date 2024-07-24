@@ -53,17 +53,27 @@ static unsigned int GetHash(const char *key) {
     }
     return hash;
 }
+
+const char *HashMapGet(struct HashMap *pMap, const char* key) {
+    unsigned int index = GetHash(key) % pMap->capacity;
+
+    struct BucketEntry *current = pMap->buckets[index];
+
+    ...
+}
 ```
 
 ### HashMap
 
 A HashMap is a fundamental data structure in programming that provides a way to store key-value pairs.
 
-Internally, a HashMap uses an array of buckets to store key-value pairs. 
+BTW, key-value pairs can also be stored in a [SortedMap](https://en.cppreference.com/w/cpp/container/map), which uses a self-balancing binary search tree to keep keys in sorted order.
+
+Internally, a HashMap ([unordered](https://en.cppreference.com/w/cpp/container/unordered_map)) uses an array of buckets to store key-value pairs.
 
 Each bucket is a linked list of elements. 
 
-When multiple elements hash to the same bucket (collision), they are stored as nodes in this linked list.
+When multiple elements hash to the same bucket (**collision**), they are stored as nodes in this linked list.
 
 The key’s hash value determines the bucket location for storage.
 
@@ -634,11 +644,13 @@ void GenOneImage(struct HashMap* pMap, char *graphName, char *fileName, long seq
     system(command);
 }
 
+
 /*
     digraph OurHashMap {
-    "HashMap_0x556d03a862a0_c=4_n=2"
-    "HashMap_0x556d03a862a0_c=4_n=2" -> {"ear"} [label="0"]
-    "HashMap_0x556d03a862a0_c=4_n=2" -> {"apply"} [label="2"]
+    "HashMap_c=8_n=3"
+    "HashMap_c=8_n=3" -> {"ear"} [label="0"]
+    "HashMap_c=8_n=3" -> {"apply"} [label="6"]
+    "apply" -> {"ape"}
     }
  */
 void HashMap2Dot(struct HashMap* pMap, char *filePath, char *graphName) {
@@ -653,15 +665,13 @@ void HashMap2Dot(struct HashMap* pMap, char *filePath, char *graphName) {
         fprintf(dotFile, "digraph %s {\n", graphName);
         // Node for the whole HashMap
         fprintf(dotFile, 
-                "\"HashMap_%p_c=%d_n=%d\"\n", 
-                pMap,
+                "\"HashMap_c=%d_n=%d\"\n",
                 pMap->capacity,
                 pMap->n);
         for (int i = 0; i < pMap->capacity; i++) {
             if (pMap->buckets[i]) {
                 fprintf(dotFile, 
-                        "\"HashMap_%p_c=%d_n=%d\" %s {\"%s\"} [label=\"%d\"]\n",
-                        pMap,
+                        "\"HashMap_c=%d_n=%d\" %s {\"%s\"} [label=\"%d\"]\n",
                         pMap->capacity,
                         pMap->n,
                         edgeConnectorStr,

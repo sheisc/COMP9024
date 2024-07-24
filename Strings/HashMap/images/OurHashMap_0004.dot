@@ -1,8 +1,8 @@
 digraph OurHashMap {
-"HashMap_0x55bccda352a0_c=8_n=5"
-"HashMap_0x55bccda352a0_c=8_n=5" -> {"ear"} [label="0"]
-"HashMap_0x55bccda352a0_c=8_n=5" -> {"apes"} [label="1"]
-"HashMap_0x55bccda352a0_c=8_n=5" -> {"earth"} [label="4"]
-"HashMap_0x55bccda352a0_c=8_n=5" -> {"apply"} [label="6"]
+"HashMap_c=8_n=5"
+"HashMap_c=8_n=5" -> {"ear"} [label="0"]
+"HashMap_c=8_n=5" -> {"apes"} [label="1"]
+"HashMap_c=8_n=5" -> {"earth"} [label="4"]
+"HashMap_c=8_n=5" -> {"apply"} [label="6"]
 "apply" -> {"ape"}
 }

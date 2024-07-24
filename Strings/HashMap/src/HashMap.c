@@ -219,9 +219,10 @@ void GenOneImage(struct HashMap* pMap, char *graphName, char *fileName, long seq
 
 /*
     digraph OurHashMap {
-    "HashMap_0x556d03a862a0_c=4_n=2"
-    "HashMap_0x556d03a862a0_c=4_n=2" -> {"ear"} [label="0"]
-    "HashMap_0x556d03a862a0_c=4_n=2" -> {"apply"} [label="2"]
+    "HashMap_c=8_n=3"
+    "HashMap_c=8_n=3" -> {"ear"} [label="0"]
+    "HashMap_c=8_n=3" -> {"apply"} [label="6"]
+    "apply" -> {"ape"}
     }
  */
 void HashMap2Dot(struct HashMap* pMap, char *filePath, char *graphName) {
@@ -236,15 +237,13 @@ void HashMap2Dot(struct HashMap* pMap, char *filePath, char *graphName) {
         fprintf(dotFile, "digraph %s {\n", graphName);
         // Node for the whole HashMap
         fprintf(dotFile, 
-                "\"HashMap_%p_c=%d_n=%d\"\n", 
-                pMap,
+                "\"HashMap_c=%d_n=%d\"\n",
                 pMap->capacity,
                 pMap->n);
         for (int i = 0; i < pMap->capacity; i++) {
             if (pMap->buckets[i]) {
                 fprintf(dotFile, 
-                        "\"HashMap_%p_c=%d_n=%d\" %s {\"%s\"} [label=\"%d\"]\n",
-                        pMap,
+                        "\"HashMap_c=%d_n=%d\" %s {\"%s\"} [label=\"%d\"]\n",
                         pMap->capacity,
                         pMap->n,
                         edgeConnectorStr,

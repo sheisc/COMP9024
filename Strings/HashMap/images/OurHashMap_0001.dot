@@ -1,5 +1,5 @@
 digraph OurHashMap {
-"HashMap_0x55bccda352a0_c=4_n=2"
-"HashMap_0x55bccda352a0_c=4_n=2" -> {"ear"} [label="0"]
-"HashMap_0x55bccda352a0_c=4_n=2" -> {"apply"} [label="2"]
+"HashMap_c=4_n=2"
+"HashMap_c=4_n=2" -> {"ear"} [label="0"]
+"HashMap_c=4_n=2" -> {"apply"} [label="2"]
 }
