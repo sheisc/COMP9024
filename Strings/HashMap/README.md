@@ -89,6 +89,8 @@ The capacity of a HashMap's table refers to the number of buckets (or slots) ava
 
 Load factor is calculated as the ratio of the number of elements currently present in the HashMap to the capacity of the HashMap's table.
 
+$Load Factor = \frac{Number Of Elements}{Capacity Of The HashMap's Table}$
+
 The load factor (e.g., default is 0.75 in [Java's HashMap](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html)) determines when the HashMap will resize its capacity. 
 
 When the number of elements exceeds the load factor multiplied by the current capacity, the HashMap will resize and rehash its elements into a larger table.
