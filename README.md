@@ -85,11 +85,12 @@ Our First Project
 
 [COMP9024/Trees/SelfBalancingBST](./Trees/SelfBalancingBST/README.md)
 
+[COMP9024/Strings/HashMap](./Strings/HashMap/README.md)
+
 [COMP9024/Strings/Trie](./Strings/Trie/README.md)
 
 [COMP9024/Strings/FormatString](./Strings/FormatString/README.md)
 
-[COMP9024/Strings/HashMap](./Strings/HashMap/README.md)
 
 
 
