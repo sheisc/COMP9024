@@ -1,8 +1,8 @@
-# HashMap
+# HashMap for Strings
 
 ``` sh
 /*******************************************************************
-                            HashMap
+                        HashMap for Strings
 
     1.  The data structure used for storing key-value pairs
 
@@ -46,12 +46,12 @@ Date:   Mon Jul 22 17:11:43 2024 +1000
 
         https://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16.html
  */
-static unsigned int GetHash(const char *key) {
-    unsigned int hash = 0;
+static unsigned int GetHash(char *key) {
+    unsigned int sum = 0;
     for (int i = 0; key[i] != '\0'; i++) {
-        hash += ((unsigned char) key[i]);
+        sum += ((unsigned char) key[i]);
     }
-    return hash;
+    return sum;  
 }
 
 const char *HashMapGet(struct HashMap *pMap, const char* key) {
@@ -62,6 +62,29 @@ const char *HashMapGet(struct HashMap *pMap, const char* key) {
     ...
 }
 ```
+For example, the hash value of "ear" (i.e., the return value of GetHash("ear")) is 312 (i.e., 101 + 97 + 114).
+
+| [ASCII](https://www.asciitable.com/) Character | Decimal Integer |
+|:-------------:|:-------------:|
+|'e'| 101 |
+|'a'| 97 |
+|'r'| 114|
+
+Suppose the capacity of the HashMap is 32.
+
+After the following modulo operation, the value of 'index' will be 24.
+
+```C
+// 9 is the quotient of (312 / 32)
+// 24 is the remainder of (312 / 32)
+unsigned int index = 312 % 32;
+
+struct BucketEntry *current = pMap->buckets[index];
+
+...
+```
+
+
 
 ### HashMap
 
@@ -77,11 +100,46 @@ When multiple elements hash to the same bucket (**collision**), they are stored 
 
 The key’s hash value determines the bucket location for storage.
 
-Hashing is used to convert the key into an index in the underlying array.
+Hashing (GetHash(key) and index calculation) is used to convert the key into an index in the underlying array.
 
 | HashMap| 
 |:-------------:|
 | <img src="diagrams/OurHashMap.png" width="100%" height="100%"> |
+
+| Purpose |   Description  |
+|:-------------:|:-------------:|
+|Fast Access | Hashing allows for constant-time **average** lookup, insert, and delete operations|
+|Uniform Distribution | A good hash function distributes keys evenly across the array, reducing collisions |
+| | |
+
+Given a HashMap which contains n elements, 
+
+if the hash function is good enough (almost no hash collision), 
+
+the **average** time complexity of the lookup, insert, and delete operations can be seen as O(1) (if the overhead of GetHash() is 
+ignored).
+
+The GetHash(key) takes some time but it does not depend on 'n'.
+
+Moreover, storing the hash value of a key once it has been calculated can be a practical optimization strategy. 
+
+But, if hash collisions are frequent in a HashMap, the **worst-case** time complexity for these operations can indeed be O(n).
+
+### Sidetracks: Is O(1) always better/faster than O(log(n)) ?
+
+It depends on both the size of n and the ignored constant factors in O(1).
+
+The big O notation ignores the constant factor (e.g., 100 in 'TimeA(n)=100').
+
+Suppose n is less than $2^{32}$.
+```sh
+O(1):
+    TimeA(n) = 100
+
+O(log(n)):
+    TimeB(n) = log(n) <= 32
+```
+
 
 #### Capacity and Load Factor
 
@@ -100,14 +158,14 @@ We assume that both the key and its corresponding value are C strings in this pr
 #### Basic Operations
 ```C
 
-// Insertion: Adding a key-value pair to a HashMap
-void HashMapPut(struct HashMap *pMap, const char* key, const char* value);
+// insert or update a key-value pair in a HashMap
+void HashMapPut(struct HashMap *pMap, HashMapKeyTy key, HashMapValueTy value);
 
-// Retrieval: Getting a value associated with a key
-const char *HashMapGet(struct HashMap *pMap, const char* key);
+// get the value associated with a key
+HashMapValueTy HashMapGet(struct HashMap *pMap, HashMapKeyTy key);
 
-// Deletion: Removing a key-value pair 
-void HashMapDelete(struct HashMap *pMap, const char* key);
+// delete a key-value pair
+void HashMapDelete(struct HashMap *pMap, HashMapKeyTy key);
 
 ```
 
@@ -200,6 +258,7 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 HashMap$ make
 
 HashMap$ ./main
+
 The meaning of "ear": the sense organ for hearing
 
 Updating the meaning of "ear"
@@ -221,6 +280,7 @@ The hash map does not contain the key "earl"
 	 "earl" not found
 	 aces: the plural noun of the word ace
 	 apple: a round fruit with firm, white flesh and a green, red, or yellow skin
+
 
 ```
 
@@ -313,16 +373,18 @@ static char *words[] = {
 ```C
 
 #define BUCKET_COUNT    2
-#define MAX_KEY_LEN     63
-#define MAX_VAL_LEN     255
 
 #define LOAD_FACTOR_THRESHOLD       0.75
 
+typedef char *HashMapKeyTy;
+typedef char *HashMapValueTy;
+
 struct BucketEntry {
-    char key[MAX_KEY_LEN + 1];
-    char value[MAX_VAL_LEN + 1];
+    HashMapKeyTy key;
+    HashMapValueTy value;
     struct BucketEntry* next;
 };
+
 
 struct HashMap{
     /*
@@ -349,6 +411,7 @@ struct HashMap{
 ### 5.1 main()
 
 ```C
+
 // keys
 static char *words[] = { 
     "ear", "apply", "ape", "apes", "earth", 
@@ -372,7 +435,7 @@ static char *meanings[] = {
     
     "the plural noun of the word ace",
     "a round fruit with firm, white flesh and a green, red, or yellow skin"
-}; 
+};    
 
 int main(void) {
     long count = 0;
@@ -394,9 +457,8 @@ int main(void) {
     }
 
     // Demonstrate get and put
-    const char *key = words[0];
-    const char *value = NULL;
-    value = HashMapGet(pMap, key);
+    HashMapKeyTy key = words[0];
+    HashMapValueTy value = HashMapGet(pMap, key);
     if (value) {
         printf("\nThe meaning of \"%s\": %s\n", key, value);
     }
@@ -437,34 +499,25 @@ int main(void) {
 }
 ```
 
-### 5.2 CreateHashMap()
+### 5.2 CreateHashMap() and ReleaseHashMap()
 ```C
-void ReleaseHashMap(struct HashMap* pMap) {
-    for (int i = 0; i < BUCKET_COUNT; i++) {
-        struct BucketEntry *current = pMap->buckets[i];
-        // Release the linked list in each bucket
-        while (current != NULL) {
-            struct BucketEntry *tmp = current;
-            current = current->next;
-            free(tmp);
-        }
-    }
-    free(pMap);
+
+struct BucketEntry *CreateBucketEntry(HashMapKeyTy key, HashMapValueTy value) {
+    struct BucketEntry *pEntry = (struct BucketEntry *) malloc(sizeof(struct BucketEntry));
+    assert(pEntry);
+    // Copy key and value. Heap space will be allocated if necessary.
+    pEntry->key = CopyKey(key);
+    pEntry->value = CopyValue(value);
+    pEntry->next = NULL;
+    return pEntry;
 }
 
-
-
-/*
-    For more about hash functions, please refer to 
-
-        https://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16.html
- */
-static unsigned int GetHash(const char *key) {
-    unsigned int sum = 0;
-    for (int i = 0; key[i] != '\0'; i++) {
-        sum += ((unsigned char) key[i]);
-    }
-    return sum;  
+void ReleaseBucketEntry(struct BucketEntry *pEntry) {
+    if (pEntry) {
+        ReleaseKey(pEntry->key);
+        ReleaseValue(pEntry->value);
+        free(pEntry);
+    }    
 }
 
 struct HashMap *CreateHashMap(void) {
@@ -485,11 +538,11 @@ struct HashMap *CreateHashMap(void) {
 void ReleaseHashMap(struct HashMap* pMap) {
     for (int i = 0; i < pMap->capacity; i++) {
         struct BucketEntry *current = pMap->buckets[i];
-        // Release the linked list in each bucket
+        // Release the elements in each bucket
         while (current != NULL) {
             struct BucketEntry *tmp = current;
             current = current->next;
-            free(tmp);
+            ReleaseBucketEntry(tmp);
         }
     }
     free(pMap->buckets);
@@ -498,31 +551,47 @@ void ReleaseHashMap(struct HashMap* pMap) {
 
 ```
 
+### 5.3 GetHash()
+```C
+/*
+    For more about hash functions, please refer to 
 
-### 5.3 HashMapPut()
+        https://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16.html
+ */
+static unsigned int GetHash(char *key) {
+    unsigned int sum = 0;
+    for (int i = 0; key[i] != '\0'; i++) {
+        sum += ((unsigned char) key[i]);
+    }
+    return sum;  
+}
+```
+
+### 5.4 HashMapPut()
 
 ```C
 
-void HashMapPut(struct HashMap *pMap, const char* key, const char* value) {
+
+// insert or update a key-value pair in a HashMap
+void HashMapPut(struct HashMap *pMap, HashMapKeyTy key, HashMapValueTy value) {
     unsigned int index = GetHash(key) % pMap->capacity;
     struct BucketEntry *current = pMap->buckets[index];
     
     // Update the value if its key already exists
     while (current != NULL) {
-        if (strcmp(current->key, key) == 0) {
-            strncpy(current->value, value, MAX_VAL_LEN);
-            current->value[MAX_VAL_LEN] = '\0';
+        if (IsEqual(current->key, key)) {
+            // Release the heap space pointed to by current->value
+            ReleaseValue(current->value);
+            // Copy the value and allocate heap space if necessary
+            current->value = CopyValue(value);
             return;
         }
         current = current->next;
     }
 
     // Add a key-value pair
-    struct BucketEntry *pEntry = (struct BucketEntry *) malloc(sizeof(struct BucketEntry));
-    strncpy(pEntry->key, key, MAX_KEY_LEN);
-    pEntry->key[MAX_KEY_LEN] = '\0';
-    strncpy(pEntry->value, value, MAX_VAL_LEN);
-    pEntry->value[MAX_VAL_LEN] = '\0';
+    struct BucketEntry *pEntry = CreateBucketEntry(key, value);
+    // add the entry at the front of the bucket
     pEntry->next = pMap->buckets[index];
     pMap->buckets[index] = pEntry;
     //increase the number of key-value pairs
@@ -533,17 +602,18 @@ void HashMapPut(struct HashMap *pMap, const char* key, const char* value) {
         HashMapResize(pMap);
     }
 }
+
 ```
-### 5.4 HashMapGet()
+### 5.5 HashMapGet()
 
 ```C
-
-const char *HashMapGet(struct HashMap *pMap, const char* key) {
+// get the value associated with a key
+HashMapValueTy HashMapGet(struct HashMap *pMap, HashMapKeyTy key) {
     unsigned int index = GetHash(key) % pMap->capacity;
     struct BucketEntry *current = pMap->buckets[index];
     
     while (current != NULL) {
-        if (strcmp(current->key, key) == 0) {
+        if (IsEqual(current->key, key)) {
             return current->value;
         }
         current = current->next;
@@ -551,26 +621,27 @@ const char *HashMapGet(struct HashMap *pMap, const char* key) {
     // Not found
     return NULL; 
 }
-
 ```
 
-### 5.5 HashMapDelete()
+### 5.6 HashMapDelete()
 
 ```C
-
-void HashMapDelete(struct HashMap *pMap, const char* key) {
+// delete a key-value pair
+void HashMapDelete(struct HashMap *pMap, HashMapKeyTy key) {
     unsigned int index = GetHash(key) % pMap->capacity;
     struct BucketEntry *current = pMap->buckets[index];
     struct BucketEntry *prev = NULL;
     
     while (current != NULL) {
-        if (strcmp(current->key, key) == 0) {
-            if (prev != NULL) {
+        if (IsEqual(current->key, key)) {
+            if (prev != NULL) { 
+                // current is not the first element
                 prev->next = current->next;
-            } else {
+            } else { 
+                // current is the first element
                 pMap->buckets[index] = current->next;
             }
-            free(current);
+            ReleaseBucketEntry(current);
             // decrease the number of key-value pairs
             pMap->n--;
             return;
@@ -579,10 +650,12 @@ void HashMapDelete(struct HashMap *pMap, const char* key) {
         current = current->next;
     }
 }
+
 ```
 
-### 5.6 HashMapResize()
+### 5.7 HashMapResize()
 ```C
+
 static void HashMapResize(struct HashMap *pMap) {
     int newCapacity = pMap->capacity * 2;
     assert(newCapacity > pMap->capacity);
@@ -621,7 +694,7 @@ double HashMapLoadFactor(struct HashMap *pMap) {
 
 ```
 
-### 5.7 HashMapToDot()
+### 5.8 HashMapToDot()
 ```C
 
 //////////////////////////// HashMap2Dot ////////////////////////////////////////
@@ -645,7 +718,6 @@ void GenOneImage(struct HashMap* pMap, char *graphName, char *fileName, long seq
     // Execute the command in a child process (fork() + exec() on Linux)
     system(command);
 }
-
 
 /*
     digraph OurHashMap {
@@ -677,16 +749,16 @@ void HashMap2Dot(struct HashMap* pMap, char *filePath, char *graphName) {
                         pMap->capacity,
                         pMap->n,
                         edgeConnectorStr,
-                        pMap->buckets[i]->key,
+                        KeyToString(pMap->buckets[i]->key),
                         i);
                 struct BucketEntry *next = pMap->buckets[i]->next;
                 struct BucketEntry *current = pMap->buckets[i];
                 while (next) {
                     fprintf(dotFile, 
                             "\"%s\" %s {\"%s\"}\n",
-                            current->key,
+                            KeyToString(current->key),
                             edgeConnectorStr,
-                            next->key);
+                            KeyToString(next->key));
                     current = next;
                     next = current->next;                   
                 }
@@ -696,6 +768,49 @@ void HashMap2Dot(struct HashMap* pMap, char *filePath, char *graphName) {
         fclose(dotFile);
     }                
 }
+
 ```
 
+### 5.9 Functions for C Strings
 
+```C
+/////////////////////////////// Both key and value are strings ///////////////////////////////////////////////
+typedef char *HashMapKeyTy;
+typedef char *HashMapValueTy;
+
+static char * CopyString(char *str) {
+    size_t len = strlen(str);
+    char *str2 = (char *) malloc(len+1);
+    strncpy(str2, str, len);
+    str2[len] = 0;
+    return str2;    
+}
+
+static void ReleaseString(char *str) {
+    free(str);
+}
+
+static HashMapKeyTy CopyKey(HashMapKeyTy key) {
+    return CopyString(key);
+}
+
+static void ReleaseKey(HashMapKeyTy key) {
+    ReleaseString(key);
+}
+
+static HashMapValueTy CopyValue(HashMapValueTy value) {
+    return CopyString(value);
+}
+
+static void ReleaseValue(HashMapValueTy value) {
+    free(value);
+}
+
+static int IsEqual(HashMapKeyTy k1, HashMapKeyTy k2) {
+    return strcmp(k1, k2) == 0;
+}
+
+static char *KeyToString(HashMapKeyTy key) {
+    return key;
+}
+```

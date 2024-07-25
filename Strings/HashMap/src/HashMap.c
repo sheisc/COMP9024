@@ -5,14 +5,13 @@
 #include "HashMap.h"
 
 #define BUCKET_COUNT    2
-#define MAX_KEY_LEN     63
-#define MAX_VAL_LEN     255
 
 #define LOAD_FACTOR_THRESHOLD       0.75
 
+
 struct BucketEntry {
-    char key[MAX_KEY_LEN + 1];
-    char value[MAX_VAL_LEN + 1];
+    HashMapKeyTy key;
+    HashMapValueTy value;
     struct BucketEntry* next;
 };
 
@@ -33,18 +32,76 @@ struct HashMap{
     int n;
 };
 
+/////////////////////////////// Both key and value are strings ///////////////////////////////////////////////
+
+static char * CopyString(char *str) {
+    size_t len = strlen(str);
+    char *str2 = (char *) malloc(len+1);
+    strncpy(str2, str, len);
+    str2[len] = 0;
+    return str2;    
+}
+
+static void ReleaseString(char *str) {
+    free(str);
+}
+
+static HashMapKeyTy CopyKey(HashMapKeyTy key) {
+    return CopyString(key);
+}
+
+static void ReleaseKey(HashMapKeyTy key) {
+    ReleaseString(key);
+}
+
+static HashMapValueTy CopyValue(HashMapValueTy value) {
+    return CopyString(value);
+}
+
+static void ReleaseValue(HashMapValueTy value) {
+    free(value);
+}
+
+static int IsEqual(HashMapKeyTy k1, HashMapKeyTy k2) {
+    return strcmp(k1, k2) == 0;
+}
+
+static char *KeyToString(HashMapKeyTy key) {
+    return key;
+}
 /*
     For more about hash functions, please refer to 
 
         https://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16.html
  */
-static unsigned int GetHash(const char *key) {
+static unsigned int GetHash(char *key) {
     unsigned int sum = 0;
     for (int i = 0; key[i] != '\0'; i++) {
         sum += ((unsigned char) key[i]);
     }
     return sum;  
 }
+
+///////////////////////////////////////////////////////////////////////////////////
+
+struct BucketEntry *CreateBucketEntry(HashMapKeyTy key, HashMapValueTy value) {
+    struct BucketEntry *pEntry = (struct BucketEntry *) malloc(sizeof(struct BucketEntry));
+    assert(pEntry);
+    // Copy key and value. Heap space will be allocated if necessary.
+    pEntry->key = CopyKey(key);
+    pEntry->value = CopyValue(value);
+    pEntry->next = NULL;
+    return pEntry;
+}
+
+void ReleaseBucketEntry(struct BucketEntry *pEntry) {
+    if (pEntry) {
+        ReleaseKey(pEntry->key);
+        ReleaseValue(pEntry->value);
+        free(pEntry);
+    }    
+}
+
 
 struct HashMap *CreateHashMap(void) {
     struct HashMap *pMap = (struct HashMap *) malloc(sizeof(struct HashMap));
@@ -97,27 +154,26 @@ double HashMapLoadFactor(struct HashMap *pMap) {
     return loadFactor;
 }
 
-
-void HashMapPut(struct HashMap *pMap, const char* key, const char* value) {
+// insert or update a key-value pair in a HashMap
+void HashMapPut(struct HashMap *pMap, HashMapKeyTy key, HashMapValueTy value) {
     unsigned int index = GetHash(key) % pMap->capacity;
     struct BucketEntry *current = pMap->buckets[index];
     
     // Update the value if its key already exists
     while (current != NULL) {
-        if (strcmp(current->key, key) == 0) {
-            strncpy(current->value, value, MAX_VAL_LEN);
-            current->value[MAX_VAL_LEN] = '\0';
+        if (IsEqual(current->key, key)) {
+            // Release the heap space pointed to by current->value
+            ReleaseValue(current->value);
+            // Copy the value and allocate heap space if necessary
+            current->value = CopyValue(value);
             return;
         }
         current = current->next;
     }
 
     // Add a key-value pair
-    struct BucketEntry *pEntry = (struct BucketEntry *) malloc(sizeof(struct BucketEntry));
-    strncpy(pEntry->key, key, MAX_KEY_LEN);
-    pEntry->key[MAX_KEY_LEN] = '\0';
-    strncpy(pEntry->value, value, MAX_VAL_LEN);
-    pEntry->value[MAX_VAL_LEN] = '\0';
+    struct BucketEntry *pEntry = CreateBucketEntry(key, value);
+    // add the entry at the front of the bucket
     pEntry->next = pMap->buckets[index];
     pMap->buckets[index] = pEntry;
     //increase the number of key-value pairs
@@ -129,12 +185,13 @@ void HashMapPut(struct HashMap *pMap, const char* key, const char* value) {
     }
 }
 
-const char *HashMapGet(struct HashMap *pMap, const char* key) {
+// get the value associated with a key
+HashMapValueTy HashMapGet(struct HashMap *pMap, HashMapKeyTy key) {
     unsigned int index = GetHash(key) % pMap->capacity;
     struct BucketEntry *current = pMap->buckets[index];
     
     while (current != NULL) {
-        if (strcmp(current->key, key) == 0) {
+        if (IsEqual(current->key, key)) {
             return current->value;
         }
         current = current->next;
@@ -143,19 +200,22 @@ const char *HashMapGet(struct HashMap *pMap, const char* key) {
     return NULL; 
 }
 
-void HashMapDelete(struct HashMap *pMap, const char* key) {
+// delete a key-value pair
+void HashMapDelete(struct HashMap *pMap, HashMapKeyTy key) {
     unsigned int index = GetHash(key) % pMap->capacity;
     struct BucketEntry *current = pMap->buckets[index];
     struct BucketEntry *prev = NULL;
     
     while (current != NULL) {
-        if (strcmp(current->key, key) == 0) {
-            if (prev != NULL) {
+        if (IsEqual(current->key, key)) {
+            if (prev != NULL) { 
+                // current is not the first element
                 prev->next = current->next;
-            } else {
+            } else { 
+                // current is the first element
                 pMap->buckets[index] = current->next;
             }
-            free(current);
+            ReleaseBucketEntry(current);
             // decrease the number of key-value pairs
             pMap->n--;
             return;
@@ -168,31 +228,15 @@ void HashMapDelete(struct HashMap *pMap, const char* key) {
 void ReleaseHashMap(struct HashMap* pMap) {
     for (int i = 0; i < pMap->capacity; i++) {
         struct BucketEntry *current = pMap->buckets[i];
-        // Release the linked list in each bucket
+        // Release the elements in each bucket
         while (current != NULL) {
             struct BucketEntry *tmp = current;
             current = current->next;
-            free(tmp);
+            ReleaseBucketEntry(tmp);
         }
     }
     free(pMap->buckets);
     free(pMap);
-}
-
-void HashMapPrint(struct HashMap* pMap) {
-    printf("The hash map contains:\n");
-    for (int i = 0; i < pMap->capacity; i++) {
-        struct BucketEntry *current = pMap->buckets[i];
-        printf("Bucket %d: \n\t\t", i);
-        while (current != NULL) {
-            printf("[%s: %s]", current->key, current->value);
-            current = current->next;
-            if (current) {
-                printf(" --> ");
-            }
-        }
-        printf("\n");
-    }
 }
 
 //////////////////////////// HashMap2Dot ////////////////////////////////////////
@@ -247,16 +291,16 @@ void HashMap2Dot(struct HashMap* pMap, char *filePath, char *graphName) {
                         pMap->capacity,
                         pMap->n,
                         edgeConnectorStr,
-                        pMap->buckets[i]->key,
+                        KeyToString(pMap->buckets[i]->key),
                         i);
                 struct BucketEntry *next = pMap->buckets[i]->next;
                 struct BucketEntry *current = pMap->buckets[i];
                 while (next) {
                     fprintf(dotFile, 
                             "\"%s\" %s {\"%s\"}\n",
-                            current->key,
+                            KeyToString(current->key),
                             edgeConnectorStr,
-                            next->key);
+                            KeyToString(next->key));
                     current = next;
                     next = current->next;                   
                 }

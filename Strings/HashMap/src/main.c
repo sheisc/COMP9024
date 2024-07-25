@@ -49,9 +49,8 @@ int main(void) {
     }
 
     // Demonstrate get and put
-    const char *key = words[0];
-    const char *value = NULL;
-    value = HashMapGet(pMap, key);
+    HashMapKeyTy key = words[0];
+    HashMapValueTy value = HashMapGet(pMap, key);
     if (value) {
         printf("\nThe meaning of \"%s\": %s\n", key, value);
     }
