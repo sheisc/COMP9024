@@ -43,7 +43,7 @@ int TestDijkstra(int isDirected) {
     // create a sub-directory 'images' (if it is not present) in the current directory
     system("mkdir -p images");
     // remove the *.dot and *.png files in the directory 'images'
-    system("rm -f images/*.dot images/*.png");
+    //system("rm -f images/*.dot images/*.png");
 
     long u = 3;
 
@@ -61,7 +61,7 @@ int main(void) {
     TestDijkstra(1);
     printf("\n\n\n\n\n########################### TestDijkstra(undirected) ######################\n\n\n");
     // undirected graph
-    //TestDijkstra(0);
+    TestDijkstra(0);
     return 0;    
 }
 
