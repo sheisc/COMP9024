@@ -1,0 +1,27 @@
+digraph TopologicalSort {
+"Course 0_In=0" -> {"Course 2_In=0"} [style=invis]
+"Course 0_In=0" -> {"Course 3_In=0"} [style=invis]
+"Course 0_In=0" -> {"Course 4_In=2"} [style=invis]
+"Course 1_In=0" -> {"Course 3_In=0"} [style=invis]
+"Course 1_In=0" -> {"Course 4_In=2"} [style=invis]
+"Course 2_In=0" -> {"Course 5_In=0"} [style=invis]
+"Course 2_In=0" -> {"Course 6_In=1"} [style=invis]
+"Course 3_In=0" -> {"Course 2_In=0"} [style=invis]
+"Course 3_In=0" -> {"Course 6_In=1"} [style=invis]
+"Course 3_In=0" -> {"Course 7_In=1"} [style=invis]
+"Course 4_In=2" -> {"Course 8_In=2"} 
+"Course 5_In=0" -> {"Course 8_In=2"} 
+"Course 6_In=1" -> {"Course 4_In=2"} 
+"Course 7_In=1" -> {"Course 4_In=2"} 
+"Course 8_In=2" -> {"Course 6_In=1"} 
+"Course 8_In=2" -> {"Course 7_In=1"} 
+"Course 0_In=0" [color=red]
+"Course 1_In=0" [color=red]
+"Course 2_In=0" [color=red]
+"Course 3_In=0" [color=red]
+"Course 4_In=2"
+"Course 5_In=0"
+"Course 6_In=1"
+"Course 7_In=1"
+"Course 8_In=2"
+}
