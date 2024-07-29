@@ -65,6 +65,8 @@ However, if the number of nodes in the topological order list is less than the t
 
 This is because a cycle would prevent some nodes from ever reaching an in-degree of 0.
 
+In other words, topological sort can be used to detect cycles in a directed graph.
+
 We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
 
 
@@ -110,7 +112,7 @@ click **Terminal -> Run Build Task**
 
 ### 2.3 Debug the project in VS Code
 
-Open src/main.c, and click to add a breakpoint (say, line 11).
+Open src/main.c, and click to add a breakpoint (say, line 32).
 
 Then, click **Run -> Start Debugging**
 
