@@ -147,7 +147,7 @@ How to clean
 FormatString$ make clean
 ```
 
-## 4 Variadic functions on a 32-bit system
+## 4 Variadic functions on a 32-bit system (Intel x86)
 
 ### 4.1 OurPrintf32_V3()
 
@@ -240,6 +240,13 @@ int main(void) {
                                                        
 
 ```
+On a 32-bit system (focusing on the x86 architecture), the C calling convention specifies how functions receive parameters, return values, and manage the call stack.
+
+Arguments in a function call are pushed onto the stack from right to left.
+
+The caller is responsible for cleaning up the stack after the function call.
+
+The return value is typically placed in the 'eax' register.
 
 
 ### 4.2 OurPrintf_V1() and OurPrintf_V2()
