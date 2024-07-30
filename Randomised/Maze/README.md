@@ -133,7 +133,7 @@ python3 MineSweeper.py
 
 ### Sidetracks: Cache
 
-Cache provides high-speed data access to the processor and improves overall system performance.
+Cache (much smaller and faster than the main memory) provides high-speed data access to the processor and improves overall system performance.
 
 It temporarily stores frequently accessed data or instructions to reduce the time it takes for the CPU to access them from the main memory.
 
