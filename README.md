@@ -91,6 +91,8 @@ Our First Project
 
 [COMP9024/Strings/FormatString](./Strings/FormatString/README.md)
 
+[COMP9024/Randomised/Maze](./Randomised/Maze/README.md)
+
 [COMP9024/Randomised/TopologicalSort](./Randomised/TopologicalSort/README.md)
 
 
