@@ -131,6 +131,79 @@ python3 MineSweeper.py
 |:-------------:|:-------------:|
 | <img src="images/WorldCoordinate.png" width="60%" height="60%"> | <img src="images/RowCol.png" width="50%" height="50%"> |
 
+### Sidetracks: Cache
+
+Cache provides high-speed data access to the processor and improves overall system performance.
+
+It temporarily stores frequently accessed data or instructions to reduce the time it takes for the CPU to access them from the main memory.
+
+The cache hit ratio measures the proportion of cache accesses that result in a "hit", where the requested data is found in the cache, versus those that result in a "miss", where the data must be fetched from a slower storage layer (the main memory).
+
+```C
+#define ROWS   1024
+#define COLS   2048
+
+/*
+    img[0][0], img[0][1], ..., img[0][2047],
+    img[1][0], img[1][1], ..., img[1][2047],
+
+    ...
+
+    img[1023][0], ....         img[1023][2047]
+ */
+
+int img[ROWS][COLS];
+
+/**********************************************************
+    Time complexity:
+
+        O(ROWS * COLS)
+
+    Access the image column by column.  (Much slower)
+
+       TimeNeeded in F() = 12455973 us
+
+       img[0][0], img[1][0], img[2][0], ...
+ **********************************************************/
+void F(){
+    for(int col = 0; col < COLS; col++){
+        for(int row = 0; row < ROWS; row++){
+            img[row][col] = 0;
+        }
+    }
+}
+/************************************************************
+    Time complexity:
+
+        O(ROWS * COLS)
+
+    Access the image row by row.   (Much faster)
+
+        TimeNeeded in G() = 1135229 us
+
+        img[0][0], img[0][1], img[0][2],  ...
+ ************************************************************/
+void G(){
+    for(int row = 0; row < ROWS; row++){
+        for(int col = 0; col < COLS; col++){
+            img[row][col] = 0;
+        }
+    }
+}
+```
+
+Algorithms with the same time complexity can have significantly different execution times due to variations in cache hit ratios.
+
+```sh
+$ gcc AccessImage.c -o AccessImage
+$ ./AccessImage
+
+TimeNeeded in F() = 12455973 us
+TimeNeeded in G() = 1135229 us
+```
+
+### This Project
+
 In this project, we will how to explore a maze with non-randomised and randomised algorithms.
 
 Exploring a maze using a [data stack](../../Stacks/Stack_LL/README.md) is like following a trail of markers: 

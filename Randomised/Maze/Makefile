@@ -43,6 +43,7 @@ all:
 	make $(TARGET_EXE)
 	gcc -g -Wall -lpthread CounterLock.c -o CounterLock
 	gcc -g -Wall -lpthread CounterNoLock.c -o CounterNoLock
+	gcc AccessImage.c -o AccessImage
 
 # generate the target, which depends on the "build/*.o" files
 $(TARGET_EXE):  $(OBJ_FILES_IN_BUILD) 	
@@ -61,7 +62,7 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 
 # clean all the files generated	
 clean:
-	rm -rf $(TARGET_EXE) CounterLock CounterNoLock $(BUILD_DIR) 
+	rm -rf $(TARGET_EXE) CounterLock CounterNoLock AccessImage $(BUILD_DIR) 
 	find . -name "*.o" | xargs rm -f
 	find . -name "*.s" | xargs rm -f
 	find . -name "*.i" | xargs rm -f
