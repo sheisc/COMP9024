@@ -25,6 +25,7 @@ In multi-threaded or multi-process programs, the outcome of a computation might 
 
 If threads are accessing shared resources without proper synchronization, the final result can vary depending on the order in which threads execute.
 
+
 #### A multi-threaded C program
 
 ```C
@@ -81,6 +82,12 @@ int main(void) {
     return 0;
 }
 ```
+
+**How many call stacks are needed in the above multi-threaded program?**
+
+In a multi-threaded program, each thread requires its own separate call stack.
+
+This is because each thread operates independently and manages its own function calls, local variables, and execution state.
 
 ```sh
 Maze$ make
