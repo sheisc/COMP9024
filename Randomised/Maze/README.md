@@ -124,6 +124,33 @@ This technique increases the security of systems by making it more difficult for
 
 Programs that use random number generators produce different results on different runs due to the inherent unpredictability of the random values. 
 
+```C
+#include <stdlib.h>     // srandom(), random()
+#include <time.h>       // time()
+
+
+int main(void) {
+    /*
+     void srandom(unsigned seed);
+
+       The srandom() function sets its argument as the seed for a new sequence
+       of pseudo-random integers to be returned by random().
+
+     time_t time(time_t *tloc);
+
+       The time() function returns the time as the number of seconds since the Epoch, 1970-01-01 00:00:00.
+       If tloc is non-NULL, the return value is also stored in the memory pointed to by tloc.
+     */
+    srandom(time(NULL));
+
+    // random() returns a random number in the range from 0 to ((2**31) - 1),
+    // where (2**31) is 2 raised to the power of 31.
+    long x = random();
+
+    // ...
+}
+```
+
 Randomness can introduce variety in playing games, making challenges more dynamic and requiring players to adapt their strategies.
 ```sh
 $ make game
