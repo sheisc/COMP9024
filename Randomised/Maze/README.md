@@ -224,6 +224,27 @@ void G(){
         }
     }
 }
+
+unsigned long get_time_in_us(void){
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * 1000000 + tv.tv_usec;
+}
+
+void Test(void (* func)(void), char *funcName){
+    unsigned long from, to;
+    from = get_time_in_us();
+    for(int i = 0; i < 1000; i++){
+        func();
+    }
+    to = get_time_in_us();
+    printf("TimeNeeded in %s = %ld us\n", funcName, to - from);
+}
+
+int main(void){
+    Test(F, "F()");
+    Test(G, "G()");
+}
 ```
 
 Algorithms with the same time complexity can have significantly different execution times due to variations in cache hit ratios.
