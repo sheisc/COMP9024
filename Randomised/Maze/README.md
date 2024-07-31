@@ -163,7 +163,7 @@ python3 MineSweeper.py
 
 | Coordinate: (x, y) |  Array: (row, column) | 
 |:-------------:|:-------------:|
-| <img src="images/WorldCoordinate.png" width="60%" height="60%"> | <img src="images/RowCol.png" width="50%" height="50%"> |
+| <img src="images/WorldCoordinate.png" width="80%" height="80%"> | <img src="images/RowCol.png" width="70%" height="70%"> |
 
 ### Sidetracks: Cache
 
