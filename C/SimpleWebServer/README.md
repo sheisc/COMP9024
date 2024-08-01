@@ -20,7 +20,15 @@ In this project, we will discuss how a [data stack](../../Stacks/Stack_LL/README
 
 The Hypertext Transfer Protocol (HTTP) is the foundation of the World Wide Web, allowing webpages to be loaded through hypertext links.
 
-[HashMap](../../Strings/HashMap/README.md) can be used to store the HTTP headers as follows.
+The World Wide Web can be modeled as a huge [directed graph](../../Graphs/DirectedGraph/README.md).
+
+In this graph, each node represents a webpage.
+
+The directed edges represent hyperlinks between these webpages.
+
+If a webpage A has a hyperlink to webpage B, there is a directed edge from A to B in the graph.
+
+A [HashMap](../../Strings/HashMap/README.md) can be used to store the HTTP headers as follows.
 
 #### An HTTP request from the Chrome browser
 
