@@ -146,7 +146,35 @@ SimpleWebServer$ ./main
 
 ```
 
-### 3.2 Use nc as the client
+### 3.2 Use a browser as the client
+
+http://localhost:8080
+
+#### HTTP request from the Chrome browser
+
+```sh
+GET / HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+
+...
+
+```
+#### Display the HTTP response from the web server
+| HTML page | 
+|:-------------:|
+| <img src="images/SimpleWebServer.png" width="80%" height="80%"> |
+
+
+
+### 3.3 Use nc as the client
+
+**The tool nc is not available in CSE VLAB.**
+
+Please use a browser instead.
 
 
 ``` sh
@@ -202,26 +230,3 @@ Content-Length: 70
 </html>
 
 ```
-
-### 3.3 Use a browser as the client
-
-http://localhost:8080
-
-#### HTTP request from the Chrome browser
-
-```sh
-GET / HTTP/1.1
-Host: localhost:8080
-User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Accept-Encoding: gzip, deflate, br
-Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
-
-...
-
-```
-#### Display the HTTP response from the web server
-| HTML page | 
-|:-------------:|
-| <img src="images/SimpleWebServer.png" width="80%" height="80%"> |
-
