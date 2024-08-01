@@ -174,23 +174,25 @@ Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
 
 **The tool nc is not available in CSE VLAB.**
 
-Please use a browser instead.
+Install Netcat on Debian/Ubuntu Linux
 
+```sh
+sudo apt install netcat
+```
+
+#### HTTP request from nc
 
 ``` sh
 
 $ echo -e "GET / HTTP/1.1\nConnection: close\n\n" | nc localhost 8080
 
-```
-
-#### HTTP request from nc
-
-```sh
 GET / HTTP/1.1
 Connection: close
 
-
 ```
+
+
+
 
 #### HTTP response from the simple web server
 
