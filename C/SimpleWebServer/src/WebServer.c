@@ -47,6 +47,7 @@
 #include <fcntl.h>     //fcntl()
 #include <pthread.h>
 #include <sys/time.h>
+#include <signal.h>
 #include "Stack.h"
 
 #define SERVER_PORT     8080
@@ -166,6 +167,9 @@ static void *run(void *arg) {
 int main(void) {
     int serv_sock, client_sock;
     struct sockaddr_in server_addr, client_addr;
+    // ignore the SIGPIPE signal
+    signal(SIGPIPE, SIG_IGN);
+
     // create a data stack to store the thread IDs of the threads that have finished
     pStack = CreateStack();
 
