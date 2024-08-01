@@ -18,6 +18,8 @@
 
 In this project, we will discuss how a [data stack](../../Stacks/Stack_LL/README.md) can be used to store thread IDs in a multi-threaded program and how to implement a simple web server in C.
 
+The Hypertext Transfer Protocol (HTTP) is the foundation of the World Wide Web, allowing webpages to be loaded through hypertext links.
+
 [HashMap](../../Strings/HashMap/README.md) can be used to store the HTTP headers as follows.
 
 #### An HTTP request from the Chrome browser
@@ -97,7 +99,7 @@ click **Terminal -> Run Build Task**
 
 #### 2.3 Debug the project in VS Code
 
-Open src/WebServer.c, and click to add a breakpoint (say, line 170).
+Open src/WebServer.c, and click to add a breakpoint (say, line 186).
 
 Then, click **Run -> Start Debugging**
 
