@@ -20,6 +20,8 @@ Trie TrieInsert(Trie t, char *key, ValueType value);
 // Search a key in a Trie
 int SearchKey(Trie t, char *key, ValueType *pVal);
 
+int LongestPrefixMatch(Trie t, char *key, ValueType *pVal);
+
 // For visualizing the data structure
 void Trie2Dot(Trie root, char *filePath, char *graphName);
 void GenOneImage(Trie root, char *graphName, char *fileName, long seqNo);
