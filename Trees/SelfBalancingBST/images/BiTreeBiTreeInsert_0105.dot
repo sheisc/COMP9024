@@ -3,7 +3,7 @@ digraph BiTreeBiTreeInsert {
 "HD0" [style=invis]
 "10_H=2_B=-2" -> {"30_H=2_B=1"} [label="R"]
 "30_H=2_B=1" -> {"20_H=1_B=0"} [label="L"]
-"30_H=2_B=1" -> {"HD1"} [label="L"] [style=invis]
+"30_H=2_B=1" -> {"HD1"} [label="R"] [style=invis]
 "HD1" [style=invis]
 "10_H=2_B=-2" [color=red]
 "30_H=2_B=1" [color=red]

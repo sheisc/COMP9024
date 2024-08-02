@@ -219,7 +219,7 @@ void BiTree2Dot(BiTreeNodePtr root,
                             BiTreeBalanceFactor(curNode->rightChild));
                     QueueEnqueue(pQueue, curNode->rightChild);
                 } else {
-                    fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s%ld\"} [label=\"L\"] [style=invis]\n",
+                    fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s%ld\"} [label=\"R\"] [style=invis]\n",
                             curNode->value.name,
                             curNode->height,
                             BiTreeBalanceFactor(curNode),

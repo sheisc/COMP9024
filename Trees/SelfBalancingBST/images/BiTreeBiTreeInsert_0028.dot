@@ -9,7 +9,7 @@ digraph BiTreeBiTreeInsert {
 "HD0" [style=invis]
 "70_H=2_B=-2" -> {"100_H=2_B=1"} [label="R"]
 "100_H=2_B=1" -> {"90_H=1_B=0"} [label="L"]
-"100_H=2_B=1" -> {"HD1"} [label="L"] [style=invis]
+"100_H=2_B=1" -> {"HD1"} [label="R"] [style=invis]
 "HD1" [style=invis]
 "40_H=4_B=-1" [color=red]
 "20_H=2_B=0"
