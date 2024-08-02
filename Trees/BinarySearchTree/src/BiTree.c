@@ -119,6 +119,8 @@ static void DisplayVisited(FILE *dotFile, BiTreeNodePtr root) {
     if (root) {
         if (root->visited) {
             fprintf(dotFile, "\"%s\" [color=red]\n", root->value.name);            
+        } else {
+            fprintf(dotFile, "\"%s\"\n", root->value.name);
         }
         DisplayVisited(dotFile, root->leftChild);
         DisplayVisited(dotFile, root->rightChild);
@@ -165,16 +167,30 @@ void BiTree2Dot(BiTreeNodePtr root,
         fprintf(dotFile, "digraph %s {\n", graphName);
         
         struct Queue *pQueue = CreateQueue();
+        long hiddenNodeCnt = 0;
+        char *hiddenNodePrefix = "HD";        
         if (root) {
             QueueEnqueue(pQueue, root);
             while (!QueueIsEmpty(pQueue)) {
                 BiTreeNodePtr curNode = QueueDequeue(pQueue);
+                if (!curNode->leftChild && !curNode->rightChild) {
+                    continue;
+                }                
+
                 if (curNode->leftChild) {
                     fprintf(dotFile, "\"%s\" %s {\"%s\"} [label=\"L\"]\n",
                             curNode->value.name,
-                            edgeConnectorStr,                         
+                            edgeConnectorStr,
                             curNode->leftChild->value.name);
                     QueueEnqueue(pQueue, curNode->leftChild);
+                } else {
+                    fprintf(dotFile, "\"%s\" %s {\"%s%ld\"} [label=\"L\"] [style=invis]\n",
+                            curNode->value.name,
+                            edgeConnectorStr,
+                            hiddenNodePrefix, 
+                            hiddenNodeCnt);  
+                    fprintf(dotFile, "\"%s%ld\" [style=invis]\n", hiddenNodePrefix, hiddenNodeCnt);
+                    hiddenNodeCnt++;
                 }
                 if (curNode->rightChild) {
                     fprintf(dotFile, "\"%s\" %s {\"%s\"} [label=\"R\"]\n",                        
@@ -182,6 +198,14 @@ void BiTree2Dot(BiTreeNodePtr root,
                             edgeConnectorStr,
                             curNode->rightChild->value.name);
                     QueueEnqueue(pQueue, curNode->rightChild);
+                } else {
+                    fprintf(dotFile, "\"%s\" %s {\"%s%ld\"} [label=\"R\"] [style=invis]\n",
+                            curNode->value.name,
+                            edgeConnectorStr,
+                            hiddenNodePrefix, 
+                            hiddenNodeCnt);  
+                    fprintf(dotFile, "\"%s%ld\" [style=invis]\n", hiddenNodePrefix, hiddenNodeCnt);
+                    hiddenNodeCnt++;
                 }            
                 
             }
