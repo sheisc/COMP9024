@@ -3,6 +3,8 @@ digraph BiTreeBiTreeInsert {
 "50" -> {"70"} [label="R"]
 "20" -> {"10"} [label="L"]
 "20" -> {"30"} [label="R"]
+"30" -> {"HD0"} [label="L"] [style=invis]
+"HD0" [style=invis]
 "30" -> {"40"} [label="R"]
 "50" [color=red]
 "20" [color=red]

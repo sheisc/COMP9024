@@ -1,7 +1,13 @@
 digraph BiTreeDelete {
+"60" -> {"HD0"} [label="L"] [style=invis]
+"HD0" [style=invis]
 "60" -> {"100"} [label="R"]
 "100" -> {"90"} [label="L"]
+"100" -> {"HD1"} [label="R"] [style=invis]
+"HD1" [style=invis]
 "90" -> {"80"} [label="L"]
+"90" -> {"HD2"} [label="R"] [style=invis]
+"HD2" [style=invis]
 "60" [color=red]
 "100" [color=red]
 "90" [color=red]

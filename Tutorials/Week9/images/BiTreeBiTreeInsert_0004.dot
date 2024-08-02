@@ -1,5 +1,7 @@
 digraph BiTreeBiTreeInsert {
 "50" -> {"20"} [label="L"]
+"50" -> {"HD0"} [label="R"] [style=invis]
+"HD0" [style=invis]
 "20" -> {"10"} [label="L"]
 "20" -> {"30"} [label="R"]
 "50" [color=red]
