@@ -5,6 +5,8 @@ digraph BiTreeBiTreeInsert {
 "20_H=2_B=0" -> {"30_H=1_B=0"} [label="R"]
 "60_H=3_B=-1" -> {"50_H=1_B=0"} [label="L"]
 "60_H=3_B=-1" -> {"70_H=2_B=-1"} [label="R"]
+"70_H=2_B=-1" -> {"HD0"} [label="L"] [style=invis]
+"HD0" [style=invis]
 "70_H=2_B=-1" -> {"100_H=1_B=0"} [label="R"]
 "40_H=3_B=-1" [color=red]
 "20_H=2_B=0"

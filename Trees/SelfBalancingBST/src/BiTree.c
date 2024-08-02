@@ -176,21 +176,38 @@ void BiTree2Dot(BiTreeNodePtr root,
         fprintf(dotFile, "digraph %s {\n", graphName);
         
         struct Queue *pQueue = CreateQueue();
+        long hiddenNodeCnt = 0;
+        char *hiddenNodePrefix = "HD";
         if (root) {
             QueueEnqueue(pQueue, root);
             while (!QueueIsEmpty(pQueue)) {
                 BiTreeNodePtr curNode = QueueDequeue(pQueue);
+                if (!curNode->leftChild && !curNode->rightChild) {
+                    continue;
+                }
+
                 if (curNode->leftChild) {
                     fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s_H=%d_B=%d\"} [label=\"L\"]\n",
                             curNode->value.name,
                             curNode->height,
                             BiTreeBalanceFactor(curNode),
-                            edgeConnectorStr,                         
+                            edgeConnectorStr,
                             curNode->leftChild->value.name,
                             curNode->leftChild->height,
                             BiTreeBalanceFactor(curNode->leftChild));
                     QueueEnqueue(pQueue, curNode->leftChild);
+                } else {
+                    fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s%ld\"} [label=\"L\"] [style=invis]\n",
+                            curNode->value.name,
+                            curNode->height,
+                            BiTreeBalanceFactor(curNode),
+                            edgeConnectorStr,
+                            hiddenNodePrefix,
+                            hiddenNodeCnt);
+                    fprintf(dotFile, "\"%s%ld\" [style=invis]\n", hiddenNodePrefix, hiddenNodeCnt);
+                    hiddenNodeCnt++;
                 }
+
                 if (curNode->rightChild) {
                     fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s_H=%d_B=%d\"} [label=\"R\"]\n",                        
                             curNode->value.name,
@@ -201,6 +218,16 @@ void BiTree2Dot(BiTreeNodePtr root,
                             curNode->rightChild->height,
                             BiTreeBalanceFactor(curNode->rightChild));
                     QueueEnqueue(pQueue, curNode->rightChild);
+                } else {
+                    fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s%ld\"} [label=\"L\"] [style=invis]\n",
+                            curNode->value.name,
+                            curNode->height,
+                            BiTreeBalanceFactor(curNode),
+                            edgeConnectorStr,
+                            hiddenNodePrefix,
+                            hiddenNodeCnt);
+                    fprintf(dotFile, "\"%s%ld\" [style=invis]\n", hiddenNodePrefix, hiddenNodeCnt);
+                    hiddenNodeCnt++;
                 }            
                 
             }

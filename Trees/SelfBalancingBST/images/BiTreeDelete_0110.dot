@@ -1,4 +1,6 @@
 digraph BiTreeDelete {
+"20_H=2_B=-1" -> {"HD0"} [label="L"] [style=invis]
+"HD0" [style=invis]
 "20_H=2_B=-1" -> {"30_H=1_B=0"} [label="R"]
 "20_H=2_B=-1"
 "30_H=1_B=0"
