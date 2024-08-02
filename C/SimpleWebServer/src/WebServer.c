@@ -1,8 +1,6 @@
 /********************************************************************************
             How to Use
 
-    How a data stack can be used to store thread IDs in a multi-threaded program.
-
     1.
         SimpleWebServer$ make
 
@@ -10,7 +8,7 @@
     
     2.  Use nc as the client
 
-        $ echo -e "GET / HTTP/1.1\nConnection: close\n\n" | nc localhost 8080
+        $ echo -e "GET / HTTP/1.1\r\nConnection: close\r\n\r\n" | nc localhost 8080
 
         HTTP/1.1 200 OK
         Server: Apache
@@ -52,7 +50,7 @@
 
 #define SERVER_PORT     8080
 //#define MAX_PENDING     10
-#define BUFFER_SIZE     1023
+#define BUFFER_SIZE     1024
 
 // mutual exclusive
 static pthread_mutex_t counterMutex = PTHREAD_MUTEX_INITIALIZER;
@@ -93,7 +91,7 @@ static void do_error(const char *msg, ...) {
 
     We only handle the default URL in this simple web server.
  */
-static void *run(void *arg) {    
+static void *run(void *arg) {
     int client_sock = (int) ((long) arg);
     char lengthHeader[CONTENT_LENGTH_HEADER];
     char responseBuf[BUFFER_SIZE];
@@ -107,7 +105,7 @@ static void *run(void *arg) {
         isDefaultURL = 1;
     } 
     
-    long ticketNum = 0;       
+    long ticketNum = 0;
 
     // 1. HTTP response line
     if (isDefaultURL) {
@@ -140,7 +138,7 @@ static void *run(void *arg) {
                     "<body>\n"
                     "<h1> 404 Not Found </h1>\n"
                     "</body>\n"
-                    "</html>\n");        
+                    "</html>\n");
     }
     snprintf(lengthHeader, CONTENT_LENGTH_HEADER, "Content-Length: %d", (int) strlen(responseBuf));
     write_one_line(client_sock, lengthHeader);
@@ -157,7 +155,7 @@ static void *run(void *arg) {
 #if 0
     // Output the HTTP request from the browser
     printf("%s\n", inputBuf);
-#endif    
+#endif
     StackPush(pStack, tid);
     pthread_mutex_unlock(&stackMutex);
 
@@ -183,13 +181,13 @@ int main(void) {
         https://stackoverflow.com/questions/3229860/what-is-the-meaning-of-so-reuseaddr-setsockopt-option-linux
      */
     int enabled = 1;
-    if( setsockopt(serv_sock, SOL_SOCKET, SO_REUSEADDR, &enabled, sizeof(int)) < 0){
+    if ( setsockopt(serv_sock, SOL_SOCKET, SO_REUSEADDR, &enabled, sizeof(int)) < 0) {
         do_error("setsockopt() failed");
-	}    
+    }
 
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = htonl(INADDR_ANY);    
+    server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     server_addr.sin_port = htons(SERVER_PORT);
 
     if (bind(serv_sock, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0) {
@@ -198,10 +196,9 @@ int main(void) {
 
     if (listen(serv_sock, SOMAXCONN) < 0) {
         do_error("listen() failed");
-        return -1;
     }
 
-    unsigned int addr_len = sizeof(client_addr);    
+    unsigned int addr_len = sizeof(client_addr);
     while (1) {
 
         client_sock = accept(serv_sock, (struct sockaddr *)&client_addr, &addr_len);
@@ -215,7 +212,7 @@ int main(void) {
             do_error("pthread_create() failed");
         }
         // call pthread_join() to do some clean-up operations for the threads that have finished
-        pthread_mutex_lock(&stackMutex);           
+        pthread_mutex_lock(&stackMutex);
         while (!StackIsEmpty(pStack)) {
             pthread_t tid = StackPop(pStack);
             pthread_join(tid, NULL);
@@ -224,7 +221,7 @@ int main(void) {
         char client_name[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &client_addr.sin_addr.s_addr, client_name, sizeof(client_name));
         printf("Hello: %s/%d\n", client_name, ntohs(client_addr.sin_port));
-#endif        
+#endif
         pthread_mutex_unlock(&stackMutex);
     }
 

@@ -1,4 +1,4 @@
-# SimpleWebServer
+# Simple Web Server
 
 ``` sh
 /*******************************************************************
@@ -194,7 +194,7 @@ sudo apt install netcat
 
 ``` sh
 
-$ echo -e "GET / HTTP/1.1\nConnection: close\n\n" | nc localhost 8080
+$ echo -e "GET / HTTP/1.1\r\nConnection: close\r\n\r\n" | nc localhost 8080
 
 GET / HTTP/1.1
 Connection: close
@@ -225,7 +225,7 @@ Content-Length: 134
 #### 404 Not Found
 
 ```sh
-echo -e "GET /xxx HTTP/1.1\nConnection: close\n\n" | nc localhost 8080
+echo -e "GET /xxx HTTP/1.1\r\nConnection: close\r\n\r\n" | nc localhost 8080
 
 HTTP/1.1 404 Not Found
 Server: Apache
