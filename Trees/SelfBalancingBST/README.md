@@ -455,13 +455,13 @@ void BiTreeLeftRotate(BiTreeNodePtr *pNodePtr) {
 
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-| Left-Right | Left Rotation, Right Rotation |<img src="images/BiTreeBiTreeInsert_0094.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0095.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0096.png" width="80%" height="80%">|
+| Left-Right | Left Rotation, Right Rotation |<img src="images/BiTreeBiTreeInsert_0094.png" width="100%" height="100%">|<img src="images/BiTreeBiTreeInsert_0095.png" width="100%" height="100%">|<img src="images/BiTreeBiTreeInsert_0096.png" width="100%" height="100%">|
 
 **(4) Insert 10, 30 and 20**
 
 | Case | Rotation |  Before   | Intermediate | After   |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-| Right-Left | Right Rotation, Left Rotation |<img src="images/BiTreeBiTreeInsert_0106.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0107.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0108.png" width="80%" height="80%">|
+| Right-Left | Right Rotation, Left Rotation |<img src="images/BiTreeBiTreeInsert_0106.png" width="100%" height="100%">|<img src="images/BiTreeBiTreeInsert_0107.png" width="100%" height="100%">|<img src="images/BiTreeBiTreeInsert_0108.png" width="100%" height="100%">|
 
 
 #### 3.2.1 BiTreeInsert()
