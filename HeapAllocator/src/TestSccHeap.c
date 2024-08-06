@@ -84,7 +84,7 @@ SccFree(ptr80)
   SccFree(ptr##n);                                                             \
   printList();
 
-int main() {
+int main(void) {
   printList();
 
   printf("\n************** SccMalloc() *****************\n");
