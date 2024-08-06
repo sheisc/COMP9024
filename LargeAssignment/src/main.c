@@ -95,7 +95,7 @@ static void ReleaseResources(AstStmtNodePtr decls, AstFuncDefNodePtr funcs) {
  */
 void InitSccIOFileInfo(int argc, char **argv) {
   SccIOFileInfo *fileInfo = GetSccIOFileInfo();
-	if(argc == 2){	
+  if(argc == 2){
     fileInfo->sccSrcFile = fopen(argv[1],"r");
     fileInfo->inputFileName = argv[1];
     if (fileInfo->sccSrcFile == NULL) {
