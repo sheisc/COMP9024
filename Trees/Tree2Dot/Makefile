@@ -57,7 +57,11 @@ view:
 	find ./images -name "*.png" | sort | xargs feh -g 720x540 &
 	
 tree:
-	python3 FractalTree.py &	
+	python3 FractalTree.py &
+
+tree3:
+	python3 FractalTree3.py &
+
 
 # clean all the files generated	
 clean:

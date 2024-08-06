@@ -38,6 +38,10 @@ Fractal trees are defined by their recursive, self-similar structure, where each
 Tree2Dot$ make tree
 
 python3 FractalTree.py &
+
+Tree2Dot$ make tree3
+
+python3 FractalTree3.py &
 ```
 
 **Recursion is hard**.
