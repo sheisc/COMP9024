@@ -122,8 +122,8 @@ void InitSccIOFileInfo(int argc, char **argv) {
       exit(-1);
     }
     InitLexer(NextCharFromInputFile);
-	}
-	else {
+  }
+  else {
     // Use the default stand input/output
     fileInfo->sccSrcFile = stdin;
     fileInfo->sccAssemblyFile = stdout;
@@ -142,7 +142,7 @@ void InitSccIOFileInfo(int argc, char **argv) {
               "args": [],
      ***************************************************/
     //InitLexer(NextCharFromMem);
-	}  
+  }
 }
 
 
@@ -204,3 +204,4 @@ int main(int argc, char **argv) {
   ReleaseResources(decls, funcs);
   return 0;
 }
+
