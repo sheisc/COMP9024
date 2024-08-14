@@ -426,7 +426,8 @@ The graph is cyclic.
 ```C
 // Storing information of a graph node
 struct GraphNode {
-    char name[MAX_ID_LEN + 1]; 
+    char name[MAX_ID_LEN + 1];
+    int onstack;
 };
 
 typedef long AdjMatrixElementTy;
@@ -701,6 +702,7 @@ static void PrintNodesInCycle(struct Graph *pGraph, long v, struct Stack *pNodes
 
 static int DetectCycle(struct Graph *pGraph, long u, int *visited, struct Stack *pNodesOnStack) {
     visited[u] = 1;
+    pGraph->pNodes[u].onstack = 1;
     // Push u onto the data stack
     StackPush(pNodesOnStack, u);    
     
@@ -753,6 +755,7 @@ static int DetectCycle(struct Graph *pGraph, long u, int *visited, struct Stack 
         }
     }
     StackPop(pNodesOnStack);
+    pGraph->pNodes[u].onstack = 0;
     return cycleDetected;
 }
 
@@ -763,6 +766,7 @@ int HasCycle(struct Graph *pGraph) {
     //memset(visited, 0, sizeof(int) * pGraph->n);
     for (long v = 0; v < pGraph->n; v++) {
         visited[v] = 0;
+        pGraph->pNodes[v].onstack = 0;
     }
 
     imgCnt = 0;
