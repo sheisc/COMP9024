@@ -11,7 +11,8 @@
 
 // Storing information of a graph node
 struct GraphNode {
-    char name[MAX_ID_LEN + 1]; 
+    char name[MAX_ID_LEN + 1];
+    int onstack;
 };
 
 struct Graph{
@@ -133,64 +134,62 @@ void PrintGraph(struct Graph *pGraph) {
     printf("\n");
 }
 
-#define FILE_NAME_LEN  255
+////////////////////////////// Depth First Search ///////////////////////////////////////
 
-void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, long seqNo, int *visited) {
-    char dotFileName[FILE_NAME_LEN+1] = {0};
-    char pngFileName[FILE_NAME_LEN+1] = {0};
-    char command[(FILE_NAME_LEN+1)*4] = {0};
+static long dfsImageCnt = 0;
+
+static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
+    visited[u] = 1;
+    pGraph->pNodes[u].onstack = 1;
+    printf("visiting %s\n", pGraph->pNodes[u].name);
     
-    snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
-    snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
+    dfsImageCnt++;
 
-    Graph2Dot(pGraph, dotFileName, graphName, pGraph->isDirected, 0, visited, 1);
+    if (pGraph->isDirected) {
+        GenOneImage(pGraph, "DfsDirected", "images/DfsDirected", dfsImageCnt, visited);
+    } else {
+        GenOneImage(pGraph, "DfsUndirected", "images/DfsUndirected", dfsImageCnt, visited);
+    }
 
-    snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
-    
-    // Execute the command in a child process (fork() + exec() on Linux)
-    system(command); 
-
+    // recursively visit the adjacent nodes of u, if they have not been visited yet
+    for(long v = 0; v < pGraph->n; v++) {
+        if (MatrixElement(pGraph, u, v) == CONNECTED && !visited[v]) {
+            DepthFirstSearch(pGraph, v, visited);
+        }
+    }
+    pGraph->pNodes[u].onstack = 0;
 }
+
+void RecursiveDFS(struct Graph *pGraph) {
+    int *visited = (int *) malloc(pGraph->n * sizeof(int));
+    //memset(visited, 0, sizeof(int) * pGraph->n);
+    for (long v = 0; v < pGraph->n; v++) {
+        visited[v] = 0;
+    }
+
+    dfsImageCnt = 0;
+
+    if (pGraph->isDirected) {
+        GenOneImage(pGraph, "DfsDirected", "images/DfsDirected", dfsImageCnt, visited);
+    } else {
+        GenOneImage(pGraph, "DfsUndirected", "images/DfsUndirected", dfsImageCnt, visited);
+    }
+
+    for (long u = 0; u < pGraph->n; u++) {
+        if (!visited[u]) {
+            DepthFirstSearch(pGraph, u, visited);
+        }
+    }
+    printf("\n");
+    free(visited);
+}
+
+
+////////////////////////////// Graph2Dot (for visualizing the algorithm) ///////////////////////////////////////
 
 /*
     Dot Files
-
-1.  Directed graph with labels
-
-    digraph ShortestGraph {    
-    "3" -> {"0"} [label="4"]
-    "3" -> {"4"} [label="2"]
-    "0" -> {"2"} [label="3"]
-    "0" -> {"4"} [label="4"]
-    "4" -> {"2"} [label="4"]
-    "4" -> {"6"} [label="5"]
-    "2" -> {"5"} [label="5"]
-    "1" -> {"2"} [label="2"]
-    "1" -> {"5"} [label="2"]
-    "6" -> {"5"} [label="5"]
-    "6" -> {"7"} [label="3"]
-    }
-
-2. Undirected graph without labels
-
-    graph DfsGraph {    
-    "3" -- {"0"}
-    "0" -- {"2"}
-    "0" -- {"4"}
-    "4" -- {"2"}
-    "2" -- {"5"}
-    "2" -- {"1"}
-    "2" -- {"6"}
-    "1" -- {"5"}
-    "6" -- {"7"}
-    }
-
-3.  Once we get a dot file, we can convert it into a png file.
-
-Week5$ dot -T png images/RecursiveDFS_0000.dot -o images/RecursiveDFS_0000.png   
-
  */
-
 void Graph2Dot(struct Graph *pGraph, 
                char *filePath,
                char *graphName,
@@ -231,21 +230,20 @@ void Graph2Dot(struct Graph *pGraph,
                 }
             }
         }
-        /*
-        "0" [color=red]
-         */
-        // if (displayVisited && visited) {
-        //     for (long i = 0; i < pGraph->n; i++) {
-        //         if (visited[i]) {
-        //             fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
-        //         }
-        //     }
-        // }
+
         for (long i = 0; i < pGraph->n; i++) {
             if (displayVisited && visited && visited[i]) {
-                fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+                if (pGraph->pNodes[i].onstack) {
+                    fprintf(dotFile, "\"%s\" [color=red] [shape=box]\n", pGraph->pNodes[i].name);
+                } else {
+                    fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+                }
             } else {
-                fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
+                if (pGraph->pNodes[i].onstack) {
+                    fprintf(dotFile, "\"%s\"  [shape=box]\n", pGraph->pNodes[i].name);
+                } else {
+                    fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
+                }
             }
         }                
         fprintf(dotFile, "}\n");
@@ -253,51 +251,26 @@ void Graph2Dot(struct Graph *pGraph,
     }                
 }
 
-static long dfsImageCnt = 0;
 
-static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
-    visited[u] = 1;
-    printf("visiting %s\n", pGraph->pNodes[u].name);
+#define FILE_NAME_LEN  255
+
+void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, long seqNo, int *visited) {
+    char dotFileName[FILE_NAME_LEN+1] = {0};
+    char pngFileName[FILE_NAME_LEN+1] = {0};
+    char command[(FILE_NAME_LEN+1)*4] = {0};
     
-    dfsImageCnt++;
+    snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
+    snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
 
-    if (pGraph->isDirected) {
-        GenOneImage(pGraph, "DfsDirected", "images/DfsDirected", dfsImageCnt, visited);
-    } else {
-        GenOneImage(pGraph, "DfsUndirected", "images/DfsUndirected", dfsImageCnt, visited);
-    }
+    Graph2Dot(pGraph, dotFileName, graphName, pGraph->isDirected, 0, visited, 1);
 
-    // recursively visit the adjacent nodes of u, if they have not been visited yet
-    for(long v = 0; v < pGraph->n; v++) {
-        if (MatrixElement(pGraph, u, v) == CONNECTED && !visited[v]) {
-            DepthFirstSearch(pGraph, v, visited);
-        }
-    }
+    snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
+    
+    // Execute the command in a child process (fork() + exec() on Linux)
+    system(command);
+
 }
 
-void RecursiveDFS(struct Graph *pGraph) {
-    int *visited = (int *) malloc(pGraph->n * sizeof(int));
-    //memset(visited, 0, sizeof(int) * pGraph->n);
-    for (long v = 0; v < pGraph->n; v++) {
-        visited[v] = 0;
-    }
-
-    dfsImageCnt = 0;
-
-    if (pGraph->isDirected) {
-        GenOneImage(pGraph, "DfsDirected", "images/DfsDirected", dfsImageCnt, visited);
-    } else {
-        GenOneImage(pGraph, "DfsUndirected", "images/DfsUndirected", dfsImageCnt, visited);
-    }
-
-    for (long u = 0; u < pGraph->n; u++) {
-        if (!visited[u]) {
-            DepthFirstSearch(pGraph, u, visited);
-        }
-    }
-    printf("\n");
-    free(visited);
-}
 
 
 
