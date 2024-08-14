@@ -15,7 +15,7 @@
 # You can reuse this Makefile in different assignments/projects in COMP9024.
 # To be simple, please put your *.c and *.h in the src directory.
 #
-#                                                                 COMP9024 24T2
+#                                                                 COMP9024
 ####################################################################################
 PROJ_ROOT_PATH = $(shell pwd)
 
@@ -65,3 +65,4 @@ clean:
 	find . -name "*.i" | xargs rm -f
 	find . -name "*.d" | xargs rm -f
 	find . -name "*.bc" | xargs rm -f
+	find ./images -name "*.dot" | xargs rm -f

@@ -12,7 +12,8 @@
 
 // Storing information of a graph node
 struct GraphNode {
-    char name[MAX_ID_LEN + 1]; 
+    char name[MAX_ID_LEN + 1];
+    int onstack;
 };
 
 struct Graph{
@@ -155,43 +156,7 @@ void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, long seq
 
 /*
     Dot Files
-
-1.  Directed graph with labels
-
-    digraph ShortestGraph {    
-    "3" -> {"0"} [label="4"]
-    "3" -> {"4"} [label="2"]
-    "0" -> {"2"} [label="3"]
-    "0" -> {"4"} [label="4"]
-    "4" -> {"2"} [label="4"]
-    "4" -> {"6"} [label="5"]
-    "2" -> {"5"} [label="5"]
-    "1" -> {"2"} [label="2"]
-    "1" -> {"5"} [label="2"]
-    "6" -> {"5"} [label="5"]
-    "6" -> {"7"} [label="3"]
-    }
-
-2. Undirected graph without labels
-
-    graph DfsGraph {    
-    "3" -- {"0"}
-    "0" -- {"2"}
-    "0" -- {"4"}
-    "4" -- {"2"}
-    "2" -- {"5"}
-    "2" -- {"1"}
-    "2" -- {"6"}
-    "1" -- {"5"}
-    "6" -- {"7"}
-    }
-
-3.  Once we get a dot file, we can convert it into a png file.
-
-Week5$ dot -T png images/RecursiveDFS_0000.dot -o images/RecursiveDFS_0000.png   
-
  */
-
 void Graph2Dot(struct Graph *pGraph, 
                char *filePath,
                char *graphName,
@@ -232,21 +197,20 @@ void Graph2Dot(struct Graph *pGraph,
                 }
             }
         }
-        /*
-        "0" [color=red]
-         */
-        // if (displayVisited && visited) {
-        //     for (long i = 0; i < pGraph->n; i++) {
-        //         if (visited[i]) {
-        //             fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
-        //         }
-        //     }
-        // }
+
         for (long i = 0; i < pGraph->n; i++) {
             if (displayVisited && visited && visited[i]) {
-                fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+                if (pGraph->pNodes[i].onstack) {
+                    fprintf(dotFile, "\"%s\" [color=red] [shape=box]\n", pGraph->pNodes[i].name);
+                } else {
+                    fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+                }
             } else {
-                fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
+                if (pGraph->pNodes[i].onstack) {
+                    fprintf(dotFile, "\"%s\"  [shape=box]\n", pGraph->pNodes[i].name);
+                } else {
+                    fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
+                }
             }
         }                
         fprintf(dotFile, "}\n");
@@ -379,6 +343,7 @@ static void PrintNodesInCycle(struct Graph *pGraph, long v, struct Stack *pNodes
 
 static int DetectCycle(struct Graph *pGraph, long u, int *visited, struct Stack *pNodesOnStack) {
     visited[u] = 1;
+    pGraph->pNodes[u].onstack = 1;
     // Push u onto the data stack
     StackPush(pNodesOnStack, u);    
     
@@ -402,34 +367,37 @@ static int DetectCycle(struct Graph *pGraph, long u, int *visited, struct Stack 
 #endif                    
                 }
             } else {
-                int nodesInCycle = GetNumOfNodesInCycle(pGraph, v, pNodesOnStack);
-                if (nodesInCycle > 0) {
-                    if (!pGraph->isDirected) {
-                        /*
-                            In an undirected graph,
+                if (pGraph->pNodes[v].onstack) {
+                    int nodesInCycle = GetNumOfNodesInCycle(pGraph, v, pNodesOnStack);
+                    if (nodesInCycle > 0) {
+                        if (!pGraph->isDirected) {
+                            /*
+                                In an undirected graph,
 
-                            an edge 'n0 -- n2' is represented as two directed edges:
+                                an edge 'n0 -- n2' is represented as two directed edges:
 
-                                n0 -> n2
-                                n2 -> n0
-                            
-                            We should not treat n2 -> n0 and n0 -> n2 as a cycle in an undirected edge.
-                            So we need to check it here.                                                       
-                        */
-                        if (nodesInCycle == 2) {
-                            continue;
+                                    n0 -> n2
+                                    n2 -> n0
+
+                                We should not treat n2 -> n0 and n0 -> n2 as a cycle in an undirected edge.
+                                So we need to check it here.
+                            */
+                            if (nodesInCycle == 2) {
+                                continue;
+                            }
                         }
+                        PrintNodesInCycle(pGraph, v, pNodesOnStack);
+                        cycleDetected = 1;
+    #ifdef  STOP_DETECTION_AT_FIRST_CYCLE
+                        break;
+    #endif
                     }
-                    PrintNodesInCycle(pGraph, v, pNodesOnStack);
-                    cycleDetected = 1;
-#ifdef  STOP_DETECTION_AT_FIRST_CYCLE                   
-                    break;
-#endif                    
                 }
             }
         }
     }
     StackPop(pNodesOnStack);
+    pGraph->pNodes[u].onstack = 0;
     return cycleDetected;
 }
 
@@ -440,6 +408,7 @@ int HasCycle(struct Graph *pGraph) {
     //memset(visited, 0, sizeof(int) * pGraph->n);
     for (long v = 0; v < pGraph->n; v++) {
         visited[v] = 0;
+        pGraph->pNodes[v].onstack = 0;
     }
 
     imgCnt = 0;
