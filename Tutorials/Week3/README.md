@@ -172,39 +172,39 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 |:-------------:|:-------------:|:-------------:|:-------------:| 
 |2024| 10 | r = x % base | x = x / base|
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |20249024| |  |<img src="images/Stack_0000.png" width="80%" height="80%"> |
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |2024902| 4| Push(4) |<img src="images/Stack_0001.png" width="80%" height="80%"> |
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |202490| 2| Push(2) |<img src="images/Stack_0002.png" width="80%" height="80%"> |
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |20249| 0| Push(0) |<img src="images/Stack_0003.png" width="80%" height="80%"> |
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |2024| 9| Push(9) |<img src="images/Stack_0004.png" width="80%" height="80%"> |
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |202| 4| Push(4) |<img src="images/Stack_0005.png" width="80%" height="80%"> |
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |20| 2| Push(2) |<img src="images/Stack_0006.png" width="80%" height="80%"> |
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |2| 0| Push(0) |<img src="images/Stack_0007.png" width="80%" height="80%"> |
 
-|Quotient|Remainder | Action |State | 
+|x|r | Action |State | 
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |0| 2| Push(2) |<img src="images/Stack_0008.png" width="80%" height="80%"> |
 
