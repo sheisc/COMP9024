@@ -46,6 +46,63 @@ Since variadic functions in C will be discussed in [COMP9024/Stacks/CallStack](.
 
 you can skip the implementation details of the code in [COMP9024/Tutorials/Week4/src/error.c](./src/error.c) now.
 
+| Initial |
+|:-------------:|
+| <img src="images/BiTree_0000.png" width="80%" height="80%"> |
+
+|? + ? = ?|
+|:-------------:|
+| <img src="images/BiTree_0001.png" width="80%" height="80%"> |
+
+| 9000 |
+|:-------------:|
+| <img src="images/BiTree_0002.png" width="80%" height="80%"> |
+
+| 9000 + ? = ? |
+|:-------------:|
+| <img src="images/BiTree_0003.png" width="80%" height="80%"> |
+
+| ? * ? = ?|
+|:-------------:|
+| <img src="images/BiTree_0004.png" width="80%" height="80%"> |
+
+| 6 |
+|:-------------:|
+| <img src="images/BiTree_0005.png" width="80%" height="80%"> |
+
+| 6 * ? = ? |
+|:-------------:|
+| <img src="images/BiTree_0006.png" width="80%" height="80%"> |
+
+| 4 |
+|:-------------:|
+| <img src="images/BiTree_0007.png" width="80%" height="80%"> |
+
+| 6 * 4 = ? |
+|:-------------:|
+| <img src="images/BiTree_0008.png" width="80%" height="80%"> |
+
+| 6 * 4 = 24 |
+|:-------------:|
+| <img src="images/BiTree_0009.png" width="80%" height="80%"> |
+
+| 9000 + 24 = ? |
+|:-------------:|
+| <img src="images/BiTree_0010.png" width="80%" height="80%"> |
+
+| 9000 + 24 = 9024 |
+|:-------------:|
+| <img src="images/BiTree_0011.png" width="80%" height="80%"> |
+
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
+
+```sh
+Week4$ make view
+```
+
+Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+
+
 ## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
