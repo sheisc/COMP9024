@@ -181,16 +181,27 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 
 
-| Visiting 0 | Visiting 2 |  Visiting 1 | Visiting 5 |
-|:-------------:|:-------------:|:-------------:|:-------------:|
-| Nodes on call stack: $\color{red}{0}$ | Nodes on call stack: $\color{red}{2}$, 0 | Nodes on call stack: $\color{red}{1}$, 2, 0 | Nodes on call stack: $\color{red}{5}$, 1, 2, 0 |
-| <img src="images/HasCycleDirected_0001.png" width="50%" height="50%"> |  <img src="images/HasCycleDirected_0002.png" width="50%" height="50%"> | <img src="images/HasCycleDirected_0003.png" width="50%" height="50%"> | <img src="images/HasCycleDirected_0004.png" width="50%" height="50%"> | 
+| Visiting 0 | Visiting 2 |
+|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{0}$ | Nodes on call stack: $\color{red}{2}$, 0 |
+| <img src="images/HasCycleDirected_0001.png" width="50%" height="50%"> |  <img src="images/HasCycleDirected_0002.png" width="50%" height="50%"> |
 
 
-| Visiting 4 (Cycle Detected) | Visiting 7 |  Visiting 6 (Cycle Detected)| Visiting 3 |
-|:-------------:|:-------------:|:-------------:|:-------------:|
-| Nodes on call stack: $\color{red}{4}$, 2, 0 | Nodes on call stack: $\color{red}{7}$, 4, 2, 0 | Nodes on call stack: $\color{red}{6}$, 7, 4, 2, 0 | Nodes on call stack: $\color{red}{3}$ |
-| <img src="images/HasCycleDirected_0005.png" width="50%" height="50%"> |  <img src="images/HasCycleDirected_0006.png" width="50%" height="50%"> | <img src="images/HasCycleDirected_0007.png" width="50%" height="50%"> | <img src="images/HasCycleDirected_0008.png" width="50%" height="50%"> | 
+|  Visiting 1 | Visiting 5 |
+|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{1}$, 2, 0 | Nodes on call stack: $\color{red}{5}$, 1, 2, 0 |
+| <img src="images/HasCycleDirected_0003.png" width="50%" height="50%"> | <img src="images/HasCycleDirected_0004.png" width="50%" height="50%"> |
+
+
+| Visiting 4 (Cycle Detected) | Visiting 7 |
+|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{4}$, 2, 0 | Nodes on call stack: $\color{red}{7}$, 4, 2, 0 |
+| <img src="images/HasCycleDirected_0005.png" width="50%" height="50%"> |  <img src="images/HasCycleDirected_0006.png" width="50%" height="50%"> |
+
+|  Visiting 6 (Cycle Detected)| Visiting 3 |
+|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{6}$, 7, 4, 2, 0 | Nodes on call stack: $\color{red}{3}$ |
+| <img src="images/HasCycleDirected_0007.png" width="50%" height="50%"> | <img src="images/HasCycleDirected_0008.png" width="50%" height="50%"> |
 
 | Call Tree and Directed Graph | 
 |:-------------:|
@@ -292,16 +303,27 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 
 
-| Visiting 0 | Visiting 2 |  Visiting 1 | Visiting 5 (Cycle Detected) |
-|:-------------:|:-------------:|:-------------:|:-------------:|
-| Nodes on call stack: $\color{red}{0}$ | Nodes on call stack: $\color{red}{2}$, 0 | Nodes on call stack: $\color{red}{1}$, 2, 0 | Nodes on call stack: $\color{red}{5}$, 1, 2, 0 |
-| <img src="images/HasCycleUndirected_0001.png" width="50%" height="50%"> |  <img src="images/HasCycleUndirected_0002.png" width="50%" height="50%"> | <img src="images/HasCycleUndirected_0003.png" width="50%" height="50%"> | <img src="images/HasCycleUndirected_0004.png" width="50%" height="50%"> | 
+| Visiting 0 | Visiting 2 |
+|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{0}$ | Nodes on call stack: $\color{red}{2}$, 0 |
+| <img src="images/HasCycleUndirected_0001.png" width="50%" height="50%"> |  <img src="images/HasCycleUndirected_0002.png" width="50%" height="50%"> |
+
+|  Visiting 1 | Visiting 5 (Cycle Detected) |
+|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{1}$, 2, 0 | Nodes on call stack: $\color{red}{5}$, 1, 2, 0 |
+| <img src="images/HasCycleUndirected_0003.png" width="50%" height="50%"> | <img src="images/HasCycleUndirected_0004.png" width="50%" height="50%"> |
 
 
-| Visiting 4 (Cycle Detected) | Visiting 7 |  Visiting 6 (Cycle Detected) | Visiting 3 |
-|:-------------:|:-------------:|:-------------:|:-------------:|
-| Nodes on call stack: $\color{red}{4}$, 2, 0 | Nodes on call stack: $\color{red}{7}$, 4, 2, 0 | Nodes on call stack: $\color{red}{6}$, 7, 4, 2, 0 | Nodes on call stack: $\color{red}{3}$, 0|
-| <img src="images/HasCycleUndirected_0005.png" width="50%" height="50%"> |  <img src="images/HasCycleUndirected_0006.png" width="50%" height="50%"> | <img src="images/HasCycleUndirected_0007.png" width="50%" height="50%"> | <img src="images/HasCycleUndirected_0008.png" width="50%" height="50%"> | 
+| Visiting 4 (Cycle Detected) | Visiting 7 |
+|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{4}$, 2, 0 | Nodes on call stack: $\color{red}{7}$, 4, 2, 0 |
+| <img src="images/HasCycleUndirected_0005.png" width="50%" height="50%"> |  <img src="images/HasCycleUndirected_0006.png" width="50%" height="50%"> |
+
+
+|  Visiting 6 (Cycle Detected) | Visiting 3 |
+|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{6}$, 7, 4, 2, 0 | Nodes on call stack: $\color{red}{3}$, 0|
+| <img src="images/HasCycleUndirected_0007.png" width="50%" height="50%"> | <img src="images/HasCycleUndirected_0008.png" width="50%" height="50%"> |
 
 | Call Tree and Undirected Graph | 
 |:-------------:|
