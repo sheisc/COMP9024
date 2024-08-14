@@ -237,5 +237,6 @@ long EvalExpression(AstExprNodePtr root) {
         return result;
     } else {
       Error("Unknown operator/operand");
+      return 0;
     }
 }

@@ -14,7 +14,7 @@
 
     5.  How to evaluate an arithmetic expression 
 
-                                             COMP9024 24T2
+                                             COMP9024
 
  *******************************************************************/
 ``` 

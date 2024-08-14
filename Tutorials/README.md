@@ -1,4 +1,4 @@
-# COMP9024 24T2 Tutorials
+# Tutorials
 
 ## Introduction
 
