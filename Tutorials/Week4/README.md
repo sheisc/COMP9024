@@ -94,6 +94,14 @@ you can skip the implementation details of the code in [COMP9024/Tutorials/Week4
 |:-------------:|
 | <img src="images/BiTree_0011.png" width="80%" height="80%"> |
 
+**The above diagrams are used to explain the recursive algorithm.**
+
+**Note that we don't actually change the binary tree itself in the post-order traversal.**
+
+| Final  |
+|:-------------:|
+| <img src="images/BiTree_0000.png" width="80%" height="80%"> |
+
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
 ```sh
