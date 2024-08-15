@@ -96,11 +96,11 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 | Initial |
 |:-------------:|
-|<img src="diagrams/BubbleSort_0000.png" width="80%" height="80%">|
+|<img src="images/BubbleSort_0000.png" width="80%" height="80%">|
 
 | Final (in ascending order) |
 |:-------------:|
-| <img src="diagrams/BubbleSort_0023.png" width="80%" height="80%"> |
+| <img src="images/BubbleSort_0023.png" width="80%" height="80%"> |
 
 **Pass 1**
 
@@ -205,7 +205,7 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 | Final (in ascending order) |
 |:-------------:|
-| <img src="diagrams/BubbleSort_sorted.png" width="80%" height="80%"> |
+| <img src="images/BubbleSort_0023.png" width="80%" height="80%"> |
 
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
