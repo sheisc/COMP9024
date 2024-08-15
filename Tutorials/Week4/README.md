@@ -46,53 +46,53 @@ Since variadic functions in C will be discussed in [COMP9024/Strings/FormatStrin
 
 you can skip the implementation details of the code in [COMP9024/Tutorials/Week4/src/error.c](./src/error.c) now.
 
-**Eval() stands for EvalExpression() in the following diagrams.**
+**eval() stands for EvalExpression() in the following diagrams.**
 
 | Initial |
 |:-------------:|
 | <img src="images/BiTree_0000.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(+)}$|
+|Function calls on call stack: eval($\color{red}{+}$)|
 |:-------------:|
 | <img src="images/BiTree_0001.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(9000)}$, Eval(+)|
+|Function calls on call stack: eval($\color{red}{9000}$), eval(+)|
 |:-------------:|
 | <img src="images/BiTree_0002.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(+)}$|
+|Function calls on call stack: eval($\color{red}{+}$)|
 |:-------------:|
 | <img src="images/BiTree_0003.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(*)}$, Eval(+)|
+|Function calls on call stack: eval($\color{red}{*}$), eval(+)|
 |:-------------:|
 | <img src="images/BiTree_0004.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(6)}$, Eval(*), Eval(+)|
+|Function calls on call stack: eval($\color{red}{6}$), eval(*), eval(+)|
 |:-------------:|
 | <img src="images/BiTree_0005.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(*)}$, Eval(+)|
+|Function calls on call stack: eval($\color{red}{*}$), eval(+)|
 |:-------------:|
 | <img src="images/BiTree_0006.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(4)}$, Eval(*), Eval(+)|
+|Function calls on call stack: eval($\color{red}{4}$), eval(*), eval(+)|
 |:-------------:|
 | <img src="images/BiTree_0007.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(*)}$, Eval(+)|
+|Function calls on call stack: eval($\color{red}{*}$), eval(+)|
 |:-------------:|
 | <img src="images/BiTree_0008.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(*)}$, Eval(+)|
+|Function calls on call stack: eval($\color{red}{*}$), eval(+)|
 |:-------------:|
 | <img src="images/BiTree_0009.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(+)}$|
+|Function calls on call stack: eval($\color{red}{+}$)|
 |:-------------:|
 | <img src="images/BiTree_0010.png" width="80%" height="80%"> |
 
-|Function calls on call stack: $\color{red}{Eval(+)}$|
+|Function calls on call stack: eval($\color{red}{+}$)|
 |:-------------:|
 | <img src="images/BiTree_0011.png" width="80%" height="80%"> |
 
