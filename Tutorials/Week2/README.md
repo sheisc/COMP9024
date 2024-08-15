@@ -73,6 +73,10 @@ Then, click **Run -> Start Debugging**
 |
 ├── README.md            introduction to this tutorial
 |
+├── images               *.png files
+|
+├── diagrams             *.dot and *.png files
+|
 ├── src                  containing *.c and *.h
 |   |
 │   └── BubbleSort.c
@@ -90,6 +94,13 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ## 3 The process of bubble sort
 
+| Initial |
+|:-------------:|
+|<img src="diagrams/BubbleSort_0000.png" width="80%" height="80%">|
+
+| Final (in ascending order) |
+|:-------------:|
+| <img src="diagrams/BubbleSort_0023.png" width="80%" height="80%"> |
 
 **Pass 1**
 
@@ -191,6 +202,10 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 |:-------------|:-------------:|
 |comparison | <img src="images/BubbleSort_0022.png" width="80%" height="80%"> |
 
+
+| Final (in ascending order) |
+|:-------------:|
+| <img src="diagrams/BubbleSort_sorted.png" width="80%" height="80%"> |
 
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
@@ -451,21 +466,21 @@ int main(void) {
     int arr[] = {30, 50, 20, 10, 60, 40};
     int len = sizeof(arr) / sizeof(arr[0]);
     
-    // a function pointer variable which points to the function IsLarger
+    // a function pointer variable which points to the function IsLarger()
     ComparatorFuncPtr fptr = &IsLarger;    
     printf("Before sorting:\n");
     PrintArray(arr, len);
     BubbleSort(arr, len, fptr);
-    // in an ascending order
+    // in ascending order
     printf("After sorting:\n");
     PrintArray(arr, len);
 
-    // a function pointer variable which points to the function IsLess
+    // a function pointer variable which points to the function IsLess()
     fptr = ____Q5____;    
     printf("\nBefore sorting:\n");
     PrintArray(arr, len);
     BubbleSort(arr, len, fptr);
-    // in a descending order
+    // in descending order
     printf("After sorting:\n");
     PrintArray(arr, len);
     return 0;
