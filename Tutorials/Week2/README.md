@@ -91,94 +91,105 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 ## 3 The process of bubble sort
 
 
+**Pass 1**
 
-| Pass 1 | 
-|:-------------:|
-| <img src="images/BubbleSort_0001.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison| <img src="images/BubbleSort_0001.png" width="80%" height="80%"> |
 
-| Pass 1 (swap)| 
-|:-------------:|
-| <img src="images/BubbleSort_0002.png" width="80%" height="80%"> |
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0002.png" width="80%" height="80%"> |
 
-| Pass 1 | 
-|:-------------:|
-| <img src="images/BubbleSort_0003.png" width="80%" height="80%"> |
+| Operation | State (after swapping)|
+|:-------------|:-------------:|
+|| <img src="images/BubbleSort_0003.png" width="80%" height="80%"> |
 
-| Pass 1 (swap)| 
-|:-------------:|
-| <img src="images/BubbleSort_0004.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0004.png" width="80%" height="80%"> |
 
-| Pass 1 | 
-|:-------------:|
-| <img src="images/BubbleSort_0005.png" width="80%" height="80%"> |
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0005.png" width="80%" height="80%"> |
 
-| Pass 1 | 
-|:-------------:|
-| <img src="images/BubbleSort_0006.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison| <img src="images/BubbleSort_0006.png" width="80%" height="80%"> |
 
-| Pass 1 (swap) | 
-|:-------------:|
-| <img src="images/BubbleSort_0007.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0007.png" width="80%" height="80%"> |
 
-| Pass 1 | 
-|:-------------:|
-| <img src="images/BubbleSort_0008.png" width="80%" height="80%"> |
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0008.png" width="80%" height="80%"> |
 
-| Pass 2 (swap) | 
-|:-------------:|
-| <img src="images/BubbleSort_0009.png" width="80%" height="80%"> |
+**Pass 2**
 
-| Pass 2  | 
-|:-------------:|
-| <img src="images/BubbleSort_0010.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0009.png" width="80%" height="80%"> |
 
-| Pass 2 (swap) | 
-|:-------------:|
-| <img src="images/BubbleSort_0011.png" width="80%" height="80%"> |
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0010.png" width="80%" height="80%"> |
 
-| Pass 2 | 
-|:-------------:|
-| <img src="images/BubbleSort_0012.png" width="80%" height="80%"> |
 
-| Pass 2  | 
-|:-------------:|
-| <img src="images/BubbleSort_0013.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0011.png" width="80%" height="80%"> |
 
-| Pass 2 (swap) | 
-|:-------------:|
-| <img src="images/BubbleSort_0014.png" width="80%" height="80%"> |
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0012.png" width="80%" height="80%"> |
 
-| Pass 2 | 
-|:-------------:|
-| <img src="images/BubbleSort_0015.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison| <img src="images/BubbleSort_0013.png" width="80%" height="80%"> |
 
-| Pass 3 (swap)| 
-|:-------------:|
-| <img src="images/BubbleSort_0016.png" width="80%" height="80%"> |
 
-| Pass 3 | 
-|:-------------:|
-| <img src="images/BubbleSort_0017.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0014.png" width="80%" height="80%"> |
 
-| Pass 3 | 
-|:-------------:|
-| <img src="images/BubbleSort_0018.png" width="80%" height="80%"> |
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0015.png" width="80%" height="80%"> |
 
-| Pass 3 | 
-|:-------------:|
-| <img src="images/BubbleSort_0019.png" width="80%" height="80%"> |
+**Pass 3**
 
-| Pass 4 | 
-|:-------------:|
-| <img src="images/BubbleSort_0020.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0016.png" width="80%" height="80%"> |
 
-| Pass 4 | 
-|:-------------:|
-| <img src="images/BubbleSort_0021.png" width="80%" height="80%"> |
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0017.png" width="80%" height="80%"> |
 
-| Pass 5 | 
-|:-------------:|
-| <img src="images/BubbleSort_0022.png" width="80%" height="80%"> |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison| <img src="images/BubbleSort_0018.png" width="80%" height="80%"> |
+
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison | <img src="images/BubbleSort_0019.png" width="80%" height="80%"> |
+
+**Pass 4**
+
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison | <img src="images/BubbleSort_0020.png" width="80%" height="80%"> |
+
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison | <img src="images/BubbleSort_0021.png" width="80%" height="80%"> |
+
+**Pass 5**
+
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison | <img src="images/BubbleSort_0022.png" width="80%" height="80%"> |
 
 
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
