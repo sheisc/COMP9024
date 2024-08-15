@@ -42,7 +42,7 @@ In this tutorial, we will delve into the creation of a binary tree (with a parse
 
 and its practical application in representing and evaluating an arithmetic expression (e.g., "9000 + (6 * 4)").
 
-Since variadic functions in C will be discussed in [COMP9024/Stacks/CallStack](../../Stacks/CallStack/README.md),
+Since variadic functions in C will be discussed in [COMP9024/Strings/FormatString](../../Strings/FormatString/README.md),
 
 you can skip the implementation details of the code in [COMP9024/Tutorials/Week4/src/error.c](./src/error.c) now.
 
@@ -524,9 +524,12 @@ The code is in src/lex.c.
 
 **1. Debug this program in VS Code and follow the recursive functions in expr.c step by step during parsing "9000 + (6 * 4)".**
 
+     You can set a breaking point inside the function Expression() during dedugging this program.
 
-**2. Complete Q1-Q10 in the parse tree with function names you discovered during debugging and then answer the questions in Quiz 3 (Week 4) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+**2. The parse tree is introduced to help us further understand the code of the syntax parser in [src/expr.c](./src/expr.c).**
 
-<img src="ParseTree.png" width="60%" height="60%">
+**3. Complete Q1-Q10 in the parse tree with function names you discovered during debugging and then answer the questions in Quiz 3 (Week 4) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+
+<img src="ParseTree.png" width="100%" height="100%">
 
 
