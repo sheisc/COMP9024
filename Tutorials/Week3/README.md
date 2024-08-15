@@ -172,75 +172,75 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 |:-------------:|:-------------:|:-------------:|:-------------:| 
 |2024| 10 | r = x % base | x = x / base|
 
-|x|r | Action |State | 
+|x|r | Action |State  |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |20249024| |  |<img src="images/Stack_0000.png" width="80%" height="80%"> |
 
-|x|r | Action |State | 
+|x|r | Action |State (after pushing)|
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |2024902| 4| Push(4) |<img src="images/Stack_0001.png" width="80%" height="80%"> |
 
-|x|r | Action |State | 
+|x|r | Action |State (after pushing) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |202490| 2| Push(2) |<img src="images/Stack_0002.png" width="80%" height="80%"> |
 
-|x|r | Action |State | 
+|x|r | Action |State (after pushing) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |20249| 0| Push(0) |<img src="images/Stack_0003.png" width="80%" height="80%"> |
 
-|x|r | Action |State | 
+|x|r | Action |State (after pushing) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |2024| 9| Push(9) |<img src="images/Stack_0004.png" width="80%" height="80%"> |
 
-|x|r | Action |State | 
+|x|r | Action |State (after pushing) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |202| 4| Push(4) |<img src="images/Stack_0005.png" width="80%" height="80%"> |
 
-|x|r | Action |State | 
+|x|r | Action |State (after pushing) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |20| 2| Push(2) |<img src="images/Stack_0006.png" width="80%" height="80%"> |
 
-|x|r | Action |State | 
+|x|r | Action |State (after pushing) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |2| 0| Push(0) |<img src="images/Stack_0007.png" width="90%" height="90%"> |
 
-|x|r | Action |State | 
+|x|r | Action |State (after pushing) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |0| 2| Push(2) |<img src="images/Stack_0008.png" width="100%" height="100%"> |
 
-| After pushing | 
+| Stack | 
 |:-------------:|
 | <img src="images/Stack_0008.png" width="100%" height="100%"> |
 
-| Output | Action |  State |
+| Output | Action |  State (after popping) |
 |:-------------:|:-------------:|:-------------:|
 | 2| Pop() | <img src="images/Stack_0009.png" width="90%" height="90%"> |
 
-| Output | Action |  State |
+| Output | Action |  State (after popping) |
 |:-------------:|:-------------:|:-------------:|
 | 20| Pop() | <img src="images/Stack_0010.png" width="90%" height="90%"> |
 
-| Output | Action |  State |
+| Output | Action |  State (after popping) |
 |:-------------:|:-------------:|:-------------:|
 | 202| Pop() | <img src="images/Stack_0011.png" width="80%" height="80%"> |
 
-| Output | Action |  State |
+| Output | Action |  State (after popping) |
 |:-------------:|:-------------:|:-------------:|
 | 2024| Pop() | <img src="images/Stack_0012.png" width="80%" height="80%"> |
 
-| Output | Action |  State |
+| Output | Action |  State (after popping) |
 |:-------------:|:-------------:|:-------------:|
 | 20249| Pop() | <img src="images/Stack_0013.png" width="80%" height="80%"> |
 
-| Output | Action |  State |
+| Output | Action |  State (after popping) |
 |:-------------:|:-------------:|:-------------:|
 | 202490| Pop() | <img src="images/Stack_0014.png" width="80%" height="80%"> |
 
-| Output | Action |  State |
+| Output | Action |  State (after popping) |
 |:-------------:|:-------------:|:-------------:|
 | 2024902| Pop() | <img src="images/Stack_0015.png" width="80%" height="80%"> |
 
-| Output | Action |  State |
+| Output | Action |  State (after popping) |
 |:-------------:|:-------------:|:-------------:|
 | 20249024| Pop() | <img src="images/Stack_0016.png" width="80%" height="80%"> |
 
@@ -396,5 +396,5 @@ Double the capacity of the stack when it is full.
 ```
 
 
-**Please complete the code (Q1-Q5) in StackPush() in src/Stack.c and then answer the questions in Quiz 2 (Week 3) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+**Please complete the code (Q1-Q5) in StackPush() in src/Stack.c and then answer the questions in Quiz 2 (Week 3) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
