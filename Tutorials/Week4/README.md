@@ -522,13 +522,13 @@ The code is in src/lex.c.
 
 **Our tutors will NOT answer the following questions in tutorials.**
 
-**(1). Debug this program in VS Code and follow the recursive functions in expr.c step by step during parsing "9000 + (6 * 4)".**
+**(1) Debug this program in VS Code and follow the recursive functions in expr.c step by step during parsing "9000 + (6 * 4)".**
 
      You can set a breaking point inside the function Expression() during dedugging this program.
 
-**(2). The parse tree is introduced to help us further understand the code of the syntax parser in [src/expr.c](./src/expr.c).**
+**(2) The parse tree is introduced to help us further understand the code of the syntax parser in [src/expr.c](./src/expr.c).**
 
-**(3). Complete Q1-Q10 in the parse tree with function names you discovered during debugging and then answer the questions in Quiz 3 (Week 4) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+**(3) Complete Q1-Q10 in the parse tree with function names you discovered during debugging and then answer the questions in Quiz 3 (Week 4) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
 <img src="ParseTree.png" width="100%" height="100%">
 
