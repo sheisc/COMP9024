@@ -422,7 +422,7 @@ and write the same program from scratch by yourselves in your own way.
 
 **Our tutors will NOT answer the following questions in tutorials.**
 
-**Please complete the following code in Q1-Q5 and then answer the questions in Quiz 1 (Week 2) in [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
+**Please complete the following code in Q1-Q5 and then answer the questions in Quiz 1 (Week 2) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
 ```C
 #include <stdio.h>
