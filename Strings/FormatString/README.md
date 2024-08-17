@@ -12,7 +12,7 @@
     3.  How to use va_start() and va_arg() to access the unnamed parameters of a variadic function
         (see OurPrintf_V1(const char *fmt, ...) in OurPrintf32.c)
 
-                                             COMP9024 24T2
+                                             COMP9024
 
  *******************************************************************/
 ``` 

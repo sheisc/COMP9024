@@ -9,7 +9,7 @@
     2.  How to explore a maze with a randomised algorithm 
         (flip a coin or roll a dice)
 
-                                             COMP9024 24T2
+                                             COMP9024
 
  *******************************************************************/
 ``` 

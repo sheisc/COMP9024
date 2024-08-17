@@ -13,7 +13,7 @@
     4.  How to print the string representations of an integer x 
         (based on a stack)
 
-                                             COMP9024 24T2
+                                             COMP9024
 
  *******************************************************************/
 ``` 

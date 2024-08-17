@@ -13,7 +13,7 @@
     4.  How to find the longest prefix match in a Trie
 
 
-                                             COMP9024 24T2
+                                             COMP9024
 
  *******************************************************************/
 ``` 

@@ -11,7 +11,7 @@
     3.  How to delete data in a self-balancing binary search tree
 
 
-                                             COMP9024 24T2
+                                             COMP9024
 
  *******************************************************************/
 ``` 

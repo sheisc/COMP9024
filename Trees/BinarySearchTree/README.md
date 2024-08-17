@@ -12,7 +12,7 @@
 
     4.  How to search for a value in a binary search tree
 
-                                             COMP9024 24T2
+                                             COMP9024
 
  *******************************************************************/
 ``` 

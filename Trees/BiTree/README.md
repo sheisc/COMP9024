@@ -8,7 +8,7 @@
 
     2.  How to evaluate an expression (based on its tree representation)
 
-                                             COMP9024 24T2
+                                             COMP9024
 
  *******************************************************************/
 ``` 

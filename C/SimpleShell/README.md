@@ -8,7 +8,7 @@
 
     2.  How to implement a simple shell program by calling fork() and execlp() directly
 
-                                                                    COMP9024 24T2
+                                                                    COMP9024
 
  ******************************************************************************************/
 
