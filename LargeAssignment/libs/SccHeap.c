@@ -13,7 +13,7 @@
 
   (6) Refer to the comments in TestSccHeap.c for an overview.
 
-                                                                COMP9024 24T2
+                                                                COMP9024
  ***************************************************************************************/
 #include <assert.h>
 #include <stdio.h>

@@ -168,7 +168,7 @@ int main(int argc, char **argv) {
   EmitIntroduction("#                                                                                    #");
   EmitIntroduction("# 3. Three columns in the assembly file: assembly code, IR, and comments             #"); 
   EmitIntroduction("#                                                                                    #");  
-  EmitIntroduction("#                                                           COMP9024 24T2            #");
+  EmitIntroduction("#                                                           COMP9024                 #");
   EmitIntroduction("# ***********************************************************************************#\n\n\n");    
   
 
