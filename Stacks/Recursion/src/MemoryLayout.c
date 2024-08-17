@@ -93,7 +93,7 @@ Its memory layout:
 
 More details are discussed in COMP9024/C/AccessMemory
 
-                                                    COMP9024 24T2
+                                                    COMP9024
  */
 #include <stdio.h>    // for printf()
 #include <stdlib.h>   // for malloc() and free()
