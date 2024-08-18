@@ -5,7 +5,7 @@
 #   make
 # (2) Use 'feh' to display / view the images
 #   make view
-#                                                                 COMP9024 24T2
+#                                                                 COMP9024
 ####################################################################################
 PROJ_ROOT_PATH = $(shell pwd)
 

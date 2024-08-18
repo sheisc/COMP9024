@@ -6,7 +6,7 @@
 #                                                                                    #
 # 3. Three columns in the assembly file: assembly code, IR, and comments             #
 #                                                                                    #
-#                                                           COMP9024 24T2            #
+#                                                           COMP9024                 #
 # ***********************************************************************************#
 
 
