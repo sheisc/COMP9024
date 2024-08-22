@@ -94,6 +94,14 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ## 3 The process of bubble sort
 
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
+
+```sh
+Week2$ make view
+```
+
+Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+
 | Initial |
 |:-------------:|
 |<img src="images/BubbleSort_0000.png" width="80%" height="80%">|
@@ -207,13 +215,7 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 |:-------------:|
 | <img src="images/BubbleSort_0023.png" width="80%" height="80%"> |
 
-**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
-```sh
-Week2$ make view
-```
-
-Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
 **In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
 
