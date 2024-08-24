@@ -207,32 +207,32 @@ long EvalExpression(AstExprNodePtr root) {
         // Postorder traversal
         long result = 0;
         switch (root->op) {
-            case TK_ADD:                
-                result = leftOperand + rightOperand;
-                EmitIR("%s = %s + %s\n", root->value.name, 
-                                         root->kids[0]->value.name, 
-                                         root->kids[1]->value.name);
-                break;
-            case TK_SUB:
-                result = leftOperand - rightOperand;
-                EmitIR("%s = %s - %s\n", root->value.name, 
-                                         root->kids[0]->value.name, 
-                                         root->kids[1]->value.name);              
-                break;
-            case TK_MUL:
-                result = leftOperand * rightOperand;
-                EmitIR("%s = %s * %s\n", root->value.name, 
-                                         root->kids[0]->value.name, 
-                                         root->kids[1]->value.name);             
-                break;
-            case TK_DIV:
-                result = leftOperand / rightOperand;
-                EmitIR("%s = %s / %s\n", root->value.name, 
-                                         root->kids[0]->value.name, 
-                                         root->kids[1]->value.name);               
-                break;
-            default:
-                break;              
+        case TK_ADD:                
+            result = leftOperand + rightOperand;
+            EmitIR("%s = %s + %s\n", root->value.name, 
+                                     root->kids[0]->value.name, 
+                                     root->kids[1]->value.name);
+            break;
+        case TK_SUB:
+            result = leftOperand - rightOperand;
+            EmitIR("%s = %s - %s\n", root->value.name, 
+                                     root->kids[0]->value.name, 
+                                     root->kids[1]->value.name);              
+            break;
+        case TK_MUL:
+            result = leftOperand * rightOperand;
+            EmitIR("%s = %s * %s\n", root->value.name, 
+                                     root->kids[0]->value.name, 
+                                     root->kids[1]->value.name);             
+            break;
+        case TK_DIV:
+            result = leftOperand / rightOperand;
+            EmitIR("%s = %s / %s\n", root->value.name, 
+                                     root->kids[0]->value.name, 
+                                     root->kids[1]->value.name);               
+            break;
+        default:
+            break;              
         }
         return result;
     } else {
