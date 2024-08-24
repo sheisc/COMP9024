@@ -181,7 +181,8 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 ```C
 // Storing information of a graph node
 struct GraphNode {
-    char name[MAX_ID_LEN + 1]; 
+    char name[MAX_ID_LEN + 1];
+    int onstack;
 };
 
 typedef long AdjMatrixElementTy;
@@ -232,6 +233,7 @@ struct Graph{
 
 static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
     visited[u] = 1;
+    pGraph->pNodes[u].onstack = 1;
     printf("visiting %s\n", pGraph->pNodes[u].name);
     
     static long i = 0;
@@ -244,18 +246,18 @@ static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
             DepthFirstSearch(pGraph, v, visited);
         }
     }
+    pGraph->pNodes[u].onstack = 0;
 }
 
 void RecursiveDFS(struct Graph *pGraph, long u) {
     int *visited = (int *) malloc(pGraph->n * sizeof(int));
-
+    //memset(visited, 0, sizeof(int) * pGraph->n);
     for (long v = 0; v < pGraph->n; v++) {
         visited[v] = 0;
+        pGraph->pNodes[v].onstack = 0;
     }
     GenOneImage(pGraph, "dfs", "images/RecursiveDFS", 0, visited);
-
     DepthFirstSearch(pGraph, u, visited);
-
     free(visited);
 }
 ```
