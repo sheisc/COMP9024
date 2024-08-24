@@ -4,4 +4,3 @@
 void Error(const char *format, ...);
 
 #endif
-
