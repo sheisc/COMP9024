@@ -12,7 +12,8 @@
 
 // Storing information of a graph node
 struct GraphNode {
-    char name[MAX_ID_LEN + 1]; 
+    char name[MAX_ID_LEN + 1];
+    int onstack;
 };
 
 struct Graph{
@@ -209,6 +210,7 @@ void NonRecursiveDFS(struct Graph *pGraph, long u) {
 
 static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
     visited[u] = 1;
+    pGraph->pNodes[u].onstack = 1;
     printf("visiting %s\n", pGraph->pNodes[u].name);
     
     static long i = 0;
@@ -221,6 +223,7 @@ static void DepthFirstSearch(struct Graph *pGraph, long u, int *visited) {
             DepthFirstSearch(pGraph, v, visited);
         }
     }
+    pGraph->pNodes[u].onstack = 0;
 }
 
 void RecursiveDFS(struct Graph *pGraph, long u) {
@@ -228,6 +231,7 @@ void RecursiveDFS(struct Graph *pGraph, long u) {
     //memset(visited, 0, sizeof(int) * pGraph->n);
     for (long v = 0; v < pGraph->n; v++) {
         visited[v] = 0;
+        pGraph->pNodes[v].onstack = 0;
     }
     GenOneImage(pGraph, "dfs", "images/RecursiveDFS", 0, visited);
     DepthFirstSearch(pGraph, u, visited);
@@ -325,13 +329,31 @@ void Graph2Dot(struct Graph *pGraph,
         //         }
         //     }
         // }
+
+        // for (long i = 0; i < pGraph->n; i++) {
+        //     if (displayVisited && visited && visited[i]) {
+        //         fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+        //     } else {
+        //         fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
+        //     }
+        // }
+
         for (long i = 0; i < pGraph->n; i++) {
             if (displayVisited && visited && visited[i]) {
-                fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+                if (pGraph->pNodes[i].onstack) {
+                    fprintf(dotFile, "\"%s\" [color=red] [shape=box]\n", pGraph->pNodes[i].name);
+                } else {
+                    fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+                }
             } else {
-                fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
+                if (pGraph->pNodes[i].onstack) {
+                    fprintf(dotFile, "\"%s\"  [shape=box]\n", pGraph->pNodes[i].name);
+                } else {
+                    fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
+                }
             }
-        }                
+        }
+
         fprintf(dotFile, "}\n");
         fclose(dotFile);
     }                
