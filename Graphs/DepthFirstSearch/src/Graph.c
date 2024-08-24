@@ -165,6 +165,7 @@ void RecursiveDFS(struct Graph *pGraph) {
     //memset(visited, 0, sizeof(int) * pGraph->n);
     for (long v = 0; v < pGraph->n; v++) {
         visited[v] = 0;
+        pGraph->pNodes[v].onstack = 0;
     }
 
     dfsImageCnt = 0;
