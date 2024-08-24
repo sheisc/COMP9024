@@ -166,13 +166,21 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
         x = x / base;
         printf("push %d\n", r);
         StackPush(pStack, r);
-    } while(x != 0);
+    } while (x != 0);
 ```
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
+
+```sh
+Week3$ make view
+```
+
+Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+
 |x| base | Remainder (r) | Quotient (x) |
 |:-------------:|:-------------:|:-------------:|:-------------:| 
 |2024| 10 | r = x % base | x = x / base|
 
-|x|r | Action |State  |
+|x|r | Action |State (initial) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |20249024| |  |<img src="images/Stack_0000.png" width="80%" height="80%"> |
 
@@ -244,13 +252,7 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 |:-------------:|:-------------:|:-------------:|
 | 20249024| Pop() | <img src="images/Stack_0016.png" width="80%" height="80%"> |
 
-**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
-```sh
-Week3$ make view
-```
-
-Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
 **In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
 
