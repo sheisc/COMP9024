@@ -65,3 +65,6 @@ clean:
 	find . -name "*.i" | xargs rm -f
 	find . -name "*.d" | xargs rm -f
 	find . -name "*.bc" | xargs rm -f
+	find ./images -name "*.dot" | xargs rm -f
+
+
