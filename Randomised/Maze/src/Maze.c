@@ -166,40 +166,40 @@ void ExploreMaze(void) {
             break;
         }        
         switch(pCurPos->state) {
-            case TO_RIGHT:
-                pCurPos->dirStr = rightArrowUnicodeStr;              
-                PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c + 1, TO_RIGHT);
-                // When this position becomes the top element on the stack,  
-                // we need to go downward.
-                pCurPos->state = TO_DOWN;
-                break;
-            case TO_DOWN:                
-                pCurPos->dirStr = downArrowUnicodeStr;
-                PushAdjacentPosition(pStack, pCurPos->r + 1, pCurPos->c, TO_RIGHT);
-                // When this position becomes the top element on the stack,  
-                // we need to go leftward.                
-                pCurPos->state = TO_LEFT;
-                break;
-            case TO_LEFT:
-                pCurPos->dirStr = leftArrowUnicodeStr;                
-                PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c - 1, TO_RIGHT);                
-                // When this position becomes the top element on the stack,  
-                // we need to go upward.                 
-                pCurPos->state = TO_UP;
-                break;
-            case TO_UP:
-                pCurPos->dirStr = upArrowUnicodeStr;
-                PushAdjacentPosition(pStack, pCurPos->r - 1, pCurPos->c, TO_RIGHT);
-                // When this position becomes the top element on the stack,  
-                // we have finished all directions.                  
-                pCurPos->state = FINISHED;
-                break;
-            case FINISHED:
-                pCurPos->dirStr = NULL;
-                StackPop(pStack);                
-                break;
-            default:
-                break;                                
+        case TO_RIGHT:
+            pCurPos->dirStr = rightArrowUnicodeStr;              
+            PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c + 1, TO_RIGHT);
+            // When this position becomes the top element on the stack,  
+            // we need to go downward.
+            pCurPos->state = TO_DOWN;
+            break;
+        case TO_DOWN:                
+            pCurPos->dirStr = downArrowUnicodeStr;
+            PushAdjacentPosition(pStack, pCurPos->r + 1, pCurPos->c, TO_RIGHT);
+            // When this position becomes the top element on the stack,  
+            // we need to go leftward.                
+            pCurPos->state = TO_LEFT;
+            break;
+        case TO_LEFT:
+            pCurPos->dirStr = leftArrowUnicodeStr;                
+            PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c - 1, TO_RIGHT);                
+            // When this position becomes the top element on the stack,  
+            // we need to go upward.                 
+            pCurPos->state = TO_UP;
+            break;
+        case TO_UP:
+            pCurPos->dirStr = upArrowUnicodeStr;
+            PushAdjacentPosition(pStack, pCurPos->r - 1, pCurPos->c, TO_RIGHT);
+            // When this position becomes the top element on the stack,  
+            // we have finished all directions.                  
+            pCurPos->state = FINISHED;
+            break;
+        case FINISHED:
+            pCurPos->dirStr = NULL;
+            StackPop(pStack);                
+            break;
+        default:
+            break;                                
         }
         PrintMaze(stepName);
     }
@@ -252,28 +252,28 @@ void ExploreMazeRandomly(void) {
         }
         //      
         switch(nextState) {
-            case TO_RIGHT:
-                pCurPos->dirStr = rightArrowUnicodeStr;
-                ______Q2______;
-                break;
-            case TO_DOWN:
-                pCurPos->dirStr = downArrowUnicodeStr;
-                ______Q3______;
-                break;
-            case TO_LEFT:
-                pCurPos->dirStr = leftArrowUnicodeStr;
-                ______Q4______;
-                break;
-            case TO_UP:
-                pCurPos->dirStr = upArrowUnicodeStr;
-                ______Q5______;
-                break;
-            case FINISHED:
-                pCurPos->dirStr = NULL;
-                StackPop(pStack);
-                break;
-            default:
-                break;
+        case TO_RIGHT:
+            pCurPos->dirStr = rightArrowUnicodeStr;
+            ______Q2______;
+            break;
+        case TO_DOWN:
+            pCurPos->dirStr = downArrowUnicodeStr;
+            ______Q3______;
+            break;
+        case TO_LEFT:
+            pCurPos->dirStr = leftArrowUnicodeStr;
+            ______Q4______;
+            break;
+        case TO_UP:
+            pCurPos->dirStr = upArrowUnicodeStr;
+            ______Q5______;
+            break;
+        case FINISHED:
+            pCurPos->dirStr = NULL;
+            StackPop(pStack);
+            break;
+        default:
+            break;
         }
         PrintMaze(stepName);
     }
