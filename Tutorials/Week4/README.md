@@ -46,6 +46,16 @@ Since variadic functions in C will be discussed in [COMP9024/Strings/FormatStrin
 
 you can skip the implementation details of the code in [COMP9024/Tutorials/Week4/src/error.c](./src/error.c) now.
 
+
+
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
+
+```sh
+Week4$ make view
+```
+
+Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+
 **eval() stands for EvalExpression() in the following diagrams.**
 
 | Initial |
@@ -104,13 +114,7 @@ you can skip the implementation details of the code in [COMP9024/Tutorials/Week4
 |:-------------:|
 | <img src="images/BiTree_0000.png" width="80%" height="80%"> |
 
-**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
-```sh
-Week4$ make view
-```
-
-Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
 
 ## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
