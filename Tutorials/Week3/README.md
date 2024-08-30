@@ -178,7 +178,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 |x| base | Remainder (r) | Quotient (x) |
 |:-------------:|:-------------:|:-------------:|:-------------:| 
-|2024| 10 | r = x % base | x = x / base|
+|20249024| 10 | r = x % base | x = x / base|
 
 |x|r | Action |State (initial) |
 |:-------------:|:-------------:|:-------------:|:-------------:|
