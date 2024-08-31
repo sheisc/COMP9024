@@ -26,15 +26,15 @@ If you reach a dead end, you need to backtrack by popping markers off the stack 
 
 | Initial | 
 |:-------------:|
-| <img src="images/Maze_0000.png" width="50%" height="50%"> |
+| <img src="diagrams/Maze_0000.png" width="50%" height="50%"> |
 
 | Exploring  |
 |:-------------:|
-|  <img src="images/Maze_0001.png" width="50%" height="50%"> |
+|  <img src="diagrams/Maze_0001.png" width="50%" height="50%"> |
 
 |  Completed  |
 |:-------------:|
-| <img src="images/Maze_0002.png" width="50%" height="50%"> |
+| <img src="diagrams/Maze_0002.png" width="50%" height="50%"> |
 
 This method ensures that every possible path is explored until the exit is found or all available paths are exhausted. 
 
@@ -112,6 +112,8 @@ Then, click **Run -> Start Debugging**
 |
 |── images
 |
+|── diagrams
+|
 └── .vscode              containing configuration files for Visual Studio Code
     |
     ├── launch.json      specifying which program to debug and with which debugger,
@@ -126,13 +128,36 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ## 3 The main procedure
 
-### 3.1 How to see more lines in the terminal in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+### 3.1 Make view
+
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
+
+```sh
+Week10$ make view
+```
+
+Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+
+| Initial |
+|:-------------:|
+| <img src="images/HtmlMaze_0000.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/HtmlMaze_0064.png" width="80%" height="80%"> |
+
+|Final|
+|:-------------:|
+| <img src="images/HtmlMaze_0152.png" width="80%" height="80%"> |
+
+
+### 3.2 How to see more lines in the terminal in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator -> Edit -> Preferences -> Display -> Scrollback lines)
 
-<img src="images/MoreLines.png" width="50%" height="50%">
+<img src="diagrams/MoreLines.png" width="50%" height="50%">
 
-### 3.2 Build and run the program from the command line interface
+### 3.3 Build and run the program from the command line interface
 
 
 ``` sh
@@ -301,7 +326,7 @@ It is a simple finite-state machine, with the following state transition:
 
  TO_RIGHT -> TO_DOWN -> TO_LEFT -> TO_UP -> FINISHED
 ```
-<img src="images/PositionState.png" width="50%" height="50%">
+<img src="diagrams/PositionState.png" width="50%" height="50%">
 
 
 **For more details about Deterministic Finite Automata (DFA) , please see [Programming Languages and Compilers (COMP3131/COMP9102)](https://webcms3.cse.unsw.edu.au/COMP3131/24T1/).**
@@ -357,40 +382,40 @@ void ExploreMaze(void) {
             break;
         }        
         switch(pCurPos->state) {
-            case TO_RIGHT:
-                pCurPos->dirStr = rightArrowUnicodeStr;              
-                PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c + 1, TO_RIGHT);
-                // When this position becomes the top element on the stack,  
-                // we need to go downward.
-                pCurPos->state = TO_DOWN;
-                break;
-            case TO_DOWN:                
-                pCurPos->dirStr = downArrowUnicodeStr;
-                PushAdjacentPosition(pStack, pCurPos->r + 1, pCurPos->c, TO_RIGHT);
-                // When this position becomes the top element on the stack,  
-                // we need to go leftward.                
-                pCurPos->state = TO_LEFT;
-                break;
-            case TO_LEFT:
-                pCurPos->dirStr = leftArrowUnicodeStr;                
-                PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c - 1, TO_RIGHT);                
-                // When this position becomes the top element on the stack,  
-                // we need to go upward.                 
-                pCurPos->state = TO_UP;
-                break;
-            case TO_UP:
-                pCurPos->dirStr = upArrowUnicodeStr;
-                PushAdjacentPosition(pStack, pCurPos->r - 1, pCurPos->c, TO_RIGHT);
-                // When this position becomes the top element on the stack,  
-                // we have finished all directions.                  
-                pCurPos->state = FINISHED;
-                break;
-            case FINISHED:
-                pCurPos->dirStr = NULL;
-                StackPop(pStack);                
-                break;
-            default:
-                break;                                
+        case TO_RIGHT:
+            pCurPos->dirStr = rightArrowUnicodeStr;              
+            PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c + 1, TO_RIGHT);
+            // When this position becomes the top element on the stack,  
+            // we need to go downward.
+            pCurPos->state = TO_DOWN;
+            break;
+        case TO_DOWN:                
+            pCurPos->dirStr = downArrowUnicodeStr;
+            PushAdjacentPosition(pStack, pCurPos->r + 1, pCurPos->c, TO_RIGHT);
+            // When this position becomes the top element on the stack,  
+            // we need to go leftward.                
+            pCurPos->state = TO_LEFT;
+            break;
+        case TO_LEFT:
+            pCurPos->dirStr = leftArrowUnicodeStr;                
+            PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c - 1, TO_RIGHT);                
+            // When this position becomes the top element on the stack,  
+            // we need to go upward.                 
+            pCurPos->state = TO_UP;
+            break;
+        case TO_UP:
+            pCurPos->dirStr = upArrowUnicodeStr;
+            PushAdjacentPosition(pStack, pCurPos->r - 1, pCurPos->c, TO_RIGHT);
+            // When this position becomes the top element on the stack,  
+            // we have finished all directions.                  
+            pCurPos->state = FINISHED;
+            break;
+        case FINISHED:
+            pCurPos->dirStr = NULL;
+            StackPop(pStack);                
+            break;
+        default:
+            break;                                
         }
         PrintMaze(stepName);
     }
@@ -452,28 +477,28 @@ void ExploreMazeRandomly(void) {
         }
         //
         switch(nextState) {
-            case TO_RIGHT:
-                pCurPos->dirStr = rightArrowUnicodeStr;
-                ______Q2______;
-                break;
-            case TO_DOWN:
-                pCurPos->dirStr = downArrowUnicodeStr;
-                ______Q3______;
-                break;
-            case TO_LEFT:
-                pCurPos->dirStr = leftArrowUnicodeStr;
-                ______Q4______;
-                break;
-            case TO_UP:
-                pCurPos->dirStr = upArrowUnicodeStr;
-                ______Q5______;
-                break;
-            case FINISHED:
-                pCurPos->dirStr = NULL;
-                StackPop(pStack);
-                break;
-            default:
-                break;
+        case TO_RIGHT:
+            pCurPos->dirStr = rightArrowUnicodeStr;
+            ______Q2______;
+            break;
+        case TO_DOWN:
+            pCurPos->dirStr = downArrowUnicodeStr;
+            ______Q3______;
+            break;
+        case TO_LEFT:
+            pCurPos->dirStr = leftArrowUnicodeStr;
+            ______Q4______;
+            break;
+        case TO_UP:
+            pCurPos->dirStr = upArrowUnicodeStr;
+            ______Q5______;
+            break;
+        case FINISHED:
+            pCurPos->dirStr = NULL;
+            StackPop(pStack);
+            break;
+        default:
+            break;
         }
         PrintMaze(stepName);
     }
@@ -519,3 +544,4 @@ X   X   X   X           X       X
 ```
 
 **Life will find a way out. We wish you all the best.**
+

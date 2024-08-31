@@ -61,3 +61,8 @@ clean:
 	find . -name "*.i" | xargs rm -f
 	find . -name "*.d" | xargs rm -f
 	find . -name "*.bc" | xargs rm -f
+	find ./images -name "*.dot" | xargs rm -f
+
+view:
+	find ./images -name "*.png" | sort | xargs feh -g 720x540 &
+
