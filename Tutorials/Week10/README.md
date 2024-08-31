@@ -142,11 +142,11 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 |:-------------:|
 | <img src="images/HtmlMaze_0000.png" width="80%" height="80%"> |
 
-||
+|Exploring|
 |:-------------:|
 | <img src="images/HtmlMaze_0064.png" width="80%" height="80%"> |
 
-|Final|
+|Completed|
 |:-------------:|
 | <img src="images/HtmlMaze_0152.png" width="80%" height="80%"> |
 
