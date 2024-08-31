@@ -377,32 +377,32 @@ void PreOrderTraversal2(BiTreeNodePtr root, NodeVisitor visit) {
         while (!StackIsEmpty(pStack)) {
             BiTreeNodePtr curNode = StackPeek(pStack);
             switch (curNode->state) {
-                case NS_FROM_UP:
-                    visit(curNode);
-                    cnt++;
-                    GenOneImage(root, "PreOrderTraversal2", "images/PreOrderTraversal2", cnt);        
-                    // When curNode becomes the top node again, it means we have visited its left sub-tree.
-                    curNode->state = NS_FROM_LEFT;
-                    // Push its left child (if existing)
-                    if (curNode->leftChild) {
-                        curNode->leftChild->state = NS_FROM_UP;
-                        StackPush(pStack, curNode->leftChild);
-                    }
-                    break;
-                case NS_FROM_LEFT:
-                    // When curNode becomes the top node again, it means we have visited its right sub-tree.
-                    curNode->state = NS_FROM_RIGHT;
-                    if (curNode->rightChild) {
-                        curNode->rightChild->state = NS_FROM_UP;
-                        StackPush(pStack, curNode->rightChild);
-                    }
-                    break;
-                case NS_FROM_RIGHT:
-                    // We can pop the node now
-                    StackPop(pStack);
-                    break;
-                default:
-                    break;
+            case NS_FROM_UP:
+                visit(curNode);
+                cnt++;
+                GenOneImage(root, "PreOrderTraversal2", "images/PreOrderTraversal2", cnt);        
+                // When curNode becomes the top node again, it means we have visited its left sub-tree.
+                curNode->state = NS_FROM_LEFT;
+                // Push its left child (if existing)
+                if (curNode->leftChild) {
+                    curNode->leftChild->state = NS_FROM_UP;
+                    StackPush(pStack, curNode->leftChild);
+                }
+                break;
+            case NS_FROM_LEFT:
+                // When curNode becomes the top node again, it means we have visited its right sub-tree.
+                curNode->state = NS_FROM_RIGHT;
+                if (curNode->rightChild) {
+                    curNode->rightChild->state = NS_FROM_UP;
+                    StackPush(pStack, curNode->rightChild);
+                }
+                break;
+            case NS_FROM_RIGHT:
+                // We can pop the node now
+                StackPop(pStack);
+                break;
+            default:
+                break;
             }
         }
       ReleaseStack(pStack);
@@ -425,33 +425,33 @@ void PostOrderTraversal2(BiTreeNodePtr root, NodeVisitor visit) {
         while (!StackIsEmpty(pStack)) {
             BiTreeNodePtr curNode = StackPeek(pStack);
             switch (curNode->state) {
-                case NS_FROM_UP:
-                    // when curNode becomes the top node again, it means we have visited its left sub-tree.          
-                    curNode->state = NS_FROM_LEFT;
-                    // Push its left child (if existing)
-                    if (curNode->leftChild) {
-                        curNode->leftChild->state = NS_FROM_UP;
-                        StackPush(pStack, curNode->leftChild);
-                    }
-                    break;
-                case NS_FROM_LEFT:
-                    // when curNode becomes the top node again, it means we have visited its right sub-tree.
-                    curNode->state = NS_FROM_RIGHT;
-                    // Push its right child (if existing)
-                    if (curNode->rightChild) {
-                        curNode->rightChild->state = NS_FROM_UP;
-                        StackPush(pStack, curNode->rightChild);
-                    }
-                    break;
-                case NS_FROM_RIGHT:
-                    visit(curNode);
-                    cnt++;
-                    GenOneImage(root, "PostOrderTraversal2", "images/PostOrderTraversal2", cnt);
-                    // We can pop the node now
-                    StackPop(pStack);
-                    break;
-                default:
-                    break;
+            case NS_FROM_UP:
+                // when curNode becomes the top node again, it means we have visited its left sub-tree.          
+                curNode->state = NS_FROM_LEFT;
+                // Push its left child (if existing)
+                if (curNode->leftChild) {
+                    curNode->leftChild->state = NS_FROM_UP;
+                    StackPush(pStack, curNode->leftChild);
+                }
+                break;
+            case NS_FROM_LEFT:
+                // when curNode becomes the top node again, it means we have visited its right sub-tree.
+                curNode->state = NS_FROM_RIGHT;
+                // Push its right child (if existing)
+                if (curNode->rightChild) {
+                    curNode->rightChild->state = NS_FROM_UP;
+                    StackPush(pStack, curNode->rightChild);
+                }
+                break;
+            case NS_FROM_RIGHT:
+                visit(curNode);
+                cnt++;
+                GenOneImage(root, "PostOrderTraversal2", "images/PostOrderTraversal2", cnt);
+                // We can pop the node now
+                StackPop(pStack);
+                break;
+            default:
+                break;
             }
         }
         ReleaseStack(pStack);
