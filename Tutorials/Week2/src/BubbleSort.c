@@ -43,7 +43,7 @@ void PrintArray(int *ptr, int n) {
 
 /*
     Bubble sort the n numbers pointed to by ptr.
-    The elements are sorted in an ascending order (from the least to the greatest).
+    The elements are sorted in ascending order (from the least to the greatest).
  */
 void BubbleSort(int *ptr, int n) {
     /*
