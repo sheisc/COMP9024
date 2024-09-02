@@ -352,12 +352,14 @@ i = 20, j = 24
 
 ## 4 Data structures 
 
+**Array in C**
+
 ```C
 // array in C    
 int arr[] = {30, 50, 20, 10, 60, 40};
 
 
-    Memory Layout:
+// Memory Layout:
 
     High Address
     
@@ -426,16 +428,16 @@ int arr[] = {30, 50, 20, 10, 60, 40};
 #### 4.1.4 arr[i] and *(arr+i)
 
 ```C
-        // access array elements via arr[i] 
-        for (int i = 0; i < len; i++) {
-            printf("%d ", arr[i]);
-        }
+    // access array elements via arr[i] 
+    for (int i = 0; i < len; i++) {
+        printf("%d ", arr[i]);
+    }
 
-        // access array elements via *(arr+i)
-        // *(arr+i) is equivalent to arr[i], where arr is an array
-        for (int i = 0; i < len; i++) {
-            printf("%d ", *(arr+i));
-        }
+    // access array elements via *(arr+i)
+    // *(arr+i) is equivalent to arr[i], where arr is an array
+    for (int i = 0; i < len; i++) {
+        printf("%d ", *(arr+i));
+    }
 ```            
 
 #### 4.1.5  li[-1] in Python (COMP9021)
