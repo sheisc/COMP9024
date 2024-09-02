@@ -237,6 +237,17 @@ where i $\in$ {0}
 |:-------------:|
 | <img src="images/BubbleSort_0023.png" width="80%" height="80%"> |
 
+**$\color{red}{\textsf{Summary}}$**
+
+where n is 6
+
+| Pass | i |  iMax   |
+|:-------------|:-------------|:-------------|
+| Pass 1 | {0, 1, 2, 3, 4} |  4   |
+| Pass 2 | {0, 1, 2, 3} |  3   |
+| Pass 3 | {0, 1, 2} |  2   |
+| Pass 4 | {0, 1} |  1   |
+| Pass 5 | {0} |  0   |
 
 ```C
 /*
