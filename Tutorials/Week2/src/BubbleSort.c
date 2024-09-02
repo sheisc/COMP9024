@@ -72,6 +72,54 @@ void BubbleSort(int *ptr, int n) {
     }
 }
 
+#if 0 
+int IsLess(int a, int b) {
+    return a < b;
+}
+
+int IsLarger(int a, int b) {
+    return a > b;
+}
+
+// Define a function pointer type, which points to a function
+typedef int (*ComparatorFuncPtr)(int, int);
+
+
+void BubbleSort2(int *ptr, int n, ComparatorFuncPtr compare) {
+    for (int iMax = n - 2; iMax >= 0; iMax--) {
+        for (int i = 0; ____Q1_____; _____Q2____) {
+            if (_____Q3_____) {
+                ____Q4____;
+            }
+        }       
+    }
+}
+
+int TestBubbleSort2(void) {    
+    int arr[] = {30, 50, 20, 10, 60, 40};
+    int len = sizeof(arr) / sizeof(arr[0]);
+    
+    // a function pointer variable which points to the function IsLarger()
+    ComparatorFuncPtr fptr = &IsLarger;    
+    printf("Before sorting:\n");
+    PrintArray(arr, len);
+    BubbleSort2(arr, len, fptr);
+    // in ascending order
+    printf("After sorting:\n");
+    PrintArray(arr, len);
+
+    // a function pointer variable which points to the function IsLess()
+    fptr = ____Q5____;    
+    printf("\nBefore sorting:\n");
+    PrintArray(arr, len);
+    BubbleSort2(arr, len, fptr);
+    // in descending order
+    printf("After sorting:\n");
+    PrintArray(arr, len);
+    return 0;
+}
+#endif
+
 int main(void) {    
     // Let the C compiler determine the number of array elements for us.
     int arr[] = {30, 50, 20, 10, 60, 40};
@@ -91,6 +139,9 @@ int main(void) {
     // The values of i and j are passed.
     Swap2(i, j);
     printf("i = %d, j = %d\n\n", i, j);
+
+    printf("After completing the code in Q1-Q5 (BubbleSort.c), please also uncomment line %d in %s:\n\n", (__LINE__ + 1), __FILE__);
+    //TestBubbleSort2();
     return 0;
 }
 
