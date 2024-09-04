@@ -426,7 +426,7 @@ where n is 6
 
 | Pass | i |  iMax   | Initial State |
 |:-------------|:-------------|:-------------|:-------------| 
-| Pass 4 | {0, 1} |  $\color{red}{1}$  |<img src="images/BubbleSort_0020.png" width="50%" height="50%"> |
+| Pass 4 | {0, 1} |  $\color{red}{1}$  |<img src="images/BubbleSort_0020.png" width="60%" height="60%"> |
 ```C
     for (int i = 0; i <= 1; i++) {
         if (ptr[i] > ptr[i+1]) {
@@ -437,7 +437,7 @@ where n is 6
 
 | Pass | i |  iMax   | Initial State |
 |:-------------|:-------------|:-------------|:-------------| 
-| Pass 5 | {0} |  $\color{red}{0}$  |<img src="images/BubbleSort_0022.png" width="35%" height="35%"> |
+| Pass 5 | {0} |  $\color{red}{0}$  |<img src="images/BubbleSort_0022.png" width="60%" height="60%"> |
 ```C
     for (int i = 0; i <= 0; i++) {
         if (ptr[i] > ptr[i+1]) {
