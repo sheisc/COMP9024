@@ -141,39 +141,259 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 where i $\in$ {0, 1, 2, 3, 4}
 
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison| <img src="images/BubbleSort_0001.png" width="80%" height="80%"> |if (ptr[ $\color{red}{0}$ ] > ptr[ $\color{red}{0}$+1 ]) {Swap(ptr + $\color{red}{0}$, ptr + $\color{red}{0}$ + 1);} |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison| <img src="images/BubbleSort_0001.png" width="80%" height="80%"> |
 
-| Operation | State  | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison, swap| <img src="images/BubbleSort_0002.png" width="80%" height="80%"> |if (ptr[ $\color{red}{1}$ ] > ptr[ $\color{red}{1}$+1 ]) {Swap(ptr + $\color{red}{1}$, ptr + $\color{red}{1}$ + 1);} |
+```C
+    if (ptr[0] > ptr[0 + 1]) {
+        Swap(ptr + 0, ptr + 0 + 1);
+    }
+```
+
+| Operation | State  | 
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0002.png" width="80%" height="80%"> |
 
 | Operation | State (after swapping)|
 |:-------------|:-------------:|
 || <img src="images/BubbleSort_0003.png" width="80%" height="80%"> |
 
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison, swap| <img src="images/BubbleSort_0004.png" width="80%" height="80%"> |if (ptr[ $\color{red}{2}$ ] > ptr[ $\color{red}{2}$+1 ]) {Swap(ptr + $\color{red}{2}$, ptr + $\color{red}{2}$ + 1);} |
+```C
+    if (ptr[1] > ptr[1 + 1]) {
+        Swap(ptr + 1, ptr + 1 + 1);
+    }
+```
+
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0004.png" width="80%" height="80%"> |
 
 | Operation | State (after swapping) |
 |:-------------|:-------------:|
 | | <img src="images/BubbleSort_0005.png" width="80%" height="80%"> |
 
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison| <img src="images/BubbleSort_0006.png" width="80%" height="80%"> |if (ptr[ $\color{red}{3}$ ] > ptr[ $\color{red}{3}$+1 ]) {Swap(ptr + $\color{red}{3}$, ptr + $\color{red}{3}$ + 1);} |
+```C
+    if (ptr[2] > ptr[2 + 1]) {
+        Swap(ptr + 2, ptr + 2 + 1);
+    }
+```
 
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison, swap| <img src="images/BubbleSort_0007.png" width="80%" height="80%"> |if (ptr[ $\color{red}{4}$ ] > ptr[ $\color{red}{4}$+1 ]) {Swap(ptr + $\color{red}{4}$, ptr + $\color{red}{4}$ + 1);} |
+| Operation | State |
+|:-------------|:-------------:|
+|comparison| <img src="images/BubbleSort_0006.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[3] > ptr[3 + 1]) {
+        Swap(ptr + 3, ptr + 3 + 1);
+    }
+```
+
+| Operation | State | 
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0007.png" width="80%" height="80%"> |
 
 | Operation | State (after swapping) |
 |:-------------|:-------------:|
 | | <img src="images/BubbleSort_0008.png" width="80%" height="80%"> |
 
+```C
+    if (ptr[4] > ptr[4 + 1]) {
+        Swap(ptr + 4, ptr + 4 + 1);
+    }
+```
+
 **Put the repeated operations (i.e., if statements) into a loop statement**
+```C
+for (int i = 0; i <= 4; i++) {
+    if (ptr[i] > ptr[i+1]) {
+        Swap(ptr + i, ptr + i + 1);
+    }
+}
+```
+
+**$\color{red}{\textsf{Pass 2}}$**
+
+where i $\in$ {0, 1, 2, 3}
+
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0009.png" width="80%" height="80%"> |
+
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0010.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[0] > ptr[0 + 1]) {
+        Swap(ptr + 0, ptr + 0 + 1);
+    }
+```
+
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0011.png" width="80%" height="80%"> |
+
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0012.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[1] > ptr[1 + 1]) {
+        Swap(ptr + 1, ptr + 1 + 1);
+    }
+```
+
+| Operation | State |
+|:-------------|:-------------:|
+|comparison| <img src="images/BubbleSort_0013.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[2] > ptr[2 + 1]) {
+        Swap(ptr + 2, ptr + 2 + 1);
+    }
+```
+
+
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0014.png" width="80%" height="80%"> |
+
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0015.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[3] > ptr[3 + 1]) {
+        Swap(ptr + 3, ptr + 3 + 1);
+    }
+```
+
+**Put the repeated operations (i.e., if statements) into a loop statement**
+```C
+for (int i = 0; i <= 3; i++) {
+    if (ptr[i] > ptr[i+1]) {
+        Swap(ptr + i, ptr + i + 1);
+    }
+}
+```
+
+**$\color{red}{\textsf{Pass 3}}$**
+
+where i $\in$ {0, 1, 2}
+
+| Operation | State |
+|:-------------|:-------------:|
+|comparison, swap| <img src="images/BubbleSort_0016.png" width="80%" height="80%"> |
+
+| Operation | State (after swapping) |
+|:-------------|:-------------:|
+| | <img src="images/BubbleSort_0017.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[0] > ptr[0 + 1]) {
+        Swap(ptr + 0, ptr + 0 + 1);
+    }
+```
+
+| Operation | State | 
+|:-------------|:-------------:|
+|comparison| <img src="images/BubbleSort_0018.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[1] > ptr[1 + 1]) {
+        Swap(ptr + 1, ptr + 1 + 1);
+    }
+```
+
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison | <img src="images/BubbleSort_0019.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[2] > ptr[2 + 1]) {
+        Swap(ptr + 2, ptr + 2 + 1);
+    }
+```
+
+
+**Put the repeated operations (i.e., if statements) into a loop statement**
+```C
+for (int i = 0; i <= 2; i++) {
+    if (ptr[i] > ptr[i+1]) {
+        Swap(ptr + i, ptr + i + 1);
+    }
+}
+```
+
+**$\color{red}{\textsf{Pass 4}}$**
+
+where i $\in$ {0, 1}
+
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison | <img src="images/BubbleSort_0020.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[0] > ptr[0 + 1]) {
+        Swap(ptr + 0, ptr + 0 + 1);
+    }
+```
+
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison | <img src="images/BubbleSort_0021.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[1] > ptr[1 + 1]) {
+        Swap(ptr + 1, ptr + 1 + 1);
+    }
+```
+
+**Put the repeated operations (i.e., if statements) into a loop statement**
+```C
+for (int i = 0; i <= 1; i++) {
+    if (ptr[i] > ptr[i+1]) {
+        Swap(ptr + i, ptr + i + 1);
+    }
+}
+```
+
+
+**$\color{red}{\textsf{Pass 5}}$**
+
+where i $\in$ {0}
+
+| Operation | State  |
+|:-------------|:-------------:|
+|comparison | <img src="images/BubbleSort_0022.png" width="80%" height="80%"> |
+
+```C
+    if (ptr[0] > ptr[0 + 1]) {
+        Swap(ptr + 0, ptr + 0 + 1);
+    }
+```
+
+| Final (in ascending order) |
+|:-------------:|
+| <img src="images/BubbleSort_0023.png" width="80%" height="80%"> |
+
+**Put the repeated operations (i.e., if statements) into a loop statement**
+```C
+for (int i = 0; i <= 0; i++) {
+    if (ptr[i] > ptr[i+1]) {
+        Swap(ptr + i, ptr + i + 1);
+    }
+}
+```
+
+**$\color{red}{\textsf{Summary}}$**
+
+where n is 6
+
+| Pass | i |  iMax   | Initial State |
+|:-------------|:-------------|:-------------|:-------------| 
+| Pass 1 | {0, 1, 2, 3, 4} |  $\color{red}{4}$   |<img src="images/BubbleSort_0001.png" width="80%" height="80%"> |
 ```C
     for (int i = 0; i <= 4; i++) {
         if (ptr[i] > ptr[i+1]) {
@@ -182,41 +402,9 @@ where i $\in$ {0, 1, 2, 3, 4}
     }
 ```
 
-**$\color{red}{\textsf{Pass 2}}$**
-
-where i $\in$ {0, 1, 2, 3}
-
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison, swap| <img src="images/BubbleSort_0009.png" width="80%" height="80%"> |if (ptr[ $\color{red}{0}$ ] > ptr[ $\color{red}{0}$+1 ]) {Swap(ptr + $\color{red}{0}$, ptr + $\color{red}{0}$ + 1);} |
-
-| Operation | State (after swapping) |
-|:-------------|:-------------:|
-| | <img src="images/BubbleSort_0010.png" width="80%" height="80%"> |
-
-
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison, swap| <img src="images/BubbleSort_0011.png" width="80%" height="80%"> |if (ptr[ $\color{red}{1}$ ] > ptr[ $\color{red}{1}$+1 ]) {Swap(ptr + $\color{red}{1}$, ptr + $\color{red}{1}$ + 1);} |
-
-| Operation | State (after swapping) |
-|:-------------|:-------------:|
-| | <img src="images/BubbleSort_0012.png" width="80%" height="80%"> |
-
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison| <img src="images/BubbleSort_0013.png" width="80%" height="80%"> |if (ptr[ $\color{red}{2}$ ] > ptr[ $\color{red}{2}$+1 ]) {Swap(ptr + $\color{red}{2}$, ptr + $\color{red}{2}$ + 1);} |
-
-
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison, swap| <img src="images/BubbleSort_0014.png" width="80%" height="80%"> |if (ptr[ $\color{red}{3}$ ] > ptr[ $\color{red}{3}$+1 ]) {Swap(ptr + $\color{red}{3}$, ptr + $\color{red}{3}$ + 1);} |
-
-| Operation | State (after swapping) |
-|:-------------|:-------------:|
-| | <img src="images/BubbleSort_0015.png" width="80%" height="80%"> |
-
-**Put the repeated operations (i.e., if statements) into a loop statement**
+| Pass | i |  iMax   | Initial State |
+|:-------------|:-------------|:-------------|:-------------| 
+| Pass 2 | {0, 1, 2, 3} |  $\color{red}{3}$   |<img src="images/BubbleSort_0009.png" width="70%" height="70%"> |
 ```C
     for (int i = 0; i <= 3; i++) {
         if (ptr[i] > ptr[i+1]) {
@@ -225,28 +413,9 @@ where i $\in$ {0, 1, 2, 3}
     }
 ```
 
-**$\color{red}{\textsf{Pass 3}}$**
-
-where i $\in$ {0, 1, 2}
-
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison, swap| <img src="images/BubbleSort_0016.png" width="80%" height="80%"> |if (ptr[ $\color{red}{0}$ ] > ptr[ $\color{red}{0}$+1 ]) {Swap(ptr + $\color{red}{0}$, ptr + $\color{red}{0}$ + 1);} |
-
-| Operation | State (after swapping) |
-|:-------------|:-------------:|
-| | <img src="images/BubbleSort_0017.png" width="80%" height="80%"> |
-
-| Operation | State | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison| <img src="images/BubbleSort_0018.png" width="80%" height="80%"> |if (ptr[ $\color{red}{1}$ ] > ptr[ $\color{red}{1}$+1 ]) {Swap(ptr + $\color{red}{1}$, ptr + $\color{red}{1}$ + 1);} |
-
-| Operation | State  | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison | <img src="images/BubbleSort_0019.png" width="80%" height="80%"> |if (ptr[ $\color{red}{2}$ ] > ptr[ $\color{red}{2}$+1 ]) {Swap(ptr + $\color{red}{2}$, ptr + $\color{red}{2}$ + 1);} |
-
-
-**Put the repeated operations (i.e., if statements) into a loop statement**
+| Pass | i |  iMax   | Initial State |
+|:-------------|:-------------|:-------------|:-------------| 
+| Pass 3 | {0, 1, 2} |  $\color{red}{2}$   |<img src="images/BubbleSort_0016.png" width="60%" height="60%"> |
 ```C
     for (int i = 0; i <= 2; i++) {
         if (ptr[i] > ptr[i+1]) {
@@ -255,19 +424,9 @@ where i $\in$ {0, 1, 2}
     }
 ```
 
-**$\color{red}{\textsf{Pass 4}}$**
-
-where i $\in$ {0, 1}
-
-| Operation | State  | in C |
-|:-------------|:-------------:|:-------------:|
-|comparison | <img src="images/BubbleSort_0020.png" width="80%" height="80%"> | if (ptr[ $\color{red}{0}$ ] > ptr[ $\color{red}{0}$+1 ]) {Swap(ptr + $\color{red}{0}$, ptr + $\color{red}{0}$ + 1);} |
-
-| Operation | State  |in C |
-|:-------------|:-------------:|:-------------:|
-|comparison | <img src="images/BubbleSort_0021.png" width="80%" height="80%"> |if (ptr[ $\color{red}{1}$ ] > ptr[ $\color{red}{1}$+1 ]) {Swap(ptr + $\color{red}{1}$, ptr + $\color{red}{1}$ + 1);} |
-
-**Put the repeated operations (i.e., if statements) into a loop statement**
+| Pass | i |  iMax   | Initial State |
+|:-------------|:-------------|:-------------|:-------------| 
+| Pass 4 | {0, 1} |  $\color{red}{1}$  |<img src="images/BubbleSort_0020.png" width="50%" height="50%"> |
 ```C
     for (int i = 0; i <= 1; i++) {
         if (ptr[i] > ptr[i+1]) {
@@ -276,21 +435,9 @@ where i $\in$ {0, 1}
     }
 ```
 
-
-**$\color{red}{\textsf{Pass 5}}$**
-
-where i $\in$ {0}
-
-| Operation | State  |in C |
-|:-------------|:-------------:|:-------------:|
-|comparison | <img src="images/BubbleSort_0022.png" width="80%" height="80%"> |if (ptr[ $\color{red}{0}$ ] > ptr[ $\color{red}{0}$+1 ]) {Swap(ptr + $\color{red}{0}$, ptr + $\color{red}{0}$ + 1);} |
-
-
-| Final (in ascending order) |
-|:-------------:|
-| <img src="images/BubbleSort_0023.png" width="80%" height="80%"> |
-
-**Put the repeated operations (i.e., if statements) into a loop statement**
+| Pass | i |  iMax   | Initial State |
+|:-------------|:-------------|:-------------|:-------------| 
+| Pass 5 | {0} |  $\color{red}{0}$  |<img src="images/BubbleSort_0022.png" width="35%" height="35%"> |
 ```C
     for (int i = 0; i <= 0; i++) {
         if (ptr[i] > ptr[i+1]) {
@@ -298,18 +445,6 @@ where i $\in$ {0}
         }
     }
 ```
-
-**$\color{red}{\textsf{Summary}}$**
-
-where n is 6
-
-| Pass | i |  iMax   | Loop in each pass | Initial State |
-|:-------------|:-------------|:-------------|:-------------|:-------------| 
-| Pass 1 | {0, 1, 2, 3, 4} |  $\color{red}{4}$   | for (int i = 0; i <= $\color{red}{4}$; i++) {if (ptr[i] > ptr[i+1]) {Swap(ptr + i, ptr + i + 1);} } | <img src="images/BubbleSort_0001.png" width="80%" height="80%"> |
-| Pass 2 | {0, 1, 2, 3} |  $\color{red}{3}$   |for (int i = 0; i <= $\color{red}{3}$; i++) {if (ptr[i] > ptr[i+1]) {Swap(ptr + i, ptr + i + 1);} } |<img src="images/BubbleSort_0009.png" width="70%" height="70%"> |
-| Pass 3 | {0, 1, 2} |  $\color{red}{2}$   |for (int i = 0; i <= $\color{red}{2}$; i++) {if (ptr[i] > ptr[i+1]) {Swap(ptr + i, ptr + i + 1);} } |<img src="images/BubbleSort_0016.png" width="60%" height="60%"> |
-| Pass 4 | {0, 1} |  $\color{red}{1}$   |for (int i = 0; i <= $\color{red}{1}$; i++) {if (ptr[i] > ptr[i+1]) {Swap(ptr + i, ptr + i + 1);} } |<img src="images/BubbleSort_0020.png" width="50%" height="50%"> |
-| Pass 5 | {0} |  $\color{red}{0}$   |for (int i = 0; i <= $\color{red}{0}$; i++) {if (ptr[i] > ptr[i+1]) {Swap(ptr + i, ptr + i + 1);} } |<img src="images/BubbleSort_0022.png" width="35%" height="35%"> |
 
 
 **Put the repeated operations (i.e., $\color{red}{for}$ statements) into a loop statement**
@@ -336,6 +471,7 @@ void BubbleSort(int *ptr, int n) {
     }
 }
 ```
+
 
 ### 3.2 make && ./main
 
