@@ -1,0 +1,14 @@
+digraph BubbleSort {
+rankdir="LR";
+"0x7fffffd33c90" [label="30"] 
+"0x7fffffd33c90" -> "0x7fffffd33c94" [style=invis] 
+"0x7fffffd33c94" [label="50"] 
+"0x7fffffd33c94" -> "0x7fffffd33c98" [style=invis] 
+"0x7fffffd33c98" [label="20"] 
+"0x7fffffd33c98" -> "0x7fffffd33c9c" [style=invis] 
+"0x7fffffd33c9c" [label="10"] 
+"0x7fffffd33c9c" -> "0x7fffffd33ca0" [style=invis] 
+"0x7fffffd33ca0" [label="60"] 
+"0x7fffffd33ca0" -> "0x7fffffd33ca4" [style=invis] 
+"0x7fffffd33ca4" [label="40"] 
+}
