@@ -91,41 +91,10 @@ Then, click **Run -> Start Debugging**
 ```
 Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
-## 3 Data structure and memory layout
 
-```C
+## 3 How to visualize stack operations
 
- Stack:
-
-                -----------------------                                    --------------
-                FieldName  FieldOffset                                     pItems[size-1]
-                -----------------------                                       ...
-  pStack -----> size         0                                             pItems[2]
-                top          8                                             pItems[1]
-                pItems      16           ----------------------------->    pItems[0]
-                -----------------------                                    ---------------  
-                    struct Stack                                        an array for storing items
-                                                                                                          
- 
- 
- In C:    
-
-      typedef long STACK_ITEM_T;
-
-      struct Stack {
-          // the current capacity size of a stack, in the number of items, not in bytes
-          long size;
-          // the stack top position
-          long top;
-          // pItems points to an array dynamically allocated in heap
-          STACK_ITEM_T *pItems;
-      };
-
-```
-
-## 4 How to visualize stack operations
-
-### 4.1 make && ./main
+### 3.1 make && ./main
 
 **In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
 
@@ -136,7 +105,7 @@ Stack2Dot$ make
 Stack2Dot$ ./main
 
 ```
-### 4.2 make view
+### 3.2 make view
 
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
@@ -145,4 +114,143 @@ Stack2Dot$ make view
 ```
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+
+
+||
+|:-------------:|
+| <img src="images/Stack_0000.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0001.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0002.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0003.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0004.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0005.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0006.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0007.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0008.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0009.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0010.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0011.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0012.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0013.png" width="80%" height="80%"> |
+
+
+||
+|:-------------:|
+| <img src="images/Stack_0014.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0015.png" width="80%" height="80%"> |
+
+
+
+||
+|:-------------:|
+| <img src="images/Stack_0016.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0017.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0018.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0019.png" width="80%" height="80%"> |
+
+
+
+||
+|:-------------:|
+| <img src="images/Stack_0020.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0021.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0022.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0023.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0024.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0025.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0026.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0027.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0028.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0029.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0030.png" width="80%" height="80%"> |
+
+||
+|:-------------:|
+| <img src="images/Stack_0031.png" width="80%" height="80%"> |
+
+
+
+
+
 
