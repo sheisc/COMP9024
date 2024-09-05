@@ -21,7 +21,7 @@ COMP9024 is a 2-in-1 course.  It consists of two parts:
 
 Together, we have **Data Structures and Algorithms in C**.
 
-**We don’t have the luxury of learning the C programming language through traditional methods (like those used in [COMP1511](https://cgi.cse.unsw.edu.au/~cs1511/24T2/))**.
+We don’t have the luxury of learning the C programming language through traditional methods (like those used in [COMP1511](https://cgi.cse.unsw.edu.au/~cs1511/24T2/)).
 
 It means:
 
