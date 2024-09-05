@@ -176,6 +176,8 @@ Week3$ make view
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
+All of these images for visualizing algorithms are generated automatically in [COMP9024/Stacks/Stack2Dot](../../Stacks/Stack2Dot/README.md).
+
 |x| base | Remainder (r) | Quotient (x) |
 |:-------------:|:-------------:|:-------------:|:-------------:| 
 |20249024| 10 | r = x % base | x = x / base|
