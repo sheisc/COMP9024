@@ -129,6 +129,8 @@ Week2$ make view
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
+All of these images for visualizing algorithms are generated automatically in [COMP9024/Sorting/Array2Dot](../../Sorting/Array2Dot/README.md).
+
 | Initial |
 |:-------------:|
 |<img src="images/BubbleSort_0000.png" width="80%" height="80%">|
