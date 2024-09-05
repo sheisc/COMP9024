@@ -111,7 +111,7 @@ Array2Dot$ ./main
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
 ```sh
-Week2$ make view
+Array2Dot$ make view
 ```
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
