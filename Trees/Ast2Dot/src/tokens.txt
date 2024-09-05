@@ -1,0 +1,23 @@
+#ifndef TOKEN
+#error "You must define TOKEN macro before include this file"
+#endif
+
+//  Token Kind, Token Name
+
+// TK_NA,  Not Available,just place-holder
+TOKEN(TK_NA, "NotAvailable")
+TOKEN(TK_ADD, "+")
+TOKEN(TK_SUB, "-")
+TOKEN(TK_MUL, "*")
+TOKEN(TK_DIV, "/")
+// number
+TOKEN(TK_NUM, "num")
+// open/left parenthesis
+TOKEN(TK_LPAREN, "(")
+// close/right parenthesis
+TOKEN(TK_RPAREN, ")")
+// end of file
+TOKEN(TK_EOF, "EOF")
+
+
+
