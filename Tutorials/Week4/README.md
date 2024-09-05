@@ -56,6 +56,8 @@ Week4$ make view
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
+All of these images for visualizing algorithms are generated automatically in [COMP9024/Trees/Ast2Dot](../../Trees/Ast2Dot/README.md).
+
 **eval() stands for EvalExpression() in the following diagrams.**
 
 | Initial |
