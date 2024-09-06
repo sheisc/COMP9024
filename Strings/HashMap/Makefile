@@ -54,7 +54,7 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	${CC} ${CFLAGS} -c $< -o $@
 
 view:
-	find ./images -name "*.png" | sort | xargs feh -F &
+	find ./images -name "*.png" | sort | xargs feh -g 1280x720 &
 	
 #tree:
 #	python3 FractalTree.py &	
@@ -67,3 +67,6 @@ clean:
 	find . -name "*.i" | xargs rm -f
 	find . -name "*.d" | xargs rm -f
 	find . -name "*.bc" | xargs rm -f
+	find ./images -name "*.dot" | xargs rm -f
+
+

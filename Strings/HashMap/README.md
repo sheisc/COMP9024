@@ -803,7 +803,7 @@ static HashMapValueTy CopyValue(HashMapValueTy value) {
 }
 
 static void ReleaseValue(HashMapValueTy value) {
-    free(value);
+    ReleaseString(value);
 }
 
 static int IsEqual(HashMapKeyTy k1, HashMapKeyTy k2) {

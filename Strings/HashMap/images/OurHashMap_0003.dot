@@ -1,7 +1,0 @@
-digraph OurHashMap {
-"HashMap_c=8_n=4"
-"HashMap_c=8_n=4" -> {"ear"} [label="0"]
-"HashMap_c=8_n=4" -> {"apes"} [label="1"]
-"HashMap_c=8_n=4" -> {"apply"} [label="6"]
-"apply" -> {"ape"}
-}
