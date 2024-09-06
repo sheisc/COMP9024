@@ -234,12 +234,22 @@ void GenOneImage(Trie root, char *graphName, char *fileName, long seqNo) {
     system(command);
 }
 
+static void PrintOneNode(FILE *dotFile, Trie curNode, char ch) {
+    char *wordEndStr = "";
+    if (curNode->wordEnd) {
+        wordEndStr = "[color=red]";
+    }
+    //
+    fprintf(dotFile, "\"%p\" [label=\"%c\"] %s\n", curNode, ch, wordEndStr);   
+}
+
 /*
     digraph TrieInsert {
-    "0x587a961a42a0" -> {"0x587a961a4390"} [label="e"]
-    "0x587a961a4390" -> {"0x587a961a4480"} [label="a"]
-    "0x587a961a4480" -> {"0x587a961a4570"} [label="r"]
-    "0x587a961a4570" [color=red]
+    "0x587a961a42a0" -> {"0x587a961a4390"}
+    "0x587a961a4390" -> {"0x587a961a4480"}
+    "0x587a961a4480" -> {"0x587a961a4570"}
+    ...
+    "0x587a961a4570" [label="r"] [color=red]
     }
  */
 void Trie2Dot(Trie root, char *filePath, char *graphName) {
@@ -255,22 +265,18 @@ void Trie2Dot(Trie root, char *filePath, char *graphName) {
         struct Queue *pQueue = CreateQueue();
         if (root) {
             QueueEnqueue(pQueue, root);
+            PrintOneNode(dotFile, root, ' ');
             while (!QueueIsEmpty(pQueue)) {
                 Trie curNode = QueueDequeue(pQueue);
-                // output current node
-                if (curNode->wordEnd) {
-                    fprintf(dotFile, 
-                            "\"%p\" [color=red]\n",
-                            curNode);
-                }
                 // output the directed edge
                 for (int i = 0; i < ALPHABET_SIZE; i++) {
                     if (curNode->kids[i]) {
-                        fprintf(dotFile, "\"%p\" %s {\"%p\"} [label=\"%c\"]\n",
+                        PrintOneNode(dotFile, curNode->kids[i], FIRST_CHAR + i);
+                        // Print one edge
+                        fprintf(dotFile, "\"%p\" %s {\"%p\"}\n",
                                 curNode,
                                 edgeConnectorStr,                         
-                                curNode->kids[i],
-                                FIRST_CHAR + i);
+                                curNode->kids[i]);
                         QueueEnqueue(pQueue, curNode->kids[i]);                        
                     }
                 }                
