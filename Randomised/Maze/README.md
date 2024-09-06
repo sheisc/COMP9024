@@ -159,11 +159,11 @@ python3 MineSweeper.py
 
 | MineSweeper | 
 |:-------------:|
-| <img src="images/MineSweeper.png" width="80%" height="80%"> |
+| <img src="diagrams/MineSweeper.png" width="80%" height="80%"> |
 
 | Coordinate: (x, y) |  Array: (row, column) | 
 |:-------------:|:-------------:|
-| <img src="images/WorldCoordinate.png" width="80%" height="80%"> | <img src="images/RowCol.png" width="70%" height="70%"> |
+| <img src="diagrams/WorldCoordinate.png" width="80%" height="80%"> | <img src="diagrams/RowCol.png" width="70%" height="70%"> |
 
 ### Sidetracks: Cache
 
@@ -273,15 +273,15 @@ If you reach a dead end, you need to backtrack by popping markers off the stack 
 
 | Initial | 
 |:-------------:|
-| <img src="images/Maze_0000.png" width="50%" height="50%"> |
+| <img src="diagrams/Maze_0000.png" width="50%" height="50%"> |
 
 | Exploring  |
 |:-------------:|
-|  <img src="images/Maze_0001.png" width="50%" height="50%"> |
+|  <img src="diagrams/Maze_0001.png" width="50%" height="50%"> |
 
 |  Completed  |
 |:-------------:|
-| <img src="images/Maze_0002.png" width="50%" height="50%"> |
+| <img src="diagrams/Maze_0002.png" width="50%" height="50%"> |
 
 This method ensures that every possible path is explored until the exit is found or all available paths are exhausted. 
 
@@ -379,13 +379,36 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ## 3 The main procedure
 
-### 3.1 How to see more lines in the terminal in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+### 3.1 Make view
+
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
+
+```sh
+Maze$ make view
+```
+
+Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+
+| Initial |
+|:-------------:|
+| <img src="images/HtmlMaze_0000.png" width="80%" height="80%"> |
+
+|Exploring|
+|:-------------:|
+| <img src="images/HtmlMaze_0064.png" width="80%" height="80%"> |
+
+|Completed|
+|:-------------:|
+| <img src="images/HtmlMaze_0152.png" width="80%" height="80%"> |
+
+
+### 3.2 How to see more lines in the terminal in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator -> Edit -> Preferences -> Display -> Scrollback lines)
 
-<img src="images/MoreLines.png" width="50%" height="50%">
+<img src="diagrams/MoreLines.png" width="50%" height="50%">
 
-### 3.2 Build and run the program from the command line interface
+### 3.3 Build and run the program from the command line interface
 
 
 ``` sh

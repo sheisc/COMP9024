@@ -27,6 +27,8 @@ typedef enum {
 
 } PositionState;
 
+// Command line
+
 // see https://en.wikipedia.org/wiki/Arrows_(Unicode_block)
 static char *rightArrowUnicodeStr = "\u2192";
 static char *downArrowUnicodeStr = "\u2193";
@@ -35,6 +37,16 @@ static char *upArrowUnicodeStr = "\u2191";
 
 // https://www.fileformat.info/info/unicode/char/1f5fc/index.htm
 static char *towerUnicodeStr = "\U0001F5FC";
+
+// Html
+// see https://en.wikipedia.org/wiki/Arrows_(Unicode_block)
+static char *rightArrowHtml = "&#x2192;";
+static char *downArrowHtml = "&#x2193;";
+static char *leftArrowHtml = "&#x2190;";
+static char *upArrowHtml = "&#x2191;";
+
+// https://www.fileformat.info/info/unicode/char/1f5fc/index.htm
+static char *towerHtml = "&#128508;";
 
 
 // The information about a position in the maze
@@ -52,6 +64,7 @@ struct PositionInfo {
     PositionState state;
     // points to a unicode string, e.g., upArrowUnicodeStr
     char *dirStr;
+    char *dirStrHtml;
 };
 
 static int map[ROWS][COLS] = {
@@ -69,6 +82,7 @@ static int map[ROWS][COLS] = {
 
 static struct PositionInfo maze[ROWS][COLS];
 
+
 static struct PositionInfo *pStartPos = &maze[1][0];
 
 // For PrintMaze()
@@ -82,6 +96,7 @@ static void InitMaze(void) {
             maze[r][c].c = c;
             maze[r][c].state = NOT_VISITED;
             maze[r][c].dirStr = NULL;
+            maze[r][c].dirStrHtml = NULL;
         }
     }
     cnt = 0;
@@ -99,7 +114,7 @@ static int IsExitPosition(int r, int c) {
     }    
 }
 
-
+static long imgCnt = 0;
 
 static void PrintMaze(char *stepName) {
     
@@ -128,6 +143,9 @@ static void PrintMaze(char *stepName) {
             printf("\n\n");
     }
     printf("---------------------------------------------------------------\n\n\n");
+    // generate an image
+    MazeGenOneImage("maze", "images/HtmlMaze", imgCnt);
+    imgCnt++;
 }
 
 /*
@@ -145,15 +163,17 @@ static void PushAdjacentPosition(struct Stack *pStack, int r, int c, PositionSta
     }
 }
 
+
 /*
   State transition:
 
        TO_RIGHT -> TO_DOWN -> TO_LEFT -> TO_UP -> FINISHED
  */
-void ExploreMaze(void) {    
-    struct Stack *pStack = CreateStack();    
+void ExploreMaze(void) {
+    struct Stack *pStack = CreateStack();
     // Initialize the maze
     InitMaze();
+ 
     char *stepName = "Step";
     PrintMaze(stepName);
     // Push the start position
@@ -161,45 +181,50 @@ void ExploreMaze(void) {
     StackPush(pStack, pStartPos);
 
     while (!StackIsEmpty(pStack)) {
-        struct PositionInfo *pCurPos = StackPeek(pStack);        
+        struct PositionInfo *pCurPos = StackPeek(pStack);
         if (IsExitPosition(pCurPos->r, pCurPos->c)) {
             break;
-        }        
+        }
         switch(pCurPos->state) {
         case TO_RIGHT:
-            pCurPos->dirStr = rightArrowUnicodeStr;              
+            pCurPos->dirStr = rightArrowUnicodeStr;
+            pCurPos->dirStrHtml = rightArrowHtml;
             PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c + 1, TO_RIGHT);
-            // When this position becomes the top element on the stack,  
+            // When this position becomes the top element on the stack,
             // we need to go downward.
             pCurPos->state = TO_DOWN;
             break;
-        case TO_DOWN:                
+        case TO_DOWN:
             pCurPos->dirStr = downArrowUnicodeStr;
+            pCurPos->dirStrHtml = downArrowHtml;
             PushAdjacentPosition(pStack, pCurPos->r + 1, pCurPos->c, TO_RIGHT);
-            // When this position becomes the top element on the stack,  
-            // we need to go leftward.                
+            // When this position becomes the top element on the stack,
+            // we need to go leftward.
             pCurPos->state = TO_LEFT;
             break;
         case TO_LEFT:
-            pCurPos->dirStr = leftArrowUnicodeStr;                
-            PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c - 1, TO_RIGHT);                
-            // When this position becomes the top element on the stack,  
-            // we need to go upward.                 
+            pCurPos->dirStr = leftArrowUnicodeStr;
+            pCurPos->dirStrHtml = leftArrowHtml;
+            PushAdjacentPosition(pStack, pCurPos->r, pCurPos->c - 1, TO_RIGHT);
+            // When this position becomes the top element on the stack,
+            // we need to go upward.
             pCurPos->state = TO_UP;
             break;
         case TO_UP:
             pCurPos->dirStr = upArrowUnicodeStr;
+            pCurPos->dirStrHtml = upArrowHtml;
             PushAdjacentPosition(pStack, pCurPos->r - 1, pCurPos->c, TO_RIGHT);
             // When this position becomes the top element on the stack,  
-            // we have finished all directions.                  
+            // we have finished all directions.
             pCurPos->state = FINISHED;
             break;
         case FINISHED:
             pCurPos->dirStr = NULL;
-            StackPop(pStack);                
+            pCurPos->dirStrHtml = NULL;
+            StackPop(pStack);
             break;
         default:
-            break;                                
+            break;
         }
         PrintMaze(stepName);
     }
@@ -254,22 +279,27 @@ void ExploreMazeRandomly(void) {
         switch(nextState) {
         case TO_RIGHT:
             pCurPos->dirStr = rightArrowUnicodeStr;
+            pCurPos->dirStrHtml = rightArrowHtml;
             ______Q2______;
             break;
         case TO_DOWN:
             pCurPos->dirStr = downArrowUnicodeStr;
+            pCurPos->dirStrHtml = downArrowHtml;
             ______Q3______;
             break;
         case TO_LEFT:
             pCurPos->dirStr = leftArrowUnicodeStr;
+            pCurPos->dirStrHtml = leftArrowHtml;
             ______Q4______;
             break;
         case TO_UP:
             pCurPos->dirStr = upArrowUnicodeStr;
+            pCurPos->dirStrHtml = upArrowHtml;
             ______Q5______;
             break;
         case FINISHED:
             pCurPos->dirStr = NULL;
+            pCurPos->dirStrHtml = NULL;
             StackPop(pStack);
             break;
         default:
@@ -282,3 +312,78 @@ void ExploreMazeRandomly(void) {
     PrintMaze(stepName);
 }
 #endif
+
+
+
+////////////////////////////// Maze2Dot (for visualizing the algorithm) ///////////////////////////////////////
+
+static void PrintHtmlTable(FILE *dotFile) {
+    fprintf(dotFile, "<table border=\"0\" cellborder=\"1\" cellspacing=\"0\" cellpadding=\"0\"> \n");
+    for (int r = 0; r < ROWS; r++) {
+        fprintf(dotFile, "<tr> \n");
+        for (int c = 0; c < COLS; c++) {
+
+            if (maze[r][c].blocked) {
+                // Green block
+                fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"green\"></td> \n");
+            }
+            else if (IsExitPosition(r, c)) {
+                fprintf(dotFile, "<td width=\"30\" height=\"30\">%s</td> \n", towerHtml); 
+            }
+            else {
+                struct PositionInfo *pCurPos =  &(maze[r][c]);
+                if (pCurPos->dirStrHtml) {
+                    fprintf(dotFile, "<td width=\"30\" height=\"30\">%s</td> \n", pCurPos->dirStrHtml);
+                } else {
+                    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\"></td> \n"); 
+                }
+            }
+        }
+        fprintf(dotFile, "</tr> \n");
+    }
+    fprintf(dotFile, "</table> \n");
+}
+
+/*
+    Dot Files
+ */
+void Maze2Dot( char *filePath,
+               char *graphName,
+               int displayVisited) {
+    (void) displayVisited;
+
+    FILE *dotFile = fopen(filePath, "w");
+
+    if (dotFile) {
+        fprintf(dotFile, "digraph %s { \n", graphName);
+        fprintf(dotFile, "Maze [shape=none, margin=0, label=< \n");
+
+        PrintHtmlTable(dotFile);
+
+        fprintf(dotFile, "  >]; \n");
+        fprintf(dotFile, "} \n");
+
+        fclose(dotFile);
+    }
+}
+
+
+#define FILE_NAME_LEN  255
+
+void MazeGenOneImage(char *graphName, char *fileName, long seqNo) {
+    char dotFileName[FILE_NAME_LEN+1] = {0};
+    char pngFileName[FILE_NAME_LEN+1] = {0};
+    char command[(FILE_NAME_LEN+1)*4] = {0};
+    
+    snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
+    snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
+
+    Maze2Dot(dotFileName, graphName, 1);
+
+    snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
+
+    //printf("%s\n", command);
+
+    // Execute the command in a child process (fork() + exec() on Linux)
+    system(command);
+}

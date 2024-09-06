@@ -8,4 +8,6 @@ void ExploreMaze(void);
 
 void ExploreMazeRandomly(void);
 
+
+void MazeGenOneImage(char *graphName, char *fileName, long seqNo);
 #endif
