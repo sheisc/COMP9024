@@ -577,7 +577,7 @@ It is a simple finite-state machine, with the following state transition:
 
  TO_RIGHT -> TO_DOWN -> TO_LEFT -> TO_UP -> FINISHED
 ```
-<img src="images/PositionState.png" width="50%" height="50%">
+<img src="diagrams/PositionState.png" width="50%" height="50%">
 
 
 **For more details about Deterministic Finite Automata (DFA) , please see [Programming Languages and Compilers (COMP3131/COMP9102)](https://webcms3.cse.unsw.edu.au/COMP3131/24T1/).**
