@@ -720,61 +720,61 @@ Responds to specific events, common in interactive applications.
 
 ```JavaScript
 function processStackTopCell() {
-	if (stack.length != 0) {
-		cur = stack[stack.length - 1];
-		var i = cur.i;
-		var j = cur.j;
-		var cell = document.getElementById(cellName + (i * cols + j));
-		if (isExitPosition(i, j)) {
-			cell.innerHTML = "&#128508;"	
-			//cell.style.background = "url(flag.gif) no-repeat center center";
-			clearInterval(intervalId);
-			mybutton.disabled = false;
-			return;
-		}
-		switch (cur.state) {
-		case State.east:
-			cur.state = State.south;
-			cell.innerHTML = "&#x2192;"						
-			//cell.style.background = "url(east.gif) no-repeat center center";
-			pushPerviousCell(i, j + 1);
-			break;
-		case State.south:
-			cur.state = State.west;
-			cell.innerHTML = "&#x2193;"	
-			//cell.style.background = "url(south.gif) no-repeat center center";
-			pushPerviousCell(i + 1, j);
-			break;
-		case State.west:
-			cur.state = State.north;
-			cell.innerHTML = "&#x2190;"
-			//cell.style.background = "url(west.gif) no-repeat center center";
-			pushPerviousCell(i, j - 1);
-			break;
-		case State.north:
-			cur.state = State.finished;
-			cell.innerHTML = "&#x2191;"
-			//cell.style.background = "url(north.gif) no-repeat center center";
-			pushPerviousCell(i - 1, j);
-			break;
-		case State.finished:
-		    cell.innerHTML = " "	
-			cell.style.background = "white";
-			stack.pop();
-			break;
-		}
-	}
-	else {
-		clearInterval(intervalId);
-		mybutton.disabled = false;
-	}
+    if (stack.length != 0) {
+        cur = stack[stack.length - 1];
+        var i = cur.i;
+        var j = cur.j;
+        var cell = document.getElementById(cellName + (i * cols + j));
+        if (isExitPosition(i, j)) {
+            cell.innerHTML = "&#128508;"	
+            //cell.style.background = "url(flag.gif) no-repeat center center";
+            clearInterval(intervalId);
+            mybutton.disabled = false;
+            return;
+        }
+        switch (cur.state) {
+        case State.east:
+            cur.state = State.south;
+            cell.innerHTML = "&#x2192;"						
+            //cell.style.background = "url(east.gif) no-repeat center center";
+            pushPerviousCell(i, j + 1);
+            break;
+        case State.south:
+            cur.state = State.west;
+            cell.innerHTML = "&#x2193;"	
+            //cell.style.background = "url(south.gif) no-repeat center center";
+            pushPerviousCell(i + 1, j);
+            break;
+        case State.west:
+            cur.state = State.north;
+            cell.innerHTML = "&#x2190;"
+            //cell.style.background = "url(west.gif) no-repeat center center";
+            pushPerviousCell(i, j - 1);
+            break;
+        case State.north:
+            cur.state = State.finished;
+            cell.innerHTML = "&#x2191;"
+            //cell.style.background = "url(north.gif) no-repeat center center";
+            pushPerviousCell(i - 1, j);
+            break;
+        case State.finished:
+            cell.innerHTML = " "	
+            cell.style.background = "white";
+            stack.pop();
+            break;
+        }
+    }
+    else {
+    	clearInterval(intervalId);
+    	mybutton.disabled = false;
+    }
 }
 
 function starting() {
-	mybutton.disabled = true;
-	pushPerviousCell(1, 0, State.east);
+    mybutton.disabled = true;
+    pushPerviousCell(1, 0, State.east);
     // Event handler: the function processStackTopCell() will be called every 200 milliseconds
-	intervalId = setInterval("processStackTopCell()", 200);
+    intervalId = setInterval("processStackTopCell()", 200);
 }
 ```
 
