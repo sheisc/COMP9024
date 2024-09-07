@@ -18,7 +18,7 @@
 
 In this project, we will discuss how a [data stack](../../Stacks/Stack_LL/README.md) can be used to store thread IDs in a multi-threaded program and how to implement a simple web server in C.
 
-The Hypertext Transfer Protocol (HTTP) is the foundation of the World Wide Web, allowing webpages to be loaded through hypertext links.
+The Hypertext Transfer Protocol ([HTTP](https://en.wikipedia.org/wiki/HTTP)) is the foundation of the World Wide Web, allowing webpages to be loaded through hypertext links.
 
 The World Wide Web can be modeled as a huge [directed graph](../../Graphs/DirectedGraph/README.md).
 
