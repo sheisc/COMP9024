@@ -26,6 +26,9 @@ Imagine the smallest elements gradually "bubbling up" to the beginning of the ar
 
 while the larger elements "sink" to their appropriate positions at the bottom or end of the array. 
 
+| Bubble |
+|:-------------:|
+|<img src="diagrams/bubble.jpg" width="50%" height="50%">|
 
 **We don’t have the luxury of learning the C programming language through traditional methods (like those used in [COMP1511](https://cgi.cse.unsw.edu.au/~cs1511/24T2/))**.
 
