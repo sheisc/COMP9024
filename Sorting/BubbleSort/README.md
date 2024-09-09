@@ -124,7 +124,7 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
 ```sh
-Week2$ make view
+BubbleSort$ make view
 ```
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
