@@ -42,7 +42,7 @@ By leveraging the stack, the algorithm maintains a record of where it has been, 
 
 An animation in exploring a maze can be found at the following link.
 
-[Animation: Exploring a Maze in JavaScript](https://sheisc.github.io/slides/COMP9024/24T2/week10/maze.html)
+[Animation: Exploring a Maze in JavaScript](https://sheisc.github.io/slides/COMP9024/Maze/maze.html)
 
 In this tutorial, we study how to explore a maze with a non-randomised algorithm.
 
