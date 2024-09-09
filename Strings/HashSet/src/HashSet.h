@@ -9,7 +9,7 @@ struct HashSet *CreateHashSet(void);
 
 void ReleaseHashSet(struct HashSet* pSet);
 
-// test whether a HashMap contains a key
+// test whether a HashSet contains a key
 int HashSetContains(struct HashSet *pSet, HashSetKeyTy key);
 
 // insert a key
