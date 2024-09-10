@@ -54,7 +54,7 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 <a href="https://sheisc.github.io/slides/COMP9024/24T3/week01/slides.html" target="_blank">Introduction</a>
 
 
-Our First Project
+[COMP9024/C/HelloWorld](./C/HelloWorld/README.md)
 
 [COMP9024/Sorting/BubbleSort](./Sorting/BubbleSort/README.md)
 
