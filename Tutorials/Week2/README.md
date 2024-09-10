@@ -44,7 +44,9 @@ It means:
 
     **Please work hard in Week 1 and harder after that**.
 
+## Frequently asked questions about [CSE VLAB](https://taggi.cse.unsw.edu.au/FAQ/Really_quick_guide_to_VLAB/)
 
+Please refer to the project [COMP9024/C/HelloWorld](../../C/HelloWorld/README.md)
 
 ## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
