@@ -8,11 +8,13 @@
 
     2.  Array in C (used as data structures for bubble sort)
 
-    3.  The algorithm of bubble sort
+    3.  If, for/while, function, and call stack
 
-    4.  Pointer arithmetic in *(ptr + i)
+    4.  The algorithm of bubble sort
 
-    5.  Why Swap2(int a, int b) doesn't work?
+    5.  Pointer arithmetic in *(ptr + i)
+
+    6.  Why Swap2(int a, int b) doesn't work?
 
                                              COMP9024
 
@@ -30,19 +32,88 @@ while the larger elements "sink" to their appropriate positions at the bottom or
 |:-------------:|
 |<img src="diagrams/bubble.jpg" width="50%" height="50%">|
 
-**We don’t have the luxury of learning the C programming language through traditional methods (like those used in [COMP1511](https://cgi.cse.unsw.edu.au/~cs1511/24T2/))**.
+## How to access an array in C
 
-It means:
+```C
+#include <stdio.h>
 
-- On one hand, you pay for one course but get the content of two (C + Data Structures and Algorithms). 
+/*
+    ------          -----------------------------------------------------------
+        -------->   |  int   |  int   |  int   |  int   |    ...     |  int  |
+    ------          -----------------------------------------------------------
+    int *ptr         ptr[0]    ptr[1]                                 ptr[n-1]
+          
+                     *ptr     *(ptr+1)                               *(ptr+n-1)
+ */
+void PrintArray(int *ptr, int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", ptr[i]);
+    }
+    printf("\n");
+}
 
-    The overworked teaching team handles two courses in COMP9024 but only gets paid for one.
+int main(void) {    
+    // Let the C compiler determine the number of array elements for us.
+    int arr[] = {30, 50, 20, 10, 60, 40};
+    // calculate the number of elements
+    int len = sizeof(arr) / sizeof(arr[0]);
 
-- On the other hand, COMP9024 has a steep learning curve.
+    PrintArray(arr, len);
+      
+    return 0;
+}
+```
 
-    **Please work hard in Week 1 and harder after that**.
+## Call Stack
 
+```sh
 
+    Data Memory Layout
+
+ High Address
+              |             | 
+              |_____________|
+              |             | main()'s stack frame
+              |             |  
+              |     40      | arr[5]  
+              |     60      | arr[4]
+              |     10      | arr[3]
+              |     20      | arr[2]
+              |     50      | arr[1] 
+   +------->  |     30      | arr[0]    // arr can be seen as '&arr[0]', the address of arr[0]
+   +          |             |
+   +      len |     6       | 
+   +          |             |
+   +          |             |  
+   +          |             | 
+   +          |             | 
+   +          |_____________|         
+   +          |             |         
+   +      n   |      6      | 
+   +-----ptr  |   &arr[0]   |
+              | ret address | 
+              |             | PrintArray()'s stack frame
+              |             | 
+              |             |
+              |             | 
+              |             |              
+
+                Call Stack 
+```
+
+A Call Stack consists of stack frames (First-In-Last-Out), one for each called function.
+
+Each frame might contain the return address, local variables, parameters, and temporary variables.
+
+Since different functions can have different sets of local variables, their stack frames vary in size.
+
+Local variables are declared within a function and their names are only visible within that function's scope.
+
+The C calling convention specifies how functions receive parameters, return values, and manage the call stack.
+
+For example, on a 32-bit system (focusing on the x86 architecture), 
+
+arguments in a function call (e.g., i and j in Swap2(i, j)) are pushed onto the call stack from right to left.
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
@@ -978,13 +1049,7 @@ Low Address
 ```
 
 
-A Call Stack consists of stack frames (First-In-Last-Out), one for each called function.
 
-Each frame might contain the return address, local variables, parameters, and temporary variables.
-
-Since different functions can have different sets of local variables, their stack frames vary in size.
-
-Local variables are declared within a function and their names are only visible within that function's scope.
 
 
 
@@ -1057,9 +1122,5 @@ i = 20, j = 24
 Low Address
 ```
 
-The C calling convention specifies how functions receive parameters, return values, and manage the call stack.
 
-For example, on a 32-bit system (focusing on the x86 architecture), 
-
-arguments in a function call (e.g., i and j in Swap2(i, j)) are pushed onto the call stack from right to left.
 
