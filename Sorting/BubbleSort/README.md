@@ -59,7 +59,7 @@ int main(void) {
     int len = sizeof(arr) / sizeof(arr[0]);
 
     PrintArray(arr, len);
-      
+
     return 0;
 }
 ```
@@ -113,7 +113,7 @@ The C calling convention specifies how functions receive parameters, return valu
 
 For example, on a 32-bit system (focusing on the x86 architecture), 
 
-arguments in a function call (e.g., i and j in Swap2(i, j)) are pushed onto the call stack from right to left.
+arguments in a function call (e.g., arr and len in PrintArray(arr, len)) are pushed onto the call stack from right to left.
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
