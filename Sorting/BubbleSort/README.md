@@ -49,6 +49,13 @@ void PrintArray(int *ptr, int n) {
     for (int i = 0; i < n; i++) {
         printf("%d ", ptr[i]);
     }
+    /*
+    int k = 0;
+    while (k < n) {
+        printf("%d ", ptr[k]);
+        k++;  // k += 1;   k = k + 1;
+    }
+    */
     printf("\n");
 }
 
