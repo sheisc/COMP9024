@@ -30,6 +30,8 @@ static void PrintPrefix(STACK_ITEM_T base) {
     }
 }
 
+static long imgCount = 0;
+
 /*
     Print the hexadecimal/decimal/octal/binary representation (specified by base) of an integer x.
 
@@ -62,20 +64,31 @@ void PrintInteger(STACK_ITEM_T x, int base) {
     base = (base >= 0 ? base: -base);
 
     printf("------------- x = %ld, base = %d -------------\n\n", (long) x, base);
-    
+
+    StackGenOneImage(pStack, "Stack", "images/Stack", imgCount);
+    imgCount++;
+
     // push the remainders onto the stack
     do {
         r = x % base;
         x = x / base;
         printf("push %d\n", r);
         StackPush(pStack, r);
-    } while (x != 0);
+        //
+        StackGenOneImage(pStack, "Stack", "images/Stack", imgCount);
+        imgCount++;
+    } while(x != 0);
 
     printf("\n\nAfter popping (First In Last Out):\n\n");
     PrintPrefix(base);
     // output the remainders in the FILO order
-    while(!StackIsEmpty(pStack)) {
+    while (!StackIsEmpty(pStack)) {
         r = StackPop(pStack);
+        
+        //
+        StackGenOneImage(pStack, "Stack", "images/Stack", imgCount);
+        imgCount++;
+
         // see https://www.asciitable.com/
         if (r <= 9) {
             // 1 --> '1' (0x31, 49); ...
