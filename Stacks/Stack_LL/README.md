@@ -221,19 +221,19 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 |Quotient|Remainder | Action |State | 
 |:-------------:|:-------------:|:-------------|:-------------|
-|2| 0| Push(0) |<img src="images/Stack_0007.png" width="80%" height="80%"> |
+|2| 0| Push(0) |<img src="images/Stack_0007.png" width="100%" height="100%"> |
 
 |Quotient|Remainder | Action |State | 
 |:-------------:|:-------------:|:-------------|:-------------|
-|0| 2| Push(2) |<img src="images/Stack_0008.png" width="80%" height="80%"> |
+|0| 2| Push(2) |<img src="images/Stack_0008.png" width="100%" height="100%"> |
 
 | After pushing | 
 |:-------------|
-| <img src="images/Stack_0008.png" width="80%" height="80%"> |
+| <img src="images/Stack_0008.png" width="100%" height="100%"> |
 
 | Output | Action |  State |
 |:-------------:|:-------------:|:-------------|
-| 2| Pop() | <img src="images/Stack_0009.png" width="80%" height="80%"> |
+| 2| Pop() | <img src="images/Stack_0009.png" width="100%" height="100%"> |
 
 | Output | Action |  State |
 |:-------------:|:-------------:|:-------------|
