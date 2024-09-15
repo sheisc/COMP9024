@@ -1,5 +1,5 @@
 /*
-    A Linux Process's memory layout (userspace)
+    The Memory Layout of a Linux Process (userspace)
 
      |_____________________|
      |  command line args  |

@@ -8,7 +8,7 @@
 
     2.  Different versions/instances of the local variable 'n' in Factorial(n)
 
-    3.  A Linux Process's memory layout (userspace)
+    3.  The Memory Layout of a Linux Process (userspace)
 
                                                                     COMP9024
 
@@ -47,7 +47,7 @@ Each time a function is called, a new stack frame (containing the return address
 is created and pushed onto the call stack. 
 
 
-## A Linux Process's memory layout (userspace)
+## The Memory Layout of a Linux Process (userspace)
 
 
 A process can be thought of as an instance of a running program. 
@@ -89,7 +89,7 @@ which are allocated to the program as it runs.
      |_____________________| 
      |                     |
 
-    A Linux Process's memory layout (userspace)
+    The Memory Layout of a Linux Process (userspace)
 
 ```
 
