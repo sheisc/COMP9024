@@ -32,6 +32,9 @@ Pop
 The order in which an element added to or removed from a stack is described as First In Last Out (FILO)
 or Last In First Out (LIFO).
 
+|Stack|
+|:-------------:|
+| <img src="diagrams/Pingpong.jpg" width="60%" height="60%"> | 
 
 In this tutorial, we will delve into the creation of a stack and its practical application in generating string representations of integers.
 
