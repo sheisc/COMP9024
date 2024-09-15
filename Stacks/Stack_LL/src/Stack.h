@@ -19,8 +19,6 @@ STACK_ITEM_T StackPeek(struct Stack *pStack);
 
 int StackIsEmpty(struct Stack *pStack);
 
-void StackGenOneImage(struct Stack *pStack, char *graphName, char *fileName, long seqNo);
-
 #endif
 
 

@@ -125,57 +125,21 @@ Then, click **Run -> Start Debugging**
 ```
 Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
-## 3 Data structure and memory layout
 
-```C
-
- Stack:
-
-                ----------            ----------         ----------         ----------   
-  pStack -----> top         ------>     next      ------>  next      .....   next: NULL  
-                n                       item               item              item        
-                ----------            ----------         ----------         ----------  
-               struct Stack           StackNode          StackNode           StackNode   
-                                                                                                          
- 
- 
- In C:   // See COMP9024/Stacks/Stack_LL/src/Stack.c      
-
-  typedef long STACK_ITEM_T;
-
-  // the definition of a node in a linked list
-  typedef struct node {    
-      struct node *next;
-      STACK_ITEM_T item;
-  } StackNode;
-
-  // The type definition of our Stack (based on a linked list)
-  struct Stack {
-      // the top element on the stack; 
-      // i.e., the first element in the linked list
-      StackNode *top;    
-      // number of elements on stack
-      long n;
-  };
-
-  // API (Application Programming Interface) in "Stack.h"
-
-  struct Stack *CreateStack(void);
-
-  void ReleaseStack(struct Stack *pStack);
-
-  void StackPush(struct Stack *pStack, STACK_ITEM_T item);
-
-  STACK_ITEM_T StackPop(struct Stack *pStack);
-
-  STACK_ITEM_T StackPeek(struct Stack *pStack);
-
-  int StackIsEmpty(struct Stack *pStack);
+## 3 The push/pop operations in printing the string representations of an integer (e.g., x)
 
 
+### 3.1 make view
+
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
+
+```sh
+BubbleSort$ make view
 ```
 
-## 4 The push/pop operations in printing the string representations of an integer (e.g., x)
+Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+
+All of these images for visualizing algorithms are generated automatically in [COMP9024/Stacks/Stack2Dot](../Stack2Dot/README.md).
 
 ```C
     long x = 20249024;
@@ -263,6 +227,8 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 |:-------------:|:-------------:|:-------------|
 | 20249024| Pop() | <img src="images/Stack_0016.png" width="80%" height="80%"> |
 
+### 3.2 make && ./main
+
 ``` sh
 Stack_LL$ make
 
@@ -347,7 +313,58 @@ After popping (First In Last Out):
 
 ```
 
-### Algorithm
+
+## 4 Data structure and memory layout
+
+```C
+
+ Stack:
+
+                ----------            ----------         ----------         ----------   
+  pStack -----> top         ------>     next      ------>  next      .....   next: NULL  
+                n                       item               item              item        
+                ----------            ----------         ----------         ----------  
+               struct Stack           StackNode          StackNode           StackNode   
+                                                                                                          
+ 
+ 
+ In C:   // See COMP9024/Stacks/Stack_LL/src/Stack.c      
+
+  typedef long STACK_ITEM_T;
+
+  // the definition of a node in a linked list
+  typedef struct node {    
+      struct node *next;
+      STACK_ITEM_T item;
+  } StackNode;
+
+  // The type definition of our Stack (based on a linked list)
+  struct Stack {
+      // the top element on the stack; 
+      // i.e., the first element in the linked list
+      StackNode *top;    
+      // number of elements on stack
+      long n;
+  };
+
+  // API (Application Programming Interface) in "Stack.h"
+
+  struct Stack *CreateStack(void);
+
+  void ReleaseStack(struct Stack *pStack);
+
+  void StackPush(struct Stack *pStack, STACK_ITEM_T item);
+
+  STACK_ITEM_T StackPop(struct Stack *pStack);
+
+  STACK_ITEM_T StackPeek(struct Stack *pStack);
+
+  int StackIsEmpty(struct Stack *pStack);
+
+
+```
+
+## 5 Algorithm
 
 ```C
 void PrintInteger(STACK_ITEM_T x, int base) {
