@@ -1056,8 +1056,19 @@ Low Address
 ```
 
 
+### Is the function main() called ?
 
+When you run the executable file, the operating system loads it into memory and starts executing it. 
 
+After setting up the environment for your program (including initializing the stack, heap, and other runtime aspects), 
+
+the operating system then calls the main() function to begin execution of your program.
+
+When main() completes, it typically returns an integer value. 
+
+This return value is sent back to the operating system, which can use it to determine the success or failure of the program. 
+
+For example, returning 0 in main() usually indicates successful execution, while returning a non-zero value typically indicates an error (in Unix/Linux).
 
 
 
@@ -1129,5 +1140,109 @@ i = 20, j = 24
 Low Address
 ```
 
+## 7 How to bubble sort the array in descending order?
 
+### Ascending order
+
+```C
+void AscendingBubbleSort(int *ptr, int n) {
+    /*
+        1. iMax represents the max value of i in a pass
+          (in the following statement "if (ptr[i] > ptr[i+1])")
+
+        2. (n-1) passes needed in Bubble Sort
+     */
+    for (int iMax = n - 2; iMax >= 0; iMax--) { // (n-1) passes
+        // i is in [0, iMax] in the current pass
+        for (int i = 0; i <= iMax; i++) {
+            if (ptr[i] > ptr[i+1]) {
+                Swap(ptr + i, ptr + i + 1);
+            }
+        }
+    }
+}
+```
+
+### Descending order
+
+```C
+void DescendingBubbleSort(int *ptr, int n) {
+    /*
+        1. iMax represents the max value of i in a pass
+          (in the following statement "if (ptr[i] > ptr[i+1])")
+
+        2. (n-1) passes needed in Bubble Sort
+     */
+    for (int iMax = n - 2; iMax >= 0; iMax--) { // (n-1) passes
+        // i is in [0, iMax] in the current pass
+        for (int i = 0; i <= iMax; i++) {
+            if (ptr[i] < ptr[i+1]) {
+                Swap(ptr + i, ptr + i + 1);
+            }
+        }
+    }
+}
+```
+
+
+### Is there a better solution?
+
+**Call a function indirectly via a function pointer in C**
+
+```C
+int IsLess(int a, int b) {
+    return a < b;
+}
+
+int IsLarger(int a, int b) {
+    return a > b;
+}
+
+// Define a function pointer type, which points to a function
+
+// Method 1
+typedef int (*ComparatorFuncPtr)(int, int);
+
+// Method 2
+//typedef int ComparatorFunc(int, int);
+//typedef ComparatorFunc *ComparatorFuncPtr;
+
+void BubbleSort2(int *ptr, int n, ComparatorFuncPtr compare) {
+    // How to call a function indirectly via a function pointer ?
+    if (compare(ptr[i], ptr[i+1])) {
+
+    }
+
+    // Lab 1, assessed via Quiz 1 on Moodle
+    /*
+    for (int iMax = n - 2; iMax >= 0; iMax--) {
+        for (int i = 0; ____Q1_____; _____Q2____) {
+            if (_____Q3_____) {
+                ____Q4____;
+            }
+        }
+    }
+    */
+}
+
+int main(void) {
+    int arr[] = {30, 50, 20, 10, 60, 40};
+    // calculate the number of elements
+    int len = sizeof(arr) / sizeof(arr[0]);
+    
+    // Ascending order
+    BubbleSort2(arr, len, IsLarger);
+
+    // ...
+    
+    // Descending order
+    BubbleSort2(arr, len, IsLess);
+
+    // ...
+
+    return 0;
+}
+```
+
+[typedef in C](https://sheisc.github.io/slides/COMP9024/24T3/week01/slides.html#s58)
 
