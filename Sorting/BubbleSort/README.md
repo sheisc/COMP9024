@@ -1017,6 +1017,23 @@ int main(void) {
 
 ```
 
+### Is the function main() called ?
+
+When you run the executable file, the operating system loads it into memory and starts executing it. 
+
+After setting up the environment for your program (including initializing the stack, heap, and other runtime aspects), 
+
+the operating system then calls the main() function to begin execution of your program.
+
+When main() completes, it typically returns an integer value. 
+
+This return value is sent back to the operating system, which can use it to determine the success or failure of the program. 
+
+For example, returning 0 in main() usually indicates successful execution, while returning a non-zero value typically indicates an error (in Unix/Linux).
+
+
+
+
 **Call Stack**
 
 ```sh
@@ -1054,22 +1071,6 @@ int main(void) {
                 Call Stack
 Low Address
 ```
-
-
-### Is the function main() called ?
-
-When you run the executable file, the operating system loads it into memory and starts executing it. 
-
-After setting up the environment for your program (including initializing the stack, heap, and other runtime aspects), 
-
-the operating system then calls the main() function to begin execution of your program.
-
-When main() completes, it typically returns an integer value. 
-
-This return value is sent back to the operating system, which can use it to determine the success or failure of the program. 
-
-For example, returning 0 in main() usually indicates successful execution, while returning a non-zero value typically indicates an error (in Unix/Linux).
-
 
 
 ## 6 Why Swap2(int a, int b) doesn't work
