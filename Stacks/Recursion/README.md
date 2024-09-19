@@ -234,8 +234,12 @@ Data area
 
         In C:
 
-        long *pLong = (long *) malloc(sizeof(long));
-        *pLong = 2024;
+        void test(void) {
+            long *pLong = (long *) malloc(sizeof(long));
+            *pLong = 2024;
+            // ...
+            free(pLong);
+        }
 
         Memory Layout:
                        --------
