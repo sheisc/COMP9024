@@ -226,7 +226,7 @@ All of these images for visualizing algorithms are generated automatically in [C
 ```
 |x| base | Remainder (r) | Quotient (x) |
 |:-------------:|:-------------:|:-------------:|:-------------:| 
-|2024| 10 | r = x % base | x = x / base|
+|20249024| 10 | r = x % base | x = x / base|
 
 |Quotient|Remainder | Action |State | 
 |:-------------:|:-------------:|:-------------|:-------------|
