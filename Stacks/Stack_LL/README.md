@@ -19,6 +19,11 @@
 ``` 
 
 ### Struct in C
+
+The **struct** keyword in C is used to define user-defined data types.
+
+The **typedef** keyword is used to create an alias for existing data types, making code easier to read and maintain.
+
 ```C
 #include <stdio.h>
 #if 1
