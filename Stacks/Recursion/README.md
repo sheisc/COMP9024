@@ -42,7 +42,7 @@ int main(void) {
     return 0;
 }
 ```
-**How the function F() is called**
+**Function Call and Return**
 ```sh
  High Address
               |             | 
