@@ -403,6 +403,7 @@ Factorial(4) = 24
 ```
 
 ## 4 The Call Stack Memory Layout (ignoring return addresses and other information)
+
 <!--
 ```C
 long Factorial(long n) {
