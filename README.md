@@ -61,12 +61,11 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 
 ## Week 02
 
-[COMP9024/C/AccessMemory](./C/AccessMemory/README.md)
-
 [COMP9024/Stacks/Recursion](./Stacks/Recursion/README.md)
-
-[COMP9024/C/HowToMake](./C/HowToMake/README.md)
 
 [COMP9024/Stacks/Stack_LL](./Stacks/Stack_LL/README.md)
 
+[COMP9024/C/AccessMemory](./C/AccessMemory/README.md)
+
+[COMP9024/C/HowToMake](./C/HowToMake/README.md)
 
