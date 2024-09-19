@@ -77,7 +77,7 @@ Recursive functions are functions that call themselves directly or indirectly wi
 
 They are a powerful tool in programming, particularly for tasks that exhibit repetitive or self-similar structures. 
 
-```C
+```sh
 
 Factorial(n) = n! = 1 * 2 * 3 * ... * (n-1) * n
 
@@ -92,7 +92,9 @@ Recursive definition:
 Motivation:
 
     Break a large problem down into smaller, similar problems.
+```
 
+```C
 long Factorial(long n) {
     if (n <= 1) {
         // the base case for the recursive function
