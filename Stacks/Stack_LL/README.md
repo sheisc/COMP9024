@@ -18,6 +18,70 @@
  *******************************************************************/
 ``` 
 
+### Struct in C
+```C
+#include <stdio.h>
+#if 1
+// Method 1
+struct Date {
+    int day;
+    int month;
+    long year;
+};
+
+typedef struct Date DateTy;
+#else
+// Method 2
+typedef struct Date {
+    int day;
+    int month;
+    long year;
+} DateTy;
+#endif
+
+DateTy d2 = {19, 9, 2024};
+
+void PrintDateV1(struct Date date) {
+    printf("date.day = %d, date.month = %d, date.year = %ld\n",
+           date.day, 
+           date.month, 
+           date.year);
+}
+
+void PrintDateV2(struct Date *pDate) {
+    printf("pDate->day = %d, pDate->month = %d, pDate->year = %ld\n",
+           pDate->day, 
+           pDate->month, 
+           pDate->year);
+}
+
+int main(void) {
+    struct Date d = {19, 9, 2024};
+    PrintDateV1(d);
+    PrintDateV2(&d);
+    return 0;
+}
+```
+**Output**
+```sh
+$ gcc Struct.c -o Struct 
+$ ./Struct
+date.day = 19, date.month = 9, date.year = 2024
+pDate->day = 19, pDate->month = 9, pDate->year = 2024
+```
+**What is the difference between PrintDateV1() and PrintDateV2()?**
+```C
+void PrintDateV1(struct Date date) {
+    date.day = 20;
+    printf("date.day = %d, date.month = %d, date.year = %ld\n",
+           date.day, 
+           date.month, 
+           date.year);
+}
+```
+
+
+## Introduction
 A stack is an abstract data type primarily characterized by two fundamental operations:
 
 Push
