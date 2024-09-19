@@ -53,6 +53,9 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	@mkdir -p $(shell dirname $@)
 	${CC} ${CFLAGS} -c $< -o $@
 
+view:
+	find ./images -name "*.png" | sort | xargs feh -g 1024x768  &
+
 # clean all the files generated	
 clean:
 	rm -rf $(TARGET_EXE) $(BUILD_DIR) 
