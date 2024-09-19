@@ -16,6 +16,56 @@
 
 ``` 
 
+**Non recursive factorial function**
+
+
+```C
+#include <stdio.h>
+// !   Exclamation mark
+// F(n) = n! = 1 * 2 * 3 * ... * (n-1) * n
+long F(long n) {
+    long result = 1;
+    for (long i = 1; i <= n; i++) {
+        result = result * i;
+        // result *= i;
+    }
+    return result;
+}
+
+int main(void) {
+    long n = 4;
+    long x = F(n);
+    printf("F(%ld) = %ld\n", n, x);
+    return 0;
+}
+```
+**How the function F() is called**
+```sh
+ High Address
+              |             | 
+              |_____________|
+              |             | 
+              | return addr |
+              |             |
+          n   |     4       |  
+          x   |             |  main()'s stack frame  
+              |             |
+              |_____________| 
+              |             |
+          n   |     4       |  
+              | return addr |  F()'s stack frame
+              |             |
+      result  |             | 
+         i    |             |
+              |             |  
+              |             | 
+              |             |
+              |_____________| 
+              |             |
+                Call Stack
+Low Address
+```
+
 ## Recursive functions
 
 
@@ -26,7 +76,34 @@ They are a powerful tool in programming, particularly for tasks that exhibit rep
 
 However, when using recursion, it's important to understand how it interacts with the call stack.
 
+```C
 
+Factorial(n) = n! = 1 * 2 * 3 * ... * (n-1) * n
+
+Base case:     
+    
+    Factorial(n) = 1,    when n is 1
+
+Recursive definition:
+
+    Factorial(n) = 1 * 2 * 3 * ... * (n-1) * n
+                 = Factorial(n-1) * n
+Motivation:
+
+    Break a large problem down into smaller, similar problems.
+
+long Factorial(long n) {
+    if (n <= 1) {
+        // the base case for the recursive function
+        return 1;
+    } else {
+        // return Factorial(n-1) * n;
+        long result = Factorial(n - 1);
+        result = result * n;
+        return result;
+    }
+}
+```
 ## Call Stack
 
 Note that a call stack is a stack data structure (Last-In-First-Out) that stores information about the active functions of a running program, 
@@ -186,6 +263,30 @@ Data area
 
 ```
 
+**Linux Programmer's Manual**
+```sh
+$ man malloc
+
+#include <stdlib.h>
+
+// "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h"
+// typedef long unsigned int size_t;
+
+void *malloc(size_t size);
+void free(void *ptr);
+
+DESCRIPTION
+       The malloc() function allocates size bytes and returns a pointer to the
+       allocated  memory.   The memory is not initialized.  If size is 0, then
+       malloc() returns either NULL, or a unique pointer value that can  later
+       be successfully passed to free().
+
+       The  free()  function  frees  the memory space pointed to by ptr, which
+       must have been returned by a previous call to  malloc(),  calloc(),  or
+       realloc().   Otherwise, or if free(ptr) has already been called before,
+       undefined behavior occurs.  If ptr is NULL, no operation is performed.
+
+```
 
 **Call stack** is studied in [Stacks/Recursion](./README.md), 
 [lines 553-566 in LargeAssignment/src/stmt.c](../../LargeAssignment/src/stmt.c), [lines 498-581 in LargeAssignment/src/expr.c](../../LargeAssignment/src/expr.c), and [lines 142-161 and 284-288 in LargeAssignment/src/emit.c](../../LargeAssignment/src/emit.c).
