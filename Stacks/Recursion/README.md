@@ -77,8 +77,6 @@ Recursive functions are functions that call themselves directly or indirectly wi
 
 They are a powerful tool in programming, particularly for tasks that exhibit repetitive or self-similar structures. 
 
-However, when using recursion, it's important to understand how it interacts with the call stack.
-
 ```C
 
 Factorial(n) = n! = 1 * 2 * 3 * ... * (n-1) * n
@@ -107,6 +105,16 @@ long Factorial(long n) {
     }
 }
 ```
+However, when using recursion, it's important to understand how it interacts with the call stack.
+
+
+|   Call Stack    |  Program      |
+| :-----: | :----------: | 
+|<img src="diagrams/FactorialCallStack.png" width="100%" height="100%">| <img src="diagrams/FactorialCode.png" width="100%" height="100%">| 
+
+
+
+
 ## Call Stack
 
 Note that a call stack is a stack data structure (Last-In-First-Out) that stores information about the active functions of a running program, 
@@ -401,10 +409,10 @@ Factorial(4) = 24
 
 
 ```
-
+<!--
 ## 4 The Call Stack Memory Layout (ignoring return addresses and other information)
 
-<!--
+
 ```C
 long Factorial(long n) {
     printf("Factorial(): n = %ld, &n = %p\n", n, &n);
@@ -464,13 +472,9 @@ Low Address
 -->
 
 
-|   Call Stack    |  Program      |
-| :-----: | :----------: | 
-|<img src="diagrams/FactorialCallStack.png" width="100%" height="100%">| <img src="diagrams/FactorialCode.png" width="100%" height="100%">| 
 
 
-
-## 5 A similar test case in [our large assignment](../../LargeAssignment/tests/Factorial.scc)
+## 4 A similar test case in [our large assignment](../../LargeAssignment/tests/Factorial.scc)
 
 The following test case is not written in C, but with a simple language defined in our large assignment.
 
