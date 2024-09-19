@@ -110,7 +110,7 @@ long Factorial(long n) {
 However, when using recursion, it's important to understand how it interacts with the call stack.
 
 
-|   Call Stack    |  Program      |
+|   Call Stack (ignoring return addresses)   |  Program      |
 | :-----: | :----------: | 
 |<img src="diagrams/FactorialCallStack.png" width="100%" height="100%">| <img src="diagrams/FactorialCode.png" width="100%" height="100%">| 
 
