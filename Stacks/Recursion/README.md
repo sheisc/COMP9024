@@ -16,15 +16,18 @@
 
 ``` 
 
-**Non recursive factorial function**
+**Non-recursive factorial function**
 
 
 ```C
 #include <stdio.h>
+#include <assert.h>
+
 // !   Exclamation mark
 // F(n) = n! = 1 * 2 * 3 * ... * (n-1) * n
 long F(long n) {
     long result = 1;
+    // assert(n >= 0);
     for (long i = 1; i <= n; i++) {
         result = result * i;
         // result *= i;
@@ -396,6 +399,7 @@ Factorial(4) = 24
 ```
 
 ## 4 The Call Stack Memory Layout (ignoring return addresses and other information)
+<!--
 ```C
 long Factorial(long n) {
     printf("Factorial(): n = %ld, &n = %p\n", n, &n);
@@ -452,6 +456,14 @@ int main(void) {
                 Call Stack
 Low Address
 ```
+-->
+
+
+|   Call Stack    |  Program      |
+| :-----: | :----------: | 
+|<img src="diagrams/FactorialCallStack.png" width="100%" height="100%">| <img src="diagrams/FactorialCode.png" width="100%" height="100%">| 
+
+
 
 ## 5 A similar test case in [our large assignment](../../LargeAssignment/tests/Factorial.scc)
 
