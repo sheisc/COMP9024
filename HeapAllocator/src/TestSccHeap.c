@@ -63,46 +63,46 @@ SccFree(ptr80)
 #include <stdlib.h>
 
 /*
-  Concatenation
-
-  https://gcc.gnu.org/onlinedocs/cpp/Concatenation.html
-
-  Concatenation is often useful to merge two tokens into one while expanding macros.
-
-  The ‘##’ preprocessing operator performs token pasting. 
-  When a macro is expanded, 
-  the two tokens on either side of each ‘##’ operator are combined into a single token.
+    Concatenation
+  
+    https://gcc.gnu.org/onlinedocs/cpp/Concatenation.html
+  
+    Concatenation is often useful to merge two tokens into one while expanding macros.
+  
+    The ‘##’ preprocessing operator performs token pasting. 
+    When a macro is expanded, 
+    the two tokens on either side of each ‘##’ operator are combined into a single token.
  */
 
 #define ALLOC(n)                                                               \
-  printf("\nvoid * ptr%d = SccMalloc(%d)\n\n\t", (n), (n));                    \
-  void *ptr##n = SccMalloc(n);                                                 \
-  printList();
+    printf("\nvoid * ptr%d = SccMalloc(%d)\n\n\t", (n), (n));                  \
+    void *ptr##n = SccMalloc(n);                                               \
+    printList();
 
 #define FREE(n)                                                                \
-  printf("\nSccFree(ptr%d)\n\n\t", (n));                                       \
-  SccFree(ptr##n);                                                             \
-  printList();
+    printf("\nSccFree(ptr%d)\n\n\t", (n));                                     \
+    SccFree(ptr##n);                                                           \
+    printList();
 
 int main(void) {
-  printList();
+    printList();
 
-  printf("\n************** SccMalloc() *****************\n");
-  ALLOC(16);
-  ALLOC(32);
-  ALLOC(48);
-  ALLOC(64);
-  ALLOC(80);
+    printf("\n************** SccMalloc() *****************\n");
+    ALLOC(16);
+    ALLOC(32);
+    ALLOC(48);
+    ALLOC(64);
+    ALLOC(80);
 
-  printf("\n************** SccFree() *****************\n");
+    printf("\n************** SccFree() *****************\n");
 
-  FREE(32);
-  FREE(64);
-  FREE(16);
-  FREE(48);
-  FREE(80);
+    FREE(32);
+    FREE(64);
+    FREE(16);
+    FREE(48);
+    FREE(80);
 
-  return 0;
+    return 0;
 }
 
 
