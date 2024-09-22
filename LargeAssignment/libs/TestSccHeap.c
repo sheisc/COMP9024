@@ -58,32 +58,32 @@
 #include <stdlib.h>
 
 #define ALLOC(n)                                                               \
-  printf("void * ptr%d = SccMalloc(%d)\n", (n), (n));                          \
-  void *ptr##n = SccMalloc(n);                                                 \
-  printList();
+    printf("void * ptr%d = SccMalloc(%d)\n", (n), (n));                        \
+    void *ptr##n = SccMalloc(n);                                               \
+    printList();
 
 #define FREE(n)                                                                \
-  printf("SccFree(ptr%d)\n", (n));                                             \
-  SccFree(ptr##n);                                                             \
-  printList();
+    printf("SccFree(ptr%d)\n", (n));                                           \
+    SccFree(ptr##n);                                                           \
+    printList();
 
 int main(void) {
-  printList();
+    printList();
 
-  printf("************** SccMalloc() *****************\n");
-  ALLOC(16);
-  ALLOC(32);
-  ALLOC(48);
-  ALLOC(64);
-  ALLOC(80);
+    printf("************** SccMalloc() *****************\n");
+    ALLOC(16);
+    ALLOC(32);
+    ALLOC(48);
+    ALLOC(64);
+    ALLOC(80);
 
-  printf("************** SccFree() *****************\n");
+    printf("************** SccFree() *****************\n");
 
-  FREE(32);
-  FREE(64);
-  FREE(16);
-  FREE(48);
-  FREE(80);
+    FREE(32);
+    FREE(64);
+    FREE(16);
+    FREE(48);
+    FREE(80);
 
-  return 0;
+    return 0;
 }

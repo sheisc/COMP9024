@@ -1,14 +1,12 @@
 #ifndef SCC_LIB_H
 #define SCC_LIB_H
 
-
-typedef char  SCC_INT_8;
+typedef char SCC_INT_8;
 typedef short SCC_INT_16;
-typedef int   SCC_INT_32;
-typedef long  SCC_INT_64;
+typedef int SCC_INT_32;
+typedef long SCC_INT_64;
 
-typedef long  SCC_INT_T;
-
+typedef long SCC_INT_T;
 
 // <, <=, >, >=, ==, !=
 SCC_INT_T SccLess(SCC_INT_T a, SCC_INT_T b);
@@ -32,7 +30,7 @@ SCC_INT_T SccLogicNot(SCC_INT_T a);
 // SCC_INT_32 SccRead32(char *base, SCC_INT_T offset);
 // SCC_INT_64 SccRead64(char *base, SCC_INT_T offset);
 
-SCC_INT_T  SccRead8(char *base, SCC_INT_T offset);
+SCC_INT_T SccRead8(char *base, SCC_INT_T offset);
 SCC_INT_T SccRead16(char *base, SCC_INT_T offset);
 SCC_INT_T SccRead32(char *base, SCC_INT_T offset);
 SCC_INT_T SccRead64(char *base, SCC_INT_T offset);
@@ -42,6 +40,5 @@ void SccWrite8(char *base, SCC_INT_T offset, SCC_INT_8 val);
 void SccWrite16(char *base, SCC_INT_T offset, SCC_INT_16 val);
 void SccWrite32(char *base, SCC_INT_T offset, SCC_INT_32 val);
 void SccWrite64(char *base, SCC_INT_T offset, SCC_INT_64 val);
-
 
 #endif
