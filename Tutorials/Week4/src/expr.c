@@ -23,7 +23,7 @@ static int tmpNo;
 static int NewTemp(void) { return tmpNo++; }
 
 /*
-  Create an Ast node for an expression.
+    Create an Ast node for an expression.
  */
 AstExprNodePtr CreateAstExprNode(TokenKind tk, Value *pVal, AstExprNodePtr left,
                                  AstExprNodePtr right) {
@@ -39,9 +39,9 @@ AstExprNodePtr CreateAstExprNode(TokenKind tk, Value *pVal, AstExprNodePtr left,
 }
 
 /*
-  PrimaryExpression:
-      NUM
-      (Expression)
+    PrimaryExpression:
+        NUM
+        (Expression)
  */
 static AstExprNodePtr PrimaryExpression(void) {
     AstExprNodePtr expr = NULL;
@@ -59,15 +59,15 @@ static AstExprNodePtr PrimaryExpression(void) {
 }
 
 /*
-  Here, mop stands for a multiplicative operator.
-
-  mop:
-              *
-              /
-
-  MultiplicativeExpression:
-          PrimaryExpression
-          PrimaryExpression  mop PrimaryExpression  ...   mop PrimaryExpression
+    Here, mop stands for a multiplicative operator.
+  
+    mop:
+                *
+                /
+  
+    MultiplicativeExpression:
+            PrimaryExpression
+            PrimaryExpression  mop PrimaryExpression  ...   mop PrimaryExpression
  */
 static AstExprNodePtr MultiplicativeExpression(void) {
     AstExprNodePtr left;
@@ -89,16 +89,16 @@ static AstExprNodePtr MultiplicativeExpression(void) {
 }
 
 /*
-  Here, aop stands for an additive operator.
-
-  aop:
-              +
-              -
-
-  AdditiveExpression:
-        MultiplicativeExpression
-        MultiplicativeExpression  aop MultiplicativeExpression  ...   aop
-  MultiplicativeExpression
+    Here, aop stands for an additive operator.
+  
+    aop:
+                +
+                -
+  
+    AdditiveExpression:
+          MultiplicativeExpression
+          MultiplicativeExpression  aop MultiplicativeExpression  ...   aop
+    MultiplicativeExpression
  */
 static AstExprNodePtr AdditiveExpression(void) {
     AstExprNodePtr left;
@@ -111,19 +111,19 @@ static AstExprNodePtr AdditiveExpression(void) {
         Current Token
 
         Let's call MultiplicativeExpression() to parse the first
-       MultiplicativeExpression in an AdditiveExpression.
+        MultiplicativeExpression in an AdditiveExpression.
         MultiplicativeExpression() will return a sub-tree for "9000"
      */
     left = MultiplicativeExpression();
     /*
-      Now, the curToken points to '+' (i.e, TK_ADD)
-
-      9000  +  ( 6  *  4 )
-            ^
-            ^
-            Current Token
-
-      Parse "aop MultiplicativeExpression" if they are in the input stream
+        Now, the curToken points to '+' (i.e, TK_ADD)
+  
+        9000  +  ( 6  *  4 )
+              ^
+              ^
+              Current Token
+  
+        Parse "aop MultiplicativeExpression" if they are in the input stream
      */
     while (curToken.kind == TK_SUB || curToken.kind == TK_ADD) {
         Value value;
@@ -138,31 +138,31 @@ static AstExprNodePtr AdditiveExpression(void) {
         // skip '+' or '-'
         NEXT_TOKEN;
         /*
-          Now, the curToken points to '('
-
-          9000  +  ( 6  *  4 )
-                   ^
-                   ^
-                   Current Token
-
-          Call MultiplicativeExpression() to parse the right operand "(6 * 4)"
-          Again, it will return a sub-tree for "(6 * 4)"
+            Now, the curToken points to '('
+  
+            9000  +  ( 6  *  4 )
+                     ^
+                     ^
+                     Current Token
+  
+            Call MultiplicativeExpression() to parse the right operand "(6 * 4)"
+            Again, it will return a sub-tree for "(6 * 4)"
         */
         expr->kids[0] = left;
         expr->kids[1] = MultiplicativeExpression();
         /*
-          If the current token is '+' or '-', The while-loop will iterate once
-          more. Otherwise, the while-loop will stop, meaning our parser has
-          recognized an additive expression in the input stream.
-
-          In this simple example, now, the current token is TK_EOF (end of
-          file).
-
-          9000  +  ( 6  *  4 )
-                                ^
-                                ^
-                                Current Token
-
+            If the current token is '+' or '-', The while-loop will iterate once
+            more. Otherwise, the while-loop will stop, meaning our parser has
+            recognized an additive expression in the input stream.
+  
+            In this simple example, now, the current token is TK_EOF (end of
+            file).
+  
+            9000  +  ( 6  *  4 )
+                                  ^
+                                  ^
+                                  Current Token
+  
          */
         left = expr;
     }
@@ -178,8 +178,8 @@ void ReleaseAstExpr(AstExprNodePtr root) {
 }
 
 /*
-  Expression:
-      AdditiveExpression
+    Expression:
+        AdditiveExpression
   */
 AstExprNodePtr Expression(void) { return AdditiveExpression(); }
 
@@ -230,3 +230,5 @@ long EvalExpression(AstExprNodePtr root) {
         return 0;
     }
 }
+
+

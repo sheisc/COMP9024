@@ -11,11 +11,11 @@ static int curChar = ' ';
 static NEXT_CHAR_FUNC NextChar = defaultNextChar;
 
 /*
-  Run the following command and
-  take a look at the output (i.e., src/lex.i) of the C preprocessor.
-
-  Tutorials/Week4$ gcc -E src/lex.c -o src/lex.i
-
+    Run the following command and
+    take a look at the output (i.e., src/lex.i) of the C preprocessor.
+  
+    Tutorials/Week4$ gcc -E src/lex.c -o src/lex.i
+  
  */
 static char *tokenNames[] = {
 #define TOKEN(kind, name) name,
@@ -101,3 +101,5 @@ void InitLexer(NEXT_CHAR_FUNC next) {
         NextChar = next;
     }
 }
+
+

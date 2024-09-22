@@ -48,17 +48,17 @@ static int NextCharFromMem(void) {
 #if 0
 // get the next char from an input file
 static int NextCharFromInputFile(void) {
-  /*
-    $ man fgetc
-
-    int fgetc(FILE *stream);
-
-    fgetc()  reads  the  next character from stream and 
-    returns it as an unsigned char cast to an int, 
-    or EOF on end of file or error.
-   */
-  int ch = fgetc(stdin);
-  return ch;
+    /*
+      $ man fgetc
+  
+      int fgetc(FILE *stream);
+  
+      fgetc()  reads  the  next character from stream and 
+      returns it as an unsigned char cast to an int, 
+      or EOF on end of file or error.
+     */
+    int ch = fgetc(stdin);
+    return ch;
 }
 #endif
 
