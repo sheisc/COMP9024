@@ -1,25 +1,24 @@
-printStrs(strs){
-  long i;
-  long s;
-  i = 0;
-  // assume the first one is not NULL
-  do {
-    s = SccRead64(strs, i*8);
-    if (s)
-      puts(s);
-    i = i + 1;
-  } while(s);
+printStrs(strs) {
+    long i;
+    long s;
+    i = 0;
+    // assume the first one is not NULL
+    do {
+        s = SccRead64(strs, i * 8);
+        if (s) {
+            puts(s);
+        }
+        i = i + 1;
+    } while (s);
 }
 
-main(argc, argv, env){
-  output(argc);
-  // Display command-line arguments
-  printStrs(argv);
-  // '\n'
-  putchar(10);	
-  // Display environment variables
-  printStrs(env);
-  return 0;
+main(argc, argv, env) {
+    output(argc);
+    // Display command-line arguments
+    printStrs(argv);
+    // '\n'
+    putchar(10);
+    // Display environment variables
+    printStrs(env);
+    return 0;
 }
-
-

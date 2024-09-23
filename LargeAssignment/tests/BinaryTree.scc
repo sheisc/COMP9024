@@ -8,7 +8,7 @@
 //      left       8
 //      right      16
 //      status     24
-//      -----------------------   
+//      -----------------------
 //
 // In C:
 //      struct BinaryTree {
@@ -19,7 +19,7 @@
 //      };
 //
 // In SCC:
-//      We only have integers in our current implementation, but it is still possible 
+//      We only have integers in our current implementation, but it is still possible
 //      to allocate a heap object and treat it as a binary tree object.
 //      No high-level human-friendly symbols for field names.
 //      Let us face the low-level field offsets and pointer arithmetic directly.
@@ -27,123 +27,122 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // root->nodeInfo = nodeInfo in C
-BinaryTreeSetNodeInfo(root, nodeInfo) {
-  SccWrite64(root, 0, nodeInfo);
+BinaryTreeSetNodeInfo(root, nodeInfo) { 
+    SccWrite64(root, 0, nodeInfo); 
 }
 
 // root->nodeInfo
-BinaryTreeGetNodeInfo(root) {
-  return SccRead64(root, 0);
+BinaryTreeGetNodeInfo(root) { 
+    return SccRead64(root, 0); 
 }
-
 
 // root->left = left
-BinaryTreeSetLeft(root, left) {
-  SccWrite64(root, 8, left);
+BinaryTreeSetLeft(root, left) { 
+    SccWrite64(root, 8, left); 
 }
 
-// root->left 
-BinaryTreeGetLeft(root) {
-  return SccRead64(root, 8);
+// root->left
+BinaryTreeGetLeft(root) { 
+    return SccRead64(root, 8); 
 }
 
 // root->right = right
-BinaryTreeSetRight(root, right) {
-  SccWrite64(root, 16, right);
+BinaryTreeSetRight(root, right) { 
+    SccWrite64(root, 16, right); 
 }
 
 // root->right
-BinaryTreeGetRight(root) {
-  return SccRead64(root, 16);
+BinaryTreeGetRight(root) { 
+    return SccRead64(root, 16); 
 }
 
 // root->status = status
-BinaryTreeSetStatus(root, status) {
-  SccWrite64(root, 24, status);
+BinaryTreeSetStatus(root, status) { 
+    SccWrite64(root, 24, status); 
 }
 
 // root->status
-BinaryTreeGetStatus(root) {
-  return SccRead64(root, 16);
+BinaryTreeGetStatus(root) { 
+    return SccRead64(root, 16); 
 }
 
 CreateBinaryTree(nodeInfo, left, right, status) {
-  long node;
-  // 4 fields and each occupies 8 bytes
-  node = SccMalloc(8 * 4);  
-  if (node) {
-    BinaryTreeSetNodeInfo(node, nodeInfo);
-    BinaryTreeSetLeft(node, left);
-    BinaryTreeSetRight(node, right);
-    BinaryTreeSetStatus(node, status);
-  } else {
-    // '-1' not supported yet, but we can use '0 - 1'
-    exit(0 - 1);
-  }
-  return node;  
+    long node;
+    // 4 fields and each occupies 8 bytes
+    node = SccMalloc(8 * 4);
+    if (node) {
+        BinaryTreeSetNodeInfo(node, nodeInfo);
+        BinaryTreeSetLeft(node, left);
+        BinaryTreeSetRight(node, right);
+        BinaryTreeSetStatus(node, status);
+    } else {
+        // '-1' not supported yet, but we can use '0 - 1'
+        exit(0 - 1);
+    }
+    return node;
 }
 
 ReleaseBinaryTree(root) {
-  long left;
-  long right;  
-    
-  if (root) {    
-    left = BinaryTreeGetLeft(root);
-    right = BinaryTreeGetRight(root);
-    // Post-order Traversal
-    ReleaseBinaryTree(left);
-    ReleaseBinaryTree(right);
-    SccFree(root);    
-  }
+    long left;
+    long right;
+
+    if (root) {
+        left = BinaryTreeGetLeft(root);
+        right = BinaryTreeGetRight(root);
+        // Post-order Traversal
+        ReleaseBinaryTree(left);
+        ReleaseBinaryTree(right);
+        SccFree(root);
+    }
 }
 
 ////////////////////////////////////////////////////////
 
 VisitBinaryTree(root) {
-  long nodeInfo;
-  long left;
-  long right;
-  
-  if (root) {
-    nodeInfo = BinaryTreeGetNodeInfo(root);
-    left = BinaryTreeGetLeft(root);
-    right = BinaryTreeGetRight(root);
-    // In-order Traversal
-    VisitBinaryTree(left);
-    output(nodeInfo);
-    VisitBinaryTree(right);    
-  }
+    long nodeInfo;
+    long left;
+    long right;
+
+    if (root) {
+        nodeInfo = BinaryTreeGetNodeInfo(root);
+        left = BinaryTreeGetLeft(root);
+        right = BinaryTreeGetRight(root);
+        // In-order Traversal
+        VisitBinaryTree(left);
+        output(nodeInfo);
+        VisitBinaryTree(right);
+    }
 }
 
 ////////////////////////////////////////////////////////
 
-main(argc, argv, env){
-  long leftLeft;
-  long leftRight;
-  long left;
-  long right;
-  long root;
-  
-  //////////////////////////
-  //
-  //       100
-  //      /   \
-  //    98    101
-  //   /  \
-  // 97    99
-  // 
-  //////////////////////////
-  leftLeft = CreateBinaryTree(97, 0, 0, 0);
-  leftRight = CreateBinaryTree(99, 0, 0, 0);
-  left = CreateBinaryTree(98, leftLeft, leftRight, 0);
-  right = CreateBinaryTree(101, 0, 0, 0);
-  root = CreateBinaryTree(100, left, right, 0);
-  
-  // 
-  VisitBinaryTree(root);
-  // Release the heap memory
-  ReleaseBinaryTree(root);  
-  return 0;
+main(argc, argv, env) {
+    long leftLeft;
+    long leftRight;
+    long left;
+    long right;
+    long root;
+
+    //////////////////////////
+    //
+    //       100
+    //      /   \
+    //    98    101
+    //   /  \
+    // 97    99
+    //
+    //////////////////////////
+    leftLeft = CreateBinaryTree(97, 0, 0, 0);
+    leftRight = CreateBinaryTree(99, 0, 0, 0);
+    left = CreateBinaryTree(98, leftLeft, leftRight, 0);
+    right = CreateBinaryTree(101, 0, 0, 0);
+    root = CreateBinaryTree(100, left, right, 0);
+
+    //
+    VisitBinaryTree(root);
+    // Release the heap memory
+    ReleaseBinaryTree(root);
+    return 0;
 }
 
 

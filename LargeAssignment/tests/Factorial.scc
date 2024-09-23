@@ -2,22 +2,19 @@ long result;
 
 // f(n) = 1 * 2 * ... * (n-1) * n
 f(n) {
-  if (SccLessEqual(n, 1)) { // n <= 1
-    return 1;
-  }
-  else {
-    return f(n-1) * n;
-  }
+    if (SccLessEqual(n, 1)) { // n <= 1
+        return 1;
+    } else {
+        return f(n - 1) * n;
+    }
 }
-
 
 main(argc, argv, env) {
-  long i;
-  
-  i = 4;
-  result = f(i);
-  output(result);
+    long i;
 
-  return 0;
+    i = 4;
+    result = f(i);
+    output(result);
+
+    return 0;
 }
-
