@@ -4,7 +4,7 @@
 /*******************************************************************
 
     1.  How to create a binary tree manually for an arithmetic expression 
-        (e.g., "9000 + 6 * 4")
+        (e.g., "9000 + (6 * 4)")
 
     2.  How to evaluate an expression (based on its tree representation)
 
@@ -40,7 +40,7 @@ The abstract syntax tree is a binary tree in this case.
 
 After visiting/traversing each node of the binary tree:
 
-   eval("9000 + 6 * 4") == 9024
+   eval("9000 + (6 * 4)") == 9024
 
 Its intermediate representation (IR): 
 
@@ -78,6 +78,8 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 All of these images for visualizing algorithms are generated automatically in [COMP9024/Trees/Ast2Dot](../../Trees/Ast2Dot/README.md).
 
 **eval() stands for EvalExpression() in the following diagrams.**
+
+**After parsing the string "9000 + (6 * 4)", we get the following abstract syntax tree.**
 
 | Initial |
 |:-------------:|
@@ -314,7 +316,7 @@ int main(int argc, char **argv, char **env) {
   long result = EvalExpression(expr);  
 
   // Output the result
-  printf("\n9000 + 6 * 4 == %ld\n", result);
+  printf("\n9000 + (6 * 4) == %ld\n", result);
 
   // Free the heap memory
   ReleaseAstExpr(expr);
@@ -323,7 +325,7 @@ int main(int argc, char **argv, char **env) {
 }
 ```
 
-## 5.2 How to create a binary tree for "9000 + 6 * 4"
+## 5.2 How to create a binary tree for "9000 + (6 * 4)"
 
 Now, let's manually create the binary tree. 
   
@@ -395,7 +397,7 @@ AstExprNodePtr Expression(void) {
 ```
 
 
-## 5.3 How to evaluate the expression "9000 + 6 * 4"
+## 5.3 How to evaluate the expression "9000 + (6 * 4)"
 
 **Perform a postorder traversal of its binary tree.**
 

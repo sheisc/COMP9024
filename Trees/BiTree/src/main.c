@@ -11,7 +11,7 @@ int main(int argc, char **argv, char **env) {
     long result = EvalExpression(expr);  
     
     // Output the result
-    printf("\n9000 + 6 * 4 == %ld\n", result);
+    printf("\n9000 + (6 * 4) == %ld\n", result);
     
     // Free the heap memory
     ReleaseAstExpr(expr);
