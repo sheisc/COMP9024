@@ -437,6 +437,10 @@ After popping (First In Last Out):
 
 ```
 
+### How to write a header file in C
+
+Please refer to [Include Guard](https://github.com/sheisc/COMP9024/blob/main/C/HowToMake/src/myadd.h) and [Abstract Data Type](https://sheisc.github.io/slides/COMP9024/24T3/week01/slides.html#s64)
+
 ## 5 Algorithm
 
 ```C
