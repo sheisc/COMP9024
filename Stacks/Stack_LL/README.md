@@ -441,6 +441,31 @@ After popping (First In Last Out):
 
 Please refer to [Include Guard](https://github.com/sheisc/COMP9024/blob/main/C/HowToMake/src/myadd.h) and [Abstract Data Type](https://sheisc.github.io/slides/COMP9024/24T3/week01/slides.html#s64)
 
+**Linux Programmer's Manual**
+```sh
+$ man malloc
+
+#include <stdlib.h>
+
+// "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h"
+// typedef long unsigned int size_t;
+
+void *malloc(size_t size);
+void free(void *ptr);
+
+DESCRIPTION
+       The malloc() function allocates size bytes and returns a pointer to the
+       allocated  memory.   The memory is not initialized.  If size is 0, then
+       malloc() returns either NULL, or a unique pointer value that can  later
+       be successfully passed to free().
+
+       The  free()  function  frees  the memory space pointed to by ptr, which
+       must have been returned by a previous call to  malloc(),  calloc(),  or
+       realloc().   Otherwise, or if free(ptr) has already been called before,
+       undefined behavior occurs.  If ptr is NULL, no operation is performed.
+
+```
+
 ## 5 Algorithm
 
 ```C
