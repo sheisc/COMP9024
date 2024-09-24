@@ -154,19 +154,19 @@ Two configuration files (Stack_LL/.vscode/[launch.json](https://code.visualstudi
 
 
 
-#### 2.1 Open the project in VS Code
+### 2.1 Open the project in VS Code
 
 In the window of Visual Studio Code, please click "File" and "Open Folder",
 
 select the folder "COMP9024/Stacks/Stack_LL", then click the "Open" button.
 
 
-#### 2.2 Build the project in VS Code
+### 2.2 Build the project in VS Code
 
 click **Terminal -> Run Build Task**
 
 
-#### 2.3 Debug the project in VS Code
+### 2.3 Debug the project in VS Code
 
 Open src/Int2Str.c, and click to add a breakpoint (say, line 71).
 
