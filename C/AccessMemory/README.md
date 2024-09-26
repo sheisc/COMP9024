@@ -65,6 +65,9 @@
 ## Introduction
 
 **Integers and Pointers**
+
+Pointer arithmetic is closely tied to the type information of the pointers involved.
+
 ```C
 #include <stdio.h>
 typedef long  MM_INT_64;
@@ -104,6 +107,7 @@ int main(void) {
 }
 ```
 
+
 **Output**
 ```sh
 $ gcc -Wall IntegerPointer.c -o IntegerPointer
@@ -129,6 +133,16 @@ MM_INT_64 MemoryRead64(MM_INT_64 address) {
     return val;
 }
 ```
+
+## Is *((T *) 0x400000) correct?
+
+It depends.
+
+On modern operating systems, address space layout randomization ([ASLR](https://en.wikipedia.org/wiki/Address_space_layout_randomization)) is enabled by default.
+
+It is hard to predict which addresses have been mapped into the address space of a process at load time.
+
+However, on some embedded systems (e.g., [STM32](https://en.wikipedia.org/wiki/STM32)), *((T *) 0x400000) is a widely used technique to access hard-coded memory addresses.
 
 ## CPU and Memory
 
