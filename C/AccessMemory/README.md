@@ -62,6 +62,73 @@
  ******************************************************************************************/
 
 ``` 
+## Introduction
+
+**Integers and Pointers**
+```C
+#include <stdio.h>
+typedef long  MM_INT_64;
+
+long number = 1000;
+long *iPtr = &number;
+long arr[4] = {10, 20, 30, 40};
+
+int main(void) {
+    long x;
+    long y;
+    // Method 1:  via the name of a variable, number
+    x = number;
+    printf("x == %ld\n", x);    
+
+    // Method 2:  via a pointer variable, iPtr
+    x = *iPtr;
+    printf("*iPtr == %ld\n", x);
+
+    // Integer Arithmetic
+    y = x + 1;
+    printf("x == %ld, y == %ld\n", x, y);
+
+    // Pointer Arithmetic
+    long *pa = &arr[0];    
+    long *pb = (pa + 1);
+    printf("pa == %p, pb == %p\n", pa, pb);
+    printf("*pa == %ld, *pb == %ld\n", *pa, *pb);
+
+    // Method 3: 
+    // Pointer  --->  Integer  ---> Integer Arithmetic  ---> Pointer
+    // Only used to verify whether your understanding is correct or not
+    x  = (MM_INT_64) (&arr[0]);
+    x = x + sizeof(arr[0]) * 2;
+    long *pc = (long *) x;
+    printf("*pc == %ld\n", *pc);
+}
+```
+
+**Output**
+```sh
+$ gcc -Wall IntegerPointer.c -o IntegerPointer
+$ ./IntegerPointer
+
+x == 1000
+*iPtr == 1000
+x == 1000, y == 1001
+pa == 0x55e2bbbdb040, pb == 0x55e2bbbdb048
+*pa == 10, *pb == 20
+*pc == 30
+```
+
+```C
+void MemoryWrite64(MM_INT_64 address, MM_INT_64 val) {
+    MM_INT_64 *lPtr = (MM_INT_64 *) address;
+    *lPtr = val;    
+}
+
+MM_INT_64 MemoryRead64(MM_INT_64 address) {
+    MM_INT_64 * lPtr= (MM_INT_64 *) address;
+    MM_INT_64 val = *lPtr;
+    return val;
+}
+```
 
 ## CPU and Memory
 
