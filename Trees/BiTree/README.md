@@ -24,7 +24,7 @@ known as the left child and the right child.
 
 An arithmetic expression (i.e., a string)
 
-   "9000 + (6 * 4)" 
+    "9000 + (6 * 4)" 
 
 can be represented as an abstract syntax tree after parsing.
 
@@ -236,66 +236,65 @@ t1 = 9000 + t0
 
 // token value
 typedef struct {
-  // e.g, "year", "t0", "t1", "+", "-", "*", "/", "(", ")", ...
-  char name[MAX_ID_LEN + 1];
-  // value of an integer, e.g., 2024
-  long numVal;
+    // e.g, "year", "t0", "t1", "+", "-", "*", "/", "(", ")", ...
+    char name[MAX_ID_LEN + 1];
+    // value of an integer, e.g., 2024
+    long numVal;
 } Value;
 
 
 // In C, an Enum/Enumeration is a custom data type where users can assign names to constant integers. 
 // Using enums makes it easier for programmers to learn, understand, and maintain the program.
 typedef enum {
-  TK_NA,     // 0     By default, the first item has the value 0. Here, NA stands for Not Available.
-  TK_ADD,    // 1     '+'
-  TK_SUB,    // 2     '-'
-  TK_MUL,    // 3     '*'
-  TK_DIV,    // 4     '/'
-  TK_NUM,    // 5     number 
-  TK_LPAREN, // 6     '('  left parenthesis
-  TK_RPAREN, // 7     ')'  right parenthesis
-  TK_EOF,    // 8     end of file
+    TK_NA,     // 0     By default, the first item has the value 0. Here, NA stands for Not Available.
+    TK_ADD,    // 1     '+'
+    TK_SUB,    // 2     '-'
+    TK_MUL,    // 3     '*'
+    TK_DIV,    // 4     '/'
+    TK_NUM,    // 5     number 
+    TK_LPAREN, // 6     '('  left parenthesis
+    TK_RPAREN, // 7     ')'  right parenthesis
+    TK_EOF,    // 8     end of file
 } TokenKind;
 
 /*
-  The Abstract Syntax Tree Node for an expression.
+    The Abstract Syntax Tree Node for an expression.
 
-  In an abstract syntax tree, syntactic details such as parentheses in expressions 
-  like "(20 + 30) * 40" are considered redundant and thus ignored.
+    In an abstract syntax tree, syntactic details such as parentheses in expressions 
+    like "(20 + 30) * 40" are considered redundant and thus ignored.
 
-           * 
-         /   \
-        +     40
-      /   \ 
-     20   30
-
+             * 
+           /   \
+          +     40
+        /   \ 
+       20   30
  */
 struct astExprNode {
-  /*
-    1. The kind of an expression node: 
-         an operand (e.g., 300) or an operator (e.g., '+', '-', '*' and '/')
-    
-    2. To keep it simple, we use the TokenKind as mentioned above
-         TK_NUM for 300, 400, ...
-         TK_ADD for '+'
-         TK_SUB for '-'
-         TK_MUL for '*'
-         TK_DIV for '/'
-   */
-  TokenKind op;
-  /*
-   The value of the token (a token is a word), consisting of two parts:
+    /*
+        1. The kind of an expression node: 
+             an operand (e.g., 300) or an operator (e.g., '+', '-', '*' and '/')
 
-   1. an integer for representing the node's value (e.g., 300), 
-    
-   2. a C string for representing its name or value (e.g., "+", "t0", "t1", "(", ")", "300", ...)
-   */
-  Value value;
+        2. To keep it simple, we use the TokenKind as mentioned above  
+             TK_NUM for 300, 400, ...
+             TK_ADD for '+'
+             TK_SUB for '-'
+             TK_MUL for '*'
+             TK_DIV for '/'
+     */
+    TokenKind op;
+    /*
+        The value of the token (a token is a word), consisting of two parts:
 
-  /////////////////////////////////////////////
-  // e.g.,  left and right operands of a binary operator (+, -, *, /)
-  struct astExprNode *leftChild;
-  struct astExprNode *rightChild; 
+        1. an integer for representing the node's value (e.g., 300), 
+
+        2. a C string for representing its name or value (e.g., "+", "t0", "t1", "(", ")", "300", ...)
+     */
+    Value value;
+
+    /////////////////////////////////////////////
+    // e.g.,  left and right operands of a binary operator (+, -, *, /)
+    struct astExprNode *leftChild;
+    struct astExprNode *rightChild; 
 };
 
 typedef struct astExprNode *AstExprNodePtr;
@@ -309,19 +308,19 @@ typedef struct astExprNode *AstExprNodePtr;
 ```C
 int main(int argc, char **argv, char **env) {
 
-  // Create a binary tree
-  AstExprNodePtr expr = Expression();
-
-  // Perform a postorder traversal of the binary tree
-  long result = EvalExpression(expr);  
-
-  // Output the result
-  printf("\n9000 + (6 * 4) == %ld\n", result);
-
-  // Free the heap memory
-  ReleaseAstExpr(expr);
-
-  return 0;
+    // Create a binary tree
+    AstExprNodePtr expr = Expression();
+    
+    // Perform a postorder traversal of the binary tree
+    long result = EvalExpression(expr);  
+    
+    // Output the result
+    printf("\n9000 + (6 * 4) == %ld\n", result);
+    
+    // Free the heap memory
+    ReleaseAstExpr(expr);
+    
+    return 0;
 }
 ```
 
@@ -364,35 +363,36 @@ A tree node can save/keep/store another node's address, thus establishing a conn
 ```C
 static AstExprNodePtr CreateAstExprNode(TokenKind tk, long numVal, char *operator, AstExprNodePtr left,
                          AstExprNodePtr right) {
-  AstExprNodePtr pNode = (AstExprNodePtr) malloc(sizeof(struct astExprNode));
-  assert(pNode != NULL);
+    AstExprNodePtr pNode = (AstExprNodePtr) malloc(sizeof(struct astExprNode));
+    assert(pNode != NULL);
 
-  memset(pNode, 0, sizeof(*pNode));
-  // The kind of an expression node
-  pNode->op = tk;
-  if (tk == TK_NUM) { // an operand like 9000
-    // 9000
-    pNode->value.numVal = numVal;
-    // "9000"
-    snprintf(pNode->value.name, MAX_ID_LEN, "%ld", numVal);    
-  } else { // an operator: + - * /
-    // A temporary variable's name: "t0", "t1" 
-    snprintf(pNode->value.name, MAX_ID_LEN, "t%d", NewTemp());  
-  }  
-  pNode->leftChild = left;
-  pNode->rightChild = right;
-  return pNode;
+    memset(pNode, 0, sizeof(*pNode));
+    // The kind of an expression node
+    pNode->op = tk;
+    if (tk == TK_NUM) { // an operand like 9000
+        // 9000
+        pNode->value.numVal = numVal;
+        // "9000"
+        snprintf(pNode->value.name, MAX_ID_LEN, "%ld", numVal);    
+    } else { // an operator: + - * /
+        // A temporary variable's name: "t0", "t1" 
+        snprintf(pNode->value.name, MAX_ID_LEN, "t%d", NewTemp());  
+    }  
+    pNode->leftChild = left;
+    pNode->rightChild = right;
+    return pNode;
 }
 
 // Now, let's manually create the binary tree. 
 // We will write a parser to create the tree for us later.
 AstExprNodePtr Expression(void) {
-  AstExprNodePtr left = CreateAstExprNode(TK_NUM, 9000, "", NULL, NULL);
-  AstExprNodePtr rightLeft = CreateAstExprNode(TK_NUM, 6, "", NULL, NULL);
-  AstExprNodePtr rightRight = CreateAstExprNode(TK_NUM, 4, "", NULL, NULL);
-  AstExprNodePtr right = CreateAstExprNode(TK_MUL, 0, "*", rightLeft, rightRight);
-  AstExprNodePtr root = CreateAstExprNode(TK_ADD, 0, "+", left, right);
-  return root;
+    AstExprNodePtr left = CreateAstExprNode(TK_NUM, 9000, "", NULL, NULL);
+    AstExprNodePtr rightLeft = CreateAstExprNode(TK_NUM, 6, "", NULL, NULL);
+    AstExprNodePtr rightRight = CreateAstExprNode(TK_NUM, 4, "", NULL, NULL);
+    AstExprNodePtr right = CreateAstExprNode(TK_MUL, 0, "*", rightLeft, rightRight);
+    AstExprNodePtr root = CreateAstExprNode(TK_ADD, 0, "+", left, right);
+
+    return root;
 }
 ```
 
@@ -469,11 +469,11 @@ long EvalExpression(AstExprNodePtr root) {
 
 // Release the heap space
 void ReleaseAstExpr(AstExprNodePtr root) {
-  if (root) {
-    ReleaseAstExpr(root->leftChild);
-    ReleaseAstExpr(root->rightChild);
-    // Postorder traversal
-    free(root);
-  }
+    if (root) {
+        ReleaseAstExpr(root->leftChild);
+        ReleaseAstExpr(root->rightChild);
+        // Postorder traversal
+        free(root);
+    }
 }
 ```
