@@ -126,7 +126,7 @@ digraph OurDirectedGraph {
 ```
 
 
-## 5 Graph-related research in CSE at UNSW
+## 5 Some graph-related research topics in CSE at UNSW
 
 ### 5.1 [HUGE: An Efficient and Scalable Subgraph Enumeration](http://www.zhengyi.one/)
 
