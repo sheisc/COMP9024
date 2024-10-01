@@ -363,6 +363,7 @@ A tree node can save/keep/store another node's address, thus establishing a conn
 ```C
 static AstExprNodePtr CreateAstExprNode(TokenKind tk, long numVal, char *operator, AstExprNodePtr left,
                          AstExprNodePtr right) {
+    (void) operator;
     AstExprNodePtr pNode = (AstExprNodePtr) malloc(sizeof(struct astExprNode));
     assert(pNode != NULL);
 

@@ -23,6 +23,7 @@ static int NewTemp(void) {
  */
 static AstExprNodePtr CreateAstExprNode(TokenKind tk, long numVal, char *operator, AstExprNodePtr left,
                          AstExprNodePtr right) {
+    (void) operator;                            
     AstExprNodePtr pNode = (AstExprNodePtr) malloc(sizeof(struct astExprNode));
     assert(pNode != NULL);
 
@@ -54,25 +55,26 @@ void ReleaseAstExpr(AstExprNodePtr root) {
 
 
 AstExprNodePtr Expression(void) {
-    ///////////////////////////////////////////////////////////////////
-    //
-    //  An expression (i.e., a string) from a user:
-    //       
-    //      "9000 + 6 * 4" 
-    //
-    //  Its binary-tree representation:
-    //
-    //        +
-    //      /   \
-    //    9000   *
-    //          /  \
-    //         6    4
-    // 
-    //
-    // Q1. How to create a binary tree?
-    // Q2. How to visit a binary tree?
-    //
-    ///////////////////////////////////////////////////////////////////
+
+    /*
+    
+          An expression (i.e., a string) from a user:
+               
+              "9000 + 6 * 4" 
+        
+          Its binary-tree representation:
+        
+                +
+              /   \
+            9000   *
+                  /  \
+                 6    4
+         
+        
+         Q1. How to create a binary tree?
+         Q2. How to visit a binary tree?
+    
+    */
 
     // Now, let's manually create the binary tree. 
     // We will write a parser to create the tree for us later.
