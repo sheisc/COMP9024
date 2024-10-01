@@ -20,11 +20,15 @@ constant integers. Using enums makes it easier for programmers to learn,
 understand, and maintain the program.
 
 typedef enum {
-  TK_NA,    // 0     By default, the first item has the value 0. Here, NA stands
-for Not Available. TK_ADD,   // 1 TK_SUB,   // 2 TK_MUL, TK_DIV, TK_NUM,
-  TK_LPAREN,
-  TK_RPAREN,
-  TK_EOF,
+    TK_NA,    // 0     By default, the first item has the value 0. Here, NA stands for Not Available. 
+    TK_ADD,   // 1 
+    TK_SUB,   // 2 
+    TK_MUL, 
+    TK_DIV, 
+    TK_NUM,
+    TK_LPAREN,
+    TK_RPAREN,
+    TK_EOF,
 } TokenKind;
 
  */
