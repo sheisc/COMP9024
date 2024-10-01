@@ -153,7 +153,7 @@ int main(void) {
 }
 ```
 
-**About do {} while(0)**
+**About do {} while(0) in NEXT_TOKEN**
 
 Please refer to the web page [do{}while(0)](https://stackoverflow.com/questions/257418/do-while-0-what-is-it-good-for).
 
