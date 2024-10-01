@@ -71,6 +71,8 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 
 [COMP9024/Trees/BiTree](./Trees/BiTree/README.md)
 
+[COMP9024/Trees/Str2Ast](./Trees/Str2Ast/README.md)
+
 [COMP9024/Complexity/Counting](./Complexity/Counting/README.md)
 
 [COMP9024/Graphs/Dot2Png](./Graphs/Dot2Png/README.md)
