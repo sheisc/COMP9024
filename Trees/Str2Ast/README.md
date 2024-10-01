@@ -194,12 +194,12 @@ void Error(const char *format, ...) {
 ### Overview: Input String --> Parse Tree ---> Abstract Syntax Tree
 
 ```sh
-9000 + (6 * 4)
+9000 + 24
 ```
 
-<img src="ParseTree.png" width="100%" height="100%">
+<img src="ParseTree2.png" width="100%" height="100%">
 
-**(1) Debug this program in VS Code and follow the recursive functions in expr.c step by step during parsing "9000 + (6 * 4)".**
+**(1) Debug this program in VS Code and follow the recursive functions in expr.c step by step during parsing "9000 + 24".**
 
      You can set a breaking point inside the function Expression() during dedugging this program.
 
@@ -209,6 +209,7 @@ void Error(const char *format, ...) {
 
 **(3) Complete Q1-Q10 in the parse tree with function names you discovered during debugging and then answer the questions in Quiz 3 (Week 4) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
+<img src="ParseTree.png" width="100%" height="100%">
 
 ### make view
 
