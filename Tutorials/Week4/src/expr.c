@@ -97,8 +97,7 @@ static AstExprNodePtr MultiplicativeExpression(void) {
   
     AdditiveExpression:
           MultiplicativeExpression
-          MultiplicativeExpression  aop MultiplicativeExpression  ...   aop
-    MultiplicativeExpression
+          MultiplicativeExpression  aop MultiplicativeExpression  ...   aop  MultiplicativeExpression
  */
 static AstExprNodePtr AdditiveExpression(void) {
     AstExprNodePtr left;
