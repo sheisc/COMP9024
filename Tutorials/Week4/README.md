@@ -550,6 +550,8 @@ The code is in src/lex.c.
 
 **(2) The parse tree is introduced to help us further understand the code of the syntax parser in [src/expr.c](./src/expr.c).**
 
+     We do not explicitly create the parse tree.
+
 **(3) Complete Q1-Q10 in the parse tree with function names you discovered during debugging and then answer the questions in Quiz 3 (Week 4) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
 
 <img src="ParseTree.png" width="100%" height="100%">
