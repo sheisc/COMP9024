@@ -19,6 +19,20 @@
  *******************************************************************/
 ``` 
 
+### Overview: Input String --> Parse Tree ---> Abstract Syntax Tree
+
+```sh
+9000 + 24
+```
+
+<img src="ParseTree2.png" width="100%" height="100%">
+
+
+In this project, we only use binary operators (such as '+' and '*'), 
+
+allowing us to represent the abstract syntax tree as a binary tree.
+
+
 ### Binary Tree
 A binary tree is a hierarchical data structure wherein each node can have a maximum of two children, 
 
