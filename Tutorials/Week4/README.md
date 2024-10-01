@@ -32,6 +32,9 @@ In this project, we only use binary operators (such as '+' and '*'),
 
 allowing us to represent the abstract syntax tree as a binary tree.
 
+The parse tree is introduced to help us further understand the code in [src/expr.c](./src/expr.c).
+
+We do not explicitly create the parse tree.
 
 ### Binary Tree
 A binary tree is a hierarchical data structure wherein each node can have a maximum of two children, 
