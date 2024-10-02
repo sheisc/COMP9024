@@ -180,7 +180,9 @@ void ReleaseAstExpr(AstExprNodePtr root) {
     Expression:
         AdditiveExpression
   */
-AstExprNodePtr Expression(void) { return AdditiveExpression(); }
+AstExprNodePtr Expression(void) {
+    return AdditiveExpression();
+}
 
 static int isArithmeticOperator(TokenKind tk) {
     return tk == TK_ADD || tk == TK_SUB || tk == TK_MUL || tk == TK_DIV;
