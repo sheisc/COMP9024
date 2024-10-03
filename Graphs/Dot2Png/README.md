@@ -22,7 +22,7 @@ An undirected graph is a data structure consisting of a set of vertices (also ca
 
 Each edge connects two nodes and does not have a direction associated with it.
 
-<img src="images/UndirectedGraph.png" width="50%" height="50%"> 
+<img src="images/UndirectedGraph.png" width="20%" height="20%"> 
 
 For example, friendships or connections between individuals are often represented using undirected graphs.
 
@@ -38,7 +38,7 @@ Unlike in undirected graphs, the edges in directed graphs have a specific direct
 
 This direction indicates a one-way relationship between vertices. 
 
-<img src="images/DirectedGraph.png" width="50%" height="50%"> 
+<img src="images/DirectedGraph.png" width="20%" height="20%"> 
 
 For example, the Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
@@ -76,7 +76,7 @@ Dot2Png$ dot -T png images/UndirectedGraph.dot -o images/UndirectedGraph.png
 ```
 
 
-<img src="images/DirectedGraphVisited.png" width="50%" height="50%">
+<img src="images/DirectedGraphVisited.png" width="20%" height="20%">
 
 ### How to execute a shell command in a C program
 
