@@ -246,6 +246,11 @@ H_SRC_FILES = $(shell find ./src -name "*.h")
 TMP_OBJ_FILES = $(C_SRC_FILES:.c=.o)
 OBJ_FILES_IN_BUILD =$(subst src/,$(BUILD_DIR)/,$(TMP_OBJ_FILES))
 
+# How to generate a "build/*.o" from a "src/*.c"
+$(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
+	@mkdir -p $(shell dirname $@)
+	${CC} ${CFLAGS} -c $< -o $@
+
 # generate the target, which depends on the "build/*.o" files
 $(TARGET_EXE):  $(OBJ_FILES_IN_BUILD) 	
 	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD)
