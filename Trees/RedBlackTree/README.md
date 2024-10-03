@@ -32,6 +32,68 @@ even height to a node at an odd height.
 -->
 
 <!-- (A dichromatic framework for balanced trees) -->
+### Red-Black Tree
+
+- Property 1: the root is black.
+- Property 2: a node is either BLACK or RED
+- Property 3: a red node shouldn't have any red child.
+- Property 4: the left and right subtrees have the same black height.
+- Property 5: all null nodes are black.
+
+```C
+
+static int CheckRBTree(BiTreeNodePtr pNode) {
+    if (pNode) {
+        // Property 2: a node is either BLACK or RED
+        if (pNode->color != BLACK && pNode->color != RED) {
+            return 0;
+        }        
+
+        if (pNode->color == RED) {
+            // Property 3: a red node shouldn't have any red child.
+            if (hasRedLeft(pNode) || hasRedRight(pNode)) {
+                return 0;
+            }
+        }
+
+        // Property 4: The left and right subtrees have the same black height.
+        if (RBTreeBlackHeight(pNode->leftChild) != RBTreeBlackHeight(pNode->rightChild)) {
+            return 0;
+        }
+
+        // Property 5: All null nodes are black.  See hasBlackLeft() and hasBlackRight()
+
+        // Recursively check left and right subtrees
+        if (CheckRBTree(pNode->leftChild) == 0) {
+            return 0;
+        }
+        
+        if (CheckRBTree(pNode->rightChild) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+/*
+    This function returns 1 when root is a legal RB tree.
+    Otherwise, it returns 0.
+ */
+int IsRBTree(BiTreeNodePtr root) {
+    if (root) {
+        // Property 1: the root is black.
+        if (root->color != BLACK) {
+            return 0;
+        }
+        // Check other properties
+        return CheckRBTree(root);
+    } else {
+        return 1;
+    }
+}
+
+```
+
 
 ### Red-Black Tree and AVL Tree
 
@@ -720,7 +782,7 @@ typedef BiTreeNodePtr RBTreeNodePtr;
 
 
 ## 5 Algorithms
-
+<!--
 ### 5.1 IsRBTree()
 
 ```C
@@ -776,8 +838,9 @@ int IsRBTree(BiTreeNodePtr root) {
 }
 
 ```
+-->
 
-### 5.2 RBTreeTo234Tree()
+### RBTreeTo234Tree()
 
 
 | Red-Black Tree | 2-3-4 Tree |
