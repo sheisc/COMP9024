@@ -72,7 +72,7 @@ digraph OurDirectedGraph {
 
 ``` sh
 
-Dot2Png$ dot -T png images/UndirectedGraph.dot -o images/UndirectedGraph.png 
+Dot2Png$ dot -T png images/DirectedGraphVisited.dot -o images/DirectedGraphVisited.png
 ```
 
 
