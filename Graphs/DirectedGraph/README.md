@@ -236,6 +236,60 @@ struct Graph{
 #define  MatrixElement(pGraph, u, v)  (pGraph)->pAdjMatrix[(pGraph)->n * (u) + (v)]
 
 ```
+
+### 4.1 About the Function-like Macro MatrixElement(pGraph, u, v)
+
+MatrixElement(pGraph, u, v) is a macro, not a function call.
+
+For example,
+
+**MatrixElement(pGraph, 3 - 1, 1)** is expanded as **(pGraph)->pAdjMatrix[(pGraph)->n * (3-1) + (1)]** by the [C preprocessor](../../C/HowToMake/README.md).
+
+
+If MatrixElement(pGraph, u, v) is defined as **(pGraph)->pAdjMatrix[(pGraph)->n * u + v]**,
+
+MatrixElement(pGraph, 3 - 1, 1) will be expanded as (pGraph)->pAdjMatrix[(pGraph)->n * 3 - 1 + 1].
+
+Apparently, **(pGraph)->pAdjMatrix[(pGraph)->n * 3 - 1 + 1]** is not the element the C programmer wants to access.
+
+That is why we need to add a pair of parentheses for pGraph, u, and v in **(pGraph)->pAdjMatrix[(pGraph)->n * (u) + (v)]**.
+
+### 4.2 Macro and Function
+
+```C
+// test.c
+#define MUL(a, b)  a * b
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int r;
+
+int main(void) {
+    r = MUL(3-1, 2-1);  // bug
+    r = add(3-1, 2-1);
+    return 0;
+}
+```
+
+```sh
+$ gcc -E test.c
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int r;
+
+int main(void) {
+    r = 3-1 * 2-1;
+    r = add(3-1, 2-1);
+    return 0;
+}
+
+```
+
 ## 5 Algorithm
 
 ### 5.1 How to create a graph
