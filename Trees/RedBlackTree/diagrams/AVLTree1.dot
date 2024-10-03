@@ -1,0 +1,11 @@
+digraph RBTree {
+"20" -> {"10"} [label="L"]
+"20" -> {"40"} [label="R"]
+"40" -> {"30"} [label="L"]
+"40" -> {"50"} [label="R"]
+"20" [color=grey] [style=filled] 
+"10" [color=grey] [style=filled] 
+"40" [color=grey] [style=filled] 
+"30" [color=grey] [style=filled] 
+"50" [color=grey] [style=filled] 
+}
