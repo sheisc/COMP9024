@@ -274,25 +274,29 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	@mkdir -p $(shell dirname $@)
 	${CC} ${CFLAGS} -c $< -o $@
 ```
+Take 'build/myadd.o' as an example.
+
+The target 'build/myadd.o' conservatively depends on 'src/myadd.c', 'src/myadd.h', 'src/mysub.h', 'src/main.h'.
+
+To generate 'build/myadd.o', the 'make' tool will run the following commands:
+```sh
+// create a directory 'build' if it does not exist.
+mkdir -p build
+gcc -g -I COMP9024/C/HowToMake/src  -c src/myadd.c -o build/myadd.o 
+```
+
+
 **Explanation of the above rule in [COMP9024/C/HowToMake/Makefile](./Makefile)**
 ```sh
-
   $@      
         the name of the target being generated,  e.g., build/myadd.o
   @<      
-        the first prerequisite (usually a source file), e.g., src/myadd.c
-
-  Take 'build/myadd.o' as an example.
-
-        The target 'build/myadd.o' conservatively depends on 'src/myadd.c', 'src/myadd.h', 'src/mysub.h', 'src/main.h'.
-
-        To generate 'build/myadd.o', the 'make' tool will run the following commands:
-
-        mkdir -p build
-        gcc -g -I COMP9024/C/HowToMake/src  -c src/myadd.c -o build/myadd.o 
-
-      
+        the first prerequisite (usually a source file), e.g., src/myadd.c     
 ```
+
+
+
+
 ### From *.o to main
 
 ```sh
