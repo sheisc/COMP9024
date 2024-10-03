@@ -22,7 +22,7 @@ An undirected graph is a data structure consisting of a set of vertices (also ca
 
 Each edge connects two nodes and does not have a direction associated with it.
 
-<img src="images/UndirectedGraph.png" width="20%" height="20%"> 
+<img src="images/UndirectedGraph.png" width="15%" height="15%"> 
 
 For example, friendships or connections between individuals are often represented using undirected graphs.
 
@@ -38,7 +38,7 @@ Unlike in undirected graphs, the edges in directed graphs have a specific direct
 
 This direction indicates a one-way relationship between vertices. 
 
-<img src="images/DirectedGraph.png" width="20%" height="20%"> 
+<img src="images/DirectedGraph.png" width="15%" height="15%"> 
 
 For example, the Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
@@ -76,7 +76,7 @@ Dot2Png$ dot -T png images/UndirectedGraph.dot -o images/UndirectedGraph.png
 ```
 
 
-<img src="images/DirectedGraphVisited.png" width="20%" height="20%">
+<img src="images/DirectedGraphVisited.png" width="15%" height="15%">
 
 ### How to execute a shell command in a C program
 
@@ -189,14 +189,14 @@ digraph OurDirectedGraph {
 Proceedings of the 2021 International Conference on Management of Data (SIGMOD 2021)
 ```
 
-**[COMP9311 Database Systems](https://webcms3.cse.unsw.edu.au/COMP9311/24T2/)**
+**[COMP9311 Database Systems](https://webcms3.cse.unsw.edu.au/COMP9311/24T3/)**
 
 ### 5.2 [TIPS: Tracking Integer-Pointer Value Flows for C++ Member Function Pointers](https://sheisc.github.io/)
 **[Changwei Zou](https://sheisc.github.io/), Dongjie He, [Yulei Sui](https://yuleisui.github.io/) and [Jingling Xue](https://www.cse.unsw.edu.au/~jingling/).**
 ```sh
 2024 ACM SIGSOFT International Symposium on the Foundations of Software Engineering (FSE 2024)
 ```
-**[COMP9024 Data Structures and Algorithms](https://webcms3.cse.unsw.edu.au/COMP9024/24T2/)**
+**[COMP9024 Data Structures and Algorithms](https://webcms3.cse.unsw.edu.au/COMP9024/24T3/)**
 
 | C++ Programs      | Number Of Value Flow Graph Nodes | Number of Value Flow Graph Edges |
 | :---------------- | :------: | :----: |
