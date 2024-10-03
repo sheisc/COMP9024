@@ -10,7 +10,7 @@
 
     3.  How to delete data in a red-black tree
 
-	4.  How to convert a red-black tree into a 2-3-4 tree.
+    4.  How to convert a red-black tree into a 2-3-4 tree.
 
                                              COMP9024
 
