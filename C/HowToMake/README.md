@@ -111,6 +111,7 @@ Then, click **Run -> Start Debugging**
 
 **In addition to utilizing VS Code, we can also compile and execute programs directly from the command line interface as follows.**
 
+**make**
 ``` sh
 
 HowToMake$ make
@@ -129,39 +130,27 @@ Hello COMP9024
 add(9000, 24) = 9024
 sub(9000, 24) = 8976
 
+```
+
+**If it is up to date, nothing to do.**
+```sh
 HowToMake$ make
 make main
 make[1]: Entering directory 'COMP9024/C/HowToMake'
 make[1]: 'main' is up to date.
 make[1]: Leaving directory 'COMP9024/C/HowToMake'
+```
 
-// If we modify src/myadd.c, only the modified parts (i.e., 'build/myadd.o' and 'main') need to be recreated.
+**If we modify src/myadd.c, only the modified parts (i.e., 'build/myadd.o' and 'main') need to be recreated.**
+
+```sh
 HowToMake$ make
 make main
 make[1]: Entering directory '/home/iron/github/COMP9024/C/HowToMake'
 gcc -g -I COMP9024/C/HowToMake/src  -c src/myadd.c -o build/myadd.o
 gcc -g -I COMP9024/C/HowToMake/src  -o main ./build/myadd.o ./build/main.o ./build/mysub.o
 make[1]: Leaving directory '/home/iron/github/COMP9024/C/HowToMake'
-
-
-HowToMake$ pwd
-
-COMP9024/C/HowToMake
-
-HowToMake$ find ./src -name "*.c"
-
-./src/myadd.c
-./src/main.c
-./src/mysub.c
-
-HowToMake$ find ./src -name "*.h"
-
-./src/myadd.h
-./src/main.h
-./src/mysub.h
-
 ```
-
 
 ## 4 The rules in [COMP9024/C/HowToMake/Makefile](./Makefile)
 
@@ -228,6 +217,49 @@ clean:
 	find . -name "*.d" | xargs rm -f
 	find . -name "*.bc" | xargs rm -f
 ```
+### How to find all the *.c or *.h files in the directory 'src'
+```sh
+
+HowToMake$ pwd
+
+COMP9024/C/HowToMake
+
+HowToMake$ find ./src -name "*.c"
+
+./src/myadd.c
+./src/main.c
+./src/mysub.c
+
+HowToMake$ find ./src -name "*.h"
+
+./src/myadd.h
+./src/main.h
+./src/mysub.h
+```
+
+**In our makefile**
+```sh
+C_SRC_FILES = $(shell find ./src -name "*.c")
+H_SRC_FILES = $(shell find ./src -name "*.h")
+
+# src/*.c  --->  src/*.o ---> build/*.o
+TMP_OBJ_FILES = $(C_SRC_FILES:.c=.o)
+OBJ_FILES_IN_BUILD =$(subst src/,$(BUILD_DIR)/,$(TMP_OBJ_FILES))
+
+# generate the target, which depends on the "build/*.o" files
+$(TARGET_EXE):  $(OBJ_FILES_IN_BUILD) 	
+	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD)
+```
+
+**make**
+```sh
+gcc -g -I COMP9024/C/HowToMake/src  -c src/myadd.c -o build/myadd.o
+gcc -g -I COMP9024/C/HowToMake/src  -c src/main.c -o build/main.o
+gcc -g -I COMP9024/C/HowToMake/src  -c src/mysub.c -o build/mysub.o
+gcc -g -I COMP9024/C/HowToMake/src  -o main ./build/myadd.o ./build/main.o ./build/mysub.o
+```
+
+### From *.c to *.o
 
 In the following rule in [COMP9024/C/HowToMake/Makefile](./Makefile),
 
@@ -256,7 +288,21 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 
       
 ```
+### From *.o to main
 
+```sh
+
+TARGET_EXE = main
+
+# the default target
+all: 
+	make $(TARGET_EXE)
+
+# generate the target, which depends on the "build/*.o" files
+$(TARGET_EXE):  $(OBJ_FILES_IN_BUILD) 	
+	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD)
+
+```
 
 ## 5 The internal Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake/Makefile](./Makefile)
 
@@ -264,13 +310,29 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 <img src="images/MakefileDAG.png" width="100%" height="100%">
 
 
-### How Does 'make' Work?
+### How does 'make' work?
 
 The make utility compares the modification time of the target file with that of the dependency files. 
 
 If any dependency file has a modification time more recent than its corresponding target file, 
 
 it necessitates the recreation of the target file.
+
+```sh
+target: dependency files
+    action
+```
+```sh
+TARGET_EXE = main
+
+$(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
+	@mkdir -p $(shell dirname $@)
+	${CC} ${CFLAGS} -c $< -o $@
+
+# generate the target, which depends on the "build/*.o" files
+$(TARGET_EXE):  $(OBJ_FILES_IN_BUILD) 	
+	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD)    
+```
 
 For example, if **src/main.c** is newer than **build/main.o**, then **build/main.o** and **main** will be rebuilt in turn.
 
@@ -282,12 +344,13 @@ The rules in [COMP9024/C/HowToMake/Makefile](./Makefile) tell the 'make' tool ho
 
 ## 6 The rules in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2)
 
-**More precise than [COMP9024/C/HowToMake/Makefile](./Makefile), but more complex.**
+More precise than [COMP9024/C/HowToMake/Makefile](./Makefile), but more complex.
 
-**The key point in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2) is to use gcc to generate prerequisites automatically for us**
+The key point in [COMP9024/C/HowToMake/Makefile.V2](./Makefile.V2) is to use **gcc -MM** to generate prerequisites automatically for us
 
-**and then include these dependencies into Makefile.V2.**
+and then include these dependencies into Makefile.V2.
 
+### How to know a *.c file depends on which *.h files?
 ```
 HowToMake$ gcc -MM src/main.c
 main.o: src/main.c src/myadd.h src/mysub.h src/main.h
