@@ -14,18 +14,23 @@
 
  *******************************************************************/
 ``` 
+## Introduction
 
-## Undirected Graph
+### Undirected Graph
 
 An undirected graph is a data structure consisting of a set of vertices (also called nodes) and a set of edges. 
 
 Each edge connects two nodes and does not have a direction associated with it.
 
+<img src="images/UndirectedGraph.png" width="50%" height="50%"> 
+
 For example, friendships or connections between individuals are often represented using undirected graphs.
 
 If person A is friends with person B, it implies that person B is also friends with person A.
 
-## Directed Graph
+
+
+### Directed Graph
 
 A directed graph is a data structure comprising a set of vertices (nodes) and a set of directed edges (arcs).
 
@@ -33,16 +38,61 @@ Unlike in undirected graphs, the edges in directed graphs have a specific direct
 
 This direction indicates a one-way relationship between vertices. 
 
+<img src="images/DirectedGraph.png" width="50%" height="50%"> 
+
 For example, the Directed Acyclic Graph (DAG) in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 The target and dependency files serve as nodes within the DAG, with the dependency relationships forming the edges of the DAG.
 
-## [DOT language](https://en.wikipedia.org/wiki/DOT_(graph_description_language))
+### [DOT language](https://en.wikipedia.org/wiki/DOT_(graph_description_language))
 
 Graph visualization is a method of representing structural information as diagrams.
 
 DOT is the graph description language, which describes graphs, nodes, and edges.
 
+An example.
+```sh
+digraph OurDirectedGraph {
+"3" -> {"0"}
+"0" -> {"2"}
+"0" -> {"4"}
+"4" -> {"2"}
+"2" -> {"5"}
+"2" -> {"1"}
+"2" -> {"6"}
+"1" -> {"5"}
+"6" -> {"7"}
+"3" [color=red]
+"0" [color=red]
+}
+
+```
+
+### From .dot files to *.png files
+
+``` sh
+
+Dot2Png$ dot -T png images/UndirectedGraph.dot -o images/UndirectedGraph.png 
+```
+
+
+<img src="images/DirectedGraphVisited.png" width="50%" height="50%">
+
+### How to execute a shell command in a C program
+
+```C
+#include <stdlib.h>
+
+//int system(const char *command);
+
+void GenOneImage(void) {
+    system("dot -T png images/UndirectedGraph.dot -o images/UndirectedGraph.png");
+}
+```
+
+### How to automatically generate a *.dot file for a data structure?
+
+More details are discussed in [Stacks/Stack2Dot](../../Stacks/Stack2Dot/README.md), [Sorting/Array2Dot](../../Sorting/Array2Dot/README.md), [Trees/Tree2Dot](../../Trees/Tree2Dot/README.md), and [Graphs/DirectedGraph](../DirectedGraph/README.md).
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
@@ -83,6 +133,10 @@ find . -name "*.png" | sort | xargs feh &
 
 
 ## [images/UndirectedGraphVisited.dot](./images/UndirectedGraphVisited.dot)
+
+
+Use a string of two hyphen-minus characters, '--', to connect nodes.
+
 ```sh
 graph OurUndirectedGraph {    
 "3" -- {"0"}
