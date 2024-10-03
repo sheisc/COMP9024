@@ -16,8 +16,7 @@
 
  *******************************************************************/
 ``` 
-
-
+<!--
 ### Tree Height
 
 We use BiTreeHeight(root) to represent the height of a BST tree.
@@ -30,6 +29,7 @@ We use BiTreeHeight(root) to represent the height of a BST tree.
 To make an AVL tree into a 2-3-4 tree, simply color 
 red exactly those links which go from a node at an 
 even height to a node at an odd height.
+-->
 
 <!-- (A dichromatic framework for balanced trees) -->
 
