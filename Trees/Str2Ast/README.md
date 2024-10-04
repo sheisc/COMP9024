@@ -485,9 +485,6 @@ long EvalExpression(AstExprNodePtr root) {
 
 ## 5 The grammar of an arithmetic expression and its corresponding parser.
 
-The grammar of an arithmetic expression is recursive.
-
-So our parser will be implemented in recursive functions.
 
 ### Motivation
 
@@ -554,6 +551,10 @@ aop:
     +  
     -    
 ```
+
+**The grammar of an arithmetic expression is recursive.**
+
+**So our parser will be implemented in recursive functions.**
 
 ### 5.1 PrimaryExpression 
 
