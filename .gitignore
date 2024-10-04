@@ -1,0 +1,43 @@
+# Ignore object files, shared libraries, executables, and other typical build products
+*.o
+*.a
+*.so
+*.exe
+*.dll
+
+# Ignore dependency files
+*.d
+
+# Ignore intermediate files created by the compiler
+*.i
+*.ii
+*.s
+*.su
+
+# Ignore temporary files and folders
+*~
+*.swp
+.DS_Store
+
+# Ignore the build directory
+build/
+
+# Ignore compiled binary files
+*.out
+*.elf
+*.map
+
+# Ignore backup files
+*.bak
+
+# Ignore debug files
+*.dSYM/
+*.pdb
+*.ilk
+
+# Ignore project-specific temporary files
+.idea/
+*.log
+*.tmp
+
+main

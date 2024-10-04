@@ -1,0 +1,64 @@
+####################################################################################
+#               How to Use
+# 
+# (1) Build the project
+#   make -f Makefile.win64 main
+# (2) Run the executable
+#   ./main.exe
+# (3) Clean the project
+#   make -f Makefile.win64 clean
+#
+# If you want to know more about makefile, please refer to:
+#
+#    https://www.gnu.org/software/make/manual/html_node/Rule-Syntax.html
+#
+# You can reuse this Makefile in different assignments/projects in COMP9024.
+# To be simple, please put your *.c and *.h in the src directory.
+#
+#                                                                 COMP9024 24T2
+####################################################################################
+# Setting the project root path
+PROJ_ROOT_PATH := $(shell cd)
+
+# Target executable name
+TARGET_EXE := main.exe
+
+# Build directory
+BUILD_DIR := build
+
+# Finding source files
+C_SRC_FILES := $(wildcard src/*.c)
+H_SRC_FILES := $(wildcard src/*.h)
+
+# Generating object files in the build directory
+TMP_OBJ_FILES := $(notdir $(C_SRC_FILES:.c=.o))
+OBJ_FILES_IN_BUILD := $(addprefix $(BUILD_DIR)/,$(TMP_OBJ_FILES))
+
+# Compiler and flags
+CC := gcc
+CFLAGS := -g -I $(PROJ_ROOT_PATH)/src
+
+# Create build directory if it doesn't exist
+$(shell mkdir -p $(BUILD_DIR))
+
+# Default target
+all: $(TARGET_EXE)
+
+# Explicitly define the 'main' target
+main: $(TARGET_EXE)
+
+# Generate the target, which depends on the "build/*.o" files
+$(TARGET_EXE): $(OBJ_FILES_IN_BUILD)
+	@echo "Linking $(TARGET_EXE)"
+	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD)
+
+# How to generate a "build/*.o" from a "src/*.c"
+$(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
+	@echo "Compiling $< to $@"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean all the files generated
+clean:
+	@echo "Cleaning up..."
+	del /f /q $(TARGET_EXE)
+	rmdir /s /q $(BUILD_DIR)
