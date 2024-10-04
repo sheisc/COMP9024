@@ -65,6 +65,8 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 
 [COMP9024/Stacks/Stack_LL](./Stacks/Stack_LL/README.md)
 
+[COMP9024/Queues/Queue_LL](./Queues/Queue_LL/README.md)
+
 [COMP9024/C/AccessMemory](./C/AccessMemory/README.md)
 
 [COMP9024/C/HowToMake](./C/HowToMake/README.md)
@@ -84,3 +86,8 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 [COMP9024/Graphs/DepthFirstSearch](./Graphs/DepthFirstSearch/README.md)
 
 [COMP9024/Graphs/Dijkstra](./Graphs/Dijkstra/README.md)
+
+[COMP9024/Graphs/CycleDetection](./Graphs/CycleDetection/README.md)
+
+[COMP9024/Graphs/BreadthFirstSearch](./Graphs/BreadthFirstSearch/README.md)
+
