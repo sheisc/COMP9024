@@ -630,7 +630,7 @@ It is used to describe a multiplicative expression like 6 * 4 or a primary expre
 To do an multiplicative operation in 'PrimaryExpression mop PrimaryExpression', 
 we need to evaluate the value of PrimaryExpression first.
 
-In other words, PrimaryExpression has a higher precedence than MultiplicativeExpression.
+In other words, PrimaryExpression has higher precedence than MultiplicativeExpression.
 
 **An example**
 ```sh
@@ -678,7 +678,7 @@ It is used to describe an additive expression like 9000 + 6 * 4 or a multiplicat
 To do an additive operation in 'MultiplicativeExpression  aop MultiplicativeExpression', 
 we need to evaluate the value of MultiplicativeExpression first.
 
-In other words, the operator mop (e.g., *) has a higher precedence than the operator aop (e.g., +).
+In other words, the operator mop (e.g., *) has higher precedence than the operator aop (e.g., +).
 
 **An example**
 ```sh
