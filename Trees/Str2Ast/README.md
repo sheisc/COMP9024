@@ -489,6 +489,71 @@ The grammar of an arithmetic expression is recursive.
 
 So our parser will be implemented in recursive functions.
 
+### Motivation
+
+Let’s explore how to define an arithmetic expression that includes two operators: '+' and '*', with integer operands represented by NUM.
+
+A complex system is typically composed of simple, fundamental components.
+
+We can start by defining a primary expression.  
+
+```sh
+PrimaryExpression:
+    NUM
+```
+Next, we introduce the '*' operator by defining a multiplicative expression.
+
+```sh
+MultiplicativeExpression:
+    PrimaryExpression
+    PrimaryExpression * PrimaryExpression * ... * PrimaryExpression
+```
+
+Similarly, we can define an additive expression to introduce the '+' operator.
+
+```sh
+AdditiveExpression:
+    MultiplicativeExpression
+    MultiplicativeExpression + MultiplicativeExpression + ... + MultiplicativeExpression
+```
+To evaluate an additive expression, such as 'MultiplicativeExpression + MultiplicativeExpression', 
+
+we first need to determine the values of the operands (i.e., the MultiplicativeExpressions). 
+
+This indicates that the '*' operator in a multiplicative expression has higher precedence than the '+' operator in an additive expression.
+
+Since we aim to support only these two operators, we can finalize our definition of an expression.
+
+```sh
+Expression:
+    AdditiveExpression
+```
+
+Additionally, we recognize that an expression enclosed in parentheses can also serve as a primary expression. 
+
+Thus, we can redefine our primary expression accordingly.
+
+```sh
+PrimaryExpression:
+    NUM
+    (Expression)
+```
+
+The '/' operator can be treated in a similar manner to the '*' operator by defining a multiplicative operator.
+```sh
+ // multiplicative operator
+mop:
+    *  
+    / 
+```
+
+The '-' operator can be handled similarly.
+```sh
+// additive operator
+aop:
+    +  
+    -    
+```
 
 ### 5.1 PrimaryExpression 
 
