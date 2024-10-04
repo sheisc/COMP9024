@@ -59,7 +59,7 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 [COMP9024/Sorting/BubbleSort](./Sorting/BubbleSort/README.md)
 
 
-## Week 02 - 04
+## Week 02 - 05
 
 [COMP9024/Stacks/Recursion](./Stacks/Recursion/README.md)
 
@@ -87,7 +87,8 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 
 [COMP9024/Graphs/Dijkstra](./Graphs/Dijkstra/README.md)
 
+[COMP9024/Graphs/BreadthFirstSearch](./Graphs/BreadthFirstSearch/README.md)
+
 [COMP9024/Graphs/CycleDetection](./Graphs/CycleDetection/README.md)
 
-[COMP9024/Graphs/BreadthFirstSearch](./Graphs/BreadthFirstSearch/README.md)
 
