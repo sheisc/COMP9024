@@ -94,6 +94,31 @@ int IsRBTree(BiTreeNodePtr root) {
 
 ```
 
+### RBTreeBlackHeight()
+```C
+static int GetMax(int h1, int h2) {
+    return (h1 > h2) ? h1: h2;
+}
+
+static int RBTreeBlackHeight(BiTreeNodePtr root) {
+    if (root) {
+        return root->blackHeight;
+    } else {
+        return 0;
+    }
+}
+
+static void UpdateBlackHeight(BiTreeNodePtr root) {
+    if (root) {
+        int max = GetMax(RBTreeBlackHeight(root->leftChild), RBTreeBlackHeight(root->rightChild));
+        if (root->color == BLACK) {
+            root->blackHeight = max + 1;
+        } else {
+            root->blackHeight = max;
+        }
+    }
+}
+```
 
 ### Red-Black Tree and AVL Tree
 
