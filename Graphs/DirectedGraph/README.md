@@ -373,13 +373,17 @@ $ man fopen
 
 FILE *fopen(const char *pathname, const char *mode);
 
-    The fopen() function opens the file whose name is the string pointed to by pathname and associates a stream with it.
+    The fopen() function opens the file whose name is the string pointed 
+    to by pathname and associates a stream with it.
 
-    The argument mode points to a string beginning with one of the following sequences (possibly followed by additional characters, as described below):
+    The argument mode points to a string beginning with one of the following sequences 
+    (possibly followed by additional characters, as described below):
 
-        "r"      Open text file for reading.  The stream is positioned at the beginning of the file.
+        "r"      Open text file for reading.  
+                 The stream is positioned at the beginning of the file.
 
-        "w"      Truncate file to zero length or create text file for writing.  The stream is positioned at the beginning of the file.
+        "w"      Truncate file to zero length or create text file for writing.  
+                 The stream is positioned at the beginning of the file.
 
         ...
 ```
@@ -388,7 +392,8 @@ FILE *fopen(const char *pathname, const char *mode);
 ```C
 int fclose(FILE *stream);
 
-    It flushes  the  stream  pointed  to by stream (writing any buffered output data using fflush()) and closes the underlying file descriptor.
+    It flushes  the  stream  pointed  to by stream (writing any buffered output data using fflush()) 
+    and closes the underlying file descriptor.
 ```
 
 #### fprintf()
@@ -477,7 +482,7 @@ void Graph2Dot(struct Graph *pGraph,
                 0 0 1  
                 0 0 1  
                 1 1 0              
-                
+
             If the above matrix represents a directed graph:
 
                 "0"  -> {"2"}
