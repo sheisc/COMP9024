@@ -14,6 +14,10 @@
 
  *******************************************************************/
 ``` 
+## Introduction
+
+
+We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
 
 ### Depth First Search
 
@@ -24,6 +28,47 @@ It starts at a designated node, and explores as far as possible along each edge 
 This means it goes as deep as possible along one edge before exploring other edges.
 
 We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
+
+
+#### Depth First Search (DFS) is based on a stack
+
+The recursive implementation, discussed in this project, relies on the [call stack](../../Stacks/Recursion/README.md), 
+
+while the non-recursive approach, left as the weekly practical in [Tutorial 4](../../Tutorials/Week5/README.md), uses an explicit [data stack](../../Stacks/Stack_LL/README.md) to keep track of nodes to be visited.
+
+DFS goes as deep as possible from the starting node before backtracking to explore other branches.
+
+|DFS (starting from node 0)|
+|:-------------:|
+|<img src="images/DfsDirected_0004.png" width="50%" height="50%"> |
+
+
+
+
+### Breadth First Search (BFS)
+
+[Breadth First Search](../BreadthFirstSearch/README.md) is a fundamental algorithm used in graph or tree traversal. 
+
+It explores all nodes at the present "depth" level before moving on to nodes at the next depth level. 
+
+This approach visits nodes level by level (layer by layer).
+
+|BFS (starting from node 0)|
+|:-------------:|
+|<img src="diagrams/BfsDirected_0005.png" width="50%" height="50%"> |
+
+#### Breadth First Search (BFS) is based on a queue
+
+BFS uses a [queue](../../Queues/Queue_LL/README.md) data structure to facilitate its exploration strategy. 
+
+The queue operates on a First-In-First-Out (FIFO) principle, meaning nodes are processed in the order they are added.
+
+Breadth First Search propagates like ripples.
+
+|BFS|
+|:-------------:|
+| <img src="diagrams/ripple.jpeg" width="100%" height="100%"> |  
+
 
 
 ## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
@@ -132,6 +177,9 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 **When debugging this program in VS Code, you can set a breakpoint at line 262 in [src/Graph.c](./src/Graph.c) to observe the nodes on call stack.**
 
+The nodes on the call stack are useful in [cycle detection](../CycleDetection/README.md).
+
+
 | Visiting 0 | Visiting 2 |  Visiting 1 | Visiting 5 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
 | Nodes on call stack: $\color{red}{0}$ | Nodes on call stack: $\color{red}{2}$, 0 | Nodes on call stack: $\color{red}{1}$, 2, 0 | Nodes on call stack: $\color{red}{5}$, 1, 2, 0 |
@@ -210,6 +258,8 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/DfsUndirected_0000.png" width="50%" height="50%"> |  
 
 **When debugging this program in VS Code, you can set a breakpoint at line 262 in [src/Graph.c](./src/Graph.c) to observe the nodes on call stack.**
+
+The nodes on the call stack are useful in [cycle detection](../CycleDetection/README.md).
 
 | Visiting 0 | Visiting 2 |  Visiting 1 | Visiting 5 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
