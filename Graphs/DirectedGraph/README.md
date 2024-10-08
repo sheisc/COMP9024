@@ -313,6 +313,13 @@ struct Graph *CreateGraph(long n, int isDirected) {
     return pGraph;
 }
 
+void ReleaseGraph(struct Graph *pGraph) {
+    assert(pGraph);
+    free(pGraph->pNodes);
+    free(pGraph->pAdjMatrix);
+    free(pGraph);
+}
+
 
 /*
     Add an undirected edge between u and v
@@ -355,6 +362,46 @@ void GraphAddNode(struct Graph *pGraph, long u, char *name) {
 ```
 
 ### 5.2 How to generate [images/OurDirectedGraph_0000.dot](./images/OurDirectedGraph_0000.dot)
+
+#### How to open or close a file in C
+
+#### fopen()
+```C
+$ man fopen
+
+#include <stdio.h>
+
+FILE *fopen(const char *pathname, const char *mode);
+
+    The fopen() function opens the file whose name is the string pointed to by pathname and associates a stream with it.
+
+    The argument mode points to a string beginning with one of the following sequences (possibly followed by additional characters, as described below):
+
+        "r"      Open text file for reading.  The stream is positioned at the beginning of the file.
+
+        "w"      Truncate file to zero length or create text file for writing.  The stream is positioned at the beginning of the file.
+
+        ...
+```
+
+#### fclose()
+```C
+int fclose(FILE *stream);
+
+    It flushes  the  stream  pointed  to by stream (writing any buffered output data using fflush()) and closes the underlying file descriptor.
+```
+
+#### fprintf()
+```C
+
+int fprintf(FILE *stream, const char *format, ...);
+
+    It writes output to the given output stream;
+
+int printf(const char *format, ...);
+       
+    It writes output to stdout, the standard output stream;
+```
 
 #### images/OurDirectedGraph_0000.dot
 ```
@@ -401,7 +448,43 @@ void Graph2Dot(struct Graph *pGraph,
             edgeConnectorStr = "--";
             fprintf(dotFile, "graph %s {\n", graphName);
         }
+        /*
+            Edges:
 
+                "0" -> {"2"}
+                "0" -> {"4"}
+                ...
+            
+            (1) Undirected graph
+
+            For an undirected graph, its matrix is symmetric.
+
+                MatrixElement(pGraph, u, v) == MatrixElement(pGraph, v, u)
+
+            An example:
+                
+                0 0 1                0  0  1
+                0 0 1      --->         0  1
+                1 1 0                      0
+
+            Only output two undirected edges in the upper part of this matrix:
+            
+                "0"  -- {"2"}
+                "1"  -- {"2"}                
+
+            (2) Directed graph
+
+                0 0 1  
+                0 0 1  
+                1 1 0              
+                
+            If the above matrix represents a directed graph:
+
+                "0"  -> {"2"}
+                "1"  -> {"2"}
+                "2"  -> {"0"}
+                "2"  -> {"1"}
+         */
         for (long u = 0; u < pGraph->n; u++) {
             long vStart = u;
             if (isDirectedGraph) {
@@ -410,6 +493,7 @@ void Graph2Dot(struct Graph *pGraph,
             for (long v = vStart; v < pGraph->n; v++) {
                 long val = MatrixElement(pGraph, u, v);
                 if (val) {
+                    // Edge: "6" -> {"7"}  or  "6" -- {"7"}
                     fprintf(dotFile, "\"%s\" %s {\"%s\"}", 
                             pGraph->pNodes[u].name, 
                             edgeConnectorStr, 
@@ -422,16 +506,14 @@ void Graph2Dot(struct Graph *pGraph,
             }
         }
         /*
-        "0" [color=red]
+            Nodes:
+
+                "0" [color=red]
+                "1"
+                ...
          */
-        // if (displayVisited && visited) {
-        //     for (long i = 0; i < pGraph->n; i++) {
-        //         if (visited[i]) {
-        //             fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
-        //         }
-        //     }
-        // }
         for (long i = 0; i < pGraph->n; i++) {
+            // Node: "6"
             if (displayVisited && visited && visited[i]) {
                 fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
             } else {
@@ -469,3 +551,10 @@ void GenOneImage(struct Graph *pGraph, char *graphName, char *fileName, int seqN
 
 }
 ```
+
+```sh
+int snprintf(char *str, size_t size, const char *format, ...);
+
+    The function snprintf() writes at most 'size' bytes to 'str'.
+```
+
