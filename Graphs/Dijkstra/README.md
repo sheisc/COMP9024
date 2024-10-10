@@ -689,8 +689,110 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
 ```
 
 
+## 7 How to record the shortest paths from node 3
+
+```C
+long *preNodeIds = (long *) malloc(pGraph->n * sizeof(long));
+```
+
+**Initial**
+| | |  | | | |  | | |
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| i | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|preNodeIds[i]|  -1  | -1 |   -1  |  -1  |   -1  |  -1 |   -1 |   -1 |
+
+
+...
+
+<!--
+```sh
+    i                  0        1        2        3        4        5        6        7
+    preNodeIds[i]      3       -1        4        3        3        2        4        6
+
+```
+ -->
+
+**Final**
+| | |  | | | |  | | |
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| i | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|preNodeIds[i]| 3  | -1 |  4  | 3  |  3  | 2 |  4 |  6 |
+
+
+Node preNodeIds[i] is the predecessor of node i in the shortest path when (preNodeIds[i] != -1).
+
+**An example**
+
+The shortest path from node 3 to node 2:
+
+Searching from node 2.
+
+| Predecessor | Meaning |
+|:-----:|:-----:|
+|preNodeIds[2]  is   4| node 4 is the predecessor of node 2 |
+preNodeIds[4]  is  3 |node 3 is the predecessor of node 4 |
+preNodeIds[3]  is   3 | Special case; stop searching |
+
+
+We can save the following nodes in a stack.
+
+```sh
+    2, 4, 3
+```
+
+And then pop the node ids (i.e., reverse the sequence "2, 4, 3") 
+```sh
+The shortest path from node 3 to node 2:
+
+    3 --> 4 --> 2
+```
 
 
 
+**Final**
+| | |  | | | |  | | |
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| i | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|preNodeIds[i]| 3  | -1 |  4  | 3  |  3  | 2 |  4 |  6 |
 
+**Node preNodeIds[i] is the predecessor of node i in the shortest path.**
+
+
+**Meaning**
+```sh
+The shortest path from node 3 to node 0: 4
+	3 --> 0
+The shortest path from node 3 to node 1: INF 
+The shortest path from node 3 to node 2: 6
+	3 --> 4 --> 2
+The shortest path from node 3 to node 3: 0
+	3
+The shortest path from node 3 to node 4: 2
+	3 --> 4
+The shortest path from node 3 to node 5: 11
+	3 --> 4 --> 2 --> 5
+The shortest path from node 3 to node 6: 7
+	3 --> 4 --> 6
+The shortest path from node 3 to node 7: 10
+	3 --> 4 --> 6 --> 7
+
+```
+
+```sh
+   
+                3
+              /    \
+             /      \
+            0        4
+                    /  \
+                   /    \
+                  2      6
+                 /        \
+                /          \
+               5            7               
+```
+
+|  | 
+|:-------------:|
+| <img src="diagrams/DijkstraDirected.png" width="50%" height="50%"> | 
 
