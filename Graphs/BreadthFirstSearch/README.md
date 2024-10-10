@@ -146,12 +146,14 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 | Nodes in queue: $\color{red}{0}$ | Nodes in queue: $\color{red}{2}$ | Nodes in queue: $\color{red}{1}$, 4, 5 | Nodes in queue: $\color{red}{4}$, 5, 5 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
-| Visiting 0 | Visiting 2 |  Visiting 1 | Visiting 4 |
+| $\color{red}{BreadthFirstSearch(0)}$: Visiting 0 | Visiting 2 |  Visiting 1 | Visiting 4 |
 | <img src="images/BfsDirected_0001.png" width="50%" height="50%"> |  <img src="images/BfsDirected_0002.png" width="50%" height="50%"> | <img src="images/BfsDirected_0003.png" width="50%" height="50%"> | <img src="images/BfsDirected_0004.png" width="50%" height="50%"> | 
 
-| Nodes in queue: $\color{red}{5}$, 5, 7 | Nodes in queue: $\color{red}{7}$ | Nodes in queue: $\color{red}{6}$ | Nodes in queue: $\color{red}{3}$ |
+<img src="diagrams/BFS.png" width="50%" height="50%"> 
+
+| Nodes in queue: $\color{red}{5}$, 5, 7 | Nodes in queue: $\color{red}{7}$ | Nodes in queue: $\color{red}{6}$ |  Nodes in queue: $\color{red}{3}$ |
 |:-------------:|:-------------:|:-------------:|:-------------:|
-| Visiting 5 | Visiting 7 |  Visiting 6 | Visiting 3 |
+| Visiting 5 | Visiting 7 |  Visiting 6 | $\color{red}{BreadthFirstSearch(3)}$: Visiting 3 |
 | <img src="images/BfsDirected_0005.png" width="50%" height="50%"> |  <img src="images/BfsDirected_0006.png" width="50%" height="50%"> | <img src="images/BfsDirected_0007.png" width="50%" height="50%"> | <img src="images/BfsDirected_0008.png" width="50%" height="50%"> | 
 
 
@@ -233,8 +235,10 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 | Nodes in queue: $\color{red}{0}$ | Nodes in queue: $\color{red}{2}$, 3, 4 | Nodes in queue: $\color{red}{3}$, 4, 1, 4, 5, 6 | Nodes in queue: $\color{red}{4}$, 1, 4, 5, 6 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
-| Visiting 0 | Visiting 2 |  Visiting 3 | Visiting 4 |
+| $\color{red}{BreadthFirstSearch(0)}$: Visiting 0 | Visiting 2 |  Visiting 3 | Visiting 4 |
 | <img src="images/BfsUndirected_0001.png" width="50%" height="50%"> |  <img src="images/BfsUndirected_0002.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0003.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0004.png" width="50%" height="50%"> | 
+
+<img src="diagrams/BFS.png" width="50%" height="50%"> 
 
 | Nodes in queue: $\color{red}{1}$, 4, 5, 6, 7 | Nodes in queue: $\color{red}{5}$, 6, 7, 5 | Nodes in queue: $\color{red}{6}$, 7, 5 | Nodes in queue: $\color{red}{7}$, 5, 7 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
