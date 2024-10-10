@@ -89,6 +89,7 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 
 [COMP9024/Graphs/BreadthFirstSearch](./Graphs/BreadthFirstSearch/README.md)
 
+<!--
 [COMP9024/Graphs/CycleDetection](./Graphs/CycleDetection/README.md)
-
+-->
 
