@@ -750,13 +750,34 @@ The shortest path from node 3 to node 2:
 
 
 **Final**
-| | |  | | | |  | | |
+| | |  | | | |  | | | 
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
 | i | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 |preNodeIds[i]| 3  | -1 |  4  | 3  |  3  | 2 |  4 |  6 |
 
 **Node preNodeIds[i] is the predecessor of node i in the shortest path.**
 
+The above table can be imagined as the following tree.
+
+```sh
+3 --> 0
+3 --> 4
+4 --> 2
+4 --> 6
+2 --> 5
+6 --> 7
+   
+                3
+              /    \
+             /      \
+            0        4
+                    /  \
+                   /    \
+                  2      6
+                 /        \
+                /          \
+               5            7               
+```
 
 **Meaning**
 ```sh
@@ -778,19 +799,7 @@ The shortest path from node 3 to node 7: 10
 
 ```
 
-```sh
-   
-                3
-              /    \
-             /      \
-            0        4
-                    /  \
-                   /    \
-                  2      6
-                 /        \
-                /          \
-               5            7               
-```
+
 
 |  | 
 |:-------------:|
