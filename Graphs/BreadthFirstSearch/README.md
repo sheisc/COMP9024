@@ -151,10 +151,10 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 <img src="diagrams/BFS.png" width="50%" height="50%"> 
 
-| Nodes in queue: $\color{red}{5}$, 5, 7 | Nodes in queue: $\color{red}{7}$ | Nodes in queue: $\color{red}{6}$ |  Nodes in queue: $\color{red}{3}$ |
-|:-------------:|:-------------:|:-------------:|:-------------:|
-| Visiting 5 | Visiting 7 |  Visiting 6 | $\color{red}{BreadthFirstSearch(3)}$: Visiting 3 |
-| <img src="images/BfsDirected_0005.png" width="50%" height="50%"> |  <img src="images/BfsDirected_0006.png" width="50%" height="50%"> | <img src="images/BfsDirected_0007.png" width="50%" height="50%"> | <img src="images/BfsDirected_0008.png" width="50%" height="50%"> | 
+| Nodes in queue: $\color{red}{5}$, 5, 7 | Nodes in queue: $\color{red}{5}$, 7 | Nodes in queue: $\color{red}{7}$ | Nodes in queue: $\color{red}{6}$ |  Nodes in queue: $\color{red}{3}$ |
+|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:
+| Visiting 5 |  |Visiting 7 |  Visiting 6 | $\color{red}{BreadthFirstSearch(3)}$: Visiting 3 |
+| <img src="images/BfsDirected_0005.png" width="50%" height="50%"> |  <img src="images/BfsDirected_0005.png" width="50%" height="50%"> | <img src="images/BfsDirected_0006.png" width="50%" height="50%"> | <img src="images/BfsDirected_0007.png" width="50%" height="50%"> | <img src="images/BfsDirected_0008.png" width="50%" height="50%"> | 
 
 
 
