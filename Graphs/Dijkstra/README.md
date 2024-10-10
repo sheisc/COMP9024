@@ -15,14 +15,59 @@
  *******************************************************************/
 ``` 
 
-### Dijkstra's shortest path algorithm
+## Introduction
 
 Dijkstra's algorithm is commonly used for finding the shortest path in a graph where the edge weights are non-negative. 
 
 To simplify our discussions, we assume the distance from one node to another (edge weight) is a positive integer.
 
-We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
+### How can we determine the shortest path from one node to any other node in the graph?
 
+|  | 
+|:-------------:|
+| <img src="diagrams/DijkstraDirected.png" width="50%" height="50%"> | 
+
+
+Suppose we start from node 3. 
+
+That is, startNodeId is 3.
+
+Initialize the shortest distances to be INFINITY_VALUE ($+\infty$ ).
+
+| Initial | 
+|:-------------:|
+| <img src="images/DijkstraDirected_0000.png" width="50%" height="50%"> |  
+
+- Basic case
+
+    Update the shortest distance from node 3 to node 3 to be 0.
+
+- Get the node id (say, u) with the shortest distance from nodes which have not been visited yet.
+
+    Mark node u as visited.
+
+    For each neighbor v of u, if 
+
+    1. node v has not been visited yet 
+    2. u is reachable from startNodeId (i.e., the shortest distance for u is not INFINITY_VALUE)
+    3. there is a shorter path from startNodeId to v via node u:
+
+        startNodeId --> ... -->  u --> v
+
+        (i.e., distances[u] + MatrixElement(pGraph, u, v) < distances[v])
+
+    then
+
+        Update the distance from startNodeId to v  
+
+        distances[v] = distances[u] + MatrixElement(pGraph, u, v) 
+
+- Repeat the previous step until all nodes have been visited.
+
+
+
+
+We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
 
 ## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
@@ -492,7 +537,7 @@ typedef long AdjMatrixElementTy;
 
 struct Graph{
     /*
-       Memory Layout:
+        Memory Layout:
                           -----------------------------------------------------------
         pAdjMatrix ---->  Element(0, 0),   Element(0, 1),    ...,       Element(0, n-1),     // each row has n elements
                           Element(1, 0),   Element(1, 1),    ...,       Element(1, n-1),
@@ -506,13 +551,13 @@ struct Graph{
      */
     AdjMatrixElementTy *pAdjMatrix;
     /*
-       Memory Layout
+        Memory Layout
                         ---------------------------
                         pNodes[n-1]
        
        
                         pNodes[1]
-       pNodes ----->    pNodes[0]
+        pNodes ----->   pNodes[0]
                        ----------------------------
                         struct GraphNode[n] on Heap
      */
@@ -521,6 +566,20 @@ struct Graph{
     long n;
     // whether it is a directed graph
     int isDirected;
+    /*
+        Added for Dijkstra       
+
+        Memory Layout
+                        ---------------------------
+                            distances[n-1]
+       
+       
+                            distances[1]
+        distances ----->    distances[0]
+                       ----------------------------
+                              on Heap
+     */
+    AdjMatrixElementTy *distances;    
 };
 
 // 0 <= u < n,  0 <= v < n
@@ -533,6 +592,7 @@ struct Graph{
 
 
 ``` C
+#include <limits.h>   // LONG_MAX, INT_MAX
 
 // INFINITY_VALUE must align with the type of AdjMatrixElementTy
 #define INFINITY_VALUE  LONG_MAX
@@ -540,6 +600,13 @@ struct Graph{
 // Also see INFINITY_VALUE
 typedef long AdjMatrixElementTy;
 
+/*
+    Get the node id, 
+
+        (1) not visited yet
+        (2) has the minimum distance among the nodes not visited yet
+    
+ */
 static long getNodeIdWithMinDistance(AdjMatrixElementTy *distances, int *visited, long n) {
     AdjMatrixElementTy min = INFINITY_VALUE;
     long minIndex = -1;
@@ -553,10 +620,7 @@ static long getNodeIdWithMinDistance(AdjMatrixElementTy *distances, int *visited
     return minIndex;
 }
 
-
-static long imgCnt = 0;
-
-
+// Omit the code for visualizing the algorithm
 void Dijkstra(struct Graph *pGraph, long startNodeId) {
     assert(IsLegalNodeNum(pGraph, startNodeId));
 
@@ -565,73 +629,45 @@ void Dijkstra(struct Graph *pGraph, long startNodeId) {
 
     assert(visited);
 
-    imgCnt = 0;     
-
-    // 
+    // Set all the elements in distances[] to be INFINITY_VALUE;
+    // Mark all nodes as 'Not Visited Yet'.
     for (long i = 0; i < pGraph->n; i++) {
         distances[i] = INFINITY_VALUE;
         visited[i] = 0;
     }
-
-    if (pGraph->isDirected) {
-        GenOneImage(pGraph, "DijkstraDirected", "images/DijkstraDirected", imgCnt, visited);
-    } else {
-        GenOneImage(pGraph, "DijkstraUndirected", "images/DijkstraUndirected", imgCnt, visited);
-    }
-    //
+    // the distance from startNodeId to startNodeId is 0
     distances[startNodeId] = 0;
+
     // Find the shortest distances
     for (long i = 0; i < pGraph->n; i++) {
-        printf("============================================== Step %ld ==============================================\n\n", i+1);
+        // Get the node id which has the minimum distance among the nodes not visited yet
         long u = getNodeIdWithMinDistance(distances, visited, pGraph->n);
-        PrintDistancesAndVisited(pGraph, distances, visited, NULL);
-
+        // set the flag to indicate it has been visited.
         visited[u] = 1;
-        printf("Node %ld is selected\n\n", u);               
-            
-        imgCnt++;
 
-        if (pGraph->isDirected) {
-            GenOneImage(pGraph, "DijkstraDirected", "images/DijkstraDirected", imgCnt, visited);
-        } else {
-            GenOneImage(pGraph, "DijkstraUndirected", "images/DijkstraUndirected", imgCnt, visited);
-        }
-        int changed = 0;
+        // Update the distances of neighbors of node u           
         for (long v = 0; v < pGraph->n; v++) {
+            /*
+            If the four conditions are true:
+                (1) node v has not been visited yet
+                (2) there is an edge from u to v (i.e., v is one of u's neighbors)
+                (3) distances[u] is not INFINITY_VALUE
+                    (i.e., u is reachable from startNodeId)
+
+                (4) there is a shorter path from startNodeId to v (via node u)
+
+                    startNodeId -->  ... --> u --> v
+            then
+                update distance[v], i.e., the shortest distance from startNodeId to v found so far.
+                Note that it might be updated with a shorter distance later.
+             */
             if (!visited[v] && MatrixElement(pGraph, u, v) != 0 && distances[u] != INFINITY_VALUE) {
                 if (distances[u] + MatrixElement(pGraph, u, v) < distances[v]) {
-                    printf("Updating distances[%ld]: %ld --> ... --> %ld --> %ld; distance from %ld to %ld is %ld\n\n", v, 
-                            startNodeId, u, v, u, v,(long) MatrixElement(pGraph, u, v));
                     distances[v] = distances[u] + MatrixElement(pGraph, u, v);
-                    changed = 1;
                 }
             }
         }
-        if (changed) {
-            imgCnt++;
-
-            if (pGraph->isDirected) {
-                GenOneImage(pGraph, "DijkstraDirected", "images/DijkstraDirected", imgCnt, visited);
-            } else {
-                GenOneImage(pGraph, "DijkstraUndirected", "images/DijkstraUndirected", imgCnt, visited);
-            }            
-        }
-        PrintDistancesAndVisited(pGraph, distances, visited, NULL);
     }
-    // Output the shortest distances
-    for (long v = 0; v < pGraph->n; v++) {
-        if (distances[v] == INFINITY_VALUE) {
-            printf("Shortest path from node %s to node %s: INF \n", 
-                    pGraph->pNodes[startNodeId].name, 
-                    pGraph->pNodes[v].name);
-        } else {
-            printf("Shortest path from node %s to node %s: %ld\n", 
-                    pGraph->pNodes[startNodeId].name, 
-                    pGraph->pNodes[v].name, 
-                    (long) distances[v]);
-        }
-    }
-
     free(visited); 
 }
 

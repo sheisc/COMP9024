@@ -16,7 +16,7 @@ struct GraphNode {
 
 struct Graph{
     /*
-       Memory Layout:
+        Memory Layout:
                           -----------------------------------------------------------
         pAdjMatrix ---->  Element(0, 0),   Element(0, 1),    ...,       Element(0, n-1),     // each row has n elements
                           Element(1, 0),   Element(1, 1),    ...,       Element(1, n-1),
@@ -30,13 +30,13 @@ struct Graph{
      */
     AdjMatrixElementTy *pAdjMatrix;
     /*
-       Memory Layout
+        Memory Layout
                         ---------------------------
                         pNodes[n-1]
        
        
                         pNodes[1]
-       pNodes ----->    pNodes[0]
+        pNodes ----->   pNodes[0]
                        ----------------------------
                         struct GraphNode[n] on Heap
      */
@@ -45,7 +45,19 @@ struct Graph{
     long n;
     // whether it is a directed graph
     int isDirected;
-    // Added for Dijkstra
+    /*
+        Added for Dijkstra       
+
+        Memory Layout
+                        ---------------------------
+                            distances[n-1]
+       
+       
+                            distances[1]
+        distances ----->    distances[0]
+                       ----------------------------
+                              on Heap
+     */
     AdjMatrixElementTy *distances;
 };
 
