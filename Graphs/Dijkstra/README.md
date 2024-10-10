@@ -46,15 +46,18 @@ Initialize the shortest distances to be INFINITY_VALUE ($+\infty$ ).
 
     Mark node u as visited.
 
-    For each neighbor v of u, if 
+    For one node v, 
+    
+    if 
 
-    1. node v has not been visited yet 
-    2. u is reachable from startNodeId (i.e., the shortest distance for u is not INFINITY_VALUE)
-    3. there is a shorter path from startNodeId to v via node u:
+        1. node v has not been visited yet 
+        2. node v is a neighbor of node u
+        3. u is reachable from startNodeId (i.e., the shortest distance for u is not INFINITY_VALUE)
+        4. there is a shorter path from startNodeId to v via node u:
 
-        startNodeId --> ... -->  u --> v
+            startNodeId --> ... -->  u --> v
 
-        (i.e., distances[u] + MatrixElement(pGraph, u, v) < distances[v])
+            (i.e., distances[u] + MatrixElement(pGraph, u, v) < distances[v])
 
     then
 
