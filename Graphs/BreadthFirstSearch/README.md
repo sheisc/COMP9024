@@ -153,7 +153,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 | Nodes in queue: $\color{red}{5}$, 5, 7 | Nodes in queue: $\color{red}{5}$, 7 | Nodes in queue: $\color{red}{7}$ | Nodes in queue: $\color{red}{6}$ |  Nodes in queue: $\color{red}{3}$ |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:
-| Visiting 5 |  |Visiting 7 |  Visiting 6 | $\color{red}{BreadthFirstSearch(3)}$: Visiting 3 |
+| Visiting 5 | Dequeue |Visiting 7 |  Visiting 6 | $\color{red}{BreadthFirstSearch(3)}$: Visiting 3 |
 | <img src="images/BfsDirected_0005.png" width="50%" height="50%"> |  <img src="images/BfsDirected_0005.png" width="50%" height="50%"> | <img src="images/BfsDirected_0006.png" width="50%" height="50%"> | <img src="images/BfsDirected_0007.png" width="50%" height="50%"> | <img src="images/BfsDirected_0008.png" width="50%" height="50%"> | 
 
 
@@ -240,13 +240,16 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 <img src="diagrams/BFS.png" width="50%" height="50%"> 
 
-| Nodes in queue: $\color{red}{1}$, 4, 5, 6, 7 | Nodes in queue: $\color{red}{5}$, 6, 7, 5 | Nodes in queue: $\color{red}{6}$, 7, 5 | Nodes in queue: $\color{red}{7}$, 5, 7 |
-|:-------------:|:-------------:|:-------------:|:-------------:|
-| Visiting 1 | Visiting 5 |  Visiting 6 | Visiting 7 |
-| <img src="images/BfsUndirected_0005.png" width="50%" height="50%"> |  <img src="images/BfsUndirected_0006.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0007.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0008.png" width="50%" height="50%"> | 
+| Nodes in queue: $\color{red}{1}$, 4, 5, 6, 7 | Nodes in queue: $\color{red}{4}$, 5, 6, 7, 5 | Nodes in queue: $\color{red}{5}$, 6, 7, 5 | Nodes in queue: $\color{red}{6}$, 7, 5 | Nodes in queue: $\color{red}{7}$, 5, 7 |
+|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+| Visiting 1 | Dequeue |Visiting 5 |  Visiting 6 | Visiting 7 |
+| <img src="images/BfsUndirected_0005.png" width="50%" height="50%"> |  <img src="images/BfsUndirected_0005.png" width="50%" height="50%"> |<img src="images/BfsUndirected_0006.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0007.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0008.png" width="50%" height="50%"> | 
 
 
-
+| Nodes in queue: $\color{red}{5}$, 7| Nodes in queue: $\color{red}{7}$ |
+|:-------------:|:-------------:|
+| Dequeue  | Dequeue |
+| <img src="images/BfsUndirected_0008.png" width="50%" height="50%"> |<img src="images/BfsUndirected_0008.png" width="50%" height="50%"> |
 
 ### 4.2 More details
 
