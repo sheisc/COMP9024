@@ -439,7 +439,7 @@ void BFS(struct Graph *pGraph) {
 
 ## 7 NonRecursiveDFS in [Tutorial 4](../../Tutorials/Week5/)
 
-
+<!--
 ```C
 
 void NonRecursiveDFS(struct Graph *pGraph, long u) {
@@ -484,7 +484,11 @@ void NonRecursiveDFS(struct Graph *pGraph, long u) {
 }
 
 ```
+-->
 
+| NonRecursiveDFS() | BreadthFirstSearch() |
+|:-------------:|:-------------:|
+| <img src="diagrams/NonRecursiveDFS.png" width="100%" height="100%"> |  <img src="diagrams/BFS.png" width="100%" height="100%"> |
 
 
 
