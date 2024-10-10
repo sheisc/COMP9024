@@ -50,10 +50,10 @@ Initialize the shortest distances to be INFINITY_VALUE ($+\infty$ ).
     
     if 
 
-        1. node v has not been visited yet 
-        2. node v is a neighbor of node u
-        3. u is reachable from startNodeId (i.e., the shortest distance for u is not INFINITY_VALUE)
-        4. there is a shorter path from startNodeId to v via node u:
+        (1) node v has not been visited yet 
+        (2) node v is a neighbor of node u
+        (3) u is reachable from startNodeId (i.e., the shortest distance for u is not INFINITY_VALUE)
+        (4) there is a shorter path from startNodeId to v via node u:
 
             startNodeId --> ... -->  u --> v
 
