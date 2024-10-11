@@ -149,7 +149,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | $\color{red}{BreadthFirstSearch(0)}$: Visiting 0 | Visiting 2 |  Visiting 1 | Visiting 4 |
 | <img src="images/BfsDirected_0001.png" width="50%" height="50%"> |  <img src="images/BfsDirected_0002.png" width="50%" height="50%"> | <img src="images/BfsDirected_0003.png" width="50%" height="50%"> | <img src="images/BfsDirected_0004.png" width="50%" height="50%"> | 
 
-<img src="diagrams/BFS.png" width="50%" height="50%"> 
+<img src="diagrams/BFS.png" width="70%" height="70%"> 
 
 | Nodes in queue: $\color{red}{5}$, 5, 7 | Nodes in queue: $\color{red}{5}$, 7 | Nodes in queue: $\color{red}{7}$ | Nodes in queue: $\color{red}{6}$ |  Nodes in queue: $\color{red}{3}$ |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:
@@ -238,7 +238,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | $\color{red}{BreadthFirstSearch(0)}$: Visiting 0 | Visiting 2 |  Visiting 3 | Visiting 4 |
 | <img src="images/BfsUndirected_0001.png" width="50%" height="50%"> |  <img src="images/BfsUndirected_0002.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0003.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0004.png" width="50%" height="50%"> | 
 
-<img src="diagrams/BFS.png" width="50%" height="50%"> 
+<img src="diagrams/BFS.png" width="70%" height="70%"> 
 
 | Nodes in queue: $\color{red}{1}$, 4, 5, 6, 7 | Nodes in queue: $\color{red}{4}$, 5, 6, 7, 5 | Nodes in queue: $\color{red}{5}$, 6, 7, 5 | Nodes in queue: $\color{red}{6}$, 7, 5 | Nodes in queue: $\color{red}{7}$, 5, 7 |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
@@ -495,7 +495,7 @@ void NonRecursiveDFS(struct Graph *pGraph, long u) {
 
 | NonRecursiveDFS() | BreadthFirstSearch() |
 |:-------------:|:-------------:|
-| <img src="diagrams/NonRecursiveDFS.png" width="100%" height="100%"> |  <img src="diagrams/BFS.png" width="100%" height="100%"> |
+| <img src="diagrams/NonRecursiveDFS.png" width="150%" height="150%"> |  <img src="diagrams/BFS.png" width="150%" height="150%"> |
 
 
 
