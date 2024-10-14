@@ -149,7 +149,33 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | $\color{red}{BreadthFirstSearch(0)}$: Visiting 0 | Visiting 2 |  Visiting 1 | Visiting 4 |
 | <img src="images/BfsDirected_0001.png" width="50%" height="50%"> |  <img src="images/BfsDirected_0002.png" width="50%" height="50%"> | <img src="images/BfsDirected_0003.png" width="50%" height="50%"> | <img src="images/BfsDirected_0004.png" width="50%" height="50%"> | 
 
+<!--
 <img src="diagrams/BFS.png" width="70%" height="70%"> 
+-->
+
+```C
+// Simplified
+void BreadthFirstSearch(struct Graph *pGraph, long u, int *visited) {
+    assert(IsLegalNodeNum(pGraph, u));
+    struct Queue *pQueue = CreateQueue();  
+    assert(pQueue);
+
+    QueueEnqueue(pQueue, u);               
+    while(!QueueIsEmpty(pQueue)) {         
+        long curNodeId = QueueDequeue(pQueue);
+        if (!visited[curNodeId]) {
+            visited[curNodeId] = 1;
+            printf("visiting %s \n", pGraph->pNodes[curNodeId].name);      
+            for (long v = 0; v < pGraph->n; v++) {
+                if (MatrixElement(pGraph, curNodeId, v) == CONNECTED && !visited[v]) {
+                    QueueEnqueue(pQueue, v);   
+                }
+            }            
+        }
+    }
+    ReleaseQueue(pQueue);                      
+}
+```
 
 | Nodes in queue: $\color{red}{5}$, 5, 7 | Nodes in queue: $\color{red}{5}$, 7 | Nodes in queue: $\color{red}{7}$ | Nodes in queue: $\color{red}{6}$ |  Nodes in queue: $\color{red}{3}$ |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:
@@ -238,7 +264,33 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | $\color{red}{BreadthFirstSearch(0)}$: Visiting 0 | Visiting 2 |  Visiting 3 | Visiting 4 |
 | <img src="images/BfsUndirected_0001.png" width="50%" height="50%"> |  <img src="images/BfsUndirected_0002.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0003.png" width="50%" height="50%"> | <img src="images/BfsUndirected_0004.png" width="50%" height="50%"> | 
 
+<!--
 <img src="diagrams/BFS.png" width="70%" height="70%"> 
+-->
+
+```C
+// Simplified
+void BreadthFirstSearch(struct Graph *pGraph, long u, int *visited) {
+    assert(IsLegalNodeNum(pGraph, u));
+    struct Queue *pQueue = CreateQueue();  
+    assert(pQueue);
+
+    QueueEnqueue(pQueue, u);               
+    while(!QueueIsEmpty(pQueue)) {         
+        long curNodeId = QueueDequeue(pQueue);
+        if (!visited[curNodeId]) {
+            visited[curNodeId] = 1;
+            printf("visiting %s \n", pGraph->pNodes[curNodeId].name);      
+            for (long v = 0; v < pGraph->n; v++) {
+                if (MatrixElement(pGraph, curNodeId, v) == CONNECTED && !visited[v]) {
+                    QueueEnqueue(pQueue, v);   
+                }
+            }            
+        }
+    }
+    ReleaseQueue(pQueue);                      
+}
+```
 
 | Nodes in queue: $\color{red}{1}$, 4, 5, 6, 7 | Nodes in queue: $\color{red}{4}$, 5, 6, 7, 5 | Nodes in queue: $\color{red}{5}$, 6, 7, 5 | Nodes in queue: $\color{red}{6}$, 7, 5 | Nodes in queue: $\color{red}{7}$, 5, 7 |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
@@ -500,4 +552,30 @@ void NonRecursiveDFS(struct Graph *pGraph, long u) {
 
 
 
+<!--
 
+// Simplified
+void NonRecursiveDFS(struct Graph *pGraph, long u, int *visited) {
+    assert(IsLegalNodeNum(pGraph, u));
+
+    struct Stack *pStack = ______Q1______;  // create a data stack
+    assert(pStack);
+
+    ______Q2______;   // push u onto the data stack
+    while (______Q3______) { // test whether the data stack is empty
+        long curNodeId = StackPop(pStack);
+        if (!visited[curNodeId]) {
+            visited[curNodeId] = 1;
+            printf("visiting %s\n", pGraph->pNodes[curNodeId].name);      
+
+            //for (long v = 0; v < pGraph->n; v++) {
+            for (long v = pGraph->n - 1; v >= 0; v--) {
+                if (MatrixElement(pGraph, curNodeId, v) == CONNECTED && !visited[v]) {
+                    ______Q4______;  // push v onto the data stack
+                }
+            }            
+        }
+    }
+    ______Q5______;  // free the heap space occupied by the data stack 
+}
+>
