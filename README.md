@@ -95,5 +95,8 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 
 [COMP9024/Trees/TreeTraversal](./Trees/TreeTraversal/README.md)
 
+[COMP9024/HeapAllocator](./HeapAllocator/README.md)
+
 [COMP9024/Trees/BinarySearchTree](./Trees/BinarySearchTree/README.md)
+
 
