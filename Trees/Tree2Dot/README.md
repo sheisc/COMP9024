@@ -14,6 +14,7 @@
 
  *******************************************************************/
 ``` 
+<!--
 #### Non-recursive Depth First Search (DFS) is based on a stack
 
 Non-recursive DFS (in [Tutorial 4](../../Tutorials/Week5/README.md)) uses an explicit [stack](../../Stacks/Stack_LL/README.md) data structure. 
@@ -26,104 +27,12 @@ DFS goes as deep as possible from the starting node before backtracking to explo
 |:-------------:|
 | <img src="diagrams/Maze.png" width="100%" height="100%"> |
 
+-->
+
+<!--
 #### Recursive Depth First Search (DFS) is based on the call stack
+-->
 
-A fractal is a geometric shape or pattern that is self-similar at different scales.
-
-Fractal trees are defined by their recursive, self-similar structure, where each branch subdivides into smaller branches that resemble the whole tree. 
-
-
-```sh
-
-Tree2Dot$ make tree
-
-python3 FractalTree.py &
-
-Tree2Dot$ make tree3
-
-python3 FractalTree3.py &
-```
-
-**Recursion is hard**.
-
-**Recursion is beautiful**.
-
-|Fractal Tree (with 2 branches) |Fractal Tree (with 3 branches)|
-|:-------------:|:-------------:|
-| <img src="diagrams/FractalTree.png" width="60%" height="60%"> | <img src="diagrams/FractalTree3.png" width="60%" height="60%"> |
-
-To create graphics on the screen, we instruct the turtle (a pen) to move.
-
-Operating the [turtle](https://docs.python.org/3/library/turtle.html) is just like driving a car as follows.
-
-* Turn left
-
-* Turn right
-
-* Forward
-
-* Backward
-
-```Python
-import turtle
-
-# Fractal tree
-def draw_branch(t:turtle.Pen, length):
-    if length > 5:
-        # Pen size
-        sz = int(length / 20)
-        if sz < 1:
-            sz = 1
-        t.pensize(sz)
-
-        # Main branch
-        t.forward(length)
-
-        # turn right by 30 degrees
-        t.right(30)
-        # right sub-tree, the length of its main branch is (length - 15) pixels
-        draw_branch(t, length - 15)
-
-        # turn left by 60 degrees
-        t.left(60)
-        # left sub-tree,  the length of its branch is (length - 15) pixels
-        draw_branch(t, length - 15)
-
-        # turn right by 30 degrees
-        t.right(30)
-        # go back to the origin position
-        t.backward(length)
-
-
-def draw():
-    # Default direction:  --->
-    t = turtle.Pen()
-
-    # Direction: Up
-    t.left(90)
-    t.penup()
-    t.backward(260)
-    t.pendown()    
-    t.shape("turtle")
-    t.speed(6)
-    
-    colors = ['red', 'green']
-    for color in colors:
-        t.pencolor(color)
-        # the length of the main branch is 120 pixels
-        draw_branch(t, 120)
-    
-    #t.hideturtle()
-
-    screen = turtle.Screen()
-    #canvas = screen.getcanvas()
-    #canvas.postscript(file='FractalTree.eps')   
-    screen.exitonclick()
-
-
-if __name__ == '__main__':
-    draw()
-```
 
 #### Breadth First Search (BFS) is based on a queue
 
@@ -524,6 +433,11 @@ void BiTree2Dot(BiTreeNodePtr root,
             QueueEnqueue(pQueue, root);
             while (!QueueIsEmpty(pQueue)) {
                 BiTreeNodePtr curNode = QueueDequeue(pQueue);
+                /*
+                    Tree Edges:
+                        "100" -> {"98"} [label="L"]
+                        "100" -> {"101"} [label="R"]                        
+                 */
                 if (curNode->leftChild) {
                     fprintf(dotFile, "\"%s\" %s {\"%s\"} [label=\"L\"]\n",
                             curNode->value.name,
@@ -543,7 +457,9 @@ void BiTree2Dot(BiTreeNodePtr root,
         }
         ReleaseQueue(pQueue);
         /*
-        "0" [color=red]
+        Tree Nodes:
+
+            "97" [color=red]
          */
         if (displayVisited) {
             DisplayVisited(dotFile, root);
@@ -566,4 +482,102 @@ void ReleaseBinaryTree(BiTreeNodePtr root) {
 }
 ```
 
+## 6 Sidetracks: fractal trees
 
+
+A fractal is a geometric shape or pattern that is self-similar at different scales.
+
+Fractal trees are defined by their recursive, self-similar structure, where each branch subdivides into smaller branches that resemble the whole tree. 
+
+
+```sh
+
+Tree2Dot$ make tree
+
+python3 FractalTree.py &
+
+Tree2Dot$ make tree3
+
+python3 FractalTree3.py &
+```
+
+**Recursion is hard**.
+
+**Recursion is beautiful**.
+
+|Fractal Tree (with 2 branches) |Fractal Tree (with 3 branches)|
+|:-------------:|:-------------:|
+| <img src="diagrams/FractalTree.png" width="60%" height="60%"> | <img src="diagrams/FractalTree3.png" width="60%" height="60%"> |
+
+To create graphics on the screen, we instruct the turtle (a pen) to move.
+
+Operating the [turtle](https://docs.python.org/3/library/turtle.html) is just like driving a car as follows.
+
+* Turn left
+
+* Turn right
+
+* Forward
+
+* Backward
+
+```Python
+import turtle
+
+# Fractal tree
+def draw_branch(t:turtle.Pen, length):
+    if length > 5:
+        # Pen size
+        sz = int(length / 20)
+        if sz < 1:
+            sz = 1
+        t.pensize(sz)
+
+        # Main branch
+        t.forward(length)
+
+        # turn right by 30 degrees
+        t.right(30)
+        # right sub-tree, the length of its main branch is (length - 15) pixels
+        draw_branch(t, length - 15)
+
+        # turn left by 60 degrees
+        t.left(60)
+        # left sub-tree,  the length of its branch is (length - 15) pixels
+        draw_branch(t, length - 15)
+
+        # turn right by 30 degrees
+        t.right(30)
+        # go back to the origin position
+        t.backward(length)
+
+
+def draw():
+    # Default direction:  --->
+    t = turtle.Pen()
+
+    # Direction: Up
+    t.left(90)
+    t.penup()
+    t.backward(260)
+    t.pendown()    
+    t.shape("turtle")
+    t.speed(6)
+    
+    colors = ['red', 'green']
+    for color in colors:
+        t.pencolor(color)
+        # the length of the main branch is 120 pixels
+        draw_branch(t, 120)
+    
+    #t.hideturtle()
+
+    screen = turtle.Screen()
+    #canvas = screen.getcanvas()
+    #canvas.postscript(file='FractalTree.eps')   
+    screen.exitonclick()
+
+
+if __name__ == '__main__':
+    draw()
+```

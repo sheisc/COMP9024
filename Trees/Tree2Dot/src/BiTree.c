@@ -89,7 +89,7 @@ static void DisplayVisited(FILE *dotFile, BiTreeNodePtr root) {
     if (root) {
         if (root->visited) {
             fprintf(dotFile, "\"%s\" [color=red]\n", root->value.name);            
-        }
+        }  
         DisplayVisited(dotFile, root->leftChild);
         DisplayVisited(dotFile, root->rightChild);
     }

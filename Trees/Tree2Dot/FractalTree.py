@@ -41,7 +41,8 @@ def draw():
     t.shape("turtle")
     t.speed(6)
     
-    colors = ['red', 'green']
+    #colors = ['red', 'green']
+    colors = ['green']
     for color in colors:
         t.pencolor(color)
         draw_branch(t, 120)
