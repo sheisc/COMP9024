@@ -59,7 +59,7 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 [COMP9024/Sorting/BubbleSort](./Sorting/BubbleSort/README.md)
 
 
-## Week 02 - 06
+## Week 02 - 07
 
 [COMP9024/Stacks/Recursion](./Stacks/Recursion/README.md)
 
