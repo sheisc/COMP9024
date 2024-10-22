@@ -235,13 +235,22 @@ Statement:
 
 ### How to create an abstract syntax tree for a return statement
 
+Example
+
+```C
+    return 0;
+```
+
 We have discussed how to create an abstract syntax tree for an expression in [COMP9024/Trees/Str2Ast](../Trees/Str2Ast/).
+
+
 
 ```sh
 ReturnStatement:
     return Expresion;
 ```
 
+Parser
 ```C
 /* 
     ReturnStatement:
@@ -300,6 +309,36 @@ typedef struct astStmtNode *AstStmtNodePtr;
 
 ### How to create an abstract syntax tree for a while statement
 
+Example
+
+```C
+// COMP9024/LargeAssignment/tests/EnvVars.scc
+
+printStrs(strs) {
+    long i;
+    long s;
+    i = 0;
+    s = SccRead64(strs, i * 8);
+    while (s) {
+        puts(s);
+        i = i + 1;
+        s = SccRead64(strs, i * 8);
+    }
+}
+
+main(argc, argv, env) {
+    output(argc);
+    // Display command-line arguments
+    printStrs(argv);
+    // '\n'
+    putchar(10);
+    // Display environment variables
+    printStrs(env);
+    return 0;
+}
+```
+
+Parser
 ```C
 /**********************************************
     WhileStatement:
@@ -337,6 +376,38 @@ static AstStmtNodePtr WhileStatement(void) {
 
 ### How to create an abstract syntax tree for a do-while statement
 
+Example
+```C
+
+// COMP9024/LargeAssignment/tests/DoWhile.scc
+
+printStrs(strs) {
+    long i;
+    long s;
+    i = 0;
+    // assume the first one is not NULL
+    do {
+        s = SccRead64(strs, i * 8);
+        if (s) {
+            puts(s);
+        }
+        i = i + 1;
+    } while (s);
+}
+
+main(argc, argv, env) {
+    output(argc);
+    // Display command-line arguments
+    printStrs(argv);
+    // '\n'
+    putchar(10);
+    // Display environment variables
+    printStrs(env);
+    return 0;
+}
+```
+
+Parser
 ```C
 /**********************************************
     DoWhileStatement:
@@ -423,6 +494,190 @@ GDMSESSION=ubuntu
 MAKELEVEL=1
 
 ```
+
+### How to create an abstract syntax tree for a compound statement
+
+Example
+```C
+main(argc, argv, env) 
+{
+    // ...
+    i = 4;
+    result = f(i);
+    output(result);
+
+    return 0;
+}
+```
+Parser
+```C
+/*
+    CompoundStatement:
+        {Statement  Statement   ...  Statement}
+  
+    Semantics:
+        The list of statements is saved in CompoundStatement.next.
+ */
+AstStmtNodePtr CompoundStatement(void) {
+    AstStmtNodePtr comStmt;
+    AstStmtNodePtr *pStmt;
+    Value value;
+
+    comStmt = CreateStmtNode(TK_COMPOUND);
+    pStmt = &(comStmt->next);
+
+    Expect(TK_LBRACE);
+    while (isPrefixOfStatement(curToken.kind)) {
+        *pStmt = Statement();
+        pStmt = &((*pStmt)->next);
+    }
+    Expect(TK_RBRACE);
+    return comStmt;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+// The first token of a statement
+static TokenKind prefixOfStmt[] = {TK_ID,     TK_IF,     TK_WHILE,
+                                   TK_LBRACE, TK_INT,    TK_INPUT,
+                                   TK_OUTPUT, TK_RETURN, TK_DO};
+
+// Test whether the token tk can be the first token of a statement in scc.
+static int isPrefixOfStatement(TokenKind tk) {
+    int i = 0;
+    for (i = 0; i < sizeof(prefixOfStmt) / sizeof(prefixOfStmt[0]); i++) {
+        if (tk == prefixOfStmt[i]) {
+            return 1;
+        }
+    }
+    return 0;
+}
+```
+
+### Function Definition
+
+```C
+FunctionDefinition:
+    id(id, id, id, ..., id) CompoundStatement
+```
+
+Example
+```C
+// COMP9024/LargeAssignment/tests/Factorial.scc
+
+long result;
+
+// f(n) = 1 * 2 * ... * (n-1) * n
+f(n) {
+    if (SccLessEqual(n, 1)) { // n <= 1
+        return 1;
+    } else {
+        return f(n - 1) * n;
+    }
+}
+
+main(argc, argv, env) {
+    long i;
+
+    i = 4;
+    result = f(i);
+    output(result);
+
+    return 0;
+}
+```
+
+
+#### struct astFuncDefNode 
+```C 
+#define MAX_PARAMETERS_CNT 10
+#define MAX_LOCAL_VARS_CNT 64
+
+/*
+    Abstract syntax tree node for a function definition.
+ */
+struct astFuncDefNode {
+    // TK_FUNC
+    TokenKind op;
+    // Function's name
+    Value value;
+
+    ///////////////////////////////////////////////
+    // The local symbol table of the function:
+    //
+    //     paras and local_vars
+    //
+    ///////////////////////////////////////////////
+
+    // for function parameters
+    struct astExprNode paras[MAX_PARAMETERS_CNT];
+    // number of parameters defined
+    int para_cnt;
+    // for local variables
+    struct astExprNode local_vars[MAX_LOCAL_VARS_CNT];
+    // number of local variables defined in the function body
+    int local_vars_cnt;
+
+    // number of temporary variables
+    int tmpVarNum;
+    // the frame size (including stack space needed for local and temporary variables)
+    int frameSize;
+
+    // funcBody
+    AstStmtNodePtr funcBody;
+    // next function
+    struct astFuncDefNode *next;
+};
+
+typedef struct astFuncDefNode *AstFuncDefNodePtr;
+```
+
+### The Memory Layout of a Linux Process
+
+``` sh
+     |_____________________|
+     |  command line args  |
+     |        and          |
+     |environment variables|
+     |_____________________| 
+     |                     | Call Stack
+     |                     |  
+     |                     |  
+     |.....................| 
+     |                     |
+     |                     |  
+     |                     |   
+     |                     |
+     |                     |  Heap memory area (malloc() and free())
+     |                     |
+     |                     |  
+     |                     |   
+     |_____________________| 
+     |                     |
+     |                     |  Global memory area
+     |                     |  
+     |_____________________|  
+     |                     |
+     |                     |  Code Area
+     |_____________________| 
+     |                     |
+
+    The Memory Layout of a Linux Process (userspace)
+
+```
+
+[Factorial.scc.s](../Stacks/Factorial.scc.s) contains the assembly code generated by SCC.
+
+**Call stack** is studied in [Stacks/Recursion](../Stacks/README.md), 
+[lines 535-550 in LargeAssignment/src/stmt.c](./src/stmt.c), [lines 473-564 in LargeAssignment/src/expr.c](./src/expr.c), and [lines 139-160 and 283-287 in LargeAssignment/src/emit.c](./src/emit.c).
+
+**Heap allocator** is customized in  [OurMalloc() and OurFree() of our large assignment](./libs/SccHeap.c).
+
+**Global variables** are generated in [EmitGlobalDeclarationNode() of our large assignment](./src/decl.c).
+
+**Code** is generated in [EmitFuncDefNode() of our large assignment](./src/func.c).
+
+**The command line arguments and environment variables** are accessed in [LargeAssignment/tests/EnvVars.scc](./tests/EnvVars.scc) and [C/EnvVars](../C/EnvVars/README.md).
 
 ## 8 Assessed online via Moodle
 
