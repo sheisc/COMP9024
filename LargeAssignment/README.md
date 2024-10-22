@@ -221,6 +221,178 @@ The address (e.g., 0x564728956040) might differ due to [Address Space Layout Ran
 
 ## 7 How to test our do-while statement (based on a Tree) 
 
+### Statement
+
+```sh
+Statement:
+        IfStatement
+        WhileStatement
+        DoWhileStatement
+        CompoundStatement
+        ReturnStatement
+        ...
+```
+
+### How to create an abstract syntax tree for a return statement
+
+We have discussed how to create an abstract syntax tree for an expression in [COMP9024/Trees/Str2Ast](../Trees/Str2Ast/).
+
+```sh
+ReturnStatement:
+    return Expresion;
+```
+
+```C
+/* 
+    ReturnStatement:
+        return Expresion;
+ */
+AstStmtNodePtr ReturnStatement() {
+    AstStmtNodePtr returnStmt = NULL;
+    returnStmt = CreateStmtNode(TK_RETURN);
+    Expect(TK_RETURN);
+    returnStmt->expr = Expression();
+    Expect(TK_SEMICOLON);
+    return returnStmt;
+}
+```
+
+### struct astStmtNode
+```C
+/*
+    AST node for different statements.
+    We use the field op to distinguish different statements.  
+ */
+struct astStmtNode {
+    // The kind of a statement.
+    // To keep it simple, we reuse the TokenKind defined in tokens.txt.
+    TokenKind op;
+    // The value got from lex.c
+    //      name of id,  integer values, ...
+    Value value;
+    /////////////////////////////
+    /*
+    1. Used in IfStatement and WhileStatement for labels
+        See the comments for IfStatement() in stmt.c.  
+    2. Other statements might use these fields for other purposes.
+        see ExpressionStatement()
+    */
+    struct astExprNode *kids[2];
+    /*
+    1. See IfStatement() in stmt.c
+          if (expr)
+            thenStmt
+          else
+            elseStmt
+          
+          nextStmt
+     2. Other statements might reuse part of these fields.
+        For example, WhileStatement only use expr, thenStmt, and next.
+    */
+    struct astExprNode *expr;
+    struct astStmtNode *thenStmt;
+    struct astStmtNode *elseStmt;
+    struct astStmtNode *next;
+};
+
+typedef struct astStmtNode *AstStmtNodePtr;
+```
+
+### How to create an abstract syntax tree for a while statement
+
+```C
+/**********************************************
+    WhileStatement:
+        while (Expression) Statement
+  
+    Semantics:
+  
+          label_begin:         // saved in WhileStatement.kids[0]
+  
+                if(!Expression)  
+                    goto	label_next
+                
+                Statement
+                
+                goto label_begin
+  
+          label_next:         //  saved in WhileStatement.kids[1]
+                ...
+ **********************************************/
+static AstStmtNodePtr WhileStatement(void) {
+    AstStmtNodePtr whileStmt = NULL;
+    whileStmt = CreateStmtNode(TK_WHILE);
+
+    whileStmt->kids[0] = CreateLabelNode();
+    Expect(TK_WHILE);
+    Expect(TK_LPAREN);
+    whileStmt->expr = Expression();
+    Expect(TK_RPAREN);
+    whileStmt->thenStmt = Statement();
+    // label for the statement after while
+    whileStmt->kids[1] = CreateLabelNode();
+    return whileStmt;
+}
+```
+
+### How to create an abstract syntax tree for a do-while statement
+
+```C
+/**********************************************
+    DoWhileStatement:
+          do Statement while (Expression);
+ 
+    Semantics:   
+         label_begin:     // saved in DoWhileStatement.kids[0]
+ 
+             Statement
+ 
+             if(Expression)
+                 goto label_begin
+ 
+         label_next:     //  saved in DoWhileStatement.kids[1]
+             ....
+ **********************************************/
+static AstStmtNodePtr DoWhileStatement(void) {
+    AstStmtNodePtr doWhileStmt = NULL;
+
+    /*
+      Create a sub-tree for the do-while statement.
+      It is similar with the code in WhileStatement().
+  
+      Q11. call CreateStmtNode(TK_DO) to create an AST node and save the return value in doWhileStmt
+      Q12. call Expect() to match TK_DO in the input file
+      Q13. call CreateLabelNode() to create an AST node for label_begin, and save the return value in doWhileStmt->kids[0]
+      Q14. call Statement() to create an AST node for the Statement, and save the return value in doWhileStmt->thenStmt
+      Q15. call Expect() to match TK_WHILE in the input file
+      Q16. call Expect() to match TK_LPAREN in the input file
+      Q17. call Expression() to create an AST node for the Expression in do-while, and save the return value in doWhileStmt->expr.
+      Q18. call Expect() to match TK_RPAREN in the input file
+      Q19. call Expect() to match TK_SEMICOLON in the input file
+      Q20. call CreateLabelNode() to create an AST node for label_next, and save the return value in doWhileStmt->kids[1]     
+     */
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    //    Please read the above comments first and then complete the following code (Q11-Q20).
+    //
+    ////////////////////////////////////////////////////////////////////////////////////
+
+    // Q11. ___________________
+    // Q12. ___________________
+    // Q13. ___________________
+    // Q14. ___________________
+    // Q15. ___________________
+    // Q16. ___________________
+    // Q17. ___________________
+    // Q18. ___________________
+    // Q19. ___________________
+    // Q20. ___________________
+
+    return doWhileStmt;
+}
+
+```
+
 **After completing the code (Q11-Q20) in the function DoWhileStatement() in src/stmt.c** , 
 
 we can run the following commands in VLAB.
@@ -254,4 +426,23 @@ MAKELEVEL=1
 
 ## 8 Assessed online via Moodle
 
-Please complete the code in Q1-Q20 and then answer questions (more than 20) in Large Assignment (Week 10) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).
+Please complete the code in Q1-Q20 and then answer the 24 questions in Large Assignment (Week 10) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).
+
+BTW, the other four questions (i.e., Q21-Q24) are as follows.
+
+```sh
+Q21.    
+    Modifying one line in ______Q21______ can make the subtraction operator right associative in our large assignment.
+
+Q22.    
+    Modifying one line in ______Q22______ can make the division operator right associative in our large assignment.
+
+Q23.    
+    Suppose there are n free memory blocks in the singly linked list in our large assignment. 
+    The time complexity of OurMalloc() is ______Q23______.
+
+Q24.
+    Suppose there are n free memory blocks in the singly linked list in our large assignment. 
+    The time complexity of OurFree() is ______Q24______.
+```
+
