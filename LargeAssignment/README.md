@@ -686,7 +686,7 @@ typedef struct astFuncDefNode *AstFuncDefNodePtr;
 
 
 
-**Call stack** is studied in [Stacks/Recursion](../Stacks/README.md), 
+**Call stack** is studied in [Stacks/Recursion](../Stacks/Recursion/README.md), 
 [lines 535-550 in LargeAssignment/src/stmt.c](./src/stmt.c), [lines 473-564 in LargeAssignment/src/expr.c](./src/expr.c), and [lines 139-160 and 283-287 in LargeAssignment/src/emit.c](./src/emit.c).
 
 **Heap allocator** is customized in  [OurMalloc() and OurFree() of our large assignment](./libs/SccHeap.c).
