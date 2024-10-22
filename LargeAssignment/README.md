@@ -247,6 +247,17 @@ Statement:
         CompoundStatement
         ReturnStatement
         ...
+
+
+IfStatement:
+        if (Expression) Statement
+        if (Expression) Statement else Statement        
+
+
+ReturnStatement:
+        return Expresion;
+
+...
 ```
 
 ### 7.2 How to create an abstract syntax tree for a return statement
