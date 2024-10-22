@@ -24,6 +24,36 @@ An allocator is responsible for managing the allocation and deallocation of memo
 
 It keeps track of which parts of the heap are in use and which are free.
 
+### void *malloc(size_t size)
+```sh
+
+// stdlib.h
+// stddef.h
+
+// typedef long unsigned int size_t;
+
+void *malloc(size_t size);
+
+DESCRIPTION
+
+       The malloc() function allocates size bytes and returns a pointer to the allocated memory.  The memory is not
+       initialized.  If size is 0, then malloc() returns either NULL, or a unique pointer value that can  later  be
+       successfully passed to free().
+
+```
+
+### void free(void *ptr)
+```sh
+void free(void *ptr);
+
+DESCRIPTION
+
+       The  free()  function  frees the memory space pointed to by ptr, which must have been returned by a previous
+       call to malloc(), calloc(), or realloc().  Otherwise, or if free(ptr) has already been called before,  unde‐
+       fined behavior occurs.  If ptr is NULL, no operation is performed.
+
+```
+
 To be simple, we use an array in the global memory area (only 4096 bytes) to imitate/mimic the heap space in this project.
 
 ```C
@@ -47,7 +77,6 @@ typedef unsigned long heap_size_t;
 void *SccMalloc(heap_size_t size);
 void SccFree(void *addr);
 ```
-
 
 ### The first fit algorithm
 
