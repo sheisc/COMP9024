@@ -25,7 +25,7 @@ It starts at a designated node, and explores as far as possible along each edge 
 
 This means it goes as deep as possible along one edge before exploring other edges.
 
-We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
+We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndirectedGraph/README.md).
 
 In this tutorial, we'll explore how to perform a recursive depth-first search within a directed graph.
 
