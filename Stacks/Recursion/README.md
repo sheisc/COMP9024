@@ -304,7 +304,7 @@ DESCRIPTION
        undefined behavior occurs.  If ptr is NULL, no operation is performed.
 
 ```
-
+<!--
 **Call stack** is studied in [Stacks/Recursion](./README.md), 
 [lines 553-566 in LargeAssignment/src/stmt.c](../../LargeAssignment/src/stmt.c), [lines 498-581 in LargeAssignment/src/expr.c](../../LargeAssignment/src/expr.c), and [lines 142-161 and 284-288 in LargeAssignment/src/emit.c](../../LargeAssignment/src/emit.c).
 
@@ -316,7 +316,7 @@ DESCRIPTION
 
 **The command line arguments and environment variables** are accessed in [LargeAssignment/tests/EnvVars.scc](../../LargeAssignment/tests/EnvVars.scc) and [C/EnvVars](../../C/EnvVars/README.md).
 
-
+-->
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
