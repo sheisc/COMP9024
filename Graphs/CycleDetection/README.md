@@ -931,6 +931,15 @@ static int GetNumOfNodesInCycle(struct Graph *pGraph, long v, struct Stack *pNod
 static long cycles = 0;
 static long imgCnt = 0;
 
+/*
+    Input
+        v == 2
+        Stack: 6  7  4  2  0
+
+    Output
+        Nodes in a cycle: 
+        6 7 4 2
+ */
 static void PrintNodesInCycle(struct Graph *pGraph, long v, struct Stack *pNodesOnStack) {
     // Get an iterator of the stack
     StackIterator it = GetIterator(pNodesOnStack);
