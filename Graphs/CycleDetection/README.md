@@ -298,7 +298,7 @@ static int GetNumOfNodesInCycle(struct Graph *pGraph, long v, struct Stack *pNod
 
 Example:
 
-| Visiting 5 (Cycle Detected) |
+| Visiting 5 (Special Case) |
 |:-------------:|
 | Nodes on call stack: $\color{red}{5}$, 1, 2, 0 |
 | <img src="images/HasCycleUndirected_0004.png" width="50%" height="50%"> |
