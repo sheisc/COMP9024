@@ -242,8 +242,14 @@ In this project, we implement an iterator to traverse the elements on the [data 
 
     The top element on the stack is 5 and we are testing its adjacent node 2.
 
-    ----- Test whether node 2 (i.e., v is 2) is on stack: NumOfNodesInCycle = 3 -----   
-    Stack: 5 1 2 0
+    ----- Test whether node 2 (i.e., v is 2) is on stack ------------- 
+
+    Input:
+        v == 2  
+        Stack: 5 1 2 0
+
+    Output:
+        NumOfNodesInCycle = 3
 
     ------------------------------------------------------------------
  */
