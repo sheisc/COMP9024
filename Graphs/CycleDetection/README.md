@@ -64,6 +64,158 @@ In other words, we have detected a cycle starting from node 0 to node 0 as follo
 | Nodes on call stack: $\color{red}{4}$, 2, 0 |
 | <img src="images/HasCycleDirected_0005.png" width="50%" height="50%"> | 
 
+### How to know which nodes are on the call stack 
+
+- Set a breakpoint at the entry of DetectCycle() (i.e., line 345 in [src/Graph.c](./src/Graph.c)) when debugging this project in VS Code.
+- Observe the parameter u of each stack frame on the call stack
+
+```C
+// DetectCycle() is a recursive function
+static int DetectCycle(struct Graph *pGraph, long u, int *visited, struct Stack *pNodesOnStack) {
+    // ...
+    int cycleDetected = 0;
+    
+    for(long v = 0; v < pGraph->n; v++) {
+        if (MatrixElement(pGraph, u, v)) {
+            if (!visited[v]) {
+                if (DetectCycle(pGraph, v, visited, pNodesOnStack)) {    
+    // ...
+
+    return cycleDetected;
+}
+```
+
+### How to record the nodes on the call stack when calling DetectCycle() recursively 
+
+The **DetectCycle()** function is implemented recursively for DFS traversal to detect cycles.
+
+As it is hard to access the nodes on the call stack,  we create a [data stack](./src/Stack.c) to record the nodes.
+
+When entering the function DetectCycle(), the current node is pushed onto the data stack.
+
+When DetectCycle() returns, the node is popped from the data stack.
+
+```C
+static int DetectCycle(struct Graph *pGraph, long u, int *visited, struct Stack *pNodesOnStack) {
+    // Entry
+    StackPush(pNodesOnStack, u); 
+
+    // ...
+
+    // Exit
+    StackPop(pNodesOnStack);
+}
+```
+
+
+### How to add an iterator interface for a data stack
+
+Motivation in this project:
+
+```sh
+Visiting all the nodes on a data stack, without using StackPop() and StackPush()
+```    
+
+In computer programming, an iterator is an object that allows a programmer to traverse through elements of a container.
+
+An iterator provides a way to access elements of a collection, like lists or arrays, one at a time without exposing the underlying structure. 
+
+It typically implements methods like next() or NextItem() to retrieve the next element and HasNext() to check if there are more elements to iterate over. 
+
+This abstraction makes it easier to work with collections in a uniform way, regardless of their specific implementations.
+
+Here, we implement an iterator to traverse the elements on the [data stack](./src/Stack.c), which is used to detect cycles in the function [GetNumOfNodesInCycle()](./src/Graph.c).
+
+#### Stack.h
+```C
+
+// src/Stack.h
+
+typedef long STACK_ITEM_T;
+
+// ...
+
+void StackPush(struct Stack *pStack, STACK_ITEM_T item);
+
+STACK_ITEM_T StackPop(struct Stack *pStack);
+
+/***********************  Iterator interface for a stack ******************/
+typedef struct {
+    void *pStackElement;
+} StackIterator;
+
+StackIterator GetIterator(struct Stack *pStack);
+
+int HasNext(StackIterator *it);
+
+STACK_ITEM_T NextItem(StackIterator *it);
+
+void TestIterator(void);
+
+```
+
+#### Stack.c
+
+```C
+// src/Stack.c
+
+
+StackIterator GetIterator(struct Stack *pStack) {
+    StackIterator iterator;
+    iterator.pStackElement = pStack->top;
+    return iterator;
+}
+
+int HasNext(StackIterator *pIt) {
+    StackNode *cur = (StackNode *)(pIt->pStackElement);
+    return cur != NULL;
+}
+
+STACK_ITEM_T NextItem(StackIterator *pIt) {    
+    StackNode *cur = (StackNode *)(pIt->pStackElement);
+    assert(cur != NULL);
+    STACK_ITEM_T item = cur->item;
+    pIt->pStackElement = cur->next;
+    return item;
+}
+
+void TestIterator(void) {
+    // Create a stack
+    struct Stack *pStack = CreateStack();
+    // Push 20, 24, 90 in turn
+    StackPush(pStack, 20);
+    StackPush(pStack, 24);
+    StackPush(pStack, 90);
+    // Get an iterator of the stack
+    StackIterator it = GetIterator(pStack);
+    // visit each element of the stack: 90, 24, 20
+    while (HasNext(&it)) {
+        STACK_ITEM_T item = NextItem(&it);
+        printf("NextItem(it) = %ld\n", (long) item);
+    }
+    // All the elements are still on the stack
+    PrintStack(pStack);
+    // Release the heap space
+    ReleaseStack(pStack);
+}
+
+```
+
+Output:
+
+```sh
+
+// visit each element of the stack: 90, 24, 20
+
+NextItem(it) = 90
+NextItem(it) = 24
+NextItem(it) = 20
+
+// All the elements are still on the stack
+Stack: 90 24 20
+
+```
+
 #### Special case in an undirected graph
 
 ```sh
@@ -618,7 +770,7 @@ int main(void) {
 
 ### 6.2 int HasCycle(struct Graph *pGraph)
 
-#### 6.2.1 How to record the nodes on the call stack in calling DetectCycle() recursively
+#### 6.2.1 How to record the nodes on the call stack when calling DetectCycle() recursively
 
 The **DetectCycle()** function is implemented recursively for DFS traversal to detect cycles.
 
@@ -815,79 +967,5 @@ int HasCycle(struct Graph *pGraph) {
     return cyclic;
 }
 ```
-
-## 7 How to add an iterator interface for a Stack
-
-In computer programming, an iterator is an object that allows a programmer to traverse through elements of a container.
-
-Here, we implement an iterator to traverse the elements on the [data stack](./src/Stack.c), which is used to detect cycles in the function [GetNumOfNodesInCycle()](./src/Graph.c).
-
-### 7.1  src/Stack.h
-```C
-
-// src/Stack.h
-
-/***********************  Iterator interface for a stack ******************/
-typedef struct {
-    void *pStackElement;
-} StackIterator;
-
-StackIterator GetIterator(struct Stack *pStack);
-
-int HasNext(StackIterator *it);
-
-STACK_ITEM_T NextItem(StackIterator *it);
-
-void TestIterator(void);
-
-```
-
-### 7.2 src/Stack.c
-
-```C
-// src/Stack.c
-
-
-StackIterator GetIterator(struct Stack *pStack) {
-    StackIterator iterator;
-    iterator.pStackElement = pStack->top;
-    return iterator;
-}
-
-int HasNext(StackIterator *pIt) {
-    StackNode *cur = (StackNode *)(pIt->pStackElement);
-    return cur != NULL;
-}
-
-STACK_ITEM_T NextItem(StackIterator *pIt) {    
-    StackNode *cur = (StackNode *)(pIt->pStackElement);
-    assert(cur != NULL);
-    STACK_ITEM_T item = cur->item;
-    pIt->pStackElement = cur->next;
-    return item;
-}
-
-void TestIterator(void) {
-    // Create a stack
-    struct Stack *pStack = CreateStack();
-    // Push 20, 24, 90 in turn
-    StackPush(pStack, 20);
-    StackPush(pStack, 24);
-    StackPush(pStack, 90);
-    // Get an iterator of the stack
-    StackIterator it = GetIterator(pStack);
-    // visit each element of the stack: 90, 24, 20
-    while (HasNext(&it)) {
-        STACK_ITEM_T item = NextItem(&it);
-        printf("NextItem(it) = %ld\n", (long) item);
-    }
-    // All the elements are still on the stack
-    PrintStack(pStack);
-    // Release the heap space
-    ReleaseStack(pStack);
-}
-
-```
-
 
 

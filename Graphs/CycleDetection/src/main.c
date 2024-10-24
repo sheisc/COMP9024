@@ -58,6 +58,7 @@ int TestCycleDetection(int isDirected) {
 
 
 int main(void) {
+    TestIterator();
     // directed graph
     printf("########################### TestCycleDetection(directed) ######################\n\n\n");
     TestCycleDetection(1);
