@@ -113,7 +113,7 @@ static int DetectCycle(struct Graph *pGraph, long u, int *visited, struct Stack 
 Motivation in this project:
 
 ```sh
-Visiting all the nodes on a data stack, without using StackPop() and StackPush()
+Visiting all the current nodes on a data stack, without changing it
 ```    
 
 In computer programming, an iterator is an object that allows a programmer to traverse through elements of a container.
@@ -124,7 +124,7 @@ It typically implements methods like next() or NextItem() to retrieve the next e
 
 This abstraction makes it easier to work with collections in a uniform way, regardless of their specific implementations.
 
-Here, we implement an iterator to traverse the elements on the [data stack](./src/Stack.c), which is used to detect cycles in the function [GetNumOfNodesInCycle()](./src/Graph.c).
+
 
 #### Stack.h
 ```C
@@ -216,6 +216,67 @@ Stack: 90 24 20
 
 ```
 
+In this project, we implement an iterator to traverse the elements on the [data stack](./src/Stack.c), which is used to detect cycles in the function [GetNumOfNodesInCycle()](./src/Graph.c).
+
+| Visiting 5 (Cycle Detected) |
+|:-------------:|
+| Nodes on call stack: $\color{red}{5}$, 1, 2, 0 |
+| <img src="images/HasCycleUndirected_0004.png" width="50%" height="50%"> |
+
+```sh
+    Path:  
+           Node 0 --> Node 2 --> Node 1 --> Node 5
+
+    Cycle:
+                      Node 2 --> Node 1 --> Node 5 --> Node 2
+```
+
+```C
+/*
+    if v is already on stack
+        return the number of nodes in a cycle    
+    else
+        return 0
+
+
+
+    The top element on the stack is 5 and we are testing its adjacent node 2.
+
+    ----- Test whether node 2 (i.e., v is 2) is on stack: NumOfNodesInCycle = 3 -----   
+    Stack: 5 1 2 0
+
+    ------------------------------------------------------------------
+ */
+static int GetNumOfNodesInCycle(struct Graph *pGraph, long v, struct Stack *pNodesOnStack) {
+    // Not used now.
+    (void) pGraph;
+    // number of node in a cycle
+    int n = 0;
+    // whether v is on stack
+    int isOnStack = 0;
+    // Get an iterator of the stack
+    StackIterator it = GetIterator(pNodesOnStack);
+    
+    // visit each element
+    while (HasNext(&it)) {
+        STACK_ITEM_T nodeId = NextItem(&it);
+        n++;
+        if (nodeId == v) {
+            isOnStack = 1;
+            break;
+            //return n;
+        }
+    }
+    if (!isOnStack) {
+        n = 0;
+    }
+    printf("\n----- Test whether node %ld is on stack: NumOfNodesInCycle = %d -----\n", v, n);
+    PrintStack(pNodesOnStack);
+    printf("------------------------------------------------------------------\n\n");
+    return n;
+}
+```
+
 #### Special case in an undirected graph
 
 ```sh
@@ -225,7 +286,35 @@ Stack: 90 24 20
        n2 -> n0
    
    We should not treat n2 -> n0 and n0 -> n2 as a cycle in an undirected edge.
+
+
 ```
+
+Example:
+
+| Visiting 5 (Cycle Detected) |
+|:-------------:|
+| Nodes on call stack: $\color{red}{5}$, 1, 2, 0 |
+| <img src="images/HasCycleUndirected_0004.png" width="50%" height="50%"> |
+
+```sh
+    Path:  
+           Node 0 --> Node 2 --> Node 1 --> Node 5
+
+    Special Case:
+                                 Node 1 --> Node 5 --> Node 1
+    When
+        GetNumOfNodesInCycle(struct Graph *pGraph, long v, struct Stack *pNodesOnStack) returns 2
+        and pGraph is an undirected graph
+```
+```
+The top element on the stack is 5 and we are testing its adjacent node 1.
+
+----- Test whether node 1 is on stack: NumOfNodesInCycle = 2 -----
+Stack: 5 1 2 0
+
+```
+So,  Node 1 --> Node 5 --> Node 1 is not treated as a cycle in an undirected graph.
 
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
