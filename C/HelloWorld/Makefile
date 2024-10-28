@@ -46,8 +46,8 @@ all:
 $(TARGET_EXE):  $(OBJ_FILES_IN_BUILD) 	
 	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD)
 	
-game:
-	python3 MineSweeper.py
+#game:
+#	python3 MineSweeper.py
 
 
 # How to generate a "build/*.o" from a "src/*.c"
