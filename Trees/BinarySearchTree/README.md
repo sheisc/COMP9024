@@ -393,6 +393,7 @@ int main(int argc, char **argv, char **env) {
     }
 }
 ```
+
 | Insert 40 | Insert 70  |  Insert 60  |
 |:-------------:|:-------------:|:-------------:|
 | <img src="images/BiTreeBiTreeInsert_0005.png" width="50%" height="50%"> |  <img src="images/BiTreeBiTreeInsert_0006.png" width="50%" height="50%"> | <img src="images/BiTreeBiTreeInsert_0007.png" width="50%" height="50%"> |
@@ -404,12 +405,13 @@ int main(int argc, char **argv, char **env) {
 
 #### 3.2.2 BiTreeDelete()
 
-| Node to Be Deleted | Left Child |  Right Child   |
-|:-------------:|:-------------:|:-------------:|
-| Case 00 | NULL |  NULL   |
-| Case 01 | NULL |  NOT NULL   |
-| Case 10 | NOT NULL |  NULL   |
-| Case 11 | NOT NULL |  NOT NULL   |
+| Node to Be Deleted | Left Child |  Right Child   | Action |
+|:-------------:|:-------------:|:-------------:|:-------------:|
+| Case 00 | NULL |  NULL   | replaced by the node's right child|
+| Case 01 | NULL |  NOT NULL   |replaced by the node's right child |
+| Case 10 | NOT NULL |  NULL   |replaced by the node's left child |
+| Case 11 | NOT NULL |  NOT NULL   | Swap the values of the node to be deleted and its in-order successor |
+
 
 | Initial | Delete 50 (case 11 in the previous state, swapping 50 and 60, inconsistency) |  Delete 50 (case 00 in the previous state)  |
 |:-------------:|:-------------:|:-------------:|
