@@ -151,7 +151,7 @@ void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {
     } 
 }
 ```
-We use Method 1 in this project.
+
 
 #### Method 2: reset its value using the return value of a function
 
@@ -185,6 +185,35 @@ BiTreeNodePtr BiTreeInsert2(BiTreeNodePtr pNode, long numVal, char *nodeName) {
 }
 
 ```
+
+### How to get the node with the minimum value in a binary search tree
+
+```sh
+           50  
+        /      \
+      20        70
+     /  \      /  \  
+    10  30    60  100
+          \        /
+          40      90
+                 /
+                80
+```
+
+Get the left-most node.
+
+```C
+BiTreeNodePtr BiTreeMinValueNode(BiTreeNodePtr root) {
+    BiTreeNodePtr cur = root;
+    // Get the left-most node
+    while ((cur != NULL) && (cur->leftChild != NULL)) {
+        cur = cur->leftChild;
+    }
+    return cur;
+}
+```
+
+
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
@@ -456,9 +485,9 @@ void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {
         *pNodePtr = tmp;
     } else {
         if (numVal < pNode->value.numVal) {
-            BiTreeInsert(&pNode->leftChild, numVal, nodeName);
+            BiTreeInsert(&(pNode->leftChild), numVal, nodeName);
         } else if (numVal > pNode->value.numVal) {
-            BiTreeInsert(&pNode->rightChild, numVal, nodeName);
+            BiTreeInsert(&(pNode->rightChild), numVal, nodeName);
         } else {
             // If numVal is already in the binary search tree, do nothing.
         }
@@ -468,16 +497,10 @@ void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {
 
 ### 5.3 BiTreeDelete()
 
-```C
+#### Method 1: pass the address of a pointer variable as an argument to a function
 
-BiTreeNodePtr BiTreeMinValueNode(BiTreeNodePtr root) {
-    BiTreeNodePtr cur = root;
-    // Get the left-most node
-    while ((cur != NULL) && (cur->leftChild != NULL)) {
-        cur = cur->leftChild;
-    }
-    return cur;
-}
+```C
+typedef struct BiTreeNode *BiTreeNodePtr;
 
 // The parameter pRoot is only used for generating the image of the binary search tree.
 // In this recursive function, *pNodePtr might point to a sub-tree in the BST.
@@ -545,9 +568,118 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
                 // Now, numVal is in right sub-tree. Let us recursively delete it.
                 // Temporarily, the whole binary search tree is at an inconsistent state.
                 // It will become consistent when the deletion is really done.
-                BiTreeDelete(pRoot, &pNode->rightChild, pSuccessor->value.numVal);
+                BiTreeDelete(pRoot, &(pNode->rightChild), pSuccessor->value.numVal);
             }
         }
     }
 }
+
+BiTreeNodePtr BiTreeMinValueNode(BiTreeNodePtr root) {
+    BiTreeNodePtr cur = root;
+    // Get the left-most node
+    while ((cur != NULL) && (cur->leftChild != NULL)) {
+        cur = cur->leftChild;
+    }
+    return cur;
+}
+
+int main(void) {
+    // Create an empty binary tree
+    BiTreeNodePtr root = NULL;
+   
+    // Simplified
+    BiTreeInsert(&root, 50, NULL);
+
+    // Simplified
+    BiTreeDelete(&root, &root, 50);
+
+    // ...
+}
 ```
+
+
+### 5.4 BiTreeDelete2()
+
+#### Method 2: reset its value using the return value of a function
+
+```C
+typedef struct BiTreeNode *BiTreeNodePtr;
+
+// In this recursive function, pNode might point to a sub-tree in the BST.
+BiTreeNodePtr BiTreeDelete2(BiTreeNodePtr pNode, long numVal) {
+    if (pNode) {
+        if (numVal < pNode->value.numVal) {
+            pNode->leftChild = BiTreeDelete2(pNode->leftChild, numVal);
+        } else if (numVal > pNode->value.numVal) {
+            pNode->rightChild = BiTreeDelete2(pNode->rightChild, numVal);
+        } else {
+            /************************************************************************
+                If the node (to be deleted) has:
+
+                    0 child:
+
+                        leftChild == NULL && rightChild == NULL    // case 00
+
+                    1 child:
+
+                        leftChild == NULL && rightChild != NULL    // case 01
+
+                        or 
+                        leftChild != NULL && rightChild == NULL    // case 10
+                 
+                    2 children:
+
+                        leftChild != NULL && rightChild != NULL    // case 11
+
+             **************************************************************************/
+            
+            if (pNode->leftChild == NULL) {   // case 00 and case 01
+                BiTreeNodePtr tmp = pNode->rightChild;
+                printf("deleting %ld\n", pNode->value.numVal);
+                free(pNode);
+                return tmp;
+
+            } else if (pNode->rightChild == NULL) { // case 10
+                BiTreeNodePtr tmp = pNode->leftChild;
+                printf("deleting %ld\n", pNode->value.numVal);      
+                free(pNode);
+                return tmp;            
+            } else {
+                // case 11:  with two children
+                // Get pNode's in-order successor, which is left-most node in its right sub-tree.
+                BiTreeNodePtr pSuccessor = BiTreeMinValueNode(pNode->rightChild);
+
+                // (Swapping is done for clearer debugging output)
+                // Swap the values of the node pointed to by pNode and its in-order successor              
+                NodeValue val = pNode->value;
+                // Copy the successor's value (this copy is necessary)
+                pNode->value = pSuccessor->value;
+                pSuccessor->value = val;
+
+
+                // Now, numVal is in right sub-tree. Let us recursively delete it.
+                // Temporarily, the whole binary search tree is at an inconsistent state.
+                // It will become consistent when the deletion is really done.
+                pNode->rightChild = BiTreeDelete2(pNode->rightChild, pSuccessor->value.numVal);
+            }
+        }
+        return pNode;
+    } else {
+        return NULL;
+    }
+}
+
+int main(void) {
+    // Create an empty binary tree
+    BiTreeNodePtr root = NULL;
+   
+    // Simplified
+    root = BiTreeInsert2(root, 50, NULL);
+
+    // Simplified
+    root = BiTreeDelete2(root, 50);
+
+    // ...
+}
+```
+

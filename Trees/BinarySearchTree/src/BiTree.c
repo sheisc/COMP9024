@@ -351,3 +351,69 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
     }
 }
 
+
+// In this recursive function, pNode might point to a sub-tree in the BST.
+BiTreeNodePtr BiTreeDelete2(BiTreeNodePtr pNode, long numVal) {
+    if (pNode) {
+        if (numVal < pNode->value.numVal) {
+            pNode->leftChild = BiTreeDelete2(pNode->leftChild, numVal);
+        } else if (numVal > pNode->value.numVal) {
+            pNode->rightChild = BiTreeDelete2(pNode->rightChild, numVal);
+        } else {
+            /************************************************************************
+                If the node (to be deleted) has:
+
+                    0 child:
+
+                        leftChild == NULL && rightChild == NULL    // case 00
+
+                    1 child:
+
+                        leftChild == NULL && rightChild != NULL    // case 01
+
+                        or 
+                        leftChild != NULL && rightChild == NULL    // case 10
+                 
+                    2 children:
+
+                        leftChild != NULL && rightChild != NULL    // case 11
+
+             **************************************************************************/
+            
+            if (pNode->leftChild == NULL) {   // case 00 and case 01
+                BiTreeNodePtr tmp = pNode->rightChild;
+                printf("deleting %ld\n", pNode->value.numVal);
+                free(pNode);
+                return tmp;
+
+            } else if (pNode->rightChild == NULL) { // case 10
+                BiTreeNodePtr tmp = pNode->leftChild;
+                printf("deleting %ld\n", pNode->value.numVal);      
+                free(pNode);
+                return tmp;            
+            } else {
+                // case 11:  with two children
+                // Get pNode's in-order successor, which is left-most node in its right sub-tree.
+                BiTreeNodePtr pSuccessor = BiTreeMinValueNode(pNode->rightChild);
+
+                // (Swapping is done for clearer debugging output)
+                // Swap the values of the node pointed to by pNode and its in-order successor              
+                NodeValue val = pNode->value;
+                // Copy the successor's value (this copy is necessary)
+                pNode->value = pSuccessor->value;
+                pSuccessor->value = val;
+
+
+                // Now, numVal is in right sub-tree. Let us recursively delete it.
+                // Temporarily, the whole binary search tree is at an inconsistent state.
+                // It will become consistent when the deletion is really done.
+                pNode->rightChild = BiTreeDelete2(pNode->rightChild, pSuccessor->value.numVal);
+            }
+        }
+        return pNode;
+    } else {
+        return NULL;
+    }
+}
+
+

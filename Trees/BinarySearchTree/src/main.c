@@ -78,6 +78,9 @@ int main(int argc, char **argv, char **env) {
     GenOneImage(root, "BiTreeDelete", "images/BiTreeDelete", cnt);
     for (int i = 0; i < sizeof(nums)/sizeof(nums[0]); i++) {                        
         BiTreeDelete(&root, &root, nums[i]);
+
+        //root = BiTreeDelete2(root, nums[i]);
+        
         printf("After deleting %ld \n", nums[i]);
         printf("*****************  InOrderTraversal() **********************\n");
         InOrderTraversal(root, PrintNodeInfo);

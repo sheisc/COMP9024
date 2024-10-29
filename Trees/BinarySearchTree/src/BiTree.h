@@ -119,4 +119,6 @@ BiTreeNodePtr BiTreeMinValueNode(BiTreeNodePtr root);
 //void BiTreeDelete(BiTreeNodePtr *p2NodePtr, long numVal);
 void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *p2NodePtr, long numVal);
 
+BiTreeNodePtr BiTreeDelete2(BiTreeNodePtr pNode, long numVal);
+
 #endif
