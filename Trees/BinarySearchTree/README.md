@@ -70,7 +70,7 @@ int main(void) {
 }
 ```
 
-
+**Data Structures**
 ```C
 // Max length of an identifier (e.g., the name for a tree node) 
 #define MAX_ID_LEN 127
@@ -101,6 +101,9 @@ struct BiTreeNode {
 };
 
 typedef struct BiTreeNode *BiTreeNodePtr;
+```
+
+```C
 /*
   Create an Ast node for an expression.
  */
@@ -110,7 +113,6 @@ BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr le
     // ...
     return pNode;
 }
-
 ```
 
 #### Method 1: pass the address of a pointer variable as an argument to a function
