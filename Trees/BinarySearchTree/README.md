@@ -137,9 +137,9 @@ void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {
         // pNode = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
     } else {
         if (numVal < pNode->value.numVal) {
-            BiTreeInsert(&pNode->leftChild, numVal, nodeName);
+            BiTreeInsert(&(pNode->leftChild), numVal, nodeName);
         } else if (numVal > pNode->value.numVal) {
-            BiTreeInsert(&pNode->rightChild, numVal, nodeName);
+            BiTreeInsert(&(pNode->rightChild), numVal, nodeName);
         } else {
             // If numVal is already in the binary search tree, do nothing.
         }
@@ -680,6 +680,9 @@ int main(void) {
    
     // Simplified
     root = BiTreeInsert2(root, 50, NULL);
+
+    // or
+    // BiTreeInsert(&root, 50, NULL);
 
     // Simplified
     root = BiTreeDelete2(root, 50);
