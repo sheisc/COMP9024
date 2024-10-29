@@ -16,6 +16,9 @@
 
  *******************************************************************/
 ``` 
+
+## Introduction
+
 A Binary Search Tree (BST) is a type of data structure that organizes data efficiently.
 
 Each node has at most two children, with values smaller than the node on the left and values larger on the right. 
@@ -40,6 +43,135 @@ Searching within a BST is left as the weekly practical exercise in [Tutorial 7](
                 80
 ```
 
+```C
+
+typedef struct BiTreeNode *BiTreeNodePtr;
+
+BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal) {
+    if (______Q1______) {       // Base case:  root is NULL
+        return ______Q2______;  // Not found
+    } else if (numVal == root->value.numVal) {
+        return ______Q3______;  // Found
+    } else if (numVal < root->value.numVal) {
+        return ______Q4______;  // Recursively search in left sub-tree
+    } else { // numVal > root->value.numVal
+        return ______Q5______;  // Recursively search in right sub-tree
+    }
+}
+```
+
+### How to update value of a pointer variable in a caller function
+
+```C
+// Max length of an identifier (e.g., the name for a tree node) 
+#define MAX_ID_LEN 127
+
+// node value
+typedef struct {
+    // e.g, "9000", "Node A", "Node B"
+    char name[MAX_ID_LEN + 1];
+    // value of an integer, e.g., 2024
+    long numVal;
+} NodeValue;
+
+struct BiTreeNode {
+    /*
+     The value of a binary tree node:
+  
+     1. an integer for representing the node's value (e.g., 300), 
+      
+     2. a C string for representing its node name
+     */
+    NodeValue value;  
+    // left subtree
+    struct BiTreeNode *leftChild;
+    // right subtree
+    struct BiTreeNode *rightChild;
+
+    // ...
+};
+
+typedef struct BiTreeNode *BiTreeNodePtr;
+/*
+  Create an Ast node for an expression.
+ */
+BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr left, BiTreeNodePtr right) {
+    BiTreeNodePtr pNode = (BiTreeNodePtr) malloc(sizeof(struct BiTreeNode));
+
+    // ...
+    return pNode;
+}
+```
+
+#### Method 1 (passing the address of a pointer variable as a function parameter)
+```C
+//typedef struct BiTreeNode *BiTreeNodePtr;
+
+int main(void) {
+    // Create an empty binary tree
+    BiTreeNodePtr root = NULL;
+
+    // Insert a node with the value 50
+    BiTreeInsert(&root, 50, NULL);
+
+}
+
+void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {  
+    BiTreeNodePtr pNode = *pNodePtr;
+    if (pNode == NULL) {
+        
+        BiTreeNodePtr tmp = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
+        *pNodePtr = tmp;
+
+        // Simplified as follows
+        // *pNodePtr = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
+
+        // But, does the following statement have the same effect?
+        // pNode = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
+    } else {
+        if (numVal < pNode->value.numVal) {
+            BiTreeInsert(&pNode->leftChild, numVal, nodeName);
+        } else if (numVal > pNode->value.numVal) {
+            BiTreeInsert(&pNode->rightChild, numVal, nodeName);
+        } else {
+            // If numVal is already in the binary search tree, do nothing.
+        }
+    } 
+}
+```
+
+#### Method 2 (via a return value)
+
+```C
+//typedef struct BiTreeNode *BiTreeNodePtr;
+
+int main(void) {
+    // Create an empty binary tree
+    BiTreeNodePtr root = NULL;
+
+    // Insert a node with the value 50
+    root = BiTreeInsert2(root, 50, NULL);
+
+    // ... 
+}
+
+BiTreeNodePtr BiTreeInsert2(BiTreeNodePtr pNode, long numVal, char *nodeName) {  
+    if (pNode == NULL) {
+        BiTreeNodePtr tmp = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
+        return tmp;
+    } else {
+        if (numVal < pNode->value.numVal) {
+            pNode->leftChild = BiTreeInsert2(pNode->leftChild, numVal, nodeName);
+        } else if (numVal > pNode->value.numVal) {
+            pNode->rightChild = BiTreeInsert2(pNode->rightChild, numVal, nodeName);
+        } else {
+            // If numVal is already in the binary search tree, do nothing.
+        }
+        return pNode;
+    }  
+}
+
+```
 
 ## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 

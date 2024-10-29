@@ -39,6 +39,8 @@ int main(int argc, char **argv, char **env) {
     for (int i = 0; i < sizeof(nums)/sizeof(nums[0]); i++) {
         BiTreeInsert(&root, nums[i], NULL);
 
+        //root = BiTreeInsert2(root, nums[i], NULL);
+
         printf("After inserting %ld \n", nums[i]);
 
         printf("*****************  InOrderTraversal() **********************\n");

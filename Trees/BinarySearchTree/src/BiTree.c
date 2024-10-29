@@ -240,6 +240,22 @@ void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {
     }  
 }
 
+BiTreeNodePtr BiTreeInsert2(BiTreeNodePtr pNode, long numVal, char *nodeName) {  
+    if (pNode == NULL) {
+        BiTreeNodePtr tmp = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
+        return tmp;
+    } else {
+        if (numVal < pNode->value.numVal) {
+            pNode->leftChild = BiTreeInsert2(pNode->leftChild, numVal, nodeName);
+        } else if (numVal > pNode->value.numVal) {
+            pNode->rightChild = BiTreeInsert2(pNode->rightChild, numVal, nodeName);
+        } else {
+            // If numVal is already in the binary search tree, do nothing.
+        }
+        return pNode;
+    }  
+}
+
 #if 0
 BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal) {
     if (______Q1______) {

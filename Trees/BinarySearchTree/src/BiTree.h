@@ -4,7 +4,7 @@
 // Max length of an identifier (e.g., the name for a tree node) 
 #define MAX_ID_LEN 127
 
-// token value
+// node value
 typedef struct {
     // e.g, "9000", "Node A", "Node B"
     char name[MAX_ID_LEN + 1];
@@ -107,6 +107,8 @@ void GenOneImage(BiTreeNodePtr root, char *graphName, char *fileName, long seqNo
 /////////////////////////////////// Binary Search Tree ///////////////////////////////////////////
 
 void BiTreeInsert(BiTreeNodePtr *p2NodePtr, long numVal, char *nodeName);
+
+BiTreeNodePtr BiTreeInsert2(BiTreeNodePtr pNode, long numVal, char *nodeName);
 
 
 BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal);
