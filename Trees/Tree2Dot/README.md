@@ -505,7 +505,7 @@ python3 FractalTree3.py &
 
 **Recursion is beautiful**.
 
-|Fractal Tree (with 2 branches) |Fractal Tree (with 3 branches)|
+|2-way (binary) fractal tree |3-way fractal tree|
 |:-------------:|:-------------:|
 | <img src="diagrams/FractalTree.png" width="60%" height="60%"> | <img src="diagrams/FractalTree3.png" width="60%" height="60%"> |
 
