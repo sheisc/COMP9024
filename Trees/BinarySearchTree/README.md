@@ -75,6 +75,12 @@ We have discussed how to create a *.dot file in [COMP9024/Trees/Tree2Dot](../../
 
 In this project, we study how to insert and delete data in a BST.
 
+Self-balancing trees will be introduced in [COMP9024/Trees/SelfBalancingBST](../../Trees/SelfBalancingBST/README.md).
+
+| Self-Balancing Tree | 
+|:-------------:|
+| <img src="diagrams/AVLTree.png" width="50%" height="50%"> | 
+
 Searching within a BST is left as the weekly practical exercise in [Tutorial 7](../../Tutorials/Week9/README.md).
 
 ```sh
@@ -285,6 +291,8 @@ Then, click **Run -> Start Debugging**
 │   └── main.c           main()
 |
 |── images               containing *.dot and *.png files
+|
+|── diagrams             containing *.png files
 |
 └── .vscode              containing configuration files for Visual Studio Code
     |
