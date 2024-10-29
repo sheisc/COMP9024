@@ -509,6 +509,18 @@ python3 FractalTree3.py &
 |:-------------:|:-------------:|
 | <img src="diagrams/FractalTree.png" width="60%" height="60%"> | <img src="diagrams/FractalTree3.png" width="60%" height="60%"> |
 
+**Length of branches**
+```sh
+
+// draw_branch(t, 120)
+//
+// def draw_branch(t:turtle.Pen, length):
+//        ...
+//        draw_branch(t, length - 15)
+
+120, 105, 90, 75, 60, 45, 30, 15
+```
+
 To create graphics on the screen, we instruct the turtle (a pen) to move.
 
 Operating the [turtle](https://docs.python.org/3/library/turtle.html) is just like driving a car as follows.
