@@ -25,6 +25,40 @@ Each node has at most two children, with values smaller than the node on the lef
 
 This arrangement allows for fast operations like searching, inserting, and deleting data, making BSTs ideal for tasks that require quick access to sorted information.
 
+
+**Data Structures**
+```C
+// Max length of an identifier (e.g., the name for a tree node) 
+#define MAX_ID_LEN 127
+
+// node value
+typedef struct {
+    // e.g, "9000", "Node A", "Node B"
+    char name[MAX_ID_LEN + 1];
+    // value of an integer, e.g., 2024
+    long numVal;
+} NodeValue;
+
+struct BiTreeNode {
+    /*
+     The value of a binary tree node:
+  
+     1. an integer for representing the node's value (e.g., 300), 
+      
+     2. a C string for representing its node name
+     */
+    NodeValue value;  
+    // left subtree
+    struct BiTreeNode *leftChild;
+    // right subtree
+    struct BiTreeNode *rightChild;
+
+    // ...
+};
+
+typedef struct BiTreeNode *BiTreeNodePtr;
+```
+
 We have discussed how to create a *.dot file in [COMP9024/Trees/Tree2Dot](../../Trees/Tree2Dot/README.md) for a binary tree.
 
 In this project, we study how to insert and delete data in a BST.
@@ -62,60 +96,9 @@ BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal) {
 
 ### How to update the value of a pointer variable in a caller function
 
-```C
-typedef struct BiTreeNode *BiTreeNodePtr;
-int main(void) {
-    // Create an empty binary tree
-    BiTreeNodePtr root = NULL;
-}
-```
-
-**Data Structures**
-```C
-// Max length of an identifier (e.g., the name for a tree node) 
-#define MAX_ID_LEN 127
-
-// node value
-typedef struct {
-    // e.g, "9000", "Node A", "Node B"
-    char name[MAX_ID_LEN + 1];
-    // value of an integer, e.g., 2024
-    long numVal;
-} NodeValue;
-
-struct BiTreeNode {
-    /*
-     The value of a binary tree node:
-  
-     1. an integer for representing the node's value (e.g., 300), 
-      
-     2. a C string for representing its node name
-     */
-    NodeValue value;  
-    // left subtree
-    struct BiTreeNode *leftChild;
-    // right subtree
-    struct BiTreeNode *rightChild;
-
-    // ...
-};
-
-typedef struct BiTreeNode *BiTreeNodePtr;
-```
-
-```C
-/*
-  Create an Ast node for an expression.
- */
-BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr left, BiTreeNodePtr right) {
-    BiTreeNodePtr pNode = (BiTreeNodePtr) malloc(sizeof(struct BiTreeNode));
-
-    // ...
-    return pNode;
-}
-```
 
 #### Method 1: pass the address of a pointer variable as an argument to a function
+
 ```C
 //typedef struct BiTreeNode *BiTreeNodePtr;
 
@@ -149,6 +132,16 @@ void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {
             // If numVal is already in the binary search tree, do nothing.
         }
     } 
+}
+
+/*
+  Create an Ast node for an expression.
+ */
+BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr left, BiTreeNodePtr right) {
+    BiTreeNodePtr pNode = (BiTreeNodePtr) malloc(sizeof(struct BiTreeNode));
+
+    // ...
+    return pNode;
 }
 ```
 
