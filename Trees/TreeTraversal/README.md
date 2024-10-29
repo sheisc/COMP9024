@@ -584,7 +584,7 @@ when we walk through a binary tree node in a non-recursive algorithm.
 <img src="diagrams/NodeState.png" width="50%" height="50%">
 
 ```sh
-It is a simple finite-state machine, with the following state transition:
+It is a simple finite-state machine, with the following state transition for each node:
  NS_FROM_UP  --->  NS_FROM_LEFT  ---> NS_FROM_RIGHT
 
 For more information about the finite-state machine (Finite Automata, including DFA/NFA), 
