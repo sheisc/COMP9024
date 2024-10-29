@@ -369,14 +369,6 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/BiTreeBiTreeInsert_0001.png" width="50%" height="50%"> |  <img src="images/BiTreeBiTreeInsert_0002.png" width="50%" height="50%"> | <img src="images/BiTreeBiTreeInsert_0003.png" width="50%" height="50%"> | <img src="images/BiTreeBiTreeInsert_0004.png" width="50%" height="50%"> |
 
 ```C
-int main(int argc, char **argv, char **env) {
-    BiTreeNodePtr root = NULL;
-    long nums[] = {50, 20, 10, 30, 40, 70, 60, 100, 90, 80};
-    for (int i = 0; i < sizeof(nums)/sizeof(nums[0]); i++) {
-        BiTreeInsert(&root, nums[i], NULL);
-    }
-}
-
 void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {  
     BiTreeNodePtr pNode = *pNodePtr;
     if (pNode == NULL) {        
@@ -392,9 +384,15 @@ void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {
         }
     } 
 }
+
+int main(int argc, char **argv, char **env) {
+    BiTreeNodePtr root = NULL;
+    long nums[] = {50, 20, 10, 30, 40, 70, 60, 100, 90, 80};
+    for (int i = 0; i < sizeof(nums)/sizeof(nums[0]); i++) {
+        BiTreeInsert(&root, nums[i], NULL);
+    }
+}
 ```
-
-
 | Insert 40 | Insert 70  |  Insert 60  |
 |:-------------:|:-------------:|:-------------:|
 | <img src="images/BiTreeBiTreeInsert_0005.png" width="50%" height="50%"> |  <img src="images/BiTreeBiTreeInsert_0006.png" width="50%" height="50%"> | <img src="images/BiTreeBiTreeInsert_0007.png" width="50%" height="50%"> |
