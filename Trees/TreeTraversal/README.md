@@ -282,6 +282,11 @@ Visiting 101
 |:-------------:|
 | <img src="diagrams/PreOrderTraversal.png" width="80%" height="80%"> | 
 
+
+**How to draw the call tree manually in a depth-first search (DFS) style**
+
+A call tree can help us analyze the program.
+
 ```C
 void PreOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
     if (root) {
@@ -343,6 +348,9 @@ Visiting 101
 |:-------------:|
 | <img src="diagrams/InOrderTraversal.png" width="80%" height="80%"> | 
 
+**How to draw the call tree manually in a depth-first search (DFS) style**
+
+A call tree can help us analyze the program.
 
 ```C
 void InOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
@@ -405,6 +413,11 @@ Visiting 100
 | Call Tree and Binary Tree | 
 |:-------------:|
 | <img src="diagrams/PostOrderTraversal.png" width="80%" height="80%"> | 
+
+
+**How to draw the call tree manually in a depth-first search (DFS) style**
+
+A call tree can help us analyze the program.
 
 ```C
 void PostOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
