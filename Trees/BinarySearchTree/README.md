@@ -25,6 +25,18 @@ Each node has at most two children, with values smaller than the node on the lef
 
 This arrangement allows for fast operations like searching, inserting, and deleting data, making BSTs ideal for tasks that require quick access to sorted information.
 
+```sh
+           50  
+        /      \
+      20        70
+     /  \      /  \  
+    10  30    60  100
+          \        /
+          40      90
+                 /
+                80
+```
+
 
 **Data Structures**
 ```C
