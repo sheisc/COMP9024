@@ -111,6 +111,14 @@ BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal) {
     }
 }
 ```
+Example
+```C
+int main(void) {
+    BiTreeNodePtr pa = BiTreeSearch(root, 60);
+
+    BiTreeNodePtr pb = BiTreeSearch(root, 55);
+}
+```
 
 ### How to update the value of a pointer variable in a caller function
 
