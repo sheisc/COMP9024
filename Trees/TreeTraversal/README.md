@@ -306,6 +306,18 @@ int main(void) {
     PreOrderTraversal(root, PrintNodeInfo);
 }
 ```
+
+**Output**
+
+```sh
+*****************  PreOrderTraversal() **********************
+Visiting 100
+Visiting 98
+Visiting 97
+Visiting 99
+Visiting 101
+```
+
 #### 3.2.2 In-order traversal
 
 | Initial | Visiting 97  |  Visiting 98  |
@@ -358,6 +370,17 @@ int main(void) {
 }
 ```
 
+**Output**
+
+```sh
+*****************  InOrderTraversal() **********************
+Visiting 97
+Visiting 98
+Visiting 99
+Visiting 100
+Visiting 101
+```
+
 #### 3.2.3 Post-order traversal
 
 | Initial | Visiting 97  |  Visiting 99  |
@@ -408,6 +431,15 @@ int main(void) {
 }
 ```
 
+**Output**
+```sh
+*****************  PostOrderTraversal() **********************
+Visiting 97
+Visiting 99
+Visiting 98
+Visiting 101
+Visiting 100
+```
 ## 4 Data structures
 
 ```C
