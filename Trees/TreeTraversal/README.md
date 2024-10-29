@@ -264,6 +264,14 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | | Nodes on call stack: $\color{red}{100}$ | Nodes on call stack: $\color{red}{98}$, 100|
 | <img src="images/PreOrderTraversal2_0000.png" width="50%" height="50%"> |  <img src="images/PreOrderTraversal2_0001.png" width="50%" height="50%"> | <img src="images/PreOrderTraversal2_0002.png" width="50%" height="50%"> |
 
+```sh
+*****************  PreOrderTraversal() **********************
+Visiting 100
+Visiting 98
+Visiting 97
+Visiting 99
+Visiting 101
+```
 
 | Visiting 97 | Visiting 99  |  Visiting 101  |
 |:-------------:|:-------------:|:-------------:|
@@ -291,6 +299,12 @@ void PrintNodeInfo(BiTreeNodePtr pNode) {
     printf("Visiting %s\n", pNode->value.name);
     pNode->visited = 1;
 }
+
+int main(void) {
+    // BiTreeNodePtr root = CreateBinaryTree();
+    // ...
+    PreOrderTraversal(root, PrintNodeInfo);
+}
 ```
 #### 3.2.2 In-order traversal
 
@@ -299,6 +313,14 @@ void PrintNodeInfo(BiTreeNodePtr pNode) {
 | | Nodes on call stack: $\color{red}{97}$, 98, 100 | Nodes on call stack: $\color{red}{98}$, 100|
 | <img src="images/InOrderTraversal2_0000.png" width="50%" height="50%"> |  <img src="images/InOrderTraversal2_0001.png" width="50%" height="50%"> | <img src="images/InOrderTraversal2_0002.png" width="50%" height="50%"> |
 
+```sh
+*****************  InOrderTraversal() **********************
+Visiting 97
+Visiting 98
+Visiting 99
+Visiting 100
+Visiting 101
+```
 
 | Visiting 99 | Visiting 100  |  Visiting 101  |
 |:-------------:|:-------------:|:-------------:|
@@ -327,6 +349,13 @@ void PrintNodeInfo(BiTreeNodePtr pNode) {
     printf("Visiting %s\n", pNode->value.name);
     pNode->visited = 1;
 }
+
+
+int main(void) {
+    // BiTreeNodePtr root = CreateBinaryTree();
+    // ...
+    InOrderTraversal(root, PrintNodeInfo);
+}
 ```
 
 #### 3.2.3 Post-order traversal
@@ -336,6 +365,14 @@ void PrintNodeInfo(BiTreeNodePtr pNode) {
 | | Nodes on call stack: $\color{red}{97}$, 98, 100 | Nodes on call stack: $\color{red}{99}$, 98, 100|
 | <img src="images/PostOrderTraversal2_0000.png" width="50%" height="50%"> |  <img src="images/PostOrderTraversal2_0001.png" width="50%" height="50%"> | <img src="images/PostOrderTraversal2_0002.png" width="50%" height="50%"> |
 
+```sh
+*****************  PostOrderTraversal() **********************
+Visiting 97
+Visiting 99
+Visiting 98
+Visiting 101
+Visiting 100
+```
 
 | Visiting 98 | Visiting 101  |  Visiting 100  |
 |:-------------:|:-------------:|:-------------:|
@@ -362,6 +399,12 @@ typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
 void PrintNodeInfo(BiTreeNodePtr pNode) {
     printf("Visiting %s\n", pNode->value.name);
     pNode->visited = 1;
+}
+
+int main(void) {
+    // BiTreeNodePtr root = CreateBinaryTree();
+    // ...
+    PostOrderTraversal(root, PrintNodeInfo);
 }
 ```
 
