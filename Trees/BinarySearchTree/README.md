@@ -60,7 +60,16 @@ BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal) {
 }
 ```
 
-### How to update value of a pointer variable in a caller function
+### How to update the value of a pointer variable in a caller function
+
+```C
+typedef struct BiTreeNode *BiTreeNodePtr;
+int main(void) {
+    // Create an empty binary tree
+    BiTreeNodePtr root = NULL;
+}
+```
+
 
 ```C
 // Max length of an identifier (e.g., the name for a tree node) 
@@ -101,9 +110,10 @@ BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr le
     // ...
     return pNode;
 }
+
 ```
 
-#### Method 1 (passing the address of a pointer variable as a function parameter)
+#### Method 1: pass the address of a pointer variable as an argument to a function
 ```C
 //typedef struct BiTreeNode *BiTreeNodePtr;
 
@@ -139,8 +149,9 @@ void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {
     } 
 }
 ```
+We use Method 1 in this project.
 
-#### Method 2 (via a return value)
+#### Method 2: reset its value using the return value of a function
 
 ```C
 //typedef struct BiTreeNode *BiTreeNodePtr;
