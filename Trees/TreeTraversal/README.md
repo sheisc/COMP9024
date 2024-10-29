@@ -667,7 +667,7 @@ void PreOrderTraversal2(BiTreeNodePtr root, NodeVisitor visit) {
                 break;
             }
         }
-      ReleaseStack(pStack);
+        ReleaseStack(pStack);
     }
 }
 ```
