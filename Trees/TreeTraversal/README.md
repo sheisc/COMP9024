@@ -275,20 +275,21 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="diagrams/PreOrderTraversal.png" width="80%" height="80%"> | 
 
 ```C
-
-typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
-
-void PrintNodeInfo(BiTreeNodePtr pNode) {
-    printf("Visiting %s\n", pNode->value.name);
-    pNode->visited = 1;
-}
-
 void PreOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
     if (root) {
         visit(root);
         PreOrderTraversal(root->leftChild, visit);
         PreOrderTraversal(root->rightChild, visit);
     }
+}
+```
+
+```C
+typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
+
+void PrintNodeInfo(BiTreeNodePtr pNode) {
+    printf("Visiting %s\n", pNode->value.name);
+    pNode->visited = 1;
 }
 ```
 #### 3.2.2 In-order traversal
@@ -310,14 +311,6 @@ void PreOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
 
 
 ```C
-
-typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
-
-void PrintNodeInfo(BiTreeNodePtr pNode) {
-    printf("Visiting %s\n", pNode->value.name);
-    pNode->visited = 1;
-}
-
 void InOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
     if (root) {
         InOrderTraversal(root->leftChild, visit);
@@ -325,8 +318,17 @@ void InOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
         InOrderTraversal(root->rightChild, visit);
     }
 }
-
 ```
+
+```C
+typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
+
+void PrintNodeInfo(BiTreeNodePtr pNode) {
+    printf("Visiting %s\n", pNode->value.name);
+    pNode->visited = 1;
+}
+```
+
 #### 3.2.3 Post-order traversal
 
 | Initial | Visiting 97  |  Visiting 99  |
@@ -345,20 +347,21 @@ void InOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
 | <img src="diagrams/PostOrderTraversal.png" width="80%" height="80%"> | 
 
 ```C
-
-typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
-
-void PrintNodeInfo(BiTreeNodePtr pNode) {
-    printf("Visiting %s\n", pNode->value.name);
-    pNode->visited = 1;
-}
-
 void PostOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
     if (root) {
         PostOrderTraversal(root->leftChild, visit);
         PostOrderTraversal(root->rightChild, visit);
         visit(root);
     }
+}
+```
+
+```C
+typedef void (* NodeVisitor)(BiTreeNodePtr pNode);
+
+void PrintNodeInfo(BiTreeNodePtr pNode) {
+    printf("Visiting %s\n", pNode->value.name);
+    pNode->visited = 1;
 }
 ```
 
