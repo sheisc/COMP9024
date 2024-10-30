@@ -109,4 +109,7 @@ void GenOneImage(BiTreeNodePtr root, char *graphName, char *fileName, long seqNo
 
 void ResetNodeState(BiTreeNodePtr root);
 
+// 3-in-1 non-recursive traversal
+void NonRecursiveTraversal(BiTreeNodePtr root, NodeVisitor visit, NodeState whenToVisit);
+
 #endif

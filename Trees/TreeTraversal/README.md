@@ -720,3 +720,64 @@ void PostOrderTraversal2(BiTreeNodePtr root, NodeVisitor visit) {
     }
 }
 ```
+
+#### 5.2.4 Non-recursive pre-oder, in-order, and post-order traversal (3-in-1)
+```C
+
+void NonRecursiveTraversal(BiTreeNodePtr root, NodeVisitor visit, NodeState whenToVisit) {
+    if (root) {
+        struct Stack *pStack = CreateStack();
+        root->state = NS_FROM_UP;
+
+        StackPush(pStack, root);
+        while (!StackIsEmpty(pStack)) {
+            BiTreeNodePtr curNode = StackPeek(pStack);
+            if (curNode->state == whenToVisit) {
+                visit(curNode);
+            }
+            switch (curNode->state) {
+            case NS_FROM_UP:
+                // When curNode becomes the top node again, it means we have visited its left sub-tree.          
+                curNode->state = NS_FROM_LEFT;
+                // Push its left child (if existing)
+                if (curNode->leftChild) {
+                    curNode->leftChild->state = NS_FROM_UP;
+                    StackPush(pStack, curNode->leftChild);
+                }
+                break;
+            case NS_FROM_LEFT:
+                // when curNode becomes the top node again, it means we have visited its right sub-tree.
+                curNode->state = NS_FROM_RIGHT;
+                // Push its right child (if existing)
+                if (curNode->rightChild) {
+                    curNode->rightChild->state = NS_FROM_UP;
+                    StackPush(pStack, curNode->rightChild);
+                }
+                break;
+            case NS_FROM_RIGHT:
+                // We can pop the node now
+                StackPop(pStack);
+                break;
+            default:
+                break;
+            }
+        }
+        ReleaseStack(pStack);
+    }
+}
+
+int main(void) {
+    // ...
+
+    // Preorder traversal
+    NonRecursiveTraversal(root, PrintNodeInfo, NS_FROM_UP);
+
+    // Inorder traversal
+    NonRecursiveTraversal(root, PrintNodeInfo, NS_FROM_LEFT);
+
+    // Postorder traversal
+    NonRecursiveTraversal(root, PrintNodeInfo, NS_FROM_RIGHT);
+
+    return 0;
+}
+```

@@ -42,7 +42,20 @@ int main(int argc, char **argv, char **env) {
     printf("*****************  PostOrderTraversal2() **********************\n");
     ResetNodeState(root);
     PostOrderTraversal2(root, PrintNodeInfo);
-    printf("\n\n");  
+    printf("\n\n");
+
+    printf("*****************  NonRecursiveTraversal(Preorder) **********************\n");
+    NonRecursiveTraversal(root, PrintNodeInfo, NS_FROM_UP);
+    printf("\n\n");
+
+    printf("*****************  NonRecursiveTraversal(Inorder) **********************\n");
+    NonRecursiveTraversal(root, PrintNodeInfo, NS_FROM_LEFT);
+    printf("\n\n");
+
+
+    printf("*****************  NonRecursiveTraversal(Postorder) **********************\n");
+    NonRecursiveTraversal(root, PrintNodeInfo, NS_FROM_RIGHT);
+    printf("\n\n");    
 
     // Free the heap memory
     ReleaseBinaryTree(root);
