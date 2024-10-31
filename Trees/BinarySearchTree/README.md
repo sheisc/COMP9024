@@ -135,7 +135,7 @@ int main(void) {
 
 
 #### Method 1: pass the address of a pointer variable as an argument to a function
-
+<!--
 ```C
 //typedef struct BiTreeNode *BiTreeNodePtr;
 
@@ -185,26 +185,130 @@ BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr le
     return pNode;
 }
 ```
+-->
 
+**Call stack when calling BiTreeInsert(&root, 50, NULL) in main()**
+
+```sh
+ High Address
+              |             | 
+              |_____________|
+              |             | 
+              |             |
+              |             |
+         root |     NULL    |  
+              |             |  main()'s stack frame  
+              |             |
+              |_____________| 
+              |             |
+    nodeName  |   NULL      |              
+      numVal  |     50      |              
+      pNodePtr|    &root    | // Points to the local pointer variable 'root' defined in main()
+       pNode  |             | // NULL
+       tmp    |             | // Points to the Node 50 in the heap
+              |             | BiTreeInsert(&root, 50, NULL)'s stack frame
+              |_____________| 
+              |             |  
+              |             | 
+              |             |
+              |             | 
+              |             |
+                Call Stack
+Low Address
+```
+
+```C
+void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {  
+    BiTreeNodePtr pNode = *pNodePtr;
+    if (pNode == NULL) {        
+        BiTreeNodePtr tmp = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
+        *pNodePtr = tmp;
+    } else {
+        if (numVal < pNode->value.numVal) {
+            BiTreeInsert(&(pNode->leftChild), numVal, nodeName);
+        } else if (numVal > pNode->value.numVal) {
+            BiTreeInsert(&(pNode->rightChild), numVal, nodeName);
+        }
+    } 
+}
+int main(void) {
+    BiTreeNodePtr root = NULL;
+    BiTreeInsert(&root, 50, NULL);
+    BiTreeInsert(&root, 70, NULL); // ...
+}
+```
+**Call stack when calling BiTreeInsert(&root, 70, NULL) in main()**
+
+Note that we have already created the node 50 in the heap.
+
+```sh
+ High Address
+              |             | 
+              |_____________|
+              |             | 
+              |             |
+              |             |
+         root |             |  // points to Node 50 in the heap
+              |             |    
+              |             |  main()'s stack frame
+              |_____________| 
+              |             |
+    nodeName  |   NULL      | 
+      numVal  |     70      |                          
+      pNodePtr|             |  // Points to the local pointer variable 'root' defined in main()
+       pNode  |             |  // Points to Node 50 in the heap
+              |             |
+              |             |  BiTreeInsert(&root, 70, NULL)'s stack frame
+              |_____________| 
+              |             |
+    nodeName  |   NULL      | 
+      numVal  |     70      |  
+      pNodePtr|             |  // Points to the field 'rightChild' of Node 50 in the heap
+       pNode  |             |  // NULL
+       tmp    |             |  // Points to the Node 70 in the heap
+              |             |  BiTreeInsert(the address of the field rightChild in Node 50, 70, NULL)'s stack frame
+              |_____________| 
+              |             |  
+              |             | 
+              |             |
+              |             | 
+              |             |
+                Call Stack
+Low Address
+```
 
 #### Method 2: reset its value using the return value of a function
 
+**Call stack when calling BiTreeInsert2(root, 50, NULL) in main()**
+
+```sh
+ High Address
+              |             | 
+              |_____________|
+              |             | 
+              |             |
+              |             |
+         root |     NULL    |  
+              |             |  main()'s stack frame  
+              |             |
+              |_____________| 
+              |             |
+    nodeName  |   NULL      |             
+      numVal  |     50      |              
+       pNode  |             | // NULL
+       tmp    |             | // Points to the Node 50 in the heap
+              |             | BiTreeInsert2(NULL, 50, NULL)'s stack frame
+              |_____________| 
+              |             |  
+              |             | 
+              |             |
+              |             | 
+              |             |
+                Call Stack
+Low Address
+```
+
 ```C
-//typedef struct BiTreeNode *BiTreeNodePtr;
-
-int main(void) {
-    // Create an empty binary tree
-    BiTreeNodePtr root = NULL;
-
-    // Insert a node with the value 50
-    root = BiTreeInsert2(root, 50, NULL);
-
-    // Insert a node with the value 70
-    root = BiTreeInsert2(root, 70, NULL);
-
-    // ...
-}
-
 BiTreeNodePtr BiTreeInsert2(BiTreeNodePtr pNode, long numVal, char *nodeName) {  
     if (pNode == NULL) {
         BiTreeNodePtr tmp = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
@@ -214,13 +318,53 @@ BiTreeNodePtr BiTreeInsert2(BiTreeNodePtr pNode, long numVal, char *nodeName) {
             pNode->leftChild = BiTreeInsert2(pNode->leftChild, numVal, nodeName);
         } else if (numVal > pNode->value.numVal) {
             pNode->rightChild = BiTreeInsert2(pNode->rightChild, numVal, nodeName);
-        } else {
-            // If numVal is already in the binary search tree, do nothing.
-        }
+        } 
         return pNode;
     }  
 }
+int main(void) {
+    BiTreeNodePtr root = NULL;
+    root = BiTreeInsert2(root, 50, NULL);
+    root = BiTreeInsert2(root, 70, NULL); // ..,
+}
+```
 
+**Call stack when calling BiTreeInsert2(root, 70, NULL) in main()**
+
+Note that we have already created the node 50 in the heap.
+
+```sh
+ High Address
+              |             | 
+              |_____________|
+              |             | 
+              |             |
+              |             |
+         root |             |  // points to Node 50 in the heap
+              |             |    
+              |             |  main()'s stack frame
+              |_____________| 
+              |             |
+    nodeName  |   NULL      |  
+      numVal  |     70      |                          
+       pNode  |             |  // Points to Node 50 in the heap
+              |             |
+              |             |  BiTreeInsert2(root, 70, NULL)'s stack frame
+              |_____________| 
+              |             |
+    nodeName  |   NULL      |
+      numVal  |     70      |  
+       pNode  |             |  // NULL
+       tmp    |             |  // Points to Node 70 in the heap
+              |             |  BiTreeInsert2(NULL, 70, NULL)'s stack frame
+              |_____________| 
+              |             |  
+              |             | 
+              |             |
+              |             | 
+              |             |
+                Call Stack
+Low Address
 ```
 
 ### How to get the node with the minimum value in a binary search tree
