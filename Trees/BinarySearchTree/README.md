@@ -203,7 +203,7 @@ BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr le
               |             |
     nodeName  |   NULL      |              
       numVal  |     50      |              
-      pNodePtr|    &root    | // Points to the local pointer variable 'root' defined in main()
+      pNodePtr|    &root    | // Points to the local pointer variable 'root' 
        pNode  |             | // NULL
        tmp    |             | // Points to the Node 50 in the heap
               |             | BiTreeInsert(&root, 50, NULL)'s stack frame
@@ -255,7 +255,7 @@ Note that we have already created the node 50 in the heap.
               |             |
     nodeName  |   NULL      | 
       numVal  |     70      |                          
-      pNodePtr|             |  // Points to the local pointer variable 'root' defined in main()
+      pNodePtr|             |  // Points to the local pointer variable 'root'
        pNode  |             |  // Points to Node 50 in the heap
               |             |
               |             |  BiTreeInsert(&root, 70, NULL)'s stack frame
@@ -266,7 +266,7 @@ Note that we have already created the node 50 in the heap.
       pNodePtr|             |  // Points to the field 'rightChild' of Node 50 in the heap
        pNode  |             |  // NULL
        tmp    |             |  // Points to the Node 70 in the heap
-              |             |  BiTreeInsert(the address of the field rightChild in Node 50, 70, NULL)'s stack frame
+              |             |  BiTreeInsert(&(field 'rightChild' in Node 50), 70, NULL)
               |_____________| 
               |             |  
               |             | 
