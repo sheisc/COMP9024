@@ -21,6 +21,8 @@
 
 A Binary Search Tree (BST) is a type of data structure that organizes data efficiently.
 
+### BST property
+
 Each node has at most two children, with values smaller than the node on the left and values larger on the right. 
 
 This arrangement allows for fast operations like searching, inserting, and deleting data, making BSTs ideal for tasks that require quick access to sorted information.
@@ -37,6 +39,9 @@ This arrangement allows for fast operations like searching, inserting, and delet
                 80
 ```
 
+### How to create a binary search tree
+
+Ensure that the binary search tree (BST) property is preserved when inserting and deleting nodes.
 
 **Data Structures**
 ```C
