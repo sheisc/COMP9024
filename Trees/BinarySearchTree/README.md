@@ -93,18 +93,6 @@ In this project, we study how to insert and delete data in a BST.
 
 Searching within a BST is left as the weekly practical exercise in [Tutorial 7](../../Tutorials/Week9/README.md).
 
-```sh
-           50  
-        /      \
-      20        70
-     /  \      /  \  
-    10  30    60  100
-          \        /
-          40      90
-                 /
-                80
-```
-
 ```C
 
 typedef struct BiTreeNode *BiTreeNodePtr;
@@ -121,6 +109,19 @@ BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal) {
     }
 }
 ```
+
+```sh
+           50  
+        /      \
+      20        70
+     /  \      /  \  
+    10  30    60  100
+          \        /
+          40      90
+                 /
+                80
+```
+
 Example
 ```C
 int main(void) {
