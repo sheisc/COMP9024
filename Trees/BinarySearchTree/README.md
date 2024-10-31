@@ -46,9 +46,9 @@ In order to keep the height a BST tree shorter, self-balancing trees will be int
 
 In the above self-balancing binary search tree, 
 
-- **H** is short for the height of a tree node, **Max(BiTreeHeight(pNode->leftChild), BiTreeHeight(pNode->rightChild)) + 1**
+- **H** is short for the height of a tree node, **Max(BiTreeHeight(leftChild), BiTreeHeight(rightChild)) + 1**
 
-- **B** stands for the balance factor of the tree node, calculated at run time via  **BiTreeHeight(pNode->leftChild) - BiTreeHeight(pNode->rightChild)**
+- **B** stands for the balance factor of the tree node, calculated at run time via  **BiTreeHeight(leftChild) - BiTreeHeight(rightChild)**
 
 ### How to create a binary search tree
 
