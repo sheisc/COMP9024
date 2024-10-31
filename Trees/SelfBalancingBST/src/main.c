@@ -74,7 +74,11 @@ int main(void) {
     long RLnums[] = {10, 30, 20};
     TestAVLTree(RLnums, sizeof(RLnums)/sizeof(RLnums[0]), &cnt);
 
+    long nums201030[] = {20, 10, 30};
+    TestAVLTree(nums201030, sizeof(nums201030)/sizeof(nums201030[0]), &cnt);
 
+    long nums203010[] = {20, 30, 10};
+    TestAVLTree(nums203010, sizeof(nums203010)/sizeof(nums203010[0]), &cnt);    
     return 0;
 }
 

@@ -125,6 +125,83 @@ We have discussed how to create a *.dot file in [COMP9024/Trees/Tree2Dot](../../
 
 In this project, we study how to insert and delete data in a self-balancing BST.
 
+### Examples
+
+#### Six permutations of the set {10, 20, 30}
+
+```sh
+30, 20, 10
+10, 20, 30
+30, 10, 20
+10, 30, 20
+20, 10, 30
+20, 30, 10
+```
+
+In the following diagrams, 
+
+- **H** is short for the height of a tree node (saved in the tree node)
+
+- the nodes on the call stack are marked in red
+
+- **B** stands for the balance factor of the tree node (calculated at run time via  **BiTreeHeight(root->leftChild) - BiTreeHeight(root->rightChild)**)
+
+#### Insert 30, 20, and 10
+| Insert 30 | Insert 20, and update the height of node 30 |     | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0068.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0069.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0070.png" width="80%" height="80%">|
+
+| Insert 10, and update the height of node 20| Update the height of node 30 (unbalanced) |  After right rotation at node 30 in the previous state   | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0071.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0072.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0073.png" width="80%" height="80%">|
+
+#### Insert 10, 20, and 30
+| Insert 10 | Insert 20, and update the height of node 10 |     | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0079.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0080.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0081.png" width="80%" height="80%">|
+
+| Insert 30, and update the height of node 20| Update the height of node 10 (unbalanced) |  After left rotation at node 10 in the previous state   | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0082.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0083.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0084.png" width="80%" height="80%">|
+
+
+#### Insert 30, 10, and 20
+| Insert 30 | Insert 10, and update the height of node 30 |     | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0090.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0091.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0092.png" width="80%" height="80%">|
+
+| Insert 20, and update the height of node 10| Update the height of node 30 (unbalanced) |  After left rotation at node 10 in the previous state   | After right rotation at node 30 in the previous state|
+|:-------------:|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0093.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0094.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0095.png" width="80%" height="80%">| <img src="images/BiTreeBiTreeInsert_0096.png" width="80%" height="80%">|
+
+
+#### Insert 10, 30, and 20
+| Insert 10 | Insert 30, and update the height of node 10 |     | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0102.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0103.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0104.png" width="80%" height="80%">|
+
+| Insert 20, and update the height of node 30| Update the height of node 10 (unbalanced) |  After right rotation at node 30 in the previous state   | After left rotation at node 10 in the previous state |
+|:-------------:|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0105.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0106.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0107.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0108.png" width="80%" height="80%">|
+
+
+#### Insert 20, 10, and 30
+| Insert 20 | Insert 10, and update the height of node 20 |     | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0114.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0115.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0116.png" width="80%" height="80%">|
+
+| Insert 30, and update the height of node 20|  | 
+|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0117.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0118.png" width="80%" height="80%">|
+
+#### Insert 20, 30, and 10
+| Insert 20 | Insert 30, and update the height of node 20 |     | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0125.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0126.png" width="80%" height="80%">|<img src="images/BiTreeBiTreeInsert_0127.png" width="80%" height="80%">|
+
+| Insert 10, and update the height of node 20|  | 
+|:-------------:|:-------------:|
+| <img src="images/BiTreeBiTreeInsert_0128.png" width="80%" height="80%"> |<img src="images/BiTreeBiTreeInsert_0129.png" width="80%" height="80%">|
 
 
 
