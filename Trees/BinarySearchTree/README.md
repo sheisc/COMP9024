@@ -135,7 +135,7 @@ int main(void) {
 
 
 #### Method 1: pass the address of a pointer variable as an argument to a function
-<!--
+
 ```C
 //typedef struct BiTreeNode *BiTreeNodePtr;
 
@@ -185,10 +185,10 @@ BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr le
     return pNode;
 }
 ```
--->
+
 
 **Call stack when calling BiTreeInsert(&root, 50, NULL) in main()**
-
+<!--
 ```sh
  High Address
               |             | 
@@ -237,10 +237,18 @@ int main(void) {
     BiTreeInsert(&root, 70, NULL); // ...
 }
 ```
+-->
+
+|   Call Stack (ignoring return addresses)   |  Program      |
+| :-----: | :----------: | 
+|<img src="diagrams/InsertCallStack50.png" width="100%" height="100%">| <img src="diagrams/BstInsert.png" width="100%" height="100%">| 
+
+
+
 **Call stack when calling BiTreeInsert(&root, 70, NULL) in main()**
 
 Note that we have already created the node 50 in the heap.
-
+<!--
 ```sh
  High Address
               |             | 
@@ -276,11 +284,44 @@ Note that we have already created the node 50 in the heap.
                 Call Stack
 Low Address
 ```
+-->
+|   Call Stack (ignoring return addresses)   |  Program      |
+| :-----: | :----------: | 
+|<img src="diagrams/InsertCallStack70.png" width="100%" height="100%">| <img src="diagrams/BstInsert.png" width="100%" height="100%">| 
+
 
 #### Method 2: reset its value using the return value of a function
 
+```C
+BiTreeNodePtr BiTreeInsert2(BiTreeNodePtr pNode, long numVal, char *nodeName) {  
+    if (pNode == NULL) {
+        BiTreeNodePtr tmp = CreateBinaryTreeNode(numVal, nodeName, NULL, NULL);
+        return tmp;
+    } else {
+        if (numVal < pNode->value.numVal) {
+            pNode->leftChild = BiTreeInsert2(pNode->leftChild, numVal, nodeName);
+        } else if (numVal > pNode->value.numVal) {
+            pNode->rightChild = BiTreeInsert2(pNode->rightChild, numVal, nodeName);
+        } 
+        return pNode;
+    }  
+}
+int main(void) {
+    BiTreeNodePtr root = NULL;
+    root = BiTreeInsert2(root, 50, NULL);
+    root = BiTreeInsert2(root, 70, NULL); 
+    // ..,
+}
+```
+
 **Call stack when calling BiTreeInsert2(root, 50, NULL) in main()**
 
+|   Call Stack (ignoring return addresses)   |  Program      |
+| :-----: | :----------: | 
+|<img src="diagrams/Insert2CallStack50.png" width="100%" height="100%">| <img src="diagrams/BstInsert2.png" width="100%" height="100%">| 
+
+
+<!--
 ```sh
  High Address
               |             | 
@@ -328,11 +369,17 @@ int main(void) {
     root = BiTreeInsert2(root, 70, NULL); // ..,
 }
 ```
-
+-->
 **Call stack when calling BiTreeInsert2(root, 70, NULL) in main()**
 
 Note that we have already created the node 50 in the heap.
 
+|   Call Stack (ignoring return addresses)   |  Program      |
+| :-----: | :----------: | 
+|<img src="diagrams/Insert2CallStack70.png" width="100%" height="100%">| <img src="diagrams/BstInsert2.png" width="100%" height="100%">| 
+
+
+<!--
 ```sh
  High Address
               |             | 
@@ -366,6 +413,7 @@ Note that we have already created the node 50 in the heap.
                 Call Stack
 Low Address
 ```
+-->
 
 ### How to get the node with the minimum value in a binary search tree
 
