@@ -146,6 +146,10 @@ int main(void) {
     // Insert a node with the value 50
     BiTreeInsert(&root, 50, NULL);
 
+    // Insert a node with the value 70
+    BiTreeInsert(&root, 70, NULL);
+
+    // ...
 }
 
 void BiTreeInsert(BiTreeNodePtr *pNodePtr, long numVal, char *nodeName) {  
@@ -195,7 +199,10 @@ int main(void) {
     // Insert a node with the value 50
     root = BiTreeInsert2(root, 50, NULL);
 
-    // ... 
+    // Insert a node with the value 70
+    root = BiTreeInsert2(root, 70, NULL);
+
+    // ...
 }
 
 BiTreeNodePtr BiTreeInsert2(BiTreeNodePtr pNode, long numVal, char *nodeName) {  
