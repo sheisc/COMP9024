@@ -38,8 +38,7 @@ This arrangement allows for fast operations like searching, inserting, and delet
                  /
                 80
 ```
-
-Self-balancing trees will be introduced in [COMP9024/Trees/SelfBalancingBST](../../Trees/SelfBalancingBST/README.md).
+In order to keep the height a BST tree shorter, self-balancing trees will be introduced in [COMP9024/Trees/SelfBalancingBST](../../Trees/SelfBalancingBST/README.md).
 
 | Self-Balancing Binary Search Tree | 
 |:-------------:|
