@@ -39,6 +39,18 @@ This arrangement allows for fast operations like searching, inserting, and delet
                 80
 ```
 
+Self-balancing trees will be introduced in [COMP9024/Trees/SelfBalancingBST](../../Trees/SelfBalancingBST/README.md).
+
+| Self-Balancing Binary Search Tree | 
+|:-------------:|
+| <img src="diagrams/AVLTree.png" width="50%" height="50%"> | 
+
+In the above self-balancing binary search tree, 
+
+- **H** is short for the height of a tree node, **Max(BiTreeHeight(pNode->leftChild), BiTreeHeight(pNode->rightChild)) + 1**
+
+- **B** stands for the balance factor of the tree node, calculated at run time via  **BiTreeHeight(pNode->leftChild) - BiTreeHeight(pNode->rightChild)**
+
 ### How to create a binary search tree
 
 Ensure that the binary search tree (BST) property is preserved when inserting and deleting nodes.
@@ -79,12 +91,6 @@ typedef struct BiTreeNode *BiTreeNodePtr;
 We have discussed how to create a *.dot file in [COMP9024/Trees/Tree2Dot](../../Trees/Tree2Dot/README.md) for a binary tree.
 
 In this project, we study how to insert and delete data in a BST.
-
-Self-balancing trees will be introduced in [COMP9024/Trees/SelfBalancingBST](../../Trees/SelfBalancingBST/README.md).
-
-| Self-Balancing Tree | 
-|:-------------:|
-| <img src="diagrams/AVLTree.png" width="50%" height="50%"> | 
 
 Searching within a BST is left as the weekly practical exercise in [Tutorial 7](../../Tutorials/Week9/README.md).
 
