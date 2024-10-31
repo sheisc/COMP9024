@@ -131,7 +131,7 @@ int main(void) {
 }
 ```
 
-### How to update the value of a pointer variable in a caller function
+### How to update the value of a pointer variable defined in a caller function
 
 
 #### Method 1: pass the address of a pointer variable as an argument to a function
