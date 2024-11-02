@@ -730,6 +730,8 @@ Q24.
     The time complexity of OurFree() is ______Q24______.
 ```
 
+### How to define a right-associative AdditiveExpression
+
 ```sh
 AdditiveExpression:
           MultiplicativeExpression aop MultiplicativeExpression  ...  aop MultiplicativeExpression 
@@ -765,6 +767,6 @@ That is, the right-associative AdditiveExpression can be defined as follows.
 ```sh
 AdditiveExpression:
     MultiplicativeExpression
-    MultiplicativeExpression + AdditiveExpression:
+    MultiplicativeExpression + AdditiveExpression
 
 ```
