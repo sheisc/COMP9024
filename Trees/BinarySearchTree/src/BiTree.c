@@ -7,7 +7,7 @@
 #include "Queue.h"
 
 /*
-  Create an Ast node for an expression.
+    Create a binary tree node.
  */
 BiTreeNodePtr CreateBinaryTreeNode(long numVal, char *nodeName, BiTreeNodePtr left, BiTreeNodePtr right) {
     BiTreeNodePtr pNode = (BiTreeNodePtr) malloc(sizeof(struct BiTreeNode));
