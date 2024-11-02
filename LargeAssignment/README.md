@@ -730,3 +730,41 @@ Q24.
     The time complexity of OurFree() is ______Q24______.
 ```
 
+```sh
+AdditiveExpression:
+          MultiplicativeExpression aop MultiplicativeExpression  ...  aop MultiplicativeExpression 
+```
+
+```sh
+// A stands for AdditiveExpression
+// M is short for MultiplicativeExpression
+
+A:
+    M + M + ... + M
+```
+
+It represents a set containing the elements M, M+M, M+M+M, ...
+
+```sh
+A = {M, M+M, M+M+M, ...}
+  = {M} U {M+M, M+M+M, ...}
+  = {M} U M + {M, M+M, M+M+M, ...}
+  = {M} U M + A
+```
+
+So we have the following rule for A when A is defined as right associative
+
+```sh
+A:
+    M 
+    M + A
+```
+
+That is, the right-associative AdditiveExpression can be defined as follows.
+
+```sh
+AdditiveExpression:
+    MultiplicativeExpression
+    MultiplicativeExpression + AdditiveExpression:
+
+```
