@@ -45,9 +45,9 @@ We use BiTreeHeight(root) to represent the height of a BST tree.
 
 In this project, its height is defined as follows.
 
-we define the height of an empty tree (NULL node) to be 0.
+- The height of an empty tree (NULL node) is defined to be 0.
 
-For a non-empty tree, the height is the maximum of the heights of its left and right subtrees, plus one (to account for the current node).
+- For a non-empty tree, the height is the maximum of the heights of its left and right subtrees, plus one (to account for the current node).
 
 ```sh
 If root is NULL
@@ -118,9 +118,19 @@ a tree node is **in-balance** when its balance factor is 0 (bf == 0);
 
 a tree node is **unbalanced** (i.e., it requires self-balancing) when its balance factor is not in {-1, 0, 1} (that is, bf < -1 || bf > 1).
 
+### AVL Property
+
+An AVL Tree is a binary search tree, where the balance factor of each node is in {-1, 0, 1}.
+
+If the balance factor becomes greater than +1 or less than -1 after an insertion or deletion, 
+
+the tree needs to be rebalanced through rotations (single or double) to maintain the AVL property.
+
 ### Self Balancing
 
-An AVL tree ensures that the balance factor of every node is within the specified range by performing rotations whenever necessary after insertion or deletion operations. These rotations restore the balance of the tree while maintaining the BST property.
+An AVL tree ensures that the balance factor of every node is within the specified range by performing rotations whenever necessary after insertion or deletion operations. 
+
+These rotations restore the balance of the tree while maintaining the BST property.
 
 We have discussed how to create a *.dot file in [COMP9024/Trees/Tree2Dot](../../Trees/Tree2Dot/README.md) for a binary tree.
 
