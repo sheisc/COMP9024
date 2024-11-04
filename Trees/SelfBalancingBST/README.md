@@ -44,6 +44,7 @@ An AVL tree with n nodes maintains a logarithmic height O(log(n)), ensuring effi
 We use BiTreeHeight(root) to represent the height of a BST tree.
 
 In this project, its height is defined as follows.
+
 we define the height of an empty tree (NULL node) to be 0.
 
 For a non-empty tree, the height is the maximum of the heights of its left and right subtrees, plus one (to account for the current node).
