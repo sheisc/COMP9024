@@ -20,7 +20,7 @@
 
 | Unbalanced BST ( degenerating into a structure that resembles a linked list) | 
 |:-------------:|
-| <img src="diagrams/UnbalancedBST45.png" width="80%" height="80%"> |
+| <img src="diagrams/UnbalancedBST45.png" width="50%" height="50%"> |
 
 
 A Binary Search Tree (BST) is a type of data structure that organizes data efficiently.
