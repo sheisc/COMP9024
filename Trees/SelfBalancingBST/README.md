@@ -39,6 +39,12 @@ An AVL tree with n nodes maintains a logarithmic height O(log(n)), ensuring effi
 |:-------------:|
 | <img src="diagrams/AVLTree.png" width="80%" height="80%"> |
 
+In the above self-balancing binary search tree, 
+
+- **H** is short for the height of a tree node, **Max(BiTreeHeight(leftChild), BiTreeHeight(rightChild)) + 1**
+
+- **B** stands for the balance factor of the tree node, calculated at run time via  **BiTreeHeight(leftChild) - BiTreeHeight(rightChild)**
+
 ### Tree Height
 
 We use BiTreeHeight(root) to represent the height of a BST tree.
