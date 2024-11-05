@@ -460,9 +460,53 @@ void PrintSubSets(int *arr, int n) {
 
 ## 7 [PrintPermutations()](./src/main.c)
 
- <img src="images/CallTree.png" width="100%" height="100%">
+```C
+/*
+    Time complexity:
+
+        O(n!*n)
+    
+    Given n elements in an array arr,
+    there are n! permutations and it requires O(n) time to print a permutation.
+
+    To simplify, let's assume that all elements in the array arr are distinct from each other.
+ */
+void PrintPermutations(int *arr, int n, int left, int right) {  
+    if (left == right) {
+        PrintArray(arr, n);
+        return;
+    }
+    // Depth first search in the call tree
+    for (int i = left; i <= right; i++) {
+        // Let arr[i] be the first element in [left, right]
+        swap(&arr[left], &arr[i]);
+        // recursively handle the (n-1) elements
+        PrintPermutations(arr, n, left+1, right);
+        // Restore
+        swap(&arr[left], &arr[i]);
+    }
+}
+
+static int nums[] = {20, 24, 90};
+
+int main(int argc, char **argv, char **env) {
+    int n = sizeof(nums)/sizeof(nums[0]);
+    PrintPermutations(nums, n, 0, n-1);     
+    return 0;
+}
+```
+
+### Part of the call tree
+
+**PrtP is short for PrintPermutations**
+
+<img src="images/CallTreeNode.png" width="80%" height="80%">
 
 ### 7.1 Call Tree
+
+ 
+
+  <img src="images/CallTree.png" width="100%" height="100%">
 
 A call tree, in the context of computer science and software development, refers to a hierarchical representation of function or method calls within a program. 
 
