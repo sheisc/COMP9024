@@ -26,6 +26,7 @@ It is like a fingerprint for the digital data.
 
 Hash values are essential for quickly comparing large datasets.
 
+<!--
 For example, in Git, every commit is identified and tracked using a unique hexadecimal string known as a Git SHA (Secure Hashing Algorithm).
 
 This [SHA](https://en.wikipedia.org/wiki/Secure_Hash_Algorithms) is calculated based on the contents of the commit using a cryptographic hash function.
@@ -38,6 +39,7 @@ Date:   Mon Jul 22 17:11:43 2024 +1000
     Update Strings/HashMap
 
 ```
+-->
 
 **A simple hash function for a string**
 ```C
