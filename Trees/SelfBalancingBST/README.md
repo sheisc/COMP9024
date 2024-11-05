@@ -147,12 +147,12 @@ In this project, we study how to insert and delete data in a self-balancing BST.
 #### Six permutations of the set {10, 20, 30}
 
 ```sh
-30, 20, 10
 10, 20, 30
-30, 10, 20
 10, 30, 20
 20, 10, 30
 20, 30, 10
+30, 10, 20
+30, 20, 10
 ```
 
 In the following diagrams, 
