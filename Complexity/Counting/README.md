@@ -525,19 +525,19 @@ The problem with n elements can be broken down into n smaller problems, each wit
 ```
 
 ```sh 
-                                        // arr[] = {20, 24, 90};
-    // smaller problem 1    
+                                        // arr[] = {20, 24, 90};       
     swap(&arr[left], &arr[0])
+    // smaller problem 1 
     20, {24, 90}                        // arr[] = {20, 24, 90};
     swap(&arr[left], &arr[0])
-                                        // arr[] = {20, 24, 90};
-    // smaller problem 2
+                                        // arr[] = {20, 24, 90};    
     swap(&arr[left], &arr[1])
+    // smaller problem 2
     24, {20, 90}                        // arr[] = {24, 20, 90};
     swap(&arr[left], &arr[1])
-                                        // arr[] = {20, 24, 90};
-    // smaller problem 3
+                                        // arr[] = {20, 24, 90};    
     swap(&arr[left], &arr[2])
+    // smaller problem 3
     90, {24, 20}                        // arr[] = {90, 24, 20};
     swap(&arr[left], &arr[2])
                                         // arr[] = {20, 24, 90};
@@ -552,15 +552,14 @@ Take '24, {20, 90}' as an example
 ```
 
 ```sh
-                                        // arr[] = {24, 20, 90};
-    // smaller problem 2.1    
+                                        // arr[] = {24, 20, 90};        
     swap(&arr[left], &arr[1])
+    // smaller problem 2.1
     24, 20, {90}                        // arr[] = {24, 20, 90};
     swap(&arr[left], &arr[1])
-                                        // arr[] = {24, 20, 90};
-
-    // smaller problem 2.2
+                                        // arr[] = {24, 20, 90};    
     swap(&arr[left], &arr[2])
+    // smaller problem 2.2
     24, 90, {20}                        // arr[] = {24, 90, 20};
     swap(&arr[left], &arr[2])
                                         // arr[] = {24, 20, 90};
