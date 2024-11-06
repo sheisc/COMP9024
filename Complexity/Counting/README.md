@@ -495,6 +495,85 @@ int main(int argc, char **argv, char **env) {
     return 0;
 }
 ```
+### Motivation
+
+The problem with n elements can be broken down into n smaller problems, each with (n-1) elements.
+
+#### Example
+
+**The problem with 3 elements**
+```
+    arr[] = {20, 24, 90};
+```
+
+**The 3 smaller problems, each with 2 elements**
+```sh
+    // smaller problem 1
+    20, {24, 90}
+    // smaller problem 2
+    24, {20, 90}
+    // smaller problem 3
+    90, {24, 20}
+```
+
+**How to transition from one smaller problem to another**
+
+```C
+
+    // Array index: left = 0,  right = 2
+    arr[] = {20, 24, 90};
+```
+
+```sh 
+                                        // arr[] = {20, 24, 90};
+    // smaller problem 1    
+    swap(&arr[left], &arr[0])
+    20, {24, 90}                        // arr[] = {20, 24, 90};
+    swap(&arr[left], &arr[0])
+                                        // arr[] = {20, 24, 90};
+    // smaller problem 2
+    swap(&arr[left], &arr[1])
+    24, {20, 90}                        // arr[] = {24, 20, 90};
+    swap(&arr[left], &arr[1])
+                                        // arr[] = {20, 24, 90};
+    // smaller problem 3
+    swap(&arr[left], &arr[2])
+    90, {24, 20}                        // arr[] = {90, 24, 20};
+    swap(&arr[left], &arr[2])
+                                        // arr[] = {20, 24, 90};
+```
+
+**The smaller problem with 2 elements**
+
+Take '24, {20, 90}' as an example
+```
+    // Array index: left = 1,  right = 2
+    arr[] = {24, 20, 90};
+```
+
+```sh
+                                        // arr[] = {24, 20, 90};
+    // smaller problem 2.1    
+    swap(&arr[left], &arr[1])
+    24, 20, {90}                        // arr[] = {24, 20, 90};
+    swap(&arr[left], &arr[1])
+                                        // arr[] = {24, 20, 90};
+
+    // smaller problem 2.2
+    swap(&arr[left], &arr[2])
+    24, 90, {20}                        // arr[] = {24, 90, 20};
+    swap(&arr[left], &arr[2])
+                                        // arr[] = {24, 20, 90};
+
+```
+
+**The smaller problem with 1 element**
+
+Take '24, 20, {90}' as an example
+```
+    // Array index: left = 2,  right = 2
+    nums[] = {24, 20, 90};
+```
 
 ### Part of the call tree
 
