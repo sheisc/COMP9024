@@ -216,7 +216,7 @@ But, if hash collisions are frequent in a HashMap, the **worst-case** time compl
 
 It depends on both the size of n and the ignored constant factors in O(1).
 
-The big O notation ignores the constant factor (e.g., 100 in 'TimeA(n)=100').
+The big O notation ignores the constant factor (e.g., 100 in 'TimeA(n)=100=100*1').
 
 Suppose n is less than $2^{32}$.
 ```sh
