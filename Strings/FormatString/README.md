@@ -151,6 +151,12 @@ FormatString$ make clean
 
 ### 4.1 OurPrintf32_V3()
 
+
+|OurPrintf32_V3()| Call Stack |
+|:-------------:|:-------------:|
+| <img src="diagrams/PrintfV3.png" width="100%" height="100%"> | <img src="diagrams/CallStack.png" width="100%" height="100%"> |  
+
+
 ```C
 
 /*
