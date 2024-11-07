@@ -109,4 +109,8 @@ An algorithm is a step-by-step process for solving a problem within a finite amo
 
 [COMP9024/Strings/FormatString](./Strings/FormatString/README.md)
 
+[COMP9024/Randomised/Maze](./Randomised/Maze/README.md)
+
+[COMP9024/Randomised/TopologicalSort](./Randomised/TopologicalSort/README.md)
+
 
