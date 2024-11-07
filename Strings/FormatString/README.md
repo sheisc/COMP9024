@@ -156,6 +156,13 @@ FormatString$ make clean
 |:-------------:|:-------------:|
 | <img src="diagrams/PrintfV3.png" width="100%" height="100%"> | <img src="diagrams/CallStack.png" width="100%" height="100%"> |  
 
+On a 32-bit system (focusing on the x86 architecture), the C calling convention specifies how functions receive parameters, return values, and manage the call stack.
+
+- Arguments in a function call are pushed onto the call stack from right to left.
+
+- The caller is responsible for cleaning up the call stack after the function call.
+
+- The return value is typically placed in the 'eax' register.
 
 ```C
 
@@ -246,13 +253,7 @@ int main(void) {
                                                        
 
 ```
-On a 32-bit system (focusing on the x86 architecture), the C calling convention specifies how functions receive parameters, return values, and manage the call stack.
 
-Arguments in a function call are pushed onto the call stack from right to left.
-
-The caller is responsible for cleaning up the call stack after the function call.
-
-The return value is typically placed in the 'eax' register.
 
 
 ### 4.2 OurPrintf_V1() and OurPrintf_V2()
