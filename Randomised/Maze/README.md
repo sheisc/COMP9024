@@ -119,6 +119,29 @@ Address Space Layout Randomization (ASLR) makes it challenging for attackers to 
 
 This technique increases the security of systems by making it more difficult for attackers to exploit memory corruption vulnerabilities. 
 
+```C
+#include <stdio.h>
+
+int main(void) {
+    int year = 2024;
+    printf("&year == %p \n", &year);
+    return 0;
+}
+```
+
+**Output**
+```sh
+Maze$ gcc ASLR.c -o ASLR
+
+Maze$ ./ASLR
+&year == 0x7ffebbe95bd4 
+
+Maze$ ./ASLR
+&year == 0x7ffd52397884 
+
+Maze$ ./ASLR
+&year == 0x7ffe0c7556d4
+```
 
 ### Random Number Generators
 
