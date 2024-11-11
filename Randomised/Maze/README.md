@@ -55,12 +55,38 @@ Maze$ ./ASLR
 ```
 
 
-### Concurrency and Parallelism
 
-In multi-threaded or multi-process programs, the outcome of a computation might depend on the timing of thread or process execution.
+### [Concurrency](https://web.mit.edu/6.005/www/fa14/classes/17-concurrency/)
+
+Concurrency doesn't necessarily mean that all tasks are happening at the exact same moment in time; 
+
+they can also be executed in an interleaved manner.
+
+In the context of concurrency, time-slicing enables the system to handle multiple tasks by rapidly switching between them, 
+
+thus allowing several tasks to appear as though they're running in parallel, when in fact, they are simply being interleaved.
+
+#### Single-threaded VS multi-threaded
+
+A single-threaded program is like a drawing made with a single continuous stroke.
+
+The one-stroke drawing follows the control flow of a single-threaded program.
+
+| Single-threaded | 
+|:-------------:|
+| <img src="diagrams/OneStrokeDrawing.png" width="80%" height="80%"> |
+
+
+A multi-threaded program is like drawing a picture concurrently with multiple strokes.
+
+| Multi-threaded | 
+|:-------------:|
+| <img src="diagrams/MultiStrokeDrawing.png" width="80%" height="80%"> |
+
 
 If threads are accessing shared resources without proper synchronization, the final result can vary depending on the order in which threads execute.
 
+In multi-threaded programs, the outcome of a computation might depend on the timing of thread execution.
 
 #### A multi-threaded C program
 
@@ -125,6 +151,8 @@ In a multi-threaded program, each thread requires its own separate call stack.
 
 This is because each thread operates independently and manages its own function calls, local variables, and execution state.
 
+**Output**
+
 ```sh
 Maze$ make
 
@@ -142,6 +170,28 @@ counter == 8000000
 
 Maze$ ./CounterLock
 counter == 8000000
+
+```
+
+**Reason**
+
+To be simple, we assume that Thread1 and Thread2 use separate physical registers on two different CPU cores.
+
+The global variable 'counter' is shared among the multiple threads
+
+```sh
+// counter = counter + 1                           // counter = counter + 1
+
+Thread1:                                           Thread2:
+
+    // Load the value from memory                          // Load the value from memory
+    Register1 = counter                                    Register2 = counter  
+
+    // Increase by 1                                       // Increase by 1
+    Increase Register1 by 1                                Increase Register2 by 1
+
+    // Write it back to the memory                         // Write it back to the memory
+    counter = Register1                                    counter = Register2             
 
 ```
 
