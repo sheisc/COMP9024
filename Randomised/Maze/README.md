@@ -3,10 +3,12 @@
 ``` sh
 /*******************************************************************
                           Maze
+    
+    1.  Non-Determinism
 
-    1.  How to explore a maze with a non-randomised algorithm
+    2.  How to explore a maze with a non-randomised algorithm
 
-    2.  How to explore a maze with a randomised algorithm 
+    3.  How to explore a maze with a randomised algorithm 
         (flip a coin or roll a dice)
 
                                              COMP9024
