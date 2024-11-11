@@ -19,6 +19,42 @@
 In programming, non-determinism refers to scenarios where the behavior of a program or system cannot be precisely predicted, 
 even if the initial conditions and inputs are known. This can happen for a variety of reasons.
 
+
+### Address Space Layout Randomization (ASLR)
+
+Address Space Layout Randomization ([ASLR](https://en.wikipedia.org/wiki/Address_space_layout_randomization)) randomizes the base addresses of key memory regions such as the stack, heap, and shared libraries. 
+
+Each time a program is executed, these memory regions are placed at different locations in virtual memory.
+
+ASLR makes it challenging for attackers to predict memory addresses in advance by randomly rearranging the memory layout of a process. 
+
+This technique increases the security of systems by making it more difficult for attackers to exploit memory corruption vulnerabilities. 
+
+```C
+#include <stdio.h>
+
+int main(void) {
+    int year = 2024;
+    printf("&year == %p \n", &year);
+    return 0;
+}
+```
+
+**Output**
+```sh
+Maze$ gcc ASLR.c -o ASLR
+
+Maze$ ./ASLR
+&year == 0x7ffebbe95bd4 
+
+Maze$ ./ASLR
+&year == 0x7ffd52397884 
+
+Maze$ ./ASLR
+&year == 0x7ffe0c7556d4
+```
+
+
 ### Concurrency and Parallelism
 
 In multi-threaded or multi-process programs, the outcome of a computation might depend on the timing of thread or process execution.
@@ -109,39 +145,6 @@ counter == 8000000
 
 ```
 
-### Address Space Layout Randomization (ASLR)
-
-ASLR randomizes the base addresses of key memory regions such as the stack, heap, and shared libraries. 
-
-Each time a program is executed, these memory regions are placed at different locations in virtual memory.
-
-Address Space Layout Randomization (ASLR) makes it challenging for attackers to predict memory addresses in advance by randomly rearranging the memory layout of a process. 
-
-This technique increases the security of systems by making it more difficult for attackers to exploit memory corruption vulnerabilities. 
-
-```C
-#include <stdio.h>
-
-int main(void) {
-    int year = 2024;
-    printf("&year == %p \n", &year);
-    return 0;
-}
-```
-
-**Output**
-```sh
-Maze$ gcc ASLR.c -o ASLR
-
-Maze$ ./ASLR
-&year == 0x7ffebbe95bd4 
-
-Maze$ ./ASLR
-&year == 0x7ffd52397884 
-
-Maze$ ./ASLR
-&year == 0x7ffe0c7556d4
-```
 
 ### Random Number Generators
 
