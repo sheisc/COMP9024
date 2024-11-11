@@ -90,6 +90,34 @@ If threads are accessing shared resources without proper synchronization, the fi
 
 In multi-threaded programs, the outcome of a computation might depend on the timing of thread execution.
 
+**Example**
+
+To be simple, we assume that Thread1 and Thread2 are running on two different CPU cores.
+
+Register1 is a physical register in CPU1, while Register2 is a physical register in CPU2.
+
+The global variable 'counter' is shared among the two threads, with an initial value of 0.
+
+**What value could the 'counter' have when both Thread1 and Thread2 finish their tasks?**
+
+```sh
+// counter = counter + 1                           // counter = counter + 1
+
+Thread1:                                           Thread2:
+
+    // Load the value from memory                          // Load the value from memory
+    Register1 = counter                                    Register2 = counter  
+
+    // Increase by 1                                       // Increase by 1
+    Increase Register1 by 1                                Increase Register2 by 1
+
+    // Write it back to the memory                         // Write it back to the memory
+    counter = Register1                                    counter = Register2             
+
+```
+
+
+
 #### A multi-threaded C program
 
 ```C
@@ -175,27 +203,7 @@ counter == 8000000
 
 ```
 
-**Reason**
 
-To be simple, we assume that Thread1 and Thread2 use separate physical registers on two different CPU cores.
-
-The global variable 'counter' is shared among the multiple threads
-
-```sh
-// counter = counter + 1                           // counter = counter + 1
-
-Thread1:                                           Thread2:
-
-    // Load the value from memory                          // Load the value from memory
-    Register1 = counter                                    Register2 = counter  
-
-    // Increase by 1                                       // Increase by 1
-    Increase Register1 by 1                                Increase Register2 by 1
-
-    // Write it back to the memory                         // Write it back to the memory
-    counter = Register1                                    counter = Register2             
-
-```
 
 
 ### Random Number Generators
