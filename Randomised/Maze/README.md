@@ -1047,6 +1047,6 @@ dedication to truth, and balancing.
 
                              by M. Scott Peck
 ```
-**Life will find a way out. We wish you all the best.**
+**Life will always find a way out. We wish you all the best.**
 
 
