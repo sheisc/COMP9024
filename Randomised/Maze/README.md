@@ -1024,4 +1024,29 @@ X   X   X   X           X       X
 
 ```
 
+```sh
+
+Life is difficult.
+
+This is a great truth, one of the greatest truths. 
+It is a great truth because once we truly see this truth, we transcend it.
+Once we truly know that life is difficult -- once we truly understand 
+and accept it -- then life is no longer difficult.
+Because once it is accepted, the fact that life is difficult no longer matters.
+
+Life is a series of problems.
+
+Discipline is the basic set of tools we require to solve life's problems.
+
+...
+There are four tools: delaying of gratification, acceptance of responsibility, 
+dedication to truth, and balancing.
+
+
+                        The Road Less Travelled
+
+                             by M. Scott Peck
+```
 **Life will find a way out. We wish you all the best.**
+
+
