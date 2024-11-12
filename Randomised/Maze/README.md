@@ -343,6 +343,8 @@ TimeNeeded in F() = 12455973 us
 TimeNeeded in G() = 1135229 us
 ```
 
+For more information about the memory hierarchy in computer systems, please refer to [Introduction to Computer Systems](http://www.cs.cmu.edu/~213/lectures/09-memory-hierarchy.pdf).
+
 ### This Project
 
 In this project, we will how to explore a maze with non-randomised and randomised algorithms.
