@@ -100,6 +100,10 @@ The global variable 'counter' is shared among the two threads, with an initial v
 
 **What value could the 'counter' have when both Thread1 and Thread2 finish their tasks?**
 
+Note that the CPU may be preempted at any time, as other threads are running on the same system.
+
+In other words, a thread may lose access to the CPU at any moment.
+
 ```sh
 // counter = counter + 1                           // counter = counter + 1
 
