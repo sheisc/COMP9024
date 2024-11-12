@@ -785,7 +785,11 @@ void ExploreMaze(void) {
 
 ### 5.4 Sidetracks: Loops in programming
 
-When implementing loops in programming, we can use three common techniques: while/for statements, recursive functions, and event handlers.
+When implementing loops in programming, we can use three common techniques: 
+
+- while/for statements 
+- recursive functions
+- event handlers
 
 #### 5.4.1 For statement
 
