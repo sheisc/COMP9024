@@ -1024,6 +1024,8 @@ X   X   X   X           X       X
 
 ```
 
+**Sometimes, we are stuck in a maze. But life will always find a way out. We wish you all the best.**
+
 ```sh
 
 Life is difficult.
@@ -1047,6 +1049,6 @@ dedication to truth, and balancing.
 
                              by M. Scott Peck
 ```
-**Life will always find a way out. We wish you all the best.**
+
 
 
