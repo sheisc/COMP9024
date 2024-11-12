@@ -709,6 +709,16 @@ static void PushAdjacentPosition(struct Stack *pStack, int r, int c, PositionSta
     }
 }
 
+
+// see https://en.wikipedia.org/wiki/Arrows_(Unicode_block)
+static char *rightArrowUnicodeStr = "\u2192";
+static char *downArrowUnicodeStr = "\u2193";
+static char *leftArrowUnicodeStr = "\u2190";
+static char *upArrowUnicodeStr = "\u2191";
+
+// https://www.fileformat.info/info/unicode/char/1f5fc/index.htm
+static char *towerUnicodeStr = "\U0001F5FC";
+
 /*
   State transition:
 
