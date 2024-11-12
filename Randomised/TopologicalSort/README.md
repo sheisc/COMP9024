@@ -4,7 +4,7 @@
 /*******************************************************************
                 Topological Sort
 
-    1.  how to perform a topological sort in a Directed Acyclic Graph (DAG) 
+    1.  How to perform a topological sort in a Directed Acyclic Graph (DAG) 
         using Breadth-First Search (BFS)
 
     2.  How to detect cycles in a Directed Graph using Topological Sort
