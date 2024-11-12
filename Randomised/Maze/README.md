@@ -354,9 +354,9 @@ For more information about the memory hierarchy in computer systems, please refe
 
 In this project, we will how to explore a maze with non-randomised and randomised algorithms.
 
-Exploring a maze using a [data stack](../../Stacks/Stack_LL/README.md) is like following a trail of markers: 
+Exploring a maze using a [data stack](../../Stacks/Stack_LL/README.md) is like following a trail of markers.
 
-it helps you backtrack and navigate through twists and turns efficiently. 
+<!-- it helps you backtrack and navigate through twists and turns efficiently. -->
 
 Imagine you're inside a maze, armed with a stack of markers. 
 
