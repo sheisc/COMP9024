@@ -1020,7 +1020,7 @@ X   X   X   X           X       X
 
 ```
 
-**Sometimes, we are stuck in a maze. But life will always find a way out. We wish you all the best.**
+**Sometimes, we are stuck in a maze. But life will find a way. We wish you all the best.**
 
 ```sh
 
