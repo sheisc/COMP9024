@@ -215,6 +215,10 @@ counter == 8000000
 Programs that use random number generators produce different results on different runs due to the inherent unpredictability of the random values. 
 
 
+| Flip a coin | Roll a dice | 
+|:-------------:|:-------------:|
+| <img src="diagrams/FlipACoin.png" width="80%" height="80%"> |<img src="diagrams/RollADice.png" width="80%" height="80%"> |
+
 ```C
 #include <stdlib.h>     // srandom(), random()
 #include <time.h>       // time()
@@ -1046,7 +1050,4 @@ dedication to truth, and balancing.
                              by M. Scott Peck
 ```
 
-| Flip a coin | Roll a dice | 
-|:-------------:|:-------------:|
-| <img src="diagrams/FlipACoin.png" width="80%" height="80%"> |<img src="diagrams/RollADice.png" width="80%" height="80%"> |
 
