@@ -1053,6 +1053,6 @@ dedication to truth, and balancing.
 
 **Sometimes, we are stuck in a maze. But life will find a way. We wish you all the best.**
 
-|  COMP9024 Completed |
+|  COMP9024 Data Structures and Algorithms |
 |:-------------:|
 | <img src="images/HtmlMaze_0152.png" width="80%" height="80%"> |
