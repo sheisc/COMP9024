@@ -412,14 +412,30 @@ int BinarySearch(int *arr, int n, int targetVal) {
 ```
 
 ## 6 PrintSubSets()
+
+
+
 ```sh
     Time complexity:
 
         O(n*(2**n))
 
-    To simplify, let's assume that all elements in the array arr are distinct from each other.
+    To simplify, let's assume that all elements in the array arr are distinct from each other.  
 
-       
+    arr[3] = {20, 24, 90}
+
+    void PrintSubSets(int *arr, int n);    
+
+```
+
+| PrintSubSets() |  Data |
+|:-------------:|:-------------:|
+|<img src="images/SubSetsCode.png" width="100%" height="100%"> |<img src="images/SubSetsTable.png" width="100%" height="100%"> |
+
+<!--
+
+```C
+/*
     arr[3] = {20, 24, 90}
     ----------------------------------------------------
     curVal      SubSet              i=0    i=1    i=2
@@ -437,9 +453,8 @@ int BinarySearch(int *arr, int n, int targetVal) {
     110         {24, 90}            001    010    100
     111         {20, 24, 90}        001    010    100
     ----------------------------------------------------- 
-```
+ */
 
-```C
 void PrintSubSets(int *arr, int n) {
     printf("****  PrintSubSets: O(n*(2**n))    ****\n");
     // (1 << n) is  2**n
@@ -461,6 +476,7 @@ void PrintSubSets(int *arr, int n) {
 }
 
 ```
+-->
 
 ## 7 [PrintPermutations()](./src/main.c)
 
