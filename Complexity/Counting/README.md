@@ -544,6 +544,16 @@ The problem with n elements can be broken down into n smaller problems, each wit
     arr[] = {20, 24, 90};
 ```
 
+**Output**
+```sh
+20 24 90 
+20 90 24 
+24 20 90 
+24 90 20 
+90 24 20 
+90 20 24 
+```
+
 **The 3 smaller problems, each with 2 elements**
 ```sh
     // smaller problem 1
