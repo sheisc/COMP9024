@@ -26,7 +26,7 @@ This type of sorting is particularly useful in scenarios where certain tasks mus
 
 | Initial DAG | DAG with in-degrees |
 |:-------------:| :-------------: |
-| <img src="diagrams/Courses.png" width="50%" height="50%"> |  <img src="diagrams/TopologicalSort_0001.png" width="50%" height="50%"> |  
+| <img src="diagrams/Courses.png" width="80%" height="80%"> |  <img src="diagrams/TopologicalSort_0001.png" width="80%" height="80%"> |  
 
 **In-degree of a node**
 
