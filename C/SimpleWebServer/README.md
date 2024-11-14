@@ -28,7 +28,7 @@ The directed edges represent hyperlinks between these webpages.
 
 If a webpage A has a hyperlink to webpage B, there is a directed edge from A to B in the graph.
 
-A [HashMap](../../Strings/HashMap/README.md) can be used to store the HTTP headers as follows.
+A [HashMap](../../Strings/HashMap/README.md) can be used to store the HTTP headers (e.g., "Host: localhost:8080") as follows.
 
 #### An HTTP request from the Chrome browser
 
