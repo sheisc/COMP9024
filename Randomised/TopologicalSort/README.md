@@ -24,9 +24,13 @@ The term “topological” reflects the idea that we are arranging nodes based o
 
 This type of sorting is particularly useful in scenarios where certain tasks must be completed before others, such as task scheduling, course prerequisite chains, and resolving dependencies in build systems (e.g., [makefile](../../C/HowToMake/README.md)).
 
-| Initial | 
-|:-------------:|
-| <img src="diagrams/TopologicalSort_0001.png" width="80%" height="80%"> |  
+| Initial DAG | DAG with in-degrees |
+|:-------------:| :-------------: |
+| <img src="diagrams/Courses.png" width="50%" height="50%"> |  <img src="diagrams/TopologicalSort_0001.png" width="50%" height="50%"> |  
+
+**In-degree of a node**
+
+The number of edges coming into that node.
 
 **Output**
 ```sh
