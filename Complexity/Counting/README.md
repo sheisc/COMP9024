@@ -428,6 +428,24 @@ int BinarySearch(int *arr, int n, int targetVal) {
 
 ```
 
+**Input**
+```sh
+{20, 24, 90}
+```
+
+**Output**
+
+```sh
+{ }
+{ 20 }
+{ 24 }
+{ 20 24 }
+{ 90 }
+{ 20 90 }
+{ 24 90 }
+{ 20 24 90 }
+```
+
 | PrintSubSets() |  Data |
 |:-------------:|:-------------:|
 |<img src="images/SubSetsCode.png" width="100%" height="100%"> |<img src="images/SubSetsTable.png" width="100%" height="100%"> |
