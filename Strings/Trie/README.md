@@ -231,33 +231,34 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 #### 3.2.2 IP Address Lookup Using a Trie
 
-| Insert "1"|
-|:-------------:|
-| <img src="images/TrieInsert_0012.png" width="60%" height="60%"> |
+| Rules |  Trie |
+|:-------------:|:-------------:|
+| <img src="diagrams/IpRules.png" width="80%" height="80%"> |<img src="diagrams/IpTrie.png" width="80%" height="80%"> |
 
-| Insert "0" |
-|:-------------:|
-| <img src="images/TrieInsert_0013.png" width="60%" height="60%"> |
-
-| Insert "1111" |
-|:-------------:|
-| <img src="images/TrieInsert_0014.png" width="60%" height="60%"> |
-
-| Insert "000" |
-|:-------------:|
-| <img src="images/TrieInsert_0015.png" width="60%" height="60%"> |
+##### Examples
 
 
-**The output of TestLongestPrefixMatch()**
-```
-10000011 ---> Block
-00111111 ---> Forward
-11110100 ---> Block and alarm
-11111000 ---> Block and alarm
-00011111 ---> Forward and alarm
 
-```
+| IP |  Action | Longest prefix in the above rules|
+|:-------------:|:-------------|:-------------|
+|10000011 | Block | 1xxxxxxx |
+|00111111 | Forward | 0xxxxxxx |
+|11110100 | Block and alarm | 1111xxxx|
+|11111000 | Block and alarm | 1111xxxx |
+|00011111 | Forward and alarm | 000xxxxx |
 
+
+
+##### Creating the trie for IP Address Lookup
+
+Inserting the prefix strings in the above rules one by one (i.e., "1", "0", "1111", and "000").
+
+| Insert "1"|  Insert "0" | Insert "1111" | Insert "000" |
+|:-------------:|:-------------:|:-------------:|:-------------:|
+| <img src="images/TrieInsert_0012.png" width="60%" height="60%"> |<img src="images/TrieInsert_0013.png" width="60%" height="60%"> |<img src="images/TrieInsert_0014.png" width="60%" height="60%"> |<img src="images/TrieInsert_0015.png" width="60%" height="60%"> |
+
+
+<!--
 ```sh
 
     To be simple, only 8 bits are used here, rather than 32 bits in IPv4
@@ -272,8 +273,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
         000xxxxx                   Forward and alarm
     ------------------------------------------------------
 ```
-
-
+-->
 
 ## 4 Data structures
 
