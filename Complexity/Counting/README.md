@@ -419,32 +419,36 @@ int BinarySearch(int *arr, int n, int targetVal) {
 
     To simplify, let's assume that all elements in the array arr are distinct from each other.
 
+       
     arr[3] = {20, 24, 90}
-
-    ----------------------------
-    curVal      SubSet
-    ----------------------------
-    000         {}
-    001         {20}
-    010         {24}
-    011         {20, 24}
-    100         {90}
-    101         {20, 90}
-    110         {24, 90}
-    111         {20, 24, 90}
-    ---------------------------- 
+    ----------------------------------------------------
+    curVal      SubSet              i=0    i=1    i=2
+                                    --------------------
+                            arr[i]  20     24      90
+                                    --------------------   
+                                    1<<i   1<<i   1<<i
+    ----------------------------------------------------
+    000         {}                  001    010    100
+    001         {20}                001    010    100
+    010         {24}                001    010    100
+    011         {20, 24}            001    010    100
+    100         {90}                001    010    100
+    101         {20, 90}            001    010    100
+    110         {24, 90}            001    010    100
+    111         {20, 24, 90}        001    010    100
+    ----------------------------------------------------- 
 ```
 
 ```C
 void PrintSubSets(int *arr, int n) {
-    printf("*******************  PrintSubSets: O(n*(2**n))    **********************\n");
+    printf("****  PrintSubSets: O(n*(2**n))    ****\n");
     // (1 << n) is  2**n
     unsigned int maxVal = (1 << n);
     // assert(n < 32);
-    // printf("sizeof(maxVal) * 8 = %ld\n", sizeof(maxVal) * 8);
     assert(n < (sizeof(maxVal) * 8));
 
-    for (unsigned int curVal = 0; curVal < maxVal; curVal++) { // (2**n) iterations
+    // (2**n) iterations
+    for (unsigned int curVal = 0; curVal < maxVal; curVal++) { 
         // 
         printf("{ ");
         for (int i = 0; i < n; i++) {   // n iterations
