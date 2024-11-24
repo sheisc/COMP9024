@@ -1,0 +1,18 @@
+digraph FordFulkersonMF {
+rankdir="LR"    
+"Source" -> {"Node1"} [label="3/3"] 
+"Source" -> {"Node2"} [label="3/7"] [color=orange]
+"Node1" -> {"Node3"} [label="3/3"] 
+"Node1" -> {"Node4"} [label="3/4"] [color=orange]
+"Node2" -> {"Node1"} [label="3/5"] [color=orange]
+"Node2" -> {"Node4"} [label="0/3"]
+"Node3" -> {"Node4"} [label="3/3"] 
+"Node3" -> {"Sink"} [label="0/2"]
+"Node4" -> {"Sink"} [label="6/6"] [color=orange]
+"Source"
+"Node1"
+"Node2"
+"Node3"
+"Node4"
+"Sink"
+}
