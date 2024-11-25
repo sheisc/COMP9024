@@ -12,7 +12,7 @@ void Swap(ArrayElementTy *pa, ArrayElementTy *pb) {
     *pb = tmp;
 }
 
-void PrintArray(ArrayElementTy *ptr, int n) {
+void PrintArray(ArrayElementTy *ptr, long n) {
     for (long i = 0; i < n; i++) {
         printf("%ld ", (long) ptr[i]);
     }
