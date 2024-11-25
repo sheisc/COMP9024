@@ -22,6 +22,10 @@ find ./images -name "*.png" | sort | xargs feh -g 1024x768  &
 
 ### The process of SelectionSort(arr, 0, 5, 6)
 
+```C
+void SelectionSort(ArrayElementTy *ptr, long left, long right, long n);
+```
+
 |Initial | 
 |:-------------:|
 | <img src="images/SelectionSort_0000.png" width="50%" height="50%"> |
