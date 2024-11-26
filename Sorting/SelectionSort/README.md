@@ -1,16 +1,5 @@
 # SelectionSort
 
-``` sh
-/*******************************************************************
-                SelectionSort
-
-    1.  The algorithm of selection sort
-
-
-                                             COMP9024
-
- *******************************************************************/
-``` 
 
 ### make view 
 
@@ -57,6 +46,7 @@ void SelectionSort(ArrayElementTy *ptr, long left, long right, long n);
 
 ### Output
 ```sh
+SelectionSort$ make
 SelectionSort$ ./main
 
 Before sorting:

@@ -90,6 +90,7 @@ void MergeSort(ArrayElementTy *ptr, long left, long right, long n);
 
 ### Output
 ```sh
+MergeSort$ make
 MergeSort$ ./main
 
 Before sorting:

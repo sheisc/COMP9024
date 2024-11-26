@@ -1,16 +1,5 @@
 # QuickSort
 
-``` sh
-/*******************************************************************
-                QuickSort
-
-    1.  The algorithm of quick sort
-
-
-                                             COMP9024
-
- *******************************************************************/
-``` 
 
 ### make view 
 
@@ -49,6 +38,7 @@ void QuickSort(ArrayElementTy *ptr, long left, long right, long n);
 
 ### Output
 ```sh
+QuickSort$ make
 QuickSort$ ./main
 
 Before sorting:

@@ -1,17 +1,5 @@
 # InsertionSort
 
-``` sh
-/*******************************************************************
-                InsertionSort
-
-    1.  The algorithm of insertion sort
-
-
-                                             COMP9024
-
- *******************************************************************/
-``` 
-
 ### make view 
 
 ```sh
@@ -53,6 +41,7 @@ find ./images -name "*.png" | sort | xargs feh -g 1024x768  &
 
 ### Output
 ```sh
+InsertionSort$ make
 InsertionSort$ ./main
 
 Before sorting:
