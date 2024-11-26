@@ -56,6 +56,8 @@ void HeapSort(ArrayElementTy *ptr, long n) {
         (n / 2 - 1) * 2 + 1  = n - 1,  the index of the last element
      */
     for (long i = n / 2 - 1; i >= 0; i--) {
+        HeapGenOneImage(SORT_ALG_NAME, "images/" SORT_ALG_NAME, imgCount, ptr, n, i);
+        imgCount++;
         Heapify(ptr, n, i);
         HeapGenOneImage(SORT_ALG_NAME, "images/" SORT_ALG_NAME, imgCount, ptr, n, i);
         imgCount++;
