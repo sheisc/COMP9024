@@ -1,5 +1,5 @@
-#ifndef COUNT_SORT_H
-#define COUNT_SORT_H
+#ifndef HEAP_SORT_H
+#define HEAP_SORT_H
 
 #include "Heap2Dot.h"
 
