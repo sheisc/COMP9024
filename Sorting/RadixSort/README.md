@@ -46,26 +46,26 @@ void RadixSort(ArrayElementTy *ptr, long n);
 
 | 90, 20, 0, 22, 2, 9024, 24, 64, 45, 17, 308 | 
 |:-------------:|
-| <img src="images/RadixSort_0000.png" width="100%" height="100%"> |
+| <img src="images/RadixSort_0000.png" width="60%" height="60%"> |
 
 #### Step 2:  (ptr[i] / 10) % 10
 
 |0, 2, 308, 17, 20, 22, 9024, 24, 45, 64, 90   | 
 |:-------------:|
-| <img src="images/RadixSort_0001.png" width="100%" height="100%"> |
+| <img src="images/RadixSort_0001.png" width="60%" height="60%"> |
 
 
 #### Step 3:  (ptr[i] / 100) % 10
 
 | 0, 2, 17, 20, 22, 9024, 24, 45, 64, 90, 308  | 
 |:-------------:|
-| <img src="images/RadixSort_0002.png" width="100%" height="100%"> |
+| <img src="images/RadixSort_0002.png" width="60%" height="60%"> |
 
 #### Step 4:  (ptr[i] / 1000) % 10
 
 |0, 2, 17, 20, 22, 24, 45, 64, 90, 308, 9024  | 
 |:-------------:|
-| <img src="images/RadixSort_0003.png" width="100%" height="100%"> |
+| <img src="images/RadixSort_0003.png" width="60%" height="60%"> |
 
 
 #### Final
