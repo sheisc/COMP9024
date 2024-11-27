@@ -17,7 +17,7 @@
 struct DisjointSets {
     /*
         If parents[i] == i, 
-            node i is the representative of ta disjoint set.
+            node i is the representative of a disjoint set.
         
         It points to an array; node parents[i] is the parent of node i
      */
