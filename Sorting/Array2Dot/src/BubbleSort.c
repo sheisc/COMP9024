@@ -54,8 +54,6 @@ void BubbleSort(ArrayElementTy *ptr, long n) {
 
         // i is in [0, iMax] in the current pass
         for (long i = 0; i <= iMax; i++) {
-            // ArrayGenOneImage(ptr, iMax + 2, i, "BubbleSort", "images/BubbleSort", imgCount);
-            // imgCount++;
             ArrayGenOneImage(SORT_ALG_NAME, "images/" SORT_ALG_NAME, imgCount, 
                              ptr, n, 0, iMax+1, i);
             imgCount++;
@@ -65,13 +63,10 @@ void BubbleSort(ArrayElementTy *ptr, long n) {
                 printf("After swapping ptr[%ld] and ptr[%ld]:\n", i, i+1);
                 PrintArray(ptr, iMax + 2);
                 printf("\n");
-                // ArrayGenOneImage(ptr, iMax + 2, i, "BubbleSort", "images/BubbleSort", imgCount);
-                // imgCount++; 
 
                 ArrayGenOneImage(SORT_ALG_NAME, "images/" SORT_ALG_NAME, imgCount, 
                                  ptr, n, 0, iMax+1, i);
-                imgCount++;                 
-                                             
+                imgCount++;                                                        
             }
         }       
     }
