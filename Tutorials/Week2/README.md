@@ -136,7 +136,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 All of these images for visualizing algorithms are generated automatically in [COMP9024/Sorting/Array2Dot](../../Sorting/Array2Dot/README.md).
 
-| Initial |
+| Initial: int arr[] = {30, 50, 20, 10, 60, 40}; |
 |:-------------:|
 |<img src="images/BubbleSort_0000.png" width="80%" height="80%">|
 
