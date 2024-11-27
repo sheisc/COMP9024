@@ -77,8 +77,6 @@ Then, click **Run -> Start Debugging**
 |   ├── BubbleSort.c
 |   ├── BubbleSort.h
 |   ├── main.c
-|   ├── Util.c
-|   └── Util.h
 |
 ├── images               *.png and *.dot files
 |
@@ -116,7 +114,12 @@ Array2Dot$ make view
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
+#### Initial
+| ArrayElementTy arr[] = {30, 50, 20, 10, 60, 40}; |
+|:-------------:|
+| <img src="images/BubbleSort_0000.png" width="80%" height="80%"> |
 
+#### Pass 1
 
 ||
 |:-------------:|
@@ -150,6 +153,9 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 |:-------------:|
 | <img src="images/BubbleSort_0008.png" width="80%" height="80%"> |
 
+
+#### Pass 2
+
 ||
 |:-------------:|
 | <img src="images/BubbleSort_0009.png" width="80%" height="80%"> |
@@ -180,6 +186,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/BubbleSort_0015.png" width="80%" height="80%"> |
 
 
+#### Pass 3
 
 ||
 |:-------------:|
@@ -198,6 +205,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/BubbleSort_0019.png" width="80%" height="80%"> |
 
 
+#### Pass 4
 
 ||
 |:-------------:|
@@ -207,10 +215,13 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 |:-------------:|
 | <img src="images/BubbleSort_0021.png" width="80%" height="80%"> |
 
+#### Pass 5
+
 ||
 |:-------------:|
 | <img src="images/BubbleSort_0022.png" width="80%" height="80%"> |
 
+#### Final
 ||
 |:-------------:|
 | <img src="images/BubbleSort_0023.png" width="80%" height="80%"> |

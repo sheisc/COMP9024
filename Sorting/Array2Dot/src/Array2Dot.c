@@ -3,56 +3,61 @@
 #include <assert.h>
 #include <string.h>
 #include "Array2Dot.h"
+
+#define	ROWS 1
+
+
 ////////////////////////////// Array2Dot (for visualizing the algorithm) ///////////////////////////////////////
+/*
+    For the n elements arr[0],  ...,  arr[n-1]:
 
-static void PrintOneEdge(FILE *dotFile, ArrayElementTy *arr, long src, long dst) {
-    fprintf(dotFile, "\"%p\" -> \"%p\" [style=invis] \n", arr + src, arr + dst);
+    Highlight the elements arr[left], arr[left+1], ..., arr[right]
+
+    Highlight a special element arr[index]
+ */
+static void PrintHtmlTable(FILE *dotFile, ArrayElementTy *arr, long n, long left, long right, long index) {
+    fprintf(dotFile, "<table border=\"0\" cellborder=\"1\" cellspacing=\"0\" cellpadding=\"0\"> \n");
+    for (long r = 0; r < ROWS; r++) {
+        fprintf(dotFile, "<tr> \n");
+        for (long c = 0; c < n; c++) {
+            if (c == index) {
+                fprintf(dotFile, "<td width=\"80\" height=\"80\" bgcolor=\"green\">[%ld]=%ld</td> \n", c, (long) arr[c]);
+            } else if (c >= left && c <= right) {
+                fprintf(dotFile, "<td width=\"80\" height=\"80\" bgcolor=\"yellow\">[%ld]=%ld</td> \n", c, (long) arr[c]);
+            } else {
+                fprintf(dotFile, "<td width=\"80\" height=\"80\" bgcolor=\"white\">[%ld]=%ld</td> \n", c, (long) arr[c]);
+            }
+        }
+        fprintf(dotFile, "</tr> \n");
+    }
+    fprintf(dotFile, "</table> \n");
 }
-
-static void PrintOneNode(FILE *dotFile, ArrayElementTy *arr, long i) {
-    fprintf(dotFile, "\"%p\" [label=\"%ld\"] \n", arr + i, (long) arr[i]);
-}
-
 
 /*
     Dot Files
  */
-void Array2Dot(ArrayElementTy *arr,
-               long n,
-               long index,
-               char *filePath,
+void Array2Dot(char *filePath,
                char *graphName,
-               int displayVisited) {
-    (void) displayVisited;
-
+               ArrayElementTy *arr, long n, long left, long right, long index) {
     FILE *dotFile = fopen(filePath, "w");
-    if (dotFile) {
-        fprintf(dotFile, "digraph %s {\n", graphName);
-        fprintf(dotFile, "rankdir=\"LR\";\n");
 
-        long i = 0;
-        // hidden node with an illegal address in C as its node id: arr[-1]
-        fprintf(dotFile, "\"%p\" [label=\"n=%ld\"] [shape=box] \n", arr - 1, n);
-        while (i < n) {
-            // Use out-of-bound addresses, but not the value inside.
-            PrintOneEdge(dotFile, arr, i-1, i);
-            PrintOneNode(dotFile, arr, i);
-            if (i == index) {
-                // use arr-1 (illegal address) as a special node
-                ArrayElementTy *indexNode = arr - 2;
-                fprintf(dotFile, "\"%p\" -> \"%p\" [color=red]\n", indexNode, arr + index);
-                fprintf(dotFile, "\"%p\" [label=\"i=%ld\"] [shape=hexagon] \n", indexNode, index);
-            }
-            i++;
-        }      
-        fprintf(dotFile, "}\n");
+    if (dotFile) {
+        fprintf(dotFile, "digraph %s { \n", graphName);
+        fprintf(dotFile, "Array [shape=none, margin=0, label=< \n");
+
+        PrintHtmlTable(dotFile, arr, n, left, right, index);
+
+        fprintf(dotFile, "  >]; \n");
+        fprintf(dotFile, "} \n");
+
         fclose(dotFile);
-    }                
+    }
 }
+
 
 #define FILE_NAME_LEN  255
 
-void ArrayGenOneImage(ArrayElementTy *arr, long n, long index, char *graphName, char *fileName, long seqNo) {
+void ArrayGenOneImage(char *graphName, char *fileName, long seqNo, ArrayElementTy *arr, long n, long left, long right, long index) {
     char dotFileName[FILE_NAME_LEN+1] = {0};
     char pngFileName[FILE_NAME_LEN+1] = {0};
     char command[(FILE_NAME_LEN+1)*4] = {0};
@@ -60,13 +65,14 @@ void ArrayGenOneImage(ArrayElementTy *arr, long n, long index, char *graphName, 
     snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
     snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
 
-    Array2Dot(arr, n, index, dotFileName, graphName, 1);
+    Array2Dot(dotFileName, graphName, arr, n, left, right, index);
 
     snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
 
     //printf("%s\n", command);
-    
+
     // Execute the command in a child process (fork() + exec() on Linux)
-    system(command); 
+    system(command);
 }
+
 
