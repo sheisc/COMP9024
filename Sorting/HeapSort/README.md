@@ -1,5 +1,11 @@
 # HeapSort
 
+The term "heap" can refer to two different concepts in computer science: heap in heap sort and heap in heap memory.
+
+- The heap in heap sort is a tree-based data structure.
+
+- The [heap](../../HeapAllocator/README.md) in heap memory is a memory area used for dynamic storage.
+
 ### make view 
 
 ```sh
