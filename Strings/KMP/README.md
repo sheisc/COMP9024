@@ -2,7 +2,17 @@
 
 KMP stands for Knuth-Morris-Pratt, which is an efficient algorithm used for string matching or substring searching. 
 
-It uses preprocessing to build an auxiliary array called the longest prefix suffix (LPS) array (also known as the "partial match" table). 
+LPPS: The longest proper prefix (also a suffix). 
+
+```sh
+String: "ababab"
+LPPS: "abab"
+Explanation:  The longest proper prefix ("abab") is also a suffix.
+              "ab" is another proper prefix (also a suffix) of "ababab", but not the longest.
+```
+
+
+It uses preprocessing to build an auxiliary array called the longest proper prefix (also a suffix) array, lppsArr[]. 
 
 This array helps in skipping unnecessary comparisons when a mismatch occurs.
 
