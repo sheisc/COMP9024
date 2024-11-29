@@ -98,6 +98,8 @@ long KMPSearch(char *pattern, char *text) {
     long i = 0;
     // index j for traversing the pattern
     long j = 0;
+    
+    assert(m > 0 && n > 0);
 
     long *lppsArr = (long *) malloc(sizeof(long) * m);
     for (long k = 0; k < m; k++) {
