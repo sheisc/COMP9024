@@ -103,78 +103,78 @@ long KMPSearch(char *pattern, char *text);
 ```
 
 
-| i = 0, j = 0 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0000.png" width="100%" height="100%"> |
 
-| i = 1, j = 1 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0001.png" width="100%" height="100%"> |
 
-| i = 1, j = 0 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0002.png" width="100%" height="100%"> |
 
-| i = 2, j = 0 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0003.png" width="100%" height="100%"> |
 
-| i = 3, j = 1 | 
+| | 
 |:-------------:|
 | <img src="images/KMP_0004.png" width="100%" height="100%"> |
 
-| i = 4, j = 2 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0005.png" width="100%" height="100%"> |
 
-| i = 4, j = 1 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0006.png" width="100%" height="100%"> |
 
 
-| i = 4, j = 0 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0007.png" width="100%" height="100%"> |
 
 
-| i = 5, j = 0 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0008.png" width="100%" height="100%"> |
 
-| i = 6, j = 1 | 
+| | 
 |:-------------:|
 | <img src="images/KMP_0009.png" width="100%" height="100%"> |
 
-| i = 7, j = 2 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0010.png" width="100%" height="100%"> |
 
 
-| i = 7, j = 1 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0011.png" width="100%" height="100%"> |
 
 
-| i = 8, j = 2 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0012.png" width="100%" height="100%"> |
 
 
-| i = 8, j = 1 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0013.png" width="100%" height="100%"> |
 
-| i = 9, j = 2 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0014.png" width="100%" height="100%"> |
 
 
-| i = 10, j = 3 | 
+|  | 
 |:-------------:|
 | <img src="images/KMP_0015.png" width="100%" height="100%"> |
 
 
-| i = 11, j = 4 | 
+| | 
 |:-------------:|
 | <img src="images/KMP_0016.png" width="100%" height="100%"> |
 
