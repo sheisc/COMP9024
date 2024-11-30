@@ -16,6 +16,46 @@ It uses preprocessing to build an auxiliary array called the longest proper pref
 
 This array helps in skipping unnecessary comparisons when a mismatch occurs.
 
+### When a mismatch occurs (text[i] != pattern[j])
+
+```sh
+
+(1) j == 0
+
+text
+                                    i
+            .   .   .   .   .   .   y   .   .   
+
+pattern
+                                    x   .   .
+
+                                    j
+
+Shift:
+        i++;
+
+(2) j > 0            
+
+
+text
+                        i-j         i
+            .   .   .   .   .   .   y   .   .   
+
+pattern
+                        .   .   .   x   .   .
+
+                        0           j
+
+
+We want to reuse the information (i.e., text[i-j .. i-1] == pattern[0 .. j-1])
+
+Shift:
+        j = lppsArr[j-1],  
+        where lppsArr[j-1] is the length of the longest proper 
+        prefix (also a suffix) of pattern[0 .. j-1].
+```
+
+**The key point of KMP is how to generate the array lppsArr[].**
 
 ### make view 
 
