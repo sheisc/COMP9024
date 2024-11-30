@@ -33,7 +33,9 @@ pattern
 
 Shift:
         i++;
+```
 
+```sh
 (2) j > 0            
 
 
