@@ -93,6 +93,15 @@ aaba found at index 7 in acaadaaaababaaba
 long KMPSearch(char *pattern, char *text);
  
 ```
+#### When a mismatch occurs (text[i] != pattern[j])
+
+```
+    if j == 0
+        i++
+    else
+        j = lpps[j-1]
+```
+
 
 | i = 0, j = 0 | 
 |:-------------:|
