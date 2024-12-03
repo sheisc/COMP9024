@@ -26,7 +26,8 @@ static void PrintHtmlTable(FILE *dotFile,
     fprintf(dotFile, "</tr> \n");
 
     fprintf(dotFile, "<tr> \n");
-    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">text[%ld]</td> \n", startTxt);
+    //fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">text[%ld]</td> \n", startTxt);
+    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">text[i+j]</td> \n");
     for (long i = 0; i < n; i++) {
         if (indexPat < 0) {
             if (i < startTxt || i >= startTxt + m) {
@@ -48,7 +49,8 @@ static void PrintHtmlTable(FILE *dotFile,
 
     // pattern
     fprintf(dotFile, "<tr> \n");   
-    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">pattern[%ld]</td> \n", indexPat);
+    //fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">pattern[%ld]</td> \n", indexPat);
+    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">pattern[j]</td> \n");
     for (long i = 0; i < n;) {
         if (i < startTxt) {
             fprintf(dotFile, "<td border=\"0\" width=\"30\" height=\"30\" bgcolor=\"white\"> </td> \n");
