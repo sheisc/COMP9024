@@ -136,7 +136,9 @@ So pattern[0 .. k-1] is also a proper prefix and a proper suffix of pattern[0 ..
 
 But pattern[0 .. k-1] is longer than pattern[0 .. lppsArr[len - 1]-1].
 
-This contradicts the definition of lppsArr[len - 1].
+This contradicts the definition of lppsArr[len - 1]:
+
+    pattern[0 .. lppsArr[len - 1]-1] (with a length of lppsArr[len - 1]) is the LPPS of pattern[0 .. len-1].
 ```
 
 ### GetLengthOfLPPS()
