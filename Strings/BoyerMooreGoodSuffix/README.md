@@ -3,7 +3,7 @@
 [The Bad-Character rule](../BoyerMooreBadChar/README.md) uses the mismatched character (text[i+j]) to determine the shift when a mismatch occurs (text[i+j] != pattern[j]).
 
 The Good-Suffix rule uses the good suffix (pattern[j+1 .. m-1]) to guide the shift in the Boyer-Moore algorithm,
-where m is the length of pattern, where pattern[j+1 .. m-1] represents a substring from pattern[j+1] to pattern[m-1].
+where m is the length of the pattern, and pattern[j+1 .. m-1] represents a substring from pattern[j+1] to pattern[m-1].
 
 - Scan the pattern from right to left , rather than from left to right.
 - Use the good suffix (i.e., pattern[j+1 .. m-1] == text[i+j+1 .. i+m-1]) to avoid unnecessary comparisons when a mismatch occurs.
