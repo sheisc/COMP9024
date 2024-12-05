@@ -306,11 +306,11 @@ void BoyerMooreGoodSuffix(char *pattern, char *text);
 ```
 ### Example 1: BoyerMooreGoodSuffix("aaba", "acaadaaaababaaba")
 
-| | 
+| After PreprocessLongestBP() | 
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0000.png" width="100%" height="100%"> |
 
-|  | 
+| After PreprocessCase2AndCase3() | 
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0001.png" width="100%" height="100%"> |
 
@@ -398,12 +398,12 @@ void BoyerMooreGoodSuffix(char *pattern, char *text);
 
 
 
-|  | 
+| After PreprocessLongestBP() | 
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0020.png" width="100%" height="100%"> |
 
 
-|  | 
+|  After PreprocessCase2AndCase3() | 
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0021.png" width="100%" height="100%"> |
 
@@ -482,12 +482,12 @@ void BoyerMooreGoodSuffix(char *pattern, char *text);
 
 ### Example 3: BoyerMooreGoodSuffix("aabaabaab", "aaaabaaaabaabaabaa")
 
-|  | 
+| After PreprocessLongestBP() | 
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0038.png" width="100%" height="100%"> |
 
 
-|  | 
+|  After PreprocessCase2AndCase3() | 
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0039.png" width="100%" height="100%"> |
 
