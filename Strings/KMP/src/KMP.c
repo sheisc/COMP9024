@@ -29,17 +29,33 @@ void GetLengthOfLPPS(char *pattern, long *lppsArr, long m) {
 
     long i = 1;
 
-    while (i < m) {          
+    while (i < m) {
+        /*
+            We know lppsArr[i-1] == len.
+
+            According the definition of LPPS, we have
+
+                pattern[0 .. len-1] == pattern[i-len .. i-1]           
+         */          
         if (pattern[i] == pattern[len]) {
-            // If characters match, increment the length of lpps
+            /*
+                Now, we have
+
+                    pattern[0 .. len] == pattern[i-len .. i]
+             */
             len++;
             lppsArr[i] = len;
             i++;
         } else {
             // If there is a mismatch
-            if (len != 0) {
+            //if (len != 0) { // assert(len > 0);
+            if (len > 0) {
+                /*
+                    Try the second longest proper prefix (also a suffix) of pattern[0 .. i-1]    
+                 */
                 len = lppsArr[len - 1];
             } else {
+                // no shorter one, only "" left
                 lppsArr[i] = 0;
                 i++;
             }
@@ -132,7 +148,8 @@ long KMPSearch(char *pattern, char *text) {
                 // j = lppsArr[j-1];
             }
         } else { // there is a mismatch        
-            if (j != 0) {
+            //if (j != 0) { // assert(j > 0);
+            if (j > 0) {
                 j = lppsArr[j-1];
             } else {
                 i++;
