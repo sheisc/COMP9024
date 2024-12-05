@@ -75,12 +75,20 @@ If pattern[k .. m-1] is a border of pattern[i .. m-1],
 then it is also a border of pattern[j .. m-1].
 
 Reason:
-    The length of pattern[k .. m-1] is (m-k).
-    The length of pattern[j .. m-1] is (m-j), where (m-j) > (m-k).
-    Since pattern[j .. m-1] is the longest border of pattern[i .. m-1],
+    1. The length of pattern[k .. m-1] is (m-k).
+
+    2. The length of pattern[j .. m-1] is (m-j), where (m-j) > (m-k).
+
+    3. Since pattern[j .. m-1] is the longest border of pattern[i .. m-1],    
     the first (m-j) characters of pattern[i .. m-1] and pattern[j .. m-1] are the same.
-    Obviously,
-    the first (m-k) characters of pattern[i .. m-1] and pattern[j .. m-1] are identical.
+    
+    4. As pattern[k .. m-1] is a border of pattern[i .. m-1],
+    the first (m-k) characters of pattern[k .. m-1] and pattern[i .. m-1] are identical.
+    
+    So, the first (m-k) characters of pattern[k .. m-1] and pattern[j .. m-1] are the same. 
+    That is, pattern[k .. m-1] is a proper prefix of pattern[j .. m-1].
+    Obviously, pattern[k .. m-1] is a proper suffix of pattern[j .. m-1].
+    Finally, pattern[k .. m-1] is a border of pattern[j .. m-1].
 
 But pattern[k .. m-1], a border of pattern[j .. m-1], is longer than the longest border (pattern[longestBP[j] .. m-1]) 
 of pattern[j .. m-1].
