@@ -9,14 +9,16 @@ It is typically indexed by the bad character (or its corresponding integer value
 
 If a bad character is not found in the pattern, the array stores a default value, often set to -1.
 
-| Pattern |   |  |  |  | 
+Given a pattern "aaba".
+
+|  |   |  |  |  | 
 |:-------:|:-------:|:-------:|:-------:|:-------:|
 | index| 0 | 1 | 2 | 3 |
 |pattern[] | a | a | b | a| 
 
+Its lastOccurrences[] table is as follows.
 
-
-| Last Occurrences |   |
+| |   |
 |:-------:|:-------:|
 |lastOccurrences['a'] | 3 |
 |lastOccurrences['b'] | 2 |
