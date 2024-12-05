@@ -161,9 +161,9 @@ Based on longestBP[m],
 the Boyer-Moore algorithm further constructs a shiftTable[m+1] to determine the shift value 
 for a mismatch at text[i+j] != text[j].
 
-Its implementation is very tricky.
+#### Its implementation is very tricky.
 
-- One part of shiftTable[] is preprocessed when constructing longestBP[].
+- One part of shiftTable[] (i.e., Case 1) is preprocessed when constructing longestBP[].
 - The other part is handled in PreprocessCase2AndCase3() as follows.
 
 
