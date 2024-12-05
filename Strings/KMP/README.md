@@ -111,16 +111,16 @@ void GetLengthOfLPPSV2(char *pattern, long *lppsArr, long m) {
 - The base case is lppsArr[0] = 0, as the empty string "" (with a length of 0) is the LPPS of pattern[0 .. 0].
 - The notation pattern[0 .. -1] is a special notation, representing ""
 
-### The substring pattern[0 .. lppsArr[len - 1]] is the second longest prefix (also a suffix) of pattern[0 .. i-1], where lppsArr[i-1] == len && i >= 1 && len > 0
+### The substring pattern[0 .. lppsArr[len - 1]-1] is the second longest proper prefix (also a suffix) of pattern[0 .. i-1], where lppsArr[i-1] == len && i >= 1 && len > 0
 
-For an index k, where lppsArr[len - 1] < k < len-1, pattern[0 .. k] can't be a proper prefix (also a proper suffix) of pattern[0 .. i-1].
+For a length k, where lppsArr[len - 1] < k < len, pattern[0 .. k-1] can't be a proper prefix (also a proper suffix) of pattern[0 .. i-1].
 
 ```sh
 Proof by contradiction:
 
-Suppose pattern[0 .. k] is a proper prefix (also a proper suffix) of pattern[0 .. i-1].
+Suppose pattern[0 .. k-1] is a proper prefix (also a proper suffix) of pattern[0 .. i-1].
 
-    pattern[0 .. k] == pattern[i-k-1 .. i-1]
+    pattern[0 .. k-1] == pattern[i-k .. i-1]
 
 then it is also a proper prefix (also a proper suffix) of pattern[0 .. len-1].
 
@@ -128,13 +128,13 @@ Note that pattern[0 .. len-1] is the LPPS of pattern[0 .. i-1]
 
     pattern[0 .. len-1] == pattern[i-len .. i-1]
 
-Since k < len-1, we have
+Since k < len, we have
 
-    i-len < i-k-1
+    i-len < i-k
 
-So pattern[0 .. k] is also a proper prefix and a proper suffix of pattern[0 .. len-1].
+So pattern[0 .. k-1] is also a proper prefix and a proper suffix of pattern[0 .. len-1].
 
-But pattern[0 .. k] is longer than pattern[0 .. lppsArr[len - 1]].
+But pattern[0 .. k-1] is longer than pattern[0 .. lppsArr[len - 1]-1].
 
 This contradicts the definition of lppsArr[len - 1].
 ```
