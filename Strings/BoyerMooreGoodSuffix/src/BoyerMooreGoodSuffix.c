@@ -72,6 +72,7 @@ static void PreprocessCase2AndCase3(long *shiftTable,
             shiftTable[k] = j;
         }
         if (k < m && k == j) {
+            // If we comment the following line, it will lead to unnecessary comparisons.
             j = longestBP[j];
         }
     }

@@ -180,6 +180,7 @@ static void PreprocessCase2AndCase3(long *shiftTable,
             shiftTable[k] = j;
         }
         if (k < m && k == j) {
+            // If we comment the following line, it will lead to unnecessary comparisons.
             j = longestBP[j];
         }
     }
@@ -230,7 +231,7 @@ Explanation:
 When a mismatch occurs at pattern[4] != text[i+4],
 the Boyer-Moore algorithm will use shiftTable[4+1] to shift the pattern to the right.
 
-The shift value in the element shiftTable[5] should be 6, rather than 3.
+The shift value in the element shiftTable[5] should be 6, rather than 3 (resulting in unnecessary comparisons).
 
 Reason:
 ```sh
