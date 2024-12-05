@@ -20,7 +20,9 @@ int main(void) {
     BoyerMooreGoodSuffix(pattern, text);
 
 
-    BoyerMooreGoodSuffix("aabaabaab", "aaaabaaaabaabaabaa");    
+    BoyerMooreGoodSuffix("aabaabaab", "aaaabaaaabaabaabaa");
+
+    BoyerMooreGoodSuffix("caba", "ddcabacc");       
 
     return 0;
 }

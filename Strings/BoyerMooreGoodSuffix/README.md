@@ -20,16 +20,19 @@ pattern:
 
 ### Motivation for avoiding unnecessary comparisons when a mismatch occurs
 
-Case 1:
+Case 1: // pattern[0] does not skip over text[i+j]
+
     Try to find another occurrence of the substring pattern[j+1 .. m-1] in the pattern, but preceded by a character
     which is different from pattern[j].
 
     Since another occurrence of pattern[j] pattern[j+1 .. m-1] will cause another mismatch.
 
-Case 2:
-    When case 1 fails, find a prefix of the pattern (starting at index 0), which matches a suffix of pattern[j+1 .. m-1].
+Case 2: // pattern[0] skips over text[i+j], but not over text[i+m-1]
 
-Case 3:
+    When case 1 fails, find a prefix of the pattern (starting at index 0), which matches with a suffix of pattern[j+1 .. m-1].
+
+Case 3: // pattern[0] skips over text[i+m-1],  
+
     When both case 1 and case 2 fail, skip text[i+j+1 .. i+m-1].
 
 
@@ -295,6 +298,9 @@ aaa found at index 6 in aaaabaaaa
 
 aabaabaab found at index 7 in aaaabaaaabaabaabaa
 
+caba found at index 2 in ddcabacc
+
+
 ```
 
 ### The process of BoyerMoore
@@ -550,4 +556,44 @@ void BoyerMooreGoodSuffix(char *pattern, char *text);
 |  | 
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0053.png" width="100%" height="100%"> |
+
+
+### Example 4: BoyerMooreGoodSuffix("caba", "ddcabacc");  
+
+| After PreprocessLongestBP() | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0054.png" width="100%" height="100%"> |
+
+
+|  After PreprocessCase2AndCase3() | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0055.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0056.png" width="100%" height="100%"> |
+
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0057.png" width="100%" height="100%"> |
+
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0058.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0059.png" width="100%" height="100%"> |
+
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0060.png" width="100%" height="100%"> |
+
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0061.png" width="100%" height="100%"> |
 
