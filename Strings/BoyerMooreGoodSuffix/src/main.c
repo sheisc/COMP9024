@@ -19,6 +19,9 @@ int main(void) {
     pattern = "aaa";
     BoyerMooreGoodSuffix(pattern, text);
 
+
+    BoyerMooreGoodSuffix("aabaabaab", "aaaabaaaabaabaabaa");    
+
     return 0;
 }
 

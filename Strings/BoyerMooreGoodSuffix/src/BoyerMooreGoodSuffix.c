@@ -60,7 +60,7 @@ static void PreprocessLongestBP(long *shiftTable,
 }
 
 
-static void PreprocessCase2(long *shiftTable, 
+static void PreprocessCase2AndCase3(long *shiftTable, 
                             long *longestBP, 
                             char *pattern, 
                             long m) {
@@ -107,7 +107,13 @@ void BoyerMooreGoodSuffix(char *pattern, char *text) {
     }
   
     PreprocessLongestBP(shiftTable, longestBP, pattern, m);
-    PreprocessCase2(shiftTable, longestBP, pattern, m);
+
+    ArrayGenOneImage("BoyerMooreGoodSuffix", "images/BoyerMooreGoodSuffix", imgCount, 
+                     shiftTable, longestBP, pattern, m, text, n, 
+                     j, i);
+    imgCount++;
+
+    PreprocessCase2AndCase3(shiftTable, longestBP, pattern, m);
   
     while (i <= n - m) {
         j = m - 1;

@@ -164,11 +164,11 @@ for a mismatch at text[i+j] != text[j].
 Its implementation is very tricky.
 
 - One part of shiftTable[] is preprocessed when constructing longestBP[].
-- The other part is handled in PreprocessCase2() as follows.
+- The other part is handled in PreprocessCase2AndCase3() as follows.
 
 
 ```C
-static void PreprocessCase2(long *shiftTable, 
+static void PreprocessCase2AndCase3(long *shiftTable, 
                             long *longestBP, 
                             char *pattern, 
                             long m) {
@@ -186,8 +186,58 @@ static void PreprocessCase2(long *shiftTable,
 }
 ```
 
-When j is m (i.e., shiftTable[k] = j), the whole pattern will be skipped (seen as the case 3) 
-when a mismatch occurs at (k-1).
+Suppose the pattern is "aabaabaab".
+
+
+
+After PreprocessLongestBP(), we have the following table.
+
+|  |  |  |  |  |  |  |  |  |  |  |
+|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| index| 0 | 1 | 2 | 3 | 4|5 | 6 | 7 | 8| 9|
+|pattern[] | a | a | b | a| a| b| a| a | b| "" |
+|longestBP[] | 3 | 4 | 5 |6 | 7 | 8|  9|9 | 9 |
+|shiftTable[] | 0 | 0 |0 | 0| 0 |0 | 0| 0 | 0| 1|
+
+After PreprocessCase2AndCase3(), the shiftTable[] is updated as follows.
+
+|  |  |  |  |  |  |  |  |  |  |  |
+|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| index| 0 | 1 | 2 | 3 | 4|5 | 6 | 7 | 8| 9|
+|pattern[] | a | a | b | a| a| b| a| a | b| "" |
+|longestBP[] | 3 | 4 | 5 |6 | 7 | 8|  9|9 | 9 |
+|shiftTable[] | 3 | 3 |3 | 3| 6 |6 | 6| 9 | 9| 1|
+
+If we consider how to match the prefix of the pattern (starting from pattern[0]) 
+after shifting the pattern to the right, 
+the possible shift values are listed as follows.
+
+
+
+```C
+{longestBP[0], longestBP[longestBP[0]],  longestBP[longestBP[longestBP[0]]], ...,  m}
+```
+
+In this example, they are 
+```C
+{3, 6, 9}
+```
+
+Shift values {3, 6} are for Case 2, while the shift value 9 (the value of m, the length of the pattern) is for Case 3.
+
+Explanation:
+
+When a mismatch occurs at pattern[4] != text[i+4],
+the Boyer-Moore algorithm will use shiftTable[4+1] to shift the pattern to the right.
+
+The shift value in the element shiftTable[5] should be 6, rather than 3.
+
+Reason:
+```sh
+If the shfit value 3 is used, there will be another mismatch at pattern[1] != text[i+1] after shifting (i.e., i += 3) and realignment .
+
+Note that both pattern[1] and pattern[4] are 'a'.
+```
 
 ### When a mismatch occurs (text[i+j] != text[j])
 
@@ -242,6 +292,8 @@ aaa found at index 1 in aaaabaaaa
 aaa found at index 5 in aaaabaaaa
 aaa found at index 6 in aaaabaaaa
 
+aabaabaab found at index 7 in aaaabaaaabaabaabaa
+
 ```
 
 ### The process of BoyerMoore
@@ -251,7 +303,7 @@ aaa found at index 6 in aaaabaaaa
 void BoyerMooreGoodSuffix(char *pattern, char *text);
  
 ```
-### BoyerMooreGoodSuffix("aaba", "acaadaaaababaaba")
+### Example 1: BoyerMooreGoodSuffix("aaba", "acaadaaaababaaba")
 
 | | 
 |:-------------:|
@@ -337,13 +389,13 @@ void BoyerMooreGoodSuffix(char *pattern, char *text);
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0018.png" width="100%" height="100%"> |
 
-
-
-### BoyerMooreGoodSuffix("aaa", "aaaabaaaa")
-
 |  | 
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0019.png" width="100%" height="100%"> |
+
+### Example 2: BoyerMooreGoodSuffix("aaa", "aaaabaaaa")
+
+
 
 |  | 
 |:-------------:|
@@ -418,4 +470,83 @@ void BoyerMooreGoodSuffix(char *pattern, char *text);
 |:-------------:|
 | <img src="images/BoyerMooreGoodSuffix_0035.png" width="100%" height="100%"> |
 
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0036.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0037.png" width="100%" height="100%"> |
+
+### Example 3: BoyerMooreGoodSuffix("aabaabaab", "aaaabaaaabaabaabaa")
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0038.png" width="100%" height="100%"> |
+
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0039.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0040.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0041.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0042.png" width="100%" height="100%"> |
+
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0043.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0044.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0045.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0046.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0047.png" width="100%" height="100%"> |
+
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0048.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0049.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0050.png" width="100%" height="100%"> |
+
+
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0051.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0052.png" width="100%" height="100%"> |
+
+|  | 
+|:-------------:|
+| <img src="images/BoyerMooreGoodSuffix_0053.png" width="100%" height="100%"> |
 
