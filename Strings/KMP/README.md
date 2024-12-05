@@ -57,6 +57,7 @@ Shift:
         prefix (also a suffix) of pattern[0 .. j-1].
 ```
 
+<!--
 **The key point of KMP is how to generate the array lppsArr[].**
 
 
@@ -102,11 +103,13 @@ void GetLengthOfLPPSV2(char *pattern, long *lppsArr, long m) {
 }
 
 ```
-### The more advanced GetLengthOfLPPS()
+-->
+
+### The key point of KMP is how to generate the lppsArr[] array
 
 - Scan the pattern from left to right.
 - The base case is lppsArr[0] = 0, as the empty string "" (with a length of 0) is the LPPS of pattern[0 .. 0].
-- pattern[0 .. -1] is a special notation, representing ""
+- The notation pattern[0 .. -1] is a special notation, representing ""
 
 ### The substring pattern[0 .. lppsArr[len - 1]] is the second longest prefix (also a suffix) of pattern[0 .. i-1], where lppsArr[i-1] == len && i >= 1 && len > 0
 
@@ -136,6 +139,7 @@ But pattern[0 .. k] is longer than pattern[0 .. lppsArr[len - 1]].
 This contradicts the definition of lppsArr[len - 1].
 ```
 
+### GetLengthOfLPPS()
 
 ```C
 /* 
