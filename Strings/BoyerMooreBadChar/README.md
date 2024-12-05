@@ -9,6 +9,19 @@ It is typically indexed by the bad character (or its corresponding integer value
 
 If a bad character is not found in the pattern, the array stores a default value, often set to -1.
 
+| Pattern |   |  |  |  | 
+|:-------:|:-------:|:-------:|:-------:|:-------:|
+| index| 0 | 1 | 2 | 3 |
+|pattern[] | a | a | b | a| 
+
+
+
+| Last Occurrences |   |
+|:-------:|:-------:|
+|lastOccurrences['a'] | 3 |
+|lastOccurrences['b'] | 2 |
+| other               | -1|
+
 ### Increasing the index i in the text means 'shifting the pattern to the right' in Boyer-Moore.
 
 After increasing i, the pattern will be realigned with the text in the next iteration (with j reset to m-1).
@@ -18,11 +31,11 @@ In other words, after re-alignment, pattern[0] will always correspond to text[i]
 ### When a mismatch occurs (text[i+j] != pattern[j])
 
 ```C
-    long lastIndex = lastOccurrances[(long)badChar];
+    long lastIndex = lastOccurrences[(long)badChar];
     if (j > lastIndex) {
         /*
         (1)
-            The last occurrance of the badChar b is on the left side of pattern[j]
+            The last occurrence of the badChar b is on the left side of pattern[j]
             in the pattern.
 
 
@@ -40,7 +53,7 @@ In other words, after re-alignment, pattern[0] will always correspond to text[i]
         i += shiftVal;
     } else {
         /*
-            The last occurrance of the badChar b is NOT ot on the left side of pattern[j]
+            The last occurrence of the badChar b is NOT ot on the left side of pattern[j]
             in the pattern.
 
                                 j
@@ -71,7 +84,7 @@ In other words, after re-alignment, pattern[0] will always correspond to text[i]
 
             if ( (i+m) < n ) {
                 // Treat text[i+m] as the bad char
-                last = lastOccurances[text[i+m]];
+                last = lastOccurrences[text[i+m]];
                 i += m - last;
             } else { // text[i+m] is out-of-bound
                 i += 1;

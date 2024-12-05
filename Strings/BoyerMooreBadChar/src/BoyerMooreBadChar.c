@@ -8,22 +8,22 @@
 
 static long imgCount = 0;
 
-static long lastOccurrances[NUM_OF_CHARS];
+static long lastOccurrences[NUM_OF_CHARS];
 
 /*
     A bad char is a character in the text which has caused a mismatch
     at the current position.
  */
 
-static void InitLastOccurrances(char *pattern, long m, long *lastOccurrances) {
+static void InitLastOccurrences(char *pattern, long m, long *lastOccurrences) {
     for (long i = 0; i < NUM_OF_CHARS; i++) {
-        lastOccurrances[i] = -1;
+        lastOccurrences[i] = -1;
     }
 
     for (long i = 0; i < m; i++) {
         long val = (long) pattern[i];
         // save the last occurrence of a character in the pattern
-        lastOccurrances[val] = i;
+        lastOccurrences[val] = i;
     }
 }
 
@@ -37,21 +37,21 @@ void BoyerMooreBadChar(char *pattern, char *text) {
 
     assert(m > 0 && n >0);
 
-    InitLastOccurrances(pattern, m, lastOccurrances);
+    InitLastOccurrences(pattern, m, lastOccurrences);
 
     while ( i <= (n-m)) {
         // index j for traversing the pattern from right to left
         long j = m - 1;
 
         ArrayGenOneImage("BoyerMooreBadChar", "images/BoyerMooreBadChar", imgCount, 
-                        lastOccurrances, pattern, m, text, n, 
+                        lastOccurrences, pattern, m, text, n, 
                         j, i);
         imgCount++;
 
         while (j >= 0 && pattern[j] == text[i+j]) {
             j--;
             ArrayGenOneImage("BoyerMooreBadChar", "images/BoyerMooreBadChar", imgCount, 
-                            lastOccurrances, pattern, m, text, n, 
+                            lastOccurrences, pattern, m, text, n, 
                             j, i);
             imgCount++;            
         }
@@ -62,18 +62,18 @@ void BoyerMooreBadChar(char *pattern, char *text) {
             if (i + m < n) {
                 // make sure text[i+m] is a legal memory access, not out-of-bound.
                 badChar = text[i + m];
-                shiftVal = m - lastOccurrances[(long) badChar];
+                shiftVal = m - lastOccurrences[(long) badChar];
                 i += shiftVal;
             } else {
                 i += 1;
             }
         } else {
             badChar = text[i + j];
-            long lastIndex = lastOccurrances[(long)badChar];
+            long lastIndex = lastOccurrences[(long)badChar];
             if (j > lastIndex) {
                 /*
                 (1)
-                    The last occurrance of the badChar b is on the left side of pattern[j]
+                    The last occurrence of the badChar b is on the left side of pattern[j]
                     in the pattern.
 
 
@@ -91,7 +91,7 @@ void BoyerMooreBadChar(char *pattern, char *text) {
                 i += shiftVal;
             } else {
                 /*
-                    The last occurrance of the badChar b is NOT ot on the left side of pattern[j]
+                    The last occurrence of the badChar b is NOT ot on the left side of pattern[j]
                     in the pattern.
 
                                         j

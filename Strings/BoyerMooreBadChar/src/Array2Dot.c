@@ -8,7 +8,7 @@
 
 ////////////////////////////// Array2Dot (for visualizing the algorithm) ///////////////////////////////////////
 static void PrintHtmlTable(FILE *dotFile, 
-                           long *lastOccurrances, char *pattern, long m, char *text, long n,
+                           long *lastOccurrences, char *pattern, long m, char *text, long n,
                            long indexPat, long startTxt) {
     fprintf(dotFile, "<table border=\"0\" cellborder=\"1\" cellspacing=\"0\" cellpadding=\"0\"> \n");
 
@@ -82,13 +82,13 @@ static void PrintHtmlTable(FILE *dotFile,
     }
     fprintf(dotFile, "</tr> \n");    
 
-    // lastOccurrances
+    // lastOccurrences
     for (long i = 0; i < NUM_OF_CHARS; i++) {
-        if (lastOccurrances[i] != -1) {            
+        if (lastOccurrences[i] != -1) {            
             fprintf(dotFile, "<tr> \n");
-            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\">lastOccurrances[%ld]</td> \n", i); 
+            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\">lastOccurrences[%ld]</td> \n", i); 
             fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\"> %c </td> \n", (char) i);
-            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\"> %ld </td> \n", lastOccurrances[i]);
+            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\"> %ld </td> \n", lastOccurrences[i]);
             fprintf(dotFile, "</tr> \n");  
         }
     }
@@ -99,7 +99,7 @@ static void PrintHtmlTable(FILE *dotFile,
     Dot Files
  */
 void Array2Dot(char *filePath, char *graphName,
-               long *lastOccurrances, char *pattern, long m, char *text, long n,
+               long *lastOccurrences, char *pattern, long m, char *text, long n,
                long indexPat, long startTxt) {
     FILE *dotFile = fopen(filePath, "w");
 
@@ -108,7 +108,7 @@ void Array2Dot(char *filePath, char *graphName,
         fprintf(dotFile, "Array [shape=none, margin=0, label=< \n");
 
         PrintHtmlTable(dotFile, 
-                       lastOccurrances, pattern, m, text, n,
+                       lastOccurrences, pattern, m, text, n,
                        indexPat, startTxt);
 
         fprintf(dotFile, "  >]; \n");
@@ -122,7 +122,7 @@ void Array2Dot(char *filePath, char *graphName,
 #define FILE_NAME_LEN  255
 
 void ArrayGenOneImage(char *graphName, char *fileName, long seqNo, 
-                      long *lastOccurrances, char *pattern, long m, char *text, long n, 
+                      long *lastOccurrences, char *pattern, long m, char *text, long n, 
                       long indexPat, long startTxt) {
     char dotFileName[FILE_NAME_LEN+1] = {0};
     char pngFileName[FILE_NAME_LEN+1] = {0};
@@ -132,7 +132,7 @@ void ArrayGenOneImage(char *graphName, char *fileName, long seqNo,
     snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
 
     Array2Dot(dotFileName, graphName, 
-              lastOccurrances, pattern, m, text, n,
+              lastOccurrences, pattern, m, text, n,
               indexPat, startTxt);
 
     snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
