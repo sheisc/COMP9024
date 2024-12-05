@@ -44,17 +44,17 @@ If longestBP[i] == j, the substring pattern[j .. m-1] is the longest border of p
 
 ### Imagine that pattern[m] contains an empty string (i.e., "").
 
-Given a pattern "abba".
+Given a pattern "aaba".
 
 
 |  |   |  |  |  |  |
 |:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
 | index| 0 | 1 | 2 | 3 | 4|
-|pattern[] | a | b | b | a| ""|
+|pattern[] | a | a | b | a| ""|
 |longestBP[] | 3 | 3 | 4 | 4|  |
 
 For example, longestBP[0] is 3.
-It means that "a", the longest border of "abba", is at index 3 in "abba".
+It means that "a", the longest border of "aaba", is at index 3 in "aaba".
 
 longestBP[3] == 4 means "" is the longest border of "a".
 
@@ -81,7 +81,7 @@ Reason:
 
     3. Since pattern[j .. m-1] is the longest border of pattern[i .. m-1],    
     the first (m-j) characters of pattern[i .. m-1] and pattern[j .. m-1] are the same.
-    
+
     4. As pattern[k .. m-1] is a border of pattern[i .. m-1],
     the first (m-k) characters of pattern[k .. m-1] and pattern[i .. m-1] are identical.
     
