@@ -54,9 +54,9 @@ Given a pattern "aaba".
 |longestBP[] | 3 | 3 | 4 | 4|  |
 
 For example, longestBP[0] is 3.
-It means that "a", the longest border of "aaba", is at index 3 in "aaba".
+It means that the substring "a" (starting from index 3) is the longest border of "aaba" (starting from index 0).
 
-longestBP[3] == 4 means "" is the longest border of "a".
+Similarly, longestBP[3] == 4 means "" is the longest border of the substring "a" (starting from index 3).
 
 The notation pattern[m .. m-1] is a special case, representing the empty substring "".
 
