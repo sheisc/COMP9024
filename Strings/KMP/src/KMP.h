@@ -3,7 +3,7 @@
 
 #include "Array2Dot.h"
 
-long KMPSearch(char *pattern, char *text);
+void KMPSearch(char *pattern, char *text);
 
 #endif
 

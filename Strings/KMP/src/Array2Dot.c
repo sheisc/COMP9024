@@ -19,7 +19,7 @@ static void PrintHtmlTable(FILE *dotFile,
     fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">i=%ld, j=%ld</td> \n", indexTxt, indexPat);
     fprintf(dotFile, "</tr> \n");
 
-     // text
+    // text
     fprintf(dotFile, "<tr> \n");
     fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">index i</td> \n");
     for (long i = 0; i < n; i++) {
@@ -39,11 +39,20 @@ static void PrintHtmlTable(FILE *dotFile,
     }
     fprintf(dotFile, "</tr> \n");   
 
-   // pattern
+    fprintf(dotFile, "<tr> \n");
+    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">m=%ld, n=%ld</td> \n", m, n);
+    fprintf(dotFile, "</tr> \n");  
+
+    // pattern
     fprintf(dotFile, "<tr> \n");   
     fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">pattern[%ld]</td> \n", indexPat); 
 
-    for (long i = 0; i < n; i++) {
+    long len = n;
+    if (startTxt + m  > n) {
+        len = startTxt + m;
+    }
+
+    for (long i = 0; i < len; i++) {
         if (i < startTxt) {
             fprintf(dotFile, "<td border=\"0\" width=\"30\" height=\"30\" bgcolor=\"white\"> </td> \n");
         } else if (i - startTxt < m) {
@@ -62,7 +71,7 @@ static void PrintHtmlTable(FILE *dotFile,
 
     fprintf(dotFile, "<tr> \n");
     fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">index j</td> \n");
-    for (long i = 0; i < n; i++) {
+    for (long i = 0; i < len; i++) {
         if (i < startTxt || i >= startTxt + m) {
             fprintf(dotFile, "<td border=\"0\" width=\"30\" height=\"30\" bgcolor=\"white\"> </td> \n");            
         } else {
@@ -74,21 +83,16 @@ static void PrintHtmlTable(FILE *dotFile,
     // lppsArr
     fprintf(dotFile, "<tr> \n");
     fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\"> lppsArr </td> \n");
-    if (n == m) {
-        for (long i = 0; i < n; i++) {
-            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\">%ld</td> \n", lppsArr[i]);
-        }
-    } else {
-        for (long i = 0; i < n; i++) {
-            if (i < startTxt) {
-                fprintf(dotFile, "<td border=\"0\" width=\"30\" height=\"30\" bgcolor=\"white\"> </td> \n");
-            } else if (i - startTxt < m) {
-                fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\">%ld</td> \n", lppsArr[i-startTxt]);
-            } else {
-                fprintf(dotFile, "<td  border=\"0\"  width=\"30\" height=\"30\" bgcolor=\"white\"> </td> \n");
-            }        
-        }
+    for (long i = 0; i < len; i++) {
+        if (i < startTxt) {
+            fprintf(dotFile, "<td border=\"0\" width=\"30\" height=\"30\" bgcolor=\"white\"> </td> \n");
+        } else if (i - startTxt < m) {
+            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\">%ld</td> \n", lppsArr[i-startTxt]);
+        } else {
+            fprintf(dotFile, "<td  border=\"0\"  width=\"30\" height=\"30\" bgcolor=\"white\"> </td> \n");
+        }        
     }
+
     fprintf(dotFile, "</tr> \n");    
 
     fprintf(dotFile, "</table> \n");

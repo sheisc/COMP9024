@@ -8,59 +8,54 @@
 
 static long imgCount = 0;
 
+
 /* 
     LPPS: the Longest Proper Prefix (also a Suffix).
 
     lppsArr[i] is the length of the longest proper prefix of pattern[0..i]
     which is also a suffix of pattern[0..i].
  */
-void GetLengthOfLPPS(char *pattern, long *lppsArr, long m) {
+static void InitLPPSArray(char *pattern, long *lppsArr, long m) {
     /*
-        len stores the length of the longest proper prefix (also a suffix) 
-        of the previous index (i - 1).
-     */
-    long len = 0;
-    /*
-        There is only one proper prefix (i.e., "") of the string pattern[0].
-        "" is also a suffix of pattern[0].
-        The length of "" is 0.
+        Base case:
+
+            The empty string "" (with a length of 0) is the LPPS of pattern[0 .. 0].
      */
     lppsArr[0] = 0;
 
     long i = 1;
-
+    long len = 0;
     while (i < m) {
         /*
-            We know lppsArr[i-1] == len.
-
-            According the definition of LPPS, we have
-
-                pattern[0 .. len-1] == pattern[i-len .. i-1]           
-         */          
-        if (pattern[i] == pattern[len]) {
+            We have
+                lppsArr[i-1] == len
+            
+            pattern[0 .. len-1] == pattern[i-len .. i-1]
+         */
+        if (pattern[len] == pattern[i]) {
             /*
-                Now, we have
-
-                    pattern[0 .. len] == pattern[i-len .. i]
+                pattern[0 .. len] == pattern[i-len .. i]
              */
+            lppsArr[i] = len + 1;
             len++;
-            lppsArr[i] = len;
             i++;
         } else {
-            // If there is a mismatch
-            //if (len != 0) { // assert(len > 0);
             if (len > 0) {
                 /*
-                    Try the second longest proper prefix (also a suffix) of pattern[0 .. i-1]    
+                    Since lppsArr[i-1] == len,
+                    pattern[0 .. len-1] is the LPPS of pattern[0 .. i-1].
+                    
+                    Try a shorter proper prefix of pattern[0 .. i-1].
                  */
-                len = lppsArr[len - 1];
+                len = lppsArr[len-1];
             } else {
-                // no shorter one, only "" left
+                // no shorter one, only "" left.
+                assert(len == 0);
                 lppsArr[i] = 0;
                 i++;
             }
         }
-    }  
+    }
 }
 
 
@@ -82,7 +77,7 @@ static int IsLPPS(char *pattern, long i, long j) {
 /*
     Naive method in calculating the length of the longest proper prefix (also a suffix).
  */
-void GetLengthOfLPPSV2(char *pattern, long *lppsArr, long m) {
+void InitLPPSArrayV2(char *pattern, long *lppsArr, long m) {
     lppsArr[0] = 0;
 
     for (long i = 1; i < m; i++) {
@@ -98,38 +93,20 @@ void GetLengthOfLPPSV2(char *pattern, long *lppsArr, long m) {
     }
 }
 
+
 /* 
     Search the pattern in the text.
-
-    It returns
-
-    (1) the position of the pattern in the text if there is a match
-    (2) -1 if there is no match
  */
-long KMPSearch(char *pattern, char *text) {
-    long n = strlen(text);
+void KMPSearch(char *pattern, char *text) {
     long m = strlen(pattern);
-    long pos = -1;
-    // index i for traversing the text
-    long i = 0;
-    // index j for traversing the pattern
-    long j = 0;
-    
+    long n = strlen(text);
     assert(m > 0 && n > 0);
 
     long *lppsArr = (long *) malloc(sizeof(long) * m);
-    for (long k = 0; k < m; k++) {
-        lppsArr[k] = -1;
-    }    
 
-    GetLengthOfLPPS(pattern, lppsArr, m);
-    //GetLengthOfLPPSV2(pattern, lppsArr, m);
-    for (long k = 0; k < m; k++) {
-        printf("%ld ", lppsArr[k]);
-    }
-    printf("\n");
-   
-    imgCount = 0;
+    InitLPPSArray(pattern, lppsArr, m);
+    
+    long i = 0, j = 0;
 
     while (i < n) {
         ArrayGenOneImage("KMP", "images/KMP", imgCount, 
@@ -137,33 +114,30 @@ long KMPSearch(char *pattern, char *text) {
                          j, i);
         imgCount++;
 
-        if (text[i] == pattern[j]) {
+        if (pattern[j] == text[i]) {
             i++;
             j++;
             if (j == m) {
-                pos = i - m;                
-                break;
+                ArrayGenOneImage("KMP", "images/KMP", imgCount, 
+                                lppsArr, pattern, m, text, n, 
+                                j, i);
+                imgCount++;
 
-                // printf("Found at index %ld\n", pos);
-                // j = lppsArr[j-1];
+                printf("%s found in %s at index %ld\n", pattern, text, i-m);
+                j = lppsArr[m-1];
             }
-        } else { // there is a mismatch        
-            //if (j != 0) { // assert(j > 0);
+        } else {
             if (j > 0) {
+                // try the second longest proper prefix (also a suffix)
                 j = lppsArr[j-1];
             } else {
-                i++;
-                // assert(j == 0);
+                assert(j == 0);
+                i++;                
             }
-        }            
-    }    
-    ArrayGenOneImage("KMP", "images/KMP", imgCount, 
-                     lppsArr, pattern, m, text, n, 
-                     j, i);
-    imgCount++;    
-
+        }
+    }
     free(lppsArr);
-    return pos;
 }
+
 
 

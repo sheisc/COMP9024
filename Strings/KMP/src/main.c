@@ -9,15 +9,16 @@ int main(void) {
     // remove the *.dot and *.png files in the directory 'images'
     system("rm -f images/*.dot images/*.png");
 
-
     char *text = "acaadaaaababaaba";
     char *pattern = "aaba";
-    long pos = KMPSearch(pattern, text);
-    if (pos != -1) {
-        printf("%s found at index %ld in %s \n", pattern, pos, text);
-    } else {
-        printf("%s is not int %s\n", pattern, text);
-    }
+    KMPSearch(pattern, text);
+
+    KMPSearch("aaa", "aaaabaaaa");
+
+    KMPSearch("aabaabaab", "aaaabaaaabaabaabaa");
+
+    KMPSearch("caba", "ddcabacc");       
+
     return 0;
 }
 
