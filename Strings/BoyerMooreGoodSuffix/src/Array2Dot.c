@@ -12,10 +12,9 @@ static void PrintHtmlTable(FILE *dotFile,
                            long indexPat, long startTxt) {
     fprintf(dotFile, "<table border=\"0\" cellborder=\"1\" cellspacing=\"0\" cellpadding=\"0\"> \n");
 
-
     fprintf(dotFile, "<tr> \n");
-    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">i=%ld, j=%ld</td> \n", startTxt, indexPat);
-    fprintf(dotFile, "</tr> \n");
+    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">m=%ld, n=%ld</td> \n", m, n);
+    fprintf(dotFile, "</tr> \n"); 
 
      // text
     fprintf(dotFile, "<tr> \n");
@@ -47,6 +46,10 @@ static void PrintHtmlTable(FILE *dotFile,
     }
     fprintf(dotFile, "</tr> \n");   
 
+    fprintf(dotFile, "<tr> \n");
+    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">i=%ld, j=%ld</td> \n", startTxt, indexPat);
+    fprintf(dotFile, "</tr> \n");
+    
     // pattern
     fprintf(dotFile, "<tr> \n");   
     //fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">pattern[%ld]</td> \n", indexPat);
