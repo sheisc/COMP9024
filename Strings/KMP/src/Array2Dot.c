@@ -16,8 +16,8 @@ static void PrintHtmlTable(FILE *dotFile,
     long startTxt = indexTxt - indexPat;    
 
     fprintf(dotFile, "<tr> \n");
-    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">i=%ld, j=%ld</td> \n", indexTxt, indexPat);
-    fprintf(dotFile, "</tr> \n");
+    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">m=%ld, n=%ld</td> \n", m, n);
+    fprintf(dotFile, "</tr> \n");     
 
     // text
     fprintf(dotFile, "<tr> \n");
@@ -40,8 +40,8 @@ static void PrintHtmlTable(FILE *dotFile,
     fprintf(dotFile, "</tr> \n");   
 
     fprintf(dotFile, "<tr> \n");
-    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">m=%ld, n=%ld</td> \n", m, n);
-    fprintf(dotFile, "</tr> \n");  
+    fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">i=%ld, j=%ld</td> \n", indexTxt, indexPat);
+    fprintf(dotFile, "</tr> \n");
 
     // pattern
     fprintf(dotFile, "<tr> \n");   
