@@ -224,6 +224,7 @@ void KMPSearch(char *pattern, char *text) {
     }
     free(lppsArr);
 }
+```
 
 ### Example 1: KMPSearch("aaba", "acaadaaaababaaba")
 
