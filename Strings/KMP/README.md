@@ -183,18 +183,47 @@ caba found in ddcabacc at index 2
 /* 
     Search the pattern in the text.
  */
-void KMPSearch(char *pattern, char *text);
- 
-```
-#### When a mismatch occurs (text[i] != pattern[j])
+void KMPSearch(char *pattern, char *text) {
+    long m = strlen(pattern);
+    long n = strlen(text);
+    assert(m > 0 && n > 0);
 
-```
-    if j == 0
-        i++
-    else
-        j = lpps[j-1]
-```
+    long *lppsArr = (long *) malloc(sizeof(long) * m);
 
+    InitLPPSArray(pattern, lppsArr, m);
+    
+    long i = 0, j = 0;
+
+    while (i < n) {
+        ArrayGenOneImage("KMP", "images/KMP", imgCount, 
+                         lppsArr, pattern, m, text, n, 
+                         j, i);
+        imgCount++;
+
+        if (pattern[j] == text[i]) {
+            i++;
+            j++;
+            if (j == m) {
+                ArrayGenOneImage("KMP", "images/KMP", imgCount, 
+                                lppsArr, pattern, m, text, n, 
+                                j, i);
+                imgCount++;
+
+                printf("%s found in %s at index %ld\n", pattern, text, i-m);
+                j = lppsArr[m-1];
+            }
+        } else {
+            if (j > 0) {
+                // try the second longest proper prefix (also a suffix)
+                j = lppsArr[j-1];
+            } else {
+                assert(j == 0);
+                i++;                
+            }
+        }
+    }
+    free(lppsArr);
+}
 
 ### Example 1: KMPSearch("aaba", "acaadaaaababaaba")
 
