@@ -14,6 +14,15 @@ int main(void) {
     char *pattern = "aaba";
     BoyerMooreBadChar(pattern, text);
 
+    text = "aaaabaaaa";
+    pattern = "aaa";
+    BoyerMooreBadChar(pattern, text);
+
+
+    BoyerMooreBadChar("aabaabaab", "aaaabaaaabaabaabaa");
+
+    BoyerMooreBadChar("caba", "ddcabacc");       
+
     return 0;
 }
 
