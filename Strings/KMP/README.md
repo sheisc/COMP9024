@@ -230,108 +230,108 @@ void KMPSearch(char *pattern, char *text) {
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0000.png" width="100%" height="100%"> |
+| <img src="images/KMP_0000.png" width="60%" height="60%"> |
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0001.png" width="100%" height="100%"> |
+| <img src="images/KMP_0001.png" width="60%" height="60%"> |
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0002.png" width="100%" height="100%"> |
+| <img src="images/KMP_0002.png" width="60%" height="60%"> |
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0003.png" width="100%" height="100%"> |
+| <img src="images/KMP_0003.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0004.png" width="100%" height="100%"> |
+| <img src="images/KMP_0004.png" width="60%" height="60%"> |
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0005.png" width="100%" height="100%"> |
+| <img src="images/KMP_0005.png" width="60%" height="60%"> |
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0006.png" width="100%" height="100%"> |
-
-
-|  | 
-|:-------------:|
-| <img src="images/KMP_0007.png" width="100%" height="100%"> |
+| <img src="images/KMP_0006.png" width="60%" height="60%"> |
 
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0008.png" width="100%" height="100%"> |
+| <img src="images/KMP_0007.png" width="60%" height="60%"> |
+
+
+|  | 
+|:-------------:|
+| <img src="images/KMP_0008.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0009.png" width="100%" height="100%"> |
+| <img src="images/KMP_0009.png" width="60%" height="60%"> |
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0010.png" width="100%" height="100%"> |
-
-
-|  | 
-|:-------------:|
-| <img src="images/KMP_0011.png" width="100%" height="100%"> |
+| <img src="images/KMP_0010.png" width="60%" height="60%"> |
 
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0012.png" width="100%" height="100%"> |
+| <img src="images/KMP_0011.png" width="60%" height="60%"> |
 
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0013.png" width="100%" height="100%"> |
-
-|  | 
-|:-------------:|
-| <img src="images/KMP_0014.png" width="100%" height="100%"> |
+| <img src="images/KMP_0012.png" width="60%" height="60%"> |
 
 
 |  | 
 |:-------------:|
-| <img src="images/KMP_0015.png" width="100%" height="100%"> |
+| <img src="images/KMP_0013.png" width="60%" height="60%"> |
 
-
-| | 
+|  | 
 |:-------------:|
-| <img src="images/KMP_0016.png" width="100%" height="100%"> |
+| <img src="images/KMP_0014.png" width="60%" height="60%"> |
 
-| | 
-|:-------------:|
-| <img src="images/KMP_0017.png" width="100%" height="100%"> |
 
-| | 
+|  | 
 |:-------------:|
-| <img src="images/KMP_0018.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0019.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0020.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0021.png" width="100%" height="100%"> |
+| <img src="images/KMP_0015.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0022.png" width="100%" height="100%"> |
+| <img src="images/KMP_0016.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0017.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0018.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0019.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0020.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0021.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0023.png" width="100%" height="100%"> |
+| <img src="images/KMP_0022.png" width="60%" height="60%"> |
+
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0023.png" width="60%" height="60%"> |
 
 
     
@@ -340,216 +340,216 @@ void KMPSearch(char *pattern, char *text) {
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0024.png" width="100%" height="100%"> |
+| <img src="images/KMP_0024.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0025.png" width="100%" height="100%"> |
+| <img src="images/KMP_0025.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0026.png" width="100%" height="100%"> |
-
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0027.png" width="100%" height="100%"> |
+| <img src="images/KMP_0026.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0028.png" width="100%" height="100%"> |
+| <img src="images/KMP_0027.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0029.png" width="100%" height="100%"> |
+| <img src="images/KMP_0028.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0030.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0031.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0032.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0033.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0034.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0035.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0036.png" width="100%" height="100%"> |
+| <img src="images/KMP_0029.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0037.png" width="100%" height="100%"> |
+| <img src="images/KMP_0030.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0031.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0032.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0033.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0034.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0035.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0036.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0038.png" width="100%" height="100%"> |
+| <img src="images/KMP_0037.png" width="60%" height="60%"> |
+
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0038.png" width="60%" height="60%"> |
 
 ### Example 3: KMPSearch("aabaabaab", "aaaabaaaabaabaabaa")
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0039.png" width="100%" height="100%"> |
+| <img src="images/KMP_0039.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0040.png" width="100%" height="100%"> |
+| <img src="images/KMP_0040.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0041.png" width="100%" height="100%"> |
-
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0042.png" width="100%" height="100%"> |
+| <img src="images/KMP_0041.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0043.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0044.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0045.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0046.png" width="100%" height="100%"> |
+| <img src="images/KMP_0042.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0047.png" width="100%" height="100%"> |
+| <img src="images/KMP_0043.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0048.png" width="100%" height="100%"> |
+| <img src="images/KMP_0044.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0049.png" width="100%" height="100%"> |
+| <img src="images/KMP_0045.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0050.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0051.png" width="100%" height="100%"> |
+| <img src="images/KMP_0046.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0052.png" width="100%" height="100%"> |
+| <img src="images/KMP_0047.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0048.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0049.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0050.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0051.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0053.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0054.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0055.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0056.png" width="100%" height="100%"> |
+| <img src="images/KMP_0052.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0057.png" width="100%" height="100%"> |
+| <img src="images/KMP_0053.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0058.png" width="100%" height="100%"> |
+| <img src="images/KMP_0054.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0059.png" width="100%" height="100%"> |
+| <img src="images/KMP_0055.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0060.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0061.png" width="100%" height="100%"> |
+| <img src="images/KMP_0056.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0062.png" width="100%" height="100%"> |
+| <img src="images/KMP_0057.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0058.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0059.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0060.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0061.png" width="60%" height="60%"> |
+
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0062.png" width="60%" height="60%"> |
 
 ### Example 4: KMPSearch("caba", "ddcabacc")
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0063.png" width="100%" height="100%"> |
+| <img src="images/KMP_0063.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0064.png" width="100%" height="100%"> |
+| <img src="images/KMP_0064.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0065.png" width="100%" height="100%"> |
+| <img src="images/KMP_0065.png" width="60%" height="60%"> |
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0066.png" width="100%" height="100%"> |
-
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0067.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0068.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0069.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0070.png" width="100%" height="100%"> |
-
-| | 
-|:-------------:|
-| <img src="images/KMP_0071.png" width="100%" height="100%"> |
+| <img src="images/KMP_0066.png" width="60%" height="60%"> |
 
 
 | | 
 |:-------------:|
-| <img src="images/KMP_0072.png" width="100%" height="100%"> |
+| <img src="images/KMP_0067.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0068.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0069.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0070.png" width="60%" height="60%"> |
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0071.png" width="60%" height="60%"> |
+
+
+| | 
+|:-------------:|
+| <img src="images/KMP_0072.png" width="60%" height="60%"> |
 
