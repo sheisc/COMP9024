@@ -43,7 +43,7 @@ Decoded: Data Structures
 
 | | 
 |:-------------:|
-| <img src="images/Huffman_0000.png" width="100%" height="100%"> |
+| <img src="images/Huffman_0000.png" width="80%" height="80%"> |
 
 ### Encoding
 
