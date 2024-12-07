@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Huffman.h"
-#include "BiTree.h"
 
 
 int main(int argc, char **argv, char **env) {

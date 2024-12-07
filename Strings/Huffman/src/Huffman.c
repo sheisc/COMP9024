@@ -2,15 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-
-#include "BiTree.h"
+#include "Queue.h"
 #include "Huffman.h"
 
 // ASCII table
 #define   SIZE_OF_ALPHABET    256
-
-// Including internal nodes and leaves in a Huffman tree (a full binary tree)
-#define   NUM_OF_ALL_NODES    (2 * SIZE_OF_ALPHABET)
 
 //
 #define   INTERNAL_NODE_CHARVAL        (SIZE_OF_ALPHABET + 1)
@@ -20,6 +16,41 @@
 
 // when the text is "aaaa", only one kind of character 
 #define     SPECIAL_CASE_ENCODED_CHAR       '0'
+
+
+// Max length of an identifier (e.g., the name for a tree node) 
+#define MAX_ID_LEN 127
+
+typedef struct {
+    // e.g, "9000", "Node A", "Node B"
+    char name[MAX_ID_LEN + 1];
+    // value of an integer, e.g., 2024
+    long frequency;
+    //
+    long charValue;
+} NodeValue;
+
+
+struct BiTreeNode {
+    /*
+     The value of a binary tree node:
+  
+     1. an integer for representing the node's value (e.g., 300), 
+      
+     2. a C string for representing its node name
+     */
+    NodeValue value;  
+    // left subtree
+    struct BiTreeNode *leftChild;
+    // right subtree
+    struct BiTreeNode *rightChild;
+    // whether this node has been visited
+    int visited;
+    // Whether it is a root node
+    int isRoot;
+};
+
+
 
 struct HuffmanInfo {
     /*
@@ -32,6 +63,8 @@ struct HuffmanInfo {
     long numOfLeaves;
     // the number of internal nodes
     long numOfInternalNodes;
+    // current number of nodes, for visualizing the algorithm
+    long n;
     /*
         For a charater with the value charVal,
 
@@ -39,6 +72,8 @@ struct HuffmanInfo {
      */
     char convertTable[SIZE_OF_ALPHABET][SIZE_OF_ALPHABET];
 };
+
+static long imgCount = 0;
 
 static void InitBinaryTreeNode(struct BiTreeNode *pNode, 
                                long charValue,
@@ -62,7 +97,25 @@ static void InitBinaryTreeNode(struct BiTreeNode *pNode,
     }
     pNode->leftChild = left;
     pNode->rightChild = right;
+    // for visualizing the algorithm
     pNode->visited = 0;   
+    pNode->isRoot = 1;    
+    if (left) {
+        left->isRoot = 0;
+    }
+
+    if (right) {
+        right->isRoot = 0;
+    }
+}
+
+static struct BiTreeNode *GetHuffmanTree(struct HuffmanInfo *pHuffmanInfo) {
+    if (pHuffmanInfo) {
+        long n = pHuffmanInfo->numOfInternalNodes + pHuffmanInfo->numOfLeaves;
+        return &(pHuffmanInfo->nodes[n-1]);
+    } else {
+        return NULL;
+    }
 }
 
 /*
@@ -95,7 +148,10 @@ static struct BiTreeNode *BuildHuffmanTree(struct HuffmanInfo *pHuffmanInfo) {
     struct BiTreeNode *pNode = pHuffmanInfo->nodes;
 
     InsertionSort(pNode, 1, nodeCount);
-    while (nodeCount > 1) {                    
+    while (nodeCount > 1) {
+        GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount);
+        imgCount++;
+
         long sum = pNode[0].value.frequency + pNode[1].value.frequency;
         // pNode[nodeCount] is used as an internal node
         InitBinaryTreeNode(pNode + nodeCount, INTERNAL_NODE_CHARVAL, sum, NULL, pNode, pNode+1);
@@ -103,10 +159,19 @@ static struct BiTreeNode *BuildHuffmanTree(struct HuffmanInfo *pHuffmanInfo) {
         pNode += 2;
         // Two leaf nodes removed, but one internal node added
         nodeCount--;
+        // 
+        pHuffmanInfo->n++;
+
+        GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount);
+        imgCount++;
+                
         // The first (nodeCount-1) elements are sorted
         InsertionSort(pNode, nodeCount-1, nodeCount);
     }
 
+    GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount);
+    imgCount++;
+    
     return pNode;
 }
 
@@ -252,6 +317,7 @@ struct HuffmanInfo *CreateHuffmanInfoFromText(char *text) {
 
     pHuffmanInfo->nodes = nodes;
     pHuffmanInfo->numOfLeaves = numOfLeaves;
+    pHuffmanInfo->n = numOfLeaves;
     pHuffmanInfo->numOfInternalNodes = numOfInternalNodes;
 
     // Init the leaf nodes
@@ -277,8 +343,6 @@ struct HuffmanInfo *CreateHuffmanInfoFromText(char *text) {
     }
     PrintConvertTable(pHuffmanInfo);
 
-    GenOneImage(root, "Huffman", "images/Huffman", 0);
-
     free(trace);
     free(frequencies);
     return pHuffmanInfo;
@@ -291,13 +355,78 @@ void ReleaseHuffmanInfo(struct HuffmanInfo *pHuffmanInfo) {
     }
 }
 
+///////////////////  For visualizing the algorithm //////////////////////////////////////////////////
 
-struct BiTreeNode *GetHuffmanTree(struct HuffmanInfo *pHuffmanInfo) {
-    if (pHuffmanInfo) {
-        long n = pHuffmanInfo->numOfInternalNodes + pHuffmanInfo->numOfLeaves;
-        return &(pHuffmanInfo->nodes[n-1]);
-    } else {
-        return NULL;
-    }
+
+#define FILE_NAME_LEN  255
+
+void GenOneImage(struct HuffmanInfo *pHuffmanInfo, char *graphName, char *fileName, long seqNo) {
+    char dotFileName[FILE_NAME_LEN+1] = {0};
+    char pngFileName[FILE_NAME_LEN+1] = {0};
+    char command[(FILE_NAME_LEN+1)*4] = {0};
+    
+    snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
+    snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
+
+    HuffmanInfo2Dot(pHuffmanInfo, dotFileName, graphName, 1);
+
+    snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
+
+    //printf("%s\n", command);
+    
+    // Execute the command in a child process (fork() + exec() on Linux)
+    system(command); 
+
 }
 
+
+void HuffmanInfo2Dot(struct HuffmanInfo *pHuffmanInfo, 
+                     char *filePath,
+                     char *graphName,
+                     int displayVisited) {
+
+    FILE *dotFile = fopen(filePath, "w");
+    /*
+        FIXME:  check sanity of the parameters.
+     */
+    if (dotFile) {
+        char *edgeConnectorStr = "->";
+        fprintf(dotFile, "digraph %s {\n", graphName);
+        
+        struct Queue *pQueue = CreateQueue();
+        for (long i = 0; i < pHuffmanInfo->n; i++) {
+            if (pHuffmanInfo->nodes[i].isRoot) {
+                QueueEnqueue(pQueue, &(pHuffmanInfo->nodes[i]));
+                while (!QueueIsEmpty(pQueue)) {
+                    BiTreeNodePtr curNode = QueueDequeue(pQueue);
+                    // node
+                    if (curNode->visited && displayVisited) {
+                        fprintf(dotFile, "\"%p\" [label=\"%s\"] [color=red] \n", curNode, curNode->value.name);
+                    } else {
+                        fprintf(dotFile, "\"%p\" [label=\"%s\"] \n", curNode, curNode->value.name);
+                    }
+                    
+                    // two edges
+                    if (curNode->leftChild) {
+                        fprintf(dotFile, "\"%p\" %s {\"%p\"} [label=\"0\"]\n",
+                                curNode,
+                                edgeConnectorStr,                         
+                                curNode->leftChild);
+                        QueueEnqueue(pQueue, curNode->leftChild);
+                    }
+                    if (curNode->rightChild) {
+                        fprintf(dotFile, "\"%p\" %s {\"%p\"} [label=\"1\"]\n",                        
+                                curNode, 
+                                edgeConnectorStr,
+                                curNode->rightChild);
+                        QueueEnqueue(pQueue, curNode->rightChild);
+                    }            
+                    
+                }
+            }
+        }
+        ReleaseQueue(pQueue);     
+        fprintf(dotFile, "}\n");
+        fclose(dotFile);
+    }                
+}

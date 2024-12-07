@@ -1,6 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
-#include "BiTree.h"
+
+#include "Huffman.h"
 
 typedef BiTreeNodePtr QUEUE_ITEM_T;
 
