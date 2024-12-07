@@ -21,7 +21,7 @@ static void InitLastOccurrences(char *pattern, long m, long *lastOccurrences) {
     }
 
     for (long i = 0; i < m; i++) {
-        long val = (long) pattern[i];
+        long val = (unsigned char) pattern[i];
         // save the last occurrence of a character in the pattern
         lastOccurrences[val] = i;
     }
@@ -62,14 +62,16 @@ void BoyerMooreBadChar(char *pattern, char *text) {
             if (i + m < n) {
                 // make sure text[i+m] is a legal memory access, not out-of-bound.
                 badChar = text[i + m];
-                shiftVal = m - lastOccurrences[(long) badChar];
+                long val = (unsigned char) badChar;
+                shiftVal = m - lastOccurrences[val];
                 i += shiftVal;
             } else {
                 i += 1;
             }
         } else {
             badChar = text[i + j];
-            long lastIndex = lastOccurrences[(long)badChar];
+            long val = (unsigned char) badChar;
+            long lastIndex = lastOccurrences[val];
             if (j > lastIndex) {
                 /*
                 (1)
