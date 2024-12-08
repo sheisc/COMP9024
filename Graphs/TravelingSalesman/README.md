@@ -23,10 +23,15 @@ The length of the route is 24: City0 -> City1 -> City3 -> City4 -> City2 -> City
 
 
 
+******** The shortest route found in TspPermute()  ************ 
+
+The length of the route is 24: City0 -> City1 -> City3 -> City4 -> City2 -> City5 -> City0
+
+
+
 ******** The shortest route in TspNearestNeighbour(0) ************ 
 
 The length of the route is 31: City0 -> City1 -> City2 -> City5 -> City3 -> City4 -> City0
-
 
 ```
 
