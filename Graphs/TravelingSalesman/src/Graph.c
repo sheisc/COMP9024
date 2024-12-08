@@ -250,8 +250,7 @@ void TspNearestNeighbour(struct Graph *pGraph, long u) {
     assert(IsLegalNodeNum(pGraph, u));
     long n = pGraph->n;
     long *visited = (long *) malloc(sizeof(long) * n);
-    // (n+1) slots allocated
-    long *route = (long *) malloc(sizeof(long) * (n+1));
+    long *route = (long *) malloc(sizeof(long) * n);
     for (long i = 0; i < n; i++) {
         visited[i] = 0;
     }
