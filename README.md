@@ -34,6 +34,8 @@ It means:
 
 ## Algorithm Visualization
 
+A picture is more than a thousand words.
+
 To aid understanding, we have visualized most of the algorithms (e.g., [COMP9024/Trees/Ast2Dot](./Trees/Ast2Dot/README.md)) discussed in COMP9024.
 
 ## [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
