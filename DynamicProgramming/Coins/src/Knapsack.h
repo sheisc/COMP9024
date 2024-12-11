@@ -3,7 +3,7 @@
 
 #define  DpTableElement(pKnapsack, i, j)  (pKnapsack)->dpTable[(i) * ((pKnapsack)->capacity + 1) + (j)]
 
-#define  ChoiceNodeElement(pKnapsack, i, j)   (pKnapsack)->nodes[(i) * ((pKnapsack)->capacity + 1) + (j)]
+#define  DpDagNode(pKnapsack, i, j)   (pKnapsack)->nodes[(i) * ((pKnapsack)->capacity + 1) + (j)]
 
 // r is the row number in the dpTable, from 0 to n
 #define  ItemValue(pKnapsack, r)    (pKnapsack)->values[(r) - 1]
