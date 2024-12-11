@@ -6,7 +6,7 @@ Suppose we have the following coins and want to find different ways to make a to
 
 | Infinite 2-cent coins |Infinite 3-cent coins| Infinite 5-cent coins|
 |:-------------:|:-------------:|:-------------:|
-|<img src="diagrams/2.jpg" width="100%" height="100%"> |<img src="diagrams/3.jpg" width="100%" height="100%"> |<img src="diagrams/5.jpg" width="100%" height="100%"> |
+|<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/3.jpg" width="50%" height="50%"> |<img src="diagrams/5.jpg" width="50%" height="50%"> |
 
 
 ### Different combinations of 10 cents using 2-cent, 3-cent, and 5-cent coins 
@@ -14,7 +14,7 @@ Suppose we have the following coins and want to find different ways to make a to
 #### 10 = 5 + 5
 | | | 
 |:-------------:|:-------------:|
-|<img src="diagrams/5.jpg" width="50%" height="50%"> |<img src="diagrams/5.jpg" width="50%" height="50%"> |
+|<img src="diagrams/5.jpg" width="40%" height="40%"> |<img src="diagrams/5.jpg" width="40%" height="40%"> |
 
 #### 10 = 5 + 3 + 2
 | | | |
