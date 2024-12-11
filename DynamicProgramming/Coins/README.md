@@ -59,6 +59,8 @@ Choices: 2 2 2 2 2
 
 ### The dynamic programming table and the DAG for making choices
 
+The Directed Acyclic Graph (DAG) is derived from the dynamic programming table and introduced for convenience in visualizing the algorithm.
+
 Depth first search in the DAG can generate all the paths from root, node (3, 10), to leaf nodes (e.g., nodes (3, 0) and (1, 0) ).
 
 For example, the following path represents the choices {item 3, item 2, item 1},  i.e., {5, 3, 2}.
