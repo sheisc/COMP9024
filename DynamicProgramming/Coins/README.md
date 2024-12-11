@@ -106,12 +106,16 @@ The only 0-cent coin is introduced to explain the column 0 in the above table.
 
 ### How to create the dynamic programming table and the DAG for making choices
 
-```C
+#### Method 1: Bottom-up tabulation
 
-/*
-    Bottom-up.
- */
+```C
 long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
+    assert(n >= 0 && n <= pKnapsack->numOfItems && cap >= 0 && cap <= pKnapsack->capacity); 
+
+    if (DpTableElement(pKnapsack, n, cap) != KNAPSACK_INVALID_VALUE) {
+        return DpTableElement(pKnapsack, n, cap);
+    }
+         
     // row 0    
     for (long col = 1; col <= pKnapsack->capacity; col++) {
         DpTableElement(pKnapsack, 0, col) = 0;
@@ -143,7 +147,43 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
             }
         }
     }
-    // FIXME: check whether (n, cap) is out of bounds
+    return DpTableElement(pKnapsack, n, cap);
+}
+
+```
+
+#### Method 2: Top-down memorization
+```C
+long SolveKnapsackMem(struct KnapsackInfo *pKnapsack, long n, long cap) {
+    assert(n >= 0 && n <= pKnapsack->numOfItems && cap >= 0 && cap <= pKnapsack->capacity);
+
+    if (DpTableElement(pKnapsack, n, cap) != KNAPSACK_INVALID_VALUE) {
+        return DpTableElement(pKnapsack, n, cap);
+    }    
+
+    if (cap == 0) {
+        DpTableElement(pKnapsack, n, cap) = 1;
+    } else if (n == 0){
+        DpTableElement(pKnapsack, n, cap) = 0;
+    } else if (ItemWeight(pKnapsack, n) > cap) {
+        DpTableElement(pKnapsack, n, cap) = SolveKnapsackMem(pKnapsack, n - 1, cap);
+        // set the dag node to remember the choices
+        if (DpTableElement(pKnapsack, n, cap) > 0) {
+            ChoiceNodeElement(pKnapsack, n, cap).excluded = &ChoiceNodeElement(pKnapsack, n - 1, cap);
+        }
+    } else {
+        long k = cap - ItemWeight(pKnapsack, n);
+        long included = SolveKnapsackMem(pKnapsack, n, k);
+        long excluded = SolveKnapsackMem(pKnapsack, n - 1, cap);
+        // set the dag node to remember the choices
+        if (included > 0) {
+            ChoiceNodeElement(pKnapsack, n, cap).included = &ChoiceNodeElement(pKnapsack, n, k);
+        }         
+        if (excluded > 0) {
+            ChoiceNodeElement(pKnapsack, n, cap).excluded = &ChoiceNodeElement(pKnapsack, n - 1, cap);
+        } 
+        DpTableElement(pKnapsack, n, cap) = included + excluded;
+    }
     return DpTableElement(pKnapsack, n, cap);
 }
 ```
