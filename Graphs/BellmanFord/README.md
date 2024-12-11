@@ -1,22 +1,17 @@
 # BellmanFord's algorithm
 
-``` sh
-/*******************************************************************
-                BellmanFord's algorithm 
 
-    1.  How to use BellmanFord's Algorithm to get the shortest distances 
-
-
-
-                                             COMP9024 24T2
-
- *******************************************************************/
-``` 
 ### Introducton
 
 The Bellman-Ford algorithm is a single-source shortest-path algorithm for graphs that may have negative weight edges. 
 
 It can also detect negative weight cycles in the graph, which is a key feature that distinguishes it from other shortest-path algorithms like Dijkstra’s.
+
+#### Motivation
+- Check all edges (n-1) times to calculate the shortest distances, where n is the number of nodes
+- Check all edges one more time to detect negative cycles
+
+Suppose edges are checked in ascending order of their source nodes.
 
 ### make view
 
@@ -33,50 +28,30 @@ find ./images -name "*.png" | sort | xargs feh -g 720x540 &
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
 
-| Initial | 
+| Initial: starting from Node 5 | 
 |:-------------:|
 | <img src="images/BellmanFord_0000.png" width="100%" height="100%"> |  
 
+### Suppose edges are checked in ascending order of their source nodes
 
-| Step 1 |  Step 2 | 
-|:-------------:|:-------------:|
-| <img src="images/BellmanFord_0001.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0002.png" width="100%" height="100%"> | 
+| Pass 1: after checking all edges | Pass 2: after checking all edges | Pass 3: after checking all edges |
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BellmanFord_0001.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0002.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0003.png" width="100%" height="100%"> |
 
 
-| Step 3 |  Step 4 | 
-|:-------------:|:-------------:|
-| <img src="images/BellmanFord_0003.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0004.png" width="100%" height="100%"> | 
+| Pass 4: after checking all edges | Pass 5: after checking all edges | One more time to check negative cycles: found | 
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/BellmanFord_0004.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0005.png" width="100%" height="100%"> | <img src="images/BellmanFord_0006.png" width="100%" height="100%"> | 
 
-| Step 5 |  Step 6 | 
-|:-------------:|:-------------:|
-| <img src="images/BellmanFord_0005.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0006.png" width="100%" height="100%"> | 
-
-| Step 7 |  Step 8 | 
-|:-------------:|:-------------:|
-| <img src="images/BellmanFord_0007.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0008.png" width="100%" height="100%"> | 
 
 
 ### Output
 
 ```sh
 
-BellmanFord() starting from node 3:
+BellmanFord() starting from node 5:
 
-The shortest path from node 3 to node 0: -2
-	3 --> 4 --> 1 --> 2 --> 0
-
-The shortest path from node 3 to node 1: 5
-	3 --> 4 --> 1
-
-The shortest path from node 3 to node 2: 1
-	3 --> 4 --> 1 --> 2
-
-The shortest path from node 3 to node 3: 0
-	3
-
-The shortest path from node 3 to node 4: 3
-	3 --> 4
-
+Negative cycles detected.
 
 ```
 

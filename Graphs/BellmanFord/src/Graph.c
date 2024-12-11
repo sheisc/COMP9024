@@ -271,35 +271,37 @@ int BellmanFord(struct Graph *pGraph, long startNodeId) {
         preds[i] = -1;
     }
 
-    GenOneImage(pGraph, "BellmanFord", "images/BellmanFord", imgCount, NULL);
-    imgCount++;
-
     distances[startNodeId] = 0;
 
     GenOneImage(pGraph, "BellmanFord", "images/BellmanFord", imgCount, NULL);
     imgCount++;
 
+    // checking all edges (n - 1) times
     for (long i = 0; i < pGraph->n - 1; i++) {
         for (long u = 0; u < pGraph->n; u++) {
             for (long v = 0; v < pGraph->n; v++) {
                 if (MatrixElement(pGraph, u, v)) {
                     if (distances[u] != INFINITY_VALUE && distances[u] + MatrixElement(pGraph, u, v) < distances[v]) {
                         distances[v] = distances[u] + MatrixElement(pGraph, u, v);
-                        preds[v] = u;      
-
-                        GenOneImage(pGraph, "BellmanFord", "images/BellmanFord", imgCount, NULL);
-                        imgCount++;               
+                        preds[v] = u;
                     }
                 }
             }
         }
+        GenOneImage(pGraph, "BellmanFord", "images/BellmanFord", imgCount, NULL);
+        imgCount++;          
     }
 
-    // Detect negative cycles
+    // checking all edges one more time to detect negative cycles
     for (long u = 0; u < pGraph->n; u++) {
         for (long v = 0; v < pGraph->n; v++) {
             if (MatrixElement(pGraph, u, v)) {
                 if (distances[u] != INFINITY_VALUE && distances[u] + MatrixElement(pGraph, u, v) < distances[v]) {
+                    // for visualizing the algorithm
+                    distances[v] = distances[u] + MatrixElement(pGraph, u, v);
+                    GenOneImage(pGraph, "BellmanFord", "images/BellmanFord", imgCount, NULL);
+                    imgCount++;
+
                     free(preds);
                     return 1;  // negative cycles found
                 }
