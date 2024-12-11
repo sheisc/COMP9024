@@ -98,7 +98,7 @@ void Knapsack2Dot(char *filePath, char *graphName, struct KnapsackInfo *pKnapsac
         fprintf(dotFile, "digraph %s { \n", graphName);
 
         fprintf(dotFile, "Array [shape=none, margin=0, label=< \n");
-        struct ChoiceDagNode *root = &ChoiceNodeElement(pKnapsack, row, col);
+        struct ChoiceDagNode *root = &DpDagNode(pKnapsack, row, col);
         PrintHtmlTable(dotFile, pKnapsack, root);
         fprintf(dotFile, "  >]; \n");
 

@@ -90,3 +90,21 @@ For example, the following path represents the choices {item 4, item 2, item 1},
 | |  Here, table(2, 7 - weight(item 3)) + value(item 3)  == table(2, 7), resulting in two edges in the DAG (from (3, 7) to (2, 2) and (2, 7)). |
 |table(4, 2) == table(3, 2) | No space for item 4 (with the weight of 3) when the capacity is 2|
 |table(3, 4) == table(2, 4) | No space for item 3 (with the weight of 5) when the capacity is 4|
+
+
+### How to create the dynamic programming table and the DAG for making choices
+
+#### Method 1: Bottom-up tabulation
+
+```C
+
+
+```
+
+#### Method 2: Top-down memorization
+```C
+
+```
+
+
+

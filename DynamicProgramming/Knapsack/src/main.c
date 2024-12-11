@@ -4,7 +4,21 @@
 #include "Knapsack.h"
 #include "Knapsack2Dot.h"
 
+typedef long (*KnapsackSolveFptrTy)(struct KnapsackInfo *pKnapsack, long n, long cap);
 
+static void TestKnapsackSolver(long values[], long weights[], long n, long capacity, 
+                              KnapsackSolveFptrTy knapsackSolve, long row, long col) {
+    static long imgCount = 0;
+    struct KnapsackInfo *pKnapsack = CreateKnapsackInfo(values, weights, n, capacity);
+    // query
+    printf("\nKnapsack() = %ld \n\n", knapsackSolve(pKnapsack, row, col));           
+    PrintKnapsack(pKnapsack, row, col);
+    
+    KnapsackGenOneImage("Knapsack", "images/Knapsack", imgCount, pKnapsack, row, col);
+    imgCount++;
+    
+    ReleaseKnapsackInfo(pKnapsack);
+}
 
 int main(void) {
     // create a sub-directory 'images' (if it is not present) in the current directory
@@ -21,14 +35,14 @@ int main(void) {
 
     long n = sizeof(values) / sizeof(values[0]);
     long capacity = 10;
+    // 0 <= row <= n, 0 <= col <= capacity
+    long row = n;
+    long col = capacity;
 
-    struct KnapsackInfo *pKnapsack = CreateKnapsackInfo(values, weights, n, capacity);
-    printf("\nKnapsack() = %ld \n\n", SolveKnapsackTabulation(pKnapsack, n, capacity));           
-    PrintKnapsack(pKnapsack);
-
-    KnapsackGenOneImage("Knapsack", "images/Knapsack", 0, pKnapsack, n, capacity);
-    
-    ReleaseKnapsackInfo(pKnapsack);
+    // Bottom up
+    TestKnapsackSolver(values, weights, n, capacity, SolveKnapsackTabulation, row, col);
+    // Top down
+    TestKnapsackSolver(values, weights, n, capacity, SolveKnapsackMem, row, col);
 
     return 0;
 }
