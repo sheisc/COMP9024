@@ -48,7 +48,7 @@ static void PrintAllChoices(struct KnapsackInfo *pKnapsack, long row, long col) 
     long n = pKnapsack->numOfItems;
     long capacity = pKnapsack->capacity;
     // FIXME:  
-    long *choices = (long *) malloc(sizeof(long) * n * capacity);    
+    long *choices = (long *) malloc(sizeof(long) * (n + 1) * (capacity + 1));    
     VisitChoiceDag(pKnapsack, &ChoiceNodeElement(pKnapsack, row, col), choices, 0);
     free(choices);
 }
@@ -89,7 +89,7 @@ void PrintKnapsack(struct KnapsackInfo *pKnapsack, long row, long col) {
 
     for (long i = 0; i <= pKnapsack->numOfItems; i++) {
         if (i != 0) {
-            printf("%9ld%9ld%9ld", pKnapsack->weights[i-1], pKnapsack->values[i-1], i);
+            printf("%9ld%9ld%9ld", ItemWeight(pKnapsack, i), ItemValue(pKnapsack, i), i);
         } else {
             printf("%9s%9s%9s", " ", " ", " ");
         }
