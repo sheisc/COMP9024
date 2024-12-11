@@ -6,13 +6,15 @@
 
 typedef long (*KnapsackSolveFptrTy)(struct KnapsackInfo *pKnapsack, long n, long cap);
 
-static void TesKnapsackSolver(long values[], long weights[], long n, long capacity, KnapsackSolveFptrTy knapsackSolve) {
+static void TestKnapsackSolver(long values[], long weights[], long n, long capacity, 
+                              KnapsackSolveFptrTy knapsackSolve, long row, long col) {
     static long imgCount = 0;
     struct KnapsackInfo *pKnapsack = CreateKnapsackInfo(values, weights, n, capacity);
-    printf("\nKnapsack() = %ld \n\n", knapsackSolve(pKnapsack, n, capacity));           
-    PrintKnapsack(pKnapsack, n, capacity);
-
-    KnapsackGenOneImage("Coins", "images/Coins", imgCount, pKnapsack, n, capacity);
+    // query
+    printf("\nKnapsack() = %ld \n\n", knapsackSolve(pKnapsack, row, col));           
+    PrintKnapsack(pKnapsack, row, col);
+    
+    KnapsackGenOneImage("Coins", "images/Coins", imgCount, pKnapsack, row, col);
     imgCount++;
     
     ReleaseKnapsackInfo(pKnapsack);
@@ -33,10 +35,15 @@ int main(void) {
 
     long n = sizeof(values) / sizeof(values[0]);
     long capacity = 10;
+    // 0 <= row <= n, 0 <= col <= capacity
+    long row = n;
+    long col = capacity;
+
     // Bottom up
-    TesKnapsackSolver(values, values, n, capacity, SolveKnapsackTabulation);
+    TestKnapsackSolver(values, values, n, capacity, SolveKnapsackTabulation, row, col);
     // Top down
-    TesKnapsackSolver(values, values, n, capacity, SolveKnapsackMem);
+    TestKnapsackSolver(values, values, n, capacity, SolveKnapsackMem, row, col);
+
     return 0;
 }
 
