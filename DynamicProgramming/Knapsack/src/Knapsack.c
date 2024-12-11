@@ -145,7 +145,9 @@ long SolveKnapsackMem(struct KnapsackInfo *pKnapsack, long n, long cap) {
     } else if (ItemWeight(pKnapsack, n) > cap) {
         DpTableElement(pKnapsack, n, cap) = SolveKnapsackMem(pKnapsack, n - 1, cap);
         // set the dag node to remember the choices. 
-        DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
+        if (DpTableElement(pKnapsack, n, cap) > 0) {
+            DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
+        }
     } else {
         long k = cap - ItemWeight(pKnapsack, n);
         long included = ItemValue(pKnapsack, n) + SolveKnapsackMem(pKnapsack, n - 1, k);
@@ -154,14 +156,20 @@ long SolveKnapsackMem(struct KnapsackInfo *pKnapsack, long n, long cap) {
         // set the dag node to remember the choices
         if (included > excluded) {
             max = included;
-            DpDagNode(pKnapsack, n, cap).included = &DpDagNode(pKnapsack, n - 1, k);            
+            if (max > 0) {
+                DpDagNode(pKnapsack, n, cap).included = &DpDagNode(pKnapsack, n - 1, k);
+            }            
         } else if (included < excluded) {
             max = excluded;
-            DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);            
+            if (max > 0) {
+                DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
+            }           
         } else {
             max = included;
-            DpDagNode(pKnapsack, n, cap).included = &DpDagNode(pKnapsack, n - 1, k);
-            DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);          
+            if (max > 0) {
+                DpDagNode(pKnapsack, n, cap).included = &DpDagNode(pKnapsack, n - 1, k);
+                DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
+            }          
         }
         DpTableElement(pKnapsack, n, cap) = max;
     }
@@ -191,7 +199,9 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
         for (long col = 1; col <= pKnapsack->capacity; col++) {
             if (col < ItemWeight(pKnapsack, row)) {
                 DpTableElement(pKnapsack, row, col) = DpTableElement(pKnapsack, row - 1, col);
-                DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
+                if (DpTableElement(pKnapsack, row, col) > 0) {
+                    DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
+                }
             } else {
                 long k = col - ItemWeight(pKnapsack, row);
                 long included = ItemValue(pKnapsack, row) + DpTableElement(pKnapsack, row - 1, k);
@@ -200,14 +210,20 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
                 // Create the choice dag to remember the choices
                 if (included > excluded ) {
                     max = included;
-                    DpDagNode(pKnapsack, row, col).included = &DpDagNode(pKnapsack, row - 1, k);
+                    if (max > 0) {
+                        DpDagNode(pKnapsack, row, col).included = &DpDagNode(pKnapsack, row - 1, k);
+                    }
                 } else if (included < excluded) {
                     max = excluded;
-                    DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
+                    if (max > 0) {
+                        DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
+                    }
                 } else { // included == excluded
                     max = included;
-                    DpDagNode(pKnapsack, row, col).included = &DpDagNode(pKnapsack, row - 1, k);
-                    DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
+                    if (max > 0) {
+                        DpDagNode(pKnapsack, row, col).included = &DpDagNode(pKnapsack, row - 1, k);
+                        DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
+                    }
                 }
                 DpTableElement(pKnapsack, row, col) = max;
             }
