@@ -82,9 +82,11 @@ For example, the following path represents the choices {item 4, item 2, item 1},
 |table(3, 0) == 0 | The maximum value is 0 when the capacity is 0 and item 1, item 2, and item 3 are available|
 |table(4, 0) == 0 | The maximum value is 0 when the capacity is 0 and item 1, item 2, item 3, and item 4 are available|
 |table(4, 10) == 1000 | The maximum value is max(table(3, 10 - 3) + Value(item 4), table(3, 10)) when the capacity is 10 and item 1, item 2, item 3, and item 4 are available |
-| |  That is, max(item 4 included, item 4 excluded). The weight of item 4 is 3. |
+| |  That is, max(item 4 included, item 4 excluded).  |
+| | The weight of item 4 is 3.|
 |table(3, 7) == 500 | The maximum value is max(table(2, 7 - 5) + Value(item 3), table(2, 7)) when the capacity is 7 and item 1, item 2, and item 3 are available |
-| |  That is, max(item 3 included, item 3 excluded). The weight of item 3 is 5. |
-| |  Here, table(2, 7 - 5) + Value(Item 3)  == table(2, 7), resulting in two edges in the DAG (from (3, 7) to (2, 2) and (2, 7)). |
+| |  That is, max(item 3 included, item 3 excluded). |
+| | The weight of item 3 is 5. |
+| |  Here, table(2, 7 - Weight(item 3)) + Value(item 3)  == table(2, 7), resulting in two edges in the DAG (from (3, 7) to (2, 2) and (2, 7)). |
 |table(4, 2) == table(3, 2) | No space for item 4 (with the weight of 3) when the capacity is 2|
 |table(3, 4) == table(2, 4) | No space for item 3 (with the weight of 5) when the capacity is 4|
