@@ -144,7 +144,6 @@ long SolveKnapsackMem(struct KnapsackInfo *pKnapsack, long n, long cap) {
         DpTableElement(pKnapsack, n, cap) = 0;
     } else if (ItemWeight(pKnapsack, n) > cap) {
         DpTableElement(pKnapsack, n, cap) = SolveKnapsackMem(pKnapsack, n - 1, cap);
-        // set the dag node to remember the choices. 
         if (DpTableElement(pKnapsack, n, cap) > 0) {
             DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
         }
@@ -207,7 +206,7 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
                 long included = ItemValue(pKnapsack, row) + DpTableElement(pKnapsack, row - 1, k);
                 long excluded = DpTableElement(pKnapsack, row - 1, col);
                 long max;
-                // Create the choice dag to remember the choices
+                // set the dag node to remember the choices
                 if (included > excluded ) {
                     max = included;
                     if (max > 0) {
