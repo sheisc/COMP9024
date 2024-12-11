@@ -126,10 +126,10 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
     }
     // other rows
     for (long row = 1; row <= pKnapsack->numOfItems; row++) {
-        for (long col = 0; col <= pKnapsack->capacity; col++) {
+        for (long col = 1; col <= pKnapsack->capacity; col++) {
             if (col < ItemWeight(pKnapsack, row)) {
                 DpTableElement(pKnapsack, row, col) = DpTableElement(pKnapsack, row - 1, col);
-                if (DpTableElement(pKnapsack, row, col) > 0 && col != 0) {
+                if (DpTableElement(pKnapsack, row, col) > 0) {
                     DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
                 }
             } else {
