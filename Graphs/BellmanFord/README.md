@@ -39,7 +39,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/BellmanFord_0001.png" width="60%" height="60%"> |  <img src="images/BellmanFord_0002.png" width="60%" height="60%"> |  <img src="images/BellmanFord_0003.png" width="60%" height="60%"> |
 
 
-| Pass 4: after checking all edges | Pass 5: after checking all edges | One more time to check negative cycles: found | 
+| Pass 4: after checking all edges | Pass 5: after checking all edges | One more pass: negative cycles found | 
 |:-------------:|:-------------:|:-------------:|
 | <img src="images/BellmanFord_0004.png" width="60%" height="60%"> |  <img src="images/BellmanFord_0005.png" width="60%" height="60%"> | <img src="images/BellmanFord_0006.png" width="60%" height="60%"> | 
 
