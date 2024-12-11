@@ -22,8 +22,8 @@ static void InitChoiceDagNode(struct ChoiceDagNode *pNode, long i, long j,
 }
 
 /*
-    n represents the number of items.
-    row is the row number of the dynamic programming table, from 0 to n
+    Item numbers are saved in choices[].
+    The parameter count represents the current index for appending an item number in choices[].
  */
 static void VisitChoiceDag(struct KnapsackInfo *pKnapsack, struct ChoiceDagNode *pNode, long choices[], long count) {
     if (pNode) {
