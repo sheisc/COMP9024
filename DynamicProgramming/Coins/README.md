@@ -1,8 +1,12 @@
-# The Coin Change Problem
+# Coin Change 
 
-|Only one 0-cent coin| Infinite 2-cent coins |Infinite 3-cent coins| Infinite 5-cent coins|
-|:-------------:|:-------------:|:-------------:|:-------------:|
-| <img src="diagrams/0.jpg" width="30%" height="30%"> |<img src="diagrams/2.jpg" width="100%" height="100%"> |<img src="diagrams/3.jpg" width="100%" height="100%"> |<img src="diagrams/5.jpg" width="100%" height="100%"> |
+Given n types of coins and a target sum, the task is to count all possible combinations to make that sum using the coins.
+
+Suppose we have the following coins and want to find different ways to make a total of 10 cents.
+
+| Infinite 2-cent coins |Infinite 3-cent coins| Infinite 5-cent coins|
+|:-------------:|:-------------:|:-------------:|
+|<img src="diagrams/2.jpg" width="100%" height="100%"> |<img src="diagrams/3.jpg" width="100%" height="100%"> |<img src="diagrams/5.jpg" width="100%" height="100%"> |
 
 
 ### Different combinations of 10 cents using 2-cent, 3-cent, and 5-cent coins 
@@ -76,7 +80,8 @@ For example, the following path represents the choices {item 3, item 2, item 1},
 | <img src="images/Coins_0000.png" width="60%" height="60%"> |
 
 
-The only 0-cent coin is introduced to explain the column 0 in the above table.
+The 0-cent coin is introduced solely as a catalyst to explain the column labeled '0' in the table above.
+
 |Only one 0-cent coin| 
 |:-------------|
 | <img src="diagrams/0.jpg" width="10%" height="10%"> |
