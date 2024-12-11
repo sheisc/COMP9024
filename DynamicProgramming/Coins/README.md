@@ -83,16 +83,22 @@ The only 0-cent coin is introduced to explain the column 0 in the above table.
 
 |table(item number, capacity) |     meaning|
 |:-------------|:-------------|
-|table(0, 0) == 1 | there is 1 combination of 0 cents, i.e., using the only 0-cent coin|
-|table(0, 1) == 0 | there is 0 combination of 1 cents using the only 0-cent coin|
-|table(1, 0) == 1 | there is 1 combination of 0 cents using 2-cent coins, plus the only 0-cent coin|
-|table(2, 0) == 1 | there is 1 combination of 0 cents using 2-cent and 3-cent coins, plus the only 0-cent coin|
-|table(3, 0) == 1 | there is 1 combination of 0 cents using 2-cent, 3-cent, and 5-cent coins, plus the only 0-cent coin|
-|table(1, 10) == 1 | there is 1 combination of 10 cents using 2-cent coins, plus the only 0-cent coin|
-|table(2, 10) == 2 | there are 2 combinations of 10 cents using 2-cent and 3-cent coins, plus the only 0-cent coin|
-|table(3, 10) == 4 | there are 4 combinations of 10 cents using 2-cent, 3-cent, and 5-cent coins, plus the only 0-cent coin|
-|table(3, 5) == 2 | there are 2 combinations of 5 cents using 2-cent, 3-cent, and 5-cent coins, plus the only 0-cent coin|
-|table(3, 10) == table(3, 5) + table(2, 10) | the combinations of table(3, 5) after adding one 5-cent coin, plus combinations of table(2, 10)|
-|table(3, 4) == table(2, 4) | no capacity for adding 5-cent coins; the combinations of table(3, 4) are the same as the combinations of table(2, 4)|
-|table(2, 2) == table(1, 2) | no capacity for adding 3-cent coins; the combinations of table(2, 2) are the same as the combinations of table(1, 2), |
-|table(1, 1) == table(0, 1) | no capacity for adding 2-cent coins; the combinations of table(1, 1) are the same as the combinations of table(0, 1), |
+|table(0, 0) == 1 | There is 1 combination of 0 cents, i.e., using the only 0-cent coin|
+|table(0, 1) == 0 | There is 0 combination of 1 cents using the only 0-cent coin|
+|table(1, 0) == 1 | There is 1 combination of 0 cents using 2-cent coins, plus the only 0-cent coin|
+|table(2, 0) == 1 | There is 1 combination of 0 cents using 2-cent and 3-cent coins, plus the only 0-cent coin|
+|table(3, 0) == 1 | There is 1 combination of 0 cents using 2-cent, 3-cent, and 5-cent coins, plus the only 0-cent coin|
+|table(1, 10) == 1 | There is 1 combination of 10 cents using 2-cent coins, plus the only 0-cent coin|
+|table(2, 10) == 2 | There are 2 combinations of 10 cents using 2-cent and 3-cent coins, plus the only 0-cent coin|
+|table(3, 10) == 4 | There are 4 combinations of 10 cents using 2-cent, 3-cent, and 5-cent coins, plus the only 0-cent coin|
+|table(3, 5) == 2 | There are 2 combinations of 5 cents using 2-cent, 3-cent, and 5-cent coins, plus the only 0-cent coin|
+|table(3, 10) == table(3, 5) + table(2, 10) | The combinations of table(3, 5) after adding one 5-cent coin, plus combinations of table(2, 10);|
+| | table(3, 5) represents the combinations of 5 cents using 2-cent, 3-cent, and 5-cent coins, plus the only 0-cent coin;|
+| | table(2, 10) represents the combinations of 10 cents using 2-cent, and 3-cent coins, plus the only 0-cent coin.|
+| | Note that multiple copies of item 3 can be used|
+|table(3, 4) == table(2, 4) | No space for adding 5-cent coins (item 3) when the capacity is 4; |
+| |the combinations of table(3, 4) are the same as the combinations of table(2, 4) |
+|table(2, 2) == table(1, 2) | No space for adding 3-cent coins (item 2) when the capacity is 2; |
+| |the combinations of table(2, 2) are the same as the combinations of table(1, 2) |
+|table(1, 1) == table(0, 1) | No space for adding 2-cent coins (item 1) when the capacity is 1; |
+| |the combinations of table(1, 1) are the same as the combinations of table(0, 1) |
