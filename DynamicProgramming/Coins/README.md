@@ -102,3 +102,48 @@ The only 0-cent coin is introduced to explain the column 0 in the above table.
 | |the combinations of table(2, 2) are the same as the combinations of table(1, 2) |
 |table(1, 1) == table(0, 1) | No space for adding 2-cent coins (item 1) when the capacity is 1; |
 | |the combinations of table(1, 1) are the same as the combinations of table(0, 1) |
+
+
+### How to create the dynamic programming table and the DAG for making choices
+
+```C
+
+/*
+    Bottom-up.
+ */
+long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
+    // row 0    
+    for (long col = 1; col <= pKnapsack->capacity; col++) {
+        DpTableElement(pKnapsack, 0, col) = 0;
+    }
+    // col 0
+    for (long row = 0; row <= pKnapsack->numOfItems; row++) {
+        DpTableElement(pKnapsack, row, 0) = 1;
+    }
+    // other rows
+    for (long row = 1; row <= pKnapsack->numOfItems; row++) {
+        for (long col = 0; col <= pKnapsack->capacity; col++) {
+            if (col < ItemWeight(pKnapsack, row)) {
+                DpTableElement(pKnapsack, row, col) = DpTableElement(pKnapsack, row - 1, col);
+                if (DpTableElement(pKnapsack, row, col) > 0 && col != 0) {
+                    ChoiceNodeElement(pKnapsack, row, col).excluded = &ChoiceNodeElement(pKnapsack, row - 1, col);
+                }
+            } else {
+                long k = col - ItemWeight(pKnapsack, row);
+                long included = DpTableElement(pKnapsack, row, k);
+                long excluded = DpTableElement(pKnapsack, row - 1, col);
+                // set the dag node to remember the choices
+                if (included > 0) {
+                    ChoiceNodeElement(pKnapsack, row, col).included = &ChoiceNodeElement(pKnapsack, row, k);
+                } 
+                if (excluded > 0) {
+                    ChoiceNodeElement(pKnapsack, row, col).excluded = &ChoiceNodeElement(pKnapsack, row - 1, col);
+                } 
+                DpTableElement(pKnapsack, row, col) = included + excluded;
+            }
+        }
+    }
+    // FIXME: check whether (n, cap) is out of bounds
+    return DpTableElement(pKnapsack, n, cap);
+}
+```

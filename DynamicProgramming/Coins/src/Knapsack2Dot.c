@@ -39,8 +39,8 @@ static void PrintHtmlTable(FILE *dotFile, struct KnapsackInfo *pKnapsack, struct
     for (long i = 0; i <= pKnapsack->numOfItems; i++) {
         fprintf(dotFile, "<tr> \n");
         if (i != 0) {            
-            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">%ld</td> \n", pKnapsack->weights[i-1]);
-            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">%ld</td> \n", pKnapsack->values[i-1]);
+            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">%ld</td> \n", ItemWeight(pKnapsack, i));
+            fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">%ld</td> \n", ItemValue(pKnapsack, i));
             fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\">%ld</td> \n", i);
         } else {            
             fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\"> </td> \n");

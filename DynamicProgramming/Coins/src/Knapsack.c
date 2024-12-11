@@ -132,14 +132,14 @@ long SolveKnapsackMem(struct KnapsackInfo *pKnapsack, long n, long cap) {
         DpTableElement(pKnapsack, n, cap) = 0;
     } else if (ItemWeight(pKnapsack, n) > cap) {
         DpTableElement(pKnapsack, n, cap) = SolveKnapsackMem(pKnapsack, n - 1, cap);
-        // set the tree node to remember the choices
+        // set the dag node to remember the choices
         ChoiceNodeElement(pKnapsack, n, cap).excluded = &ChoiceNodeElement(pKnapsack, n - 1, cap);
     } else {
         long k = cap - ItemWeight(pKnapsack, n);
         long included = ItemValue(pKnapsack, n) + SolveKnapsackMem(pKnapsack, n - 1, k);
         long excluded = SolveKnapsackMem(pKnapsack, n - 1, cap);
         long max;
-        // set the tree node to remember the choices
+        // set the dag node to remember the choices
         if (included > excluded) {
             ChoiceNodeElement(pKnapsack, n, cap).included = &ChoiceNodeElement(pKnapsack, n - 1, k);
             max = included;
@@ -180,7 +180,7 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
                 long k = col - ItemWeight(pKnapsack, row);
                 long included = DpTableElement(pKnapsack, row, k);
                 long excluded = DpTableElement(pKnapsack, row - 1, col);
-                // Create the binary tree to remember the choices
+                // set the dag node to remember the choices
                 if (included > 0) {
                     ChoiceNodeElement(pKnapsack, row, col).included = &ChoiceNodeElement(pKnapsack, row, k);
                 } 
