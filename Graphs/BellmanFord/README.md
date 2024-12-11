@@ -30,18 +30,18 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 | Initial: starting from Node 5 | 
 |:-------------:|
-| <img src="images/BellmanFord_0000.png" width="100%" height="100%"> |  
+| <img src="images/BellmanFord_0000.png" width="60%" height="60%"> |  
 
 ### Suppose edges are checked in ascending order of their source nodes
 
 | Pass 1: after checking all edges | Pass 2: after checking all edges | Pass 3: after checking all edges |
 |:-------------:|:-------------:|:-------------:|
-| <img src="images/BellmanFord_0001.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0002.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0003.png" width="100%" height="100%"> |
+| <img src="images/BellmanFord_0001.png" width="60%" height="60%"> |  <img src="images/BellmanFord_0002.png" width="60%" height="60%"> |  <img src="images/BellmanFord_0003.png" width="60%" height="60%"> |
 
 
 | Pass 4: after checking all edges | Pass 5: after checking all edges | One more time to check negative cycles: found | 
 |:-------------:|:-------------:|:-------------:|
-| <img src="images/BellmanFord_0004.png" width="100%" height="100%"> |  <img src="images/BellmanFord_0005.png" width="100%" height="100%"> | <img src="images/BellmanFord_0006.png" width="100%" height="100%"> | 
+| <img src="images/BellmanFord_0004.png" width="60%" height="60%"> |  <img src="images/BellmanFord_0005.png" width="60%" height="60%"> | <img src="images/BellmanFord_0006.png" width="60%" height="60%"> | 
 
 
 
