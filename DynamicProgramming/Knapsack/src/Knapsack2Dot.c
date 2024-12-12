@@ -4,26 +4,13 @@
 #include <string.h>
 #include "Knapsack2Dot.h"
 #include "Knapsack.h"
-#include "Queue.h"
-
 
 ////////////////////////////// Knapsack2Dot (for visualizing the algorithm) ///////////////////////////////////////
-static int IsInChoiceDag(struct ChoiceDagNode *root, long i, long j) {
-    if (root) {
-        if (root->i == i && root->j == j) {
-            return 1;
-        } else {
-            int found1 = IsInChoiceDag(root->included, i, j);
-            int found2 = IsInChoiceDag(root->excluded, i, j);
-            return found1 || found2;
-        }
-    } else {
-        return 0;
-    }
+static int IsInChoiceDag(struct KnapsackInfo *pKnapsack, long row, long col) {
+    return DpTableElementVisited(pKnapsack, row, col);    
 }
 
-
-static void PrintHtmlTable(FILE *dotFile, struct KnapsackInfo *pKnapsack, struct ChoiceDagNode *root) {
+static void PrintHtmlTable(FILE *dotFile, struct KnapsackInfo *pKnapsack) {
     fprintf(dotFile, "<table border=\"0\" cellborder=\"1\" cellspacing=\"0\" cellpadding=\"0\"> \n");
 
     fprintf(dotFile, "<tr> \n");    
@@ -48,7 +35,7 @@ static void PrintHtmlTable(FILE *dotFile, struct KnapsackInfo *pKnapsack, struct
             fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"gray\"> 0 </td> \n");
         }
         for (long j = 0; j <= pKnapsack->capacity; j++) {
-            if (IsInChoiceDag(root, i, j)) {
+            if (IsInChoiceDag(pKnapsack, i, j)) {
                 fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"green\">%ld</td> \n", DpTableElement(pKnapsack, i, j));
             } else {
                 fprintf(dotFile, "<td width=\"30\" height=\"30\" bgcolor=\"white\">%ld</td> \n", DpTableElement(pKnapsack, i, j));
@@ -60,32 +47,40 @@ static void PrintHtmlTable(FILE *dotFile, struct KnapsackInfo *pKnapsack, struct
     fprintf(dotFile, "</table> \n");
 }
 
-static void PrintChoiceDag(FILE *dotFile, struct KnapsackInfo *pKnapsack, struct ChoiceDagNode *root) {
-    char *edgeConnectorStr = "->";     
-    fprintf(dotFile, "rankdir=\"BT\"\n");
-    struct Queue *pQueue = CreateQueue();
-    QueueEnqueue(pQueue, root);
-    while (!QueueIsEmpty(pQueue)) {
-        struct ChoiceDagNode *curNode = QueueDequeue(pQueue);
-        // node
-        fprintf(dotFile, "\"%p\" [label=\"(%ld, %ld)\"] \n", curNode, curNode->i, curNode->j);        
-        // two edges
-        if (curNode->included) {
-            fprintf(dotFile, "\"%p\" %s {\"%p\"} [label=\"1\"]\n",
-                    curNode,
-                    edgeConnectorStr,                         
-                    curNode->included);
-            QueueEnqueue(pQueue, curNode->included);
-        }
-        if (curNode->excluded) {
-            fprintf(dotFile, "\"%p\" %s {\"%p\"} [label=\"0\"]\n",                        
-                    curNode, 
-                    edgeConnectorStr,
-                    curNode->excluded);
-            QueueEnqueue(pQueue, curNode->excluded);
-        }        
+
+static void PrintChoiceDagInDot(FILE *dotFile, struct KnapsackInfo *pKnapsack, long row, long col) {
+    if (DpTableElementVisited(pKnapsack, row, col)) {
+        return;
     }
-    ReleaseQueue(pQueue); 
+    DpTableElementVisited(pKnapsack, row, col) = 1;
+    if (row == 0) {
+        // leaf node 
+        return;
+    } else {
+        if (col < ItemWeight(pKnapsack, row)) {
+            // Add edge (row, col) --> (row - 1, col)
+            if (DpTableElement(pKnapsack, row - 1, col) > 0) {
+                fprintf(dotFile, "\"(%ld,%ld)\" -> {\"(%ld,%ld)\"} \n",
+                        row, col, row - 1, col);                
+            }
+        } else {
+            long k = col - ItemWeight(pKnapsack, row);
+            long included = ItemValue(pKnapsack, row) + DpTableElement(pKnapsack, row - 1, k);
+            long excluded = DpTableElement(pKnapsack, row - 1, col);
+            // Add edge (row, col) --> (row, k)
+            if (included >= excluded && included > 0) {
+                fprintf(dotFile, "\"(%ld,%ld)\" -> {\"(%ld,%ld)\"} [label=\"%ld\"]\n",
+                        row, col, row - 1, k, ItemValue(pKnapsack, row));
+                PrintChoiceDagInDot(dotFile, pKnapsack, row - 1, k);                    
+            }
+            // Add edge (row, col) --> (row - 1, col)
+            if (included <= excluded && excluded > 0) {
+                fprintf(dotFile, "\"(%ld,%ld)\" -> {\"(%ld,%ld)\"} \n",
+                        row, col, row - 1, col);
+                PrintChoiceDagInDot(dotFile, pKnapsack, row - 1, col);                  
+            }
+        }
+    }
 }
 
 /*
@@ -97,18 +92,25 @@ void Knapsack2Dot(char *filePath, char *graphName, struct KnapsackInfo *pKnapsac
     if (dotFile) {
         fprintf(dotFile, "digraph %s { \n", graphName);
 
-        fprintf(dotFile, "Array [shape=none, margin=0, label=< \n");
-        struct ChoiceDagNode *root = &DpDagNode(pKnapsack, row, col);
-        PrintHtmlTable(dotFile, pKnapsack, root);
+        // dag
+        fprintf(dotFile, "rankdir=\"LR\"\n");
+        for (long i = 0; i <= pKnapsack->numOfItems; i++) {
+            for (long j = 0; j <= pKnapsack->capacity; j++) {
+                DpTableElementVisited(pKnapsack, i, j) = 0;
+            }
+        }         
+        PrintChoiceDagInDot(dotFile, pKnapsack, row, col);
+
+        // table
+        fprintf(dotFile, "Array [shape=none, margin=0, label=< \n");        
+        PrintHtmlTable(dotFile, pKnapsack);
         fprintf(dotFile, "  >]; \n");
 
-        PrintChoiceDag(dotFile, pKnapsack, root);
         fprintf(dotFile, "} \n");
 
         fclose(dotFile);
     }
 }
-
 
 #define FILE_NAME_LEN  255
 
@@ -129,5 +131,4 @@ void KnapsackGenOneImage(char *graphName, char *fileName, long seqNo, struct Kna
     // Execute the command in a child process (fork() + exec() on Linux)
     system(command);
 }
-
 
