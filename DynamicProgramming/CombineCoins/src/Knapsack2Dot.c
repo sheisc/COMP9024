@@ -51,8 +51,13 @@ static void PrintHtmlTable(FILE *dotFile, struct KnapsackInfo *pKnapsack, long r
 }
 
 static void PrintChoiceDagInDot(FILE *dotFile, struct KnapsackInfo *pKnapsack, long row, long col) {
-    if (col == 0 || DpTableElementVisited(pKnapsack, row, col)) {
-        // leaf node or already visited 
+    if (DpTableElementVisited(pKnapsack, row, col)) {
+        return;
+    }
+    DpTableElementVisited(pKnapsack, row, col) = 1;
+
+    if (col == 0) {
+        // leaf node
         return;
     } else {
         DpTableElementVisited(pKnapsack, row, col) = 1;
