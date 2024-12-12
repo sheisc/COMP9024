@@ -8,48 +8,39 @@
 
 // static long imgCount = 0;
 
-/*
-    In most cases, it is a binary tree.    
- */
-static void InitChoiceDagNode(struct ChoiceDagNode *pNode, long i, long j, 
-                                 struct ChoiceDagNode *included,
-                                 struct ChoiceDagNode *excluded) {
-    pNode->i = i;
-    pNode->j = j;
-    pNode->included = included;
-    pNode->excluded = excluded;
-    pNode->visited = 0;
-}
 
 /*
-    Item numbers are saved in choices[].
-    The parameter count represents the current index for appending an item number in choices[].
+    The parameter 'count' represents the current index for appending an item in choices[].
  */
-static void VisitChoiceDag(struct KnapsackInfo *pKnapsack, struct ChoiceDagNode *pNode, long choices[], long count) {
-    if (pNode) {
-        if (pNode->j == 0) {
-            // leaf node 
-            printf("Choices: ");
-            for (long i = 0; i < count; i++) {
-                printf("%ld ", choices[i]);
-            }
-            printf("\n");
-            return;
-        } else {        
-            choices[count] = ItemWeight(pKnapsack, pNode->i);
-            VisitChoiceDag(pKnapsack, pNode->included, choices, count + 1);
-            //
-            VisitChoiceDag(pKnapsack, pNode->excluded, choices, count);
+static void VisitChoiceDag(struct KnapsackInfo *pKnapsack, long row, long col, long choices[], long count) {
+    if (col == 0) {
+        // leaf node 
+        printf("Choices: ");
+        for (long i = 0; i < count; i++) {
+            printf("%ld ", choices[i]);
         }
-    }
+        printf("\n");
+        return;
+    } else {        
+        long k = col - ItemWeight(pKnapsack, row);
+        if (k >= 0 && DpTableElement(pKnapsack, row, k) > 0) {
+            choices[count] = ItemWeight(pKnapsack, row);
+            // count + 1:  the item included
+            VisitChoiceDag(pKnapsack, row, k, choices, count + 1);
+        }
+        
+        if (row - 1 >= 0 && DpTableElement(pKnapsack, row - 1, col) > 0) {
+            // count: the item excluded
+            VisitChoiceDag(pKnapsack, row - 1, col, choices, count);
+        }
+    }    
 }
 
 static void PrintAllChoices(struct KnapsackInfo *pKnapsack, long row, long col) {       
-    long n = pKnapsack->numOfItems;
     long capacity = pKnapsack->capacity;
     // FIXME:  
-    long *choices = (long *) malloc(sizeof(long) * (n + 1) * (capacity + 1));    
-    VisitChoiceDag(pKnapsack, &DpDagNode(pKnapsack, row, col), choices, 0);
+    long *choices = (long *) malloc(sizeof(long) * (capacity + 1));    
+    VisitChoiceDag(pKnapsack, row, col, choices, 0);
     free(choices);
 }
 
@@ -57,8 +48,6 @@ struct KnapsackInfo *CreateKnapsackInfo(long *values, long *weights, long numbOf
     struct KnapsackInfo *pKnapsack = (struct KnapsackInfo *) malloc(sizeof(struct KnapsackInfo));
     memset(pKnapsack, 0, sizeof(struct KnapsackInfo));
     long *dpTable = (long *) malloc(sizeof(long) * (numbOfItems + 1) * (capacity + 1));
-    struct ChoiceDagNode *nodes = (struct ChoiceDagNode *) malloc(
-                sizeof(struct ChoiceDagNode) * (numbOfItems + 1) * (capacity + 1));
     
     pKnapsack->values = (long *) malloc(sizeof(long) * numbOfItems);
     memcpy(pKnapsack->values, values, sizeof(long) * numbOfItems);
@@ -66,15 +55,16 @@ struct KnapsackInfo *CreateKnapsackInfo(long *values, long *weights, long numbOf
     pKnapsack->weights = (long *) malloc(sizeof(long) * numbOfItems);
     memcpy(pKnapsack->weights, weights, sizeof(long) * numbOfItems);
 
+    pKnapsack->visited = (int *) malloc(sizeof(int) * (numbOfItems + 1) * (capacity + 1));
+
     pKnapsack->numOfItems = numbOfItems;
     pKnapsack->capacity = capacity;
     pKnapsack->dpTable = dpTable;
-    pKnapsack->nodes = nodes;
 
     for (long i = 0; i <= numbOfItems; i++) {
         for (long j = 0; j <= capacity; j++) {
             DpTableElement(pKnapsack, i, j) = KNAPSACK_INVALID_VALUE;
-            InitChoiceDagNode(& DpDagNode(pKnapsack, i, j), i, j, NULL, NULL);
+            DpTableElementVisited(pKnapsack, i, j) = 0;
         }
     }
     return pKnapsack;    
@@ -106,14 +96,12 @@ void PrintKnapsack(struct KnapsackInfo *pKnapsack, long row, long col) {
 void ReleaseKnapsackInfo(struct KnapsackInfo *pKnapsack) {
     if (pKnapsack) {
         free(pKnapsack->dpTable);
-        free(pKnapsack->nodes);
         free(pKnapsack->weights);
         free(pKnapsack->values);
+        free(pKnapsack->visited);
         free(pKnapsack);
     }
 }
-
-
 
 /*
     Top-down.
@@ -133,21 +121,10 @@ long SolveKnapsackMem(struct KnapsackInfo *pKnapsack, long n, long cap) {
         DpTableElement(pKnapsack, n, cap) = 0;
     } else if (ItemWeight(pKnapsack, n) > cap) {
         DpTableElement(pKnapsack, n, cap) = SolveKnapsackMem(pKnapsack, n - 1, cap);
-        // set the dag node to remember the choices
-        if (DpTableElement(pKnapsack, n, cap) > 0) {
-            DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
-        }
     } else {
         long k = cap - ItemWeight(pKnapsack, n);
         long included = SolveKnapsackMem(pKnapsack, n, k);
         long excluded = SolveKnapsackMem(pKnapsack, n - 1, cap);
-        // set the dag node to remember the choices
-        if (included > 0) {
-            DpDagNode(pKnapsack, n, cap).included = &DpDagNode(pKnapsack, n, k);
-        }         
-        if (excluded > 0) {
-            DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
-        } 
         DpTableElement(pKnapsack, n, cap) = included + excluded;
     }
     return DpTableElement(pKnapsack, n, cap);
@@ -176,20 +153,10 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
         for (long col = 1; col <= pKnapsack->capacity; col++) {
             if (col < ItemWeight(pKnapsack, row)) {
                 DpTableElement(pKnapsack, row, col) = DpTableElement(pKnapsack, row - 1, col);
-                if (DpTableElement(pKnapsack, row, col) > 0) {
-                    DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
-                }
             } else {
                 long k = col - ItemWeight(pKnapsack, row);
                 long included = DpTableElement(pKnapsack, row, k);
                 long excluded = DpTableElement(pKnapsack, row - 1, col);
-                // set the dag node to remember the choices
-                if (included > 0) {
-                    DpDagNode(pKnapsack, row, col).included = &DpDagNode(pKnapsack, row, k);
-                } 
-                if (excluded > 0) {
-                    DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
-                } 
                 DpTableElement(pKnapsack, row, col) = included + excluded;
             }
         }

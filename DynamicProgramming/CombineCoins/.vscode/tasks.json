@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Coins: make",
+            "label": "CombineCoins: make",
             "type": "shell",
             "command": "make",
             "problemMatcher": [],
@@ -14,7 +14,7 @@
             }
         },
         {
-            "label": "Coins: make clean",
+            "label": "CombineCoins: make clean",
             "type": "shell",
             "command": "make clean",
             "problemMatcher": [],

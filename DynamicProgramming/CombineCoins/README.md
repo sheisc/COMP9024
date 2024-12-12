@@ -12,24 +12,24 @@ Suppose we have the following coins and want to find different ways to make a to
 ### Different combinations of 10 cents using 2-cent, 3-cent, and 5-cent coins 
 
 #### 10 = 5 + 5
-| | | 
+<!-- | | | 
 |:-------------:|:-------------:|
-|<img src="diagrams/5.jpg" width="40%" height="40%"> |<img src="diagrams/5.jpg" width="40%" height="40%"> |
+|<img src="diagrams/5.jpg" width="40%" height="40%"> |<img src="diagrams/5.jpg" width="40%" height="40%"> | -->
 
 #### 10 = 5 + 3 + 2
-| | | |
+<!-- | | | |
 |:-------------:|:-------------:|:-------------:|
-|<img src="diagrams/5.jpg" width="50%" height="50%"> |<img src="diagrams/3.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |
+|<img src="diagrams/5.jpg" width="50%" height="50%"> |<img src="diagrams/3.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> | -->
 
 #### 10 = 3 + 3 + 2 + 2
-| | | ||
+<!-- | | | ||
 |:-------------:|:-------------:|:-------------:|:-------------:|
-|<img src="diagrams/3.jpg" width="50%" height="50%"> |<img src="diagrams/3.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |
+|<img src="diagrams/3.jpg" width="50%" height="50%"> |<img src="diagrams/3.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> | -->
 
 #### 10 = 2 + 2 + 2 + 2 + 2
-| | | |||
+<!-- | | | |||
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-|<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |
+|<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> |<img src="diagrams/2.jpg" width="50%" height="50%"> | -->
 
 ### make view 
 
@@ -69,7 +69,7 @@ Depth first search in the DAG can generate all the paths from root, node (3, 10)
 
 For example, the following path represents the choices {item 3, item 2, item 1},  i.e., {5, 3, 2}.
 ```sh
-          1             0            1            0           1
+          5                         3                         2
 (3, 10)  --->  (3, 5)  ---> (2, 5)  ---> (2, 2)  ---> (1, 2) ---> (1, 0)
 
  ^                           ^                         ^
@@ -77,7 +77,7 @@ For example, the following path represents the choices {item 3, item 2, item 1},
 ```
 | | 
 |:-------------:|
-| <img src="images/Coins_0000.png" width="60%" height="60%"> |
+| <img src="images/Coins_0000.png" width="100%" height="100%"> |
 
 
 The 0-cent coin is introduced solely as a catalyst to explain the column labeled '0' in the table above.
@@ -109,7 +109,7 @@ The 0-cent coin is introduced solely as a catalyst to explain the column labeled
 | |the combinations of table(1, 1) are the same as the combinations of table(0, 1) |
 
 
-### How to create the dynamic programming table and the DAG for making choices
+### How to create the dynamic programming table
 
 #### Method 1: Bottom-up tabulation
 
@@ -134,20 +134,10 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
         for (long col = 1; col <= pKnapsack->capacity; col++) {
             if (col < ItemWeight(pKnapsack, row)) {
                 DpTableElement(pKnapsack, row, col) = DpTableElement(pKnapsack, row - 1, col);
-                if (DpTableElement(pKnapsack, row, col) > 0) {
-                    DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
-                }
             } else {
                 long k = col - ItemWeight(pKnapsack, row);
                 long included = DpTableElement(pKnapsack, row, k);
                 long excluded = DpTableElement(pKnapsack, row - 1, col);
-                // set the dag node to remember the choices
-                if (included > 0) {
-                    DpDagNode(pKnapsack, row, col).included = &DpDagNode(pKnapsack, row, k);
-                } 
-                if (excluded > 0) {
-                    DpDagNode(pKnapsack, row, col).excluded = &DpDagNode(pKnapsack, row - 1, col);
-                } 
                 DpTableElement(pKnapsack, row, col) = included + excluded;
             }
         }
@@ -171,21 +161,10 @@ long SolveKnapsackMem(struct KnapsackInfo *pKnapsack, long n, long cap) {
         DpTableElement(pKnapsack, n, cap) = 0;
     } else if (ItemWeight(pKnapsack, n) > cap) {
         DpTableElement(pKnapsack, n, cap) = SolveKnapsackMem(pKnapsack, n - 1, cap);
-        // set the dag node to remember the choices
-        if (DpTableElement(pKnapsack, n, cap) > 0) {
-            DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
-        }
     } else {
         long k = cap - ItemWeight(pKnapsack, n);
         long included = SolveKnapsackMem(pKnapsack, n, k);
         long excluded = SolveKnapsackMem(pKnapsack, n - 1, cap);
-        // set the dag node to remember the choices
-        if (included > 0) {
-            DpDagNode(pKnapsack, n, cap).included = &DpDagNode(pKnapsack, n, k);
-        }         
-        if (excluded > 0) {
-            DpDagNode(pKnapsack, n, cap).excluded = &DpDagNode(pKnapsack, n - 1, cap);
-        } 
         DpTableElement(pKnapsack, n, cap) = included + excluded;
     }
     return DpTableElement(pKnapsack, n, cap);
