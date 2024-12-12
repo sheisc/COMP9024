@@ -69,7 +69,7 @@ For example, the following path represents the choices {2, 3, 5}.
 ```
 | | 
 |:-------------:|
-| <img src="images/Coins_0000.png" width="60%" height="60%"> |
+| <img src="images/Coins_0000.png" width="100%" height="100%"> |
 
 #### Motivation
 
