@@ -155,16 +155,17 @@ long SolveKnapsackTabulation(struct KnapsackInfo *pKnapsack, long n, long cap) {
     for (long row = 1; row <= pKnapsack->numOfItems; row++) {
         for (long col = 1; col <= pKnapsack->capacity; col++) {
             /*
-                (1) row == 1
+                (1) row == 1, {item1} used
                     
                     DpTableElement(row, col) = DpTableElement(row, col - ItemWeight(item1))
 
-                (2) row == 2
+                (2) row == 2, {item1, item2} used
                   
                     DpTableElement(row, col) = DpTableElement(row, col - ItemWeight(item1)) 
                                                +
                                                DpTableElement(row, col - ItemWeight(item2))
-                (3) row == 3
+                                               
+                (3) row == 3, {item1, item2, item3} used
 
                     DpTableElement(row, col) = DpTableElement(row, col - ItemWeight(item1)) 
                                                +
