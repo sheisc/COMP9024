@@ -1,20 +1,44 @@
 # Edmonds-Karp's algorithm
 
-``` sh
-/*******************************************************************
-                    Edmonds-Karp's algorithm 
 
-    1.  How to use the Edmonds-Karp algorithm to calculate the maximum flow.
+## Introduction
+
+The Edmonds-Karp's algorithm is an approach used to compute the maximum flow in a flow network. 
+
+The core idea is to repeatedly find paths (e.g., Source -> Node1 -> Node3 -> Sink, found by [breadth first search](../BreadthFirstSearch/README.md)) from the source to the sink in the graph.
+
+To maximize the flow in a flow network, reversed edges (e.g. Node1 -> Source, the red edges in the following diagrams) are introduced.
+
+Reversed edges allow for the possibility of "undoing" or "reversing" flow in future iterations.
+
+| Path 1: Source -> Node1 -> Node3 -> Sink, Flow: 2 | Update edge weights | Hide reversed edges |
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/EdmondsKarpMF_0001.png" width="80%" height="80%"> |  <img src="images/EdmondsKarpMF_0002.png" width="80%" height="80%"> |<img src="images/EdmondsKarpMF_0003.png" width="80%" height="80%"> |
+
+If the reversed edges are not included in the graph, we might end up with a scenario where the local maximum flow along a path doesn't contribute to a larger overall flow in the network.
+
+In the following example discussed in [Ford-Fulkerson](../FordFulkersonMF/), the sum of local maximums (i.e., 3+3) might be not the global maximum (i.e., 8).
+
+
+| Local maximum flow 3 on the path Source->Node1->Node3->Node4->Sink, but the flow capacity of the edge Node3->Sink has been wasted. | 
+|:-------------:|
+| <img src="diagrams/LocalMaximum.png" width="100%" height="100%"> | 
+
+| Local maximum flow 3 on the path Source->Node2->Node1->Node4->Sink, but the flow capacity of the edge Node3->Sink has been wasted. | 
+|:-------------:|
+| <img src="diagrams/LocalMaximum2.png" width="100%" height="100%"> | 
 
 
 
+| Global maximum flow 8. | 
+|:-------------:|
+| <img src="diagrams/GlobalMaximum.png" width="100%" height="100%"> | 
 
-                                             COMP9024
 
- *******************************************************************/
-``` 
+Augmented paths can contain reversed edges added during the algorithm.
 
-### Edmonds-Karp vs. Ford-Fulkerson
+
+### Edmonds-Karp vs. [Ford-Fulkerson](../FordFulkersonMF/)
 
 Think about augmenting paths as highways:
 
