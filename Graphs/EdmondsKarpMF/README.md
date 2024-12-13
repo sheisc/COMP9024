@@ -7,6 +7,15 @@ The Edmonds-Karp's algorithm is an approach used to compute the maximum flow in 
 
 The core idea is to repeatedly find paths (e.g., Source -> Node1 -> Node3 -> Sink, found by [breadth first search](../BreadthFirstSearch/README.md)) from the source to the sink in the graph.
 
+```sh
+The meaning of the edge weight in the graph.
+
+         0/7
+Source -------->  Node 2
+
+The flow capacity of the edge, Source --> Node 2,  is 7, and the current flow is 0.
+```
+
 To maximize the flow in a flow network, reversed edges (e.g. Node1 -> Source, the red edges in the following diagrams) are introduced.
 
 Reversed edges allow for the possibility of "undoing" or "reversing" flow in future iterations.
