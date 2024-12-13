@@ -1,22 +1,19 @@
 # Prim's algorithm
 
-``` sh
-/*******************************************************************
-                    Prim's algorithm 
-
-    1.  How to use Prim's algorithm in an undirected graph
-
-
-
-
-                                             COMP9024
-
- *******************************************************************/
-``` 
-
 ## Introduction
 
 Prim's algorithm finds the Minimum Spanning Tree (MST) of a connected, undirected graph.
+
+- Dijkstra's Algorithm: 
+
+    Accumulates the shortest path distances to all nodes from a source node. 
+    It doesn't focus on edges but on finding the minimum distance across all paths.
+
+- Prim's MST Algorithm: 
+
+    Tracks only the edges that are part of the minimum spanning tree. 
+    
+    It expands the MST by selecting the shortest edge connecting the already selected tree to new nodes.
 
 ###  make view
 
@@ -27,10 +24,6 @@ Prim's algorithm finds the Minimum Spanning Tree (MST) of a connected, undirecte
 PrimMST$ make view
 find ./images -name "*.png" | sort | xargs feh -g 1024x768 &
 ```
-
-**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
-
-Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 
 
 | Initial | 
