@@ -1,22 +1,18 @@
 # FordFulkerson's algorithm
 
-``` sh
-/*******************************************************************
-                    FordFulkerson's algorithm 
-
-    1.  How to use the Ford-Fulkerson algorithm to calculate the maximum flow.
-
-
-
-
-                                             COMP9024
-
- *******************************************************************/
-``` 
-
 ## Introduction
 
+The Ford-Fulkerson algorithm is an approach used to compute the maximum flow in a flow network. 
+
+The algorithm was developed by L.R. Ford Jr. and D.R. Fulkerson in 1956. 
+
+The core idea is to repeatedly find paths from the source to the sink in the graph.
+
+To maximize the flow in a flow network, reversed edges are introduced.
+
 If the reversed edges are not included in the residual graph, we might end up with a scenario where the local maximum flow along a path doesn't contribute to a larger overall flow in the network.
+
+Reversed edges allow for the possibility of "undoing" or "reversing" flow in future iterations.
 
 | Local maximum flow 3 on the path Source->Node1->Node3->Node4->Sink, but the flow capacity of the edge Node3->Sink has been wasted. | 
 |:-------------:|
@@ -32,7 +28,6 @@ The sum of local maximums (i.e., 3+3) might be not the global maximum (i.e., 8).
 |:-------------:|
 | <img src="diagrams/GlobalMaximum.png" width="100%" height="100%"> | 
 
-Reversed edges allow for the possibility of "undoing" or "reversing" flow in future iterations.
 
 Augmented paths can contain reversed edges (the red edges in the following diagrams) added during the algorithm.
 
