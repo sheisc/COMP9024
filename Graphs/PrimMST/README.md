@@ -4,16 +4,23 @@
 
 Prim's algorithm finds the Minimum Spanning Tree (MST) of a connected, undirected graph.
 
+It can reuse a lot of the structure from [Dijkstra's algorithm](../Dijkstra/README.md). 
+
+Both algorithms share some similarities in their approach, and this makes it easier to implement Prim's algorithm by leveraging Dijkstra's code. 
+
+### Key differences.
+
 - Dijkstra's Algorithm: 
 
     Accumulates the shortest path distances to all nodes from a source node. 
-    It doesn't focus on edges but on finding the minimum distance across all paths.
 
 - Prim's MST Algorithm: 
-
-    Tracks only the edges that are part of the minimum spanning tree. 
-    
+  
     It expands the MST by selecting the shortest edge connecting the already selected tree to new nodes.
+
+| Dijkstra: the 6 in (Node 2: 6) is the shortest distance accumulated | Prim: the -5 in (Node 5: -5) is the weight of the shortest edge |
+|:-------------:|:-------------:|
+| <img src="diagrams/DijkstraDirected_0005.png" width="50%" height="50%"> |   <img src="diagrams/PrimMST_0004.png" width="50%" height="50%"> |
 
 ###  make view
 
