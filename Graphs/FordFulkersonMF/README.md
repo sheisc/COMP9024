@@ -6,13 +6,20 @@ The Ford-Fulkerson algorithm is an approach used to compute the maximum flow in 
 
 The algorithm was developed by L.R. Ford Jr. and D.R. Fulkerson in 1956. 
 
-The core idea is to repeatedly find paths from the source to the sink in the graph.
+The core idea is to repeatedly find paths (e.g., using [depth first search](../DepthFirstSearch/README.md)) from the source to the sink in the graph.
 
-To maximize the flow in a flow network, reversed edges are introduced.
+To maximize the flow in a flow network, reversed edges (the red edges in the following diagrams) are introduced.
+
+Reversed edges allow for the possibility of "undoing" or "reversing" flow in future iterations.
+
+| Path 1: Source -> Node1 -> Node3 -> Node4 -> Sink, Flow: 3 | Update edge weights | Hide reversed edges |
+|:-------------:|:-------------:|:-------------:|
+| <img src="images/FordFulkersonMF_0001.png" width="80%" height="80%"> |  <img src="images/FordFulkersonMF_0002.png" width="80%" height="80%"> |<img src="images/FordFulkersonMF_0003.png" width="80%" height="80%"> |
 
 If the reversed edges are not included in the residual graph, we might end up with a scenario where the local maximum flow along a path doesn't contribute to a larger overall flow in the network.
 
-Reversed edges allow for the possibility of "undoing" or "reversing" flow in future iterations.
+In the following example, the sum of local maximums (i.e., 3+3) might be not the global maximum (i.e., 8).
+
 
 | Local maximum flow 3 on the path Source->Node1->Node3->Node4->Sink, but the flow capacity of the edge Node3->Sink has been wasted. | 
 |:-------------:|
@@ -22,7 +29,7 @@ Reversed edges allow for the possibility of "undoing" or "reversing" flow in fut
 |:-------------:|
 | <img src="diagrams/LocalMaximum2.png" width="100%" height="100%"> | 
 
-The sum of local maximums (i.e., 3+3) might be not the global maximum (i.e., 8).
+
 
 | Global maximum flow 8. | 
 |:-------------:|
