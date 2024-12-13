@@ -36,7 +36,7 @@ In the following example, the sum of local maximums (i.e., 3+3) might be not the
 | <img src="diagrams/GlobalMaximum.png" width="100%" height="100%"> | 
 
 
-Augmented paths can contain reversed edges (the red edges in the following diagrams) added during the algorithm.
+Augmented paths (e.g. Path 2 in the following diagrams) can contain reversed edges (e.g., Node4 -> Node3 in Path 2 ) added during the algorithm.
 
 ###  make view
 
