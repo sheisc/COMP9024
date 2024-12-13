@@ -167,7 +167,7 @@ void GenOneImage(struct Graph *pGraph,
                  long seqNo, 
                  int *visited, 
                  struct GraphEdge *pMstEdges,
-                 long mstCount) {
+                 long edgesAdded) {
     char dotFileName[FILE_NAME_LEN+1] = {0};
     char pngFileName[FILE_NAME_LEN+1] = {0};
     char command[(FILE_NAME_LEN+1)*4] = {0};
@@ -176,7 +176,7 @@ void GenOneImage(struct Graph *pGraph,
     snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
 
     Graph2Dot(pGraph, dotFileName, graphName, pGraph->isDirected, 
-              1, visited, pMstEdges, mstCount, 1);
+              1, visited, pMstEdges, edgesAdded, 1);
 
     snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
     
@@ -186,9 +186,10 @@ void GenOneImage(struct Graph *pGraph,
 }
 
 // FIXME:
-static int isEdgeInMst(long u, long v, struct GraphEdge *pMstEdges, long mstCount) {
-    for (long i = 0; i < mstCount; i++) {
-        if (u == pMstEdges[i].u && v == pMstEdges[i].v) {
+static int isEdgeInMst(long u, long v, struct GraphEdge *pMstEdges, long edgesAdded) {
+    for (long i = 0; i < edgesAdded; i++) {
+        // undirected edge:  u --> v,  v --> u
+        if ((u == pMstEdges[i].u && v == pMstEdges[i].v) || (v == pMstEdges[i].u && u == pMstEdges[i].v)) {
             return 1;
         }
     }
@@ -206,7 +207,7 @@ void Graph2Dot(struct Graph *pGraph,
                int displayLabel,
                int *visited,
                struct GraphEdge *pMstEdges,
-               long mstCount,
+               long edgesAdded,
                int displayVisited) {
     FILE *dotFile = fopen(filePath, "w");
     /*
@@ -239,7 +240,7 @@ void Graph2Dot(struct Graph *pGraph,
                         fprintf(dotFile, " [label=\"%ld\"]", val);
                     }
                     // FIXME:
-                    if (isEdgeInMst(u, v, pMstEdges, mstCount)) {
+                    if (isEdgeInMst(u, v, pMstEdges, edgesAdded)) {
                         fprintf(dotFile, "[color=red]");
                     }
                     fprintf(dotFile, "\n"); 
@@ -292,7 +293,7 @@ void KruskalMST(struct Graph *pGraph) {
     struct DisjointSets *djs = CreateDisjointSets(pGraph->n);
 
     long i = 0;
-    long mstCount = 0;
+    long edgesAdded = 0;
     for (long u = 0; u < pGraph->n; u++) {
         for (long v = u; v < pGraph->n; v++) {
             // FIXME:
@@ -307,22 +308,27 @@ void KruskalMST(struct Graph *pGraph) {
 
     qsort(pAllEdges, edgeCount, sizeof(pAllEdges[0]), CompareTwoEdges);
     GenOneImage(pGraph, "KruskalMST", "images/KruskalMST", 
-                        imgCount, NULL, pMstEdges, mstCount);
+                        imgCount, NULL, pMstEdges, edgesAdded);
     imgCount++;
     for (i = 0; i < edgeCount; i++) {
         long uRep = DisjointSetsFind(djs, pAllEdges[i].u);
         long vRep = DisjointSetsFind(djs, pAllEdges[i].v);
-        if (uRep != vRep) {
-            pMstEdges[mstCount] = pAllEdges[i];
-            mstCount++;
-            DisjointSetsUnion(djs, uRep, vRep);
 
-            printf("============================================== Step %ld ==============================================\n\n", mstCount);
-            printf("\tAdd: %s -- %s\n\n", pGraph->pNodes[pAllEdges[i].u].name, pGraph->pNodes[pAllEdges[i].v].name);
-            //           
-            GenOneImage(pGraph, "KruskalMST", "images/KruskalMST", 
-                        imgCount, NULL, pMstEdges, mstCount);
-            imgCount++;
+        printf("============================================== Step %ld ==============================================\n\n", (i + 1));
+        printf("\tAdd: %s -- %s\n\n", pGraph->pNodes[pAllEdges[i].u].name, pGraph->pNodes[pAllEdges[i].v].name); 
+
+        
+        pMstEdges[edgesAdded] = pAllEdges[i];        
+        
+        //           
+        GenOneImage(pGraph, "KruskalMST", "images/KruskalMST", 
+                    imgCount, NULL, pMstEdges, edgesAdded + 1);
+        imgCount++;
+        if (uRep != vRep) {
+            DisjointSetsUnion(djs, uRep, vRep);
+            edgesAdded++;
+        } else {
+            printf("Cycle detected.\n");
         }
     }
 
