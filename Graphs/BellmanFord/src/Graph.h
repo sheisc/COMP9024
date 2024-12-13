@@ -1,6 +1,6 @@
 #ifndef GRAPH_H
 #define GRAPH_H
-#include "Stack.h"
+
 
 // INFINITY_VALUE must align with the type of AdjMatrixElementTy
 #define INFINITY_VALUE  LONG_MAX
