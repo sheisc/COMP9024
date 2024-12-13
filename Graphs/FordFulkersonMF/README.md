@@ -16,7 +16,7 @@ Reversed edges allow for the possibility of "undoing" or "reversing" flow in fut
 |:-------------:|:-------------:|:-------------:|
 | <img src="images/FordFulkersonMF_0001.png" width="80%" height="80%"> |  <img src="images/FordFulkersonMF_0002.png" width="80%" height="80%"> |<img src="images/FordFulkersonMF_0003.png" width="80%" height="80%"> |
 
-If the reversed edges are not included in the residual graph, we might end up with a scenario where the local maximum flow along a path doesn't contribute to a larger overall flow in the network.
+If the reversed edges are not included in the graph, we might end up with a scenario where the local maximum flow along a path doesn't contribute to a larger overall flow in the network.
 
 In the following example, the sum of local maximums (i.e., 3+3) might be not the global maximum (i.e., 8).
 
