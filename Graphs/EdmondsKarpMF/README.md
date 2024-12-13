@@ -10,10 +10,10 @@ The core idea is to repeatedly find paths (e.g., Source -> Node1 -> Node3 -> Sin
 ```sh
 The meaning of the edge weight in the graph.
 
-         0/7
-Source -------->  Node 2
+         0/3
+Source -------->  Node 1
 
-The flow capacity of the edge, Source --> Node 2,  is 7, and the current flow is 0.
+The flow capacity of the edge, Source --> Node 1,  is 3, and the current flow is 0.
 ```
 
 To maximize the flow in a flow network, reversed edges (e.g. Node1 -> Source, the red edges in the following diagrams) are introduced.
