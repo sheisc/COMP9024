@@ -6,9 +6,9 @@ The Ford-Fulkerson algorithm is an approach used to compute the maximum flow in 
 
 The algorithm was developed by L.R. Ford Jr. and D.R. Fulkerson in 1956. 
 
-The core idea is to repeatedly find paths (e.g., using [depth first search](../DepthFirstSearch/README.md)) from the source to the sink in the graph.
+The core idea is to repeatedly find paths (e.g., Source -> Node1 -> Node3 -> Node4 -> Sink, found by [depth first search](../DepthFirstSearch/README.md)) from the source to the sink in the graph.
 
-To maximize the flow in a flow network, reversed edges (the red edges in the following diagrams) are introduced.
+To maximize the flow in a flow network, reversed edges (e.g. Node1 -> Source, the red edges in the following diagrams) are introduced.
 
 Reversed edges allow for the possibility of "undoing" or "reversing" flow in future iterations.
 
