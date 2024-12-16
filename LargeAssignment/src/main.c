@@ -14,6 +14,7 @@ static const char *srcCode =
     "main() { long year; year = 2024; output(year); return 0;}";
 
 // get the next char from memory
+//__attribute__((unused))
 static int NextCharFromMem(void) {
     int ch = (unsigned char)(*srcCode);
     srcCode++;

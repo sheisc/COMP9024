@@ -64,6 +64,7 @@ static void initialHeap() {
   2. The memory allocated is not initialized. 
 
  */
+//__attribute__((unused))
 static void *OurMalloc(heap_size_t size) {
     if (!init) {
         init = 1;
@@ -172,6 +173,7 @@ static void mergeIfAdjacent(struct HeapMemBlock *one,
   If addrs is NULL, no operation is performed.
 
  */
+//__attribute__((unused))
 static void OurFree(void *addr) {
     if (addr == NULL)
         return;

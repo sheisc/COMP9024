@@ -306,7 +306,7 @@ static AstStmtNodePtr DoWhileStatement(void) {
 AstStmtNodePtr CompoundStatement(void) {
     AstStmtNodePtr comStmt;
     AstStmtNodePtr *pStmt;
-    Value value;
+    //Value value;
 
     comStmt = CreateStmtNode(TK_COMPOUND);
     pStmt = &(comStmt->next);
@@ -386,6 +386,8 @@ AstStmtNodePtr Statement(void) {
         return IOStatement(curToken.kind);
     case TK_RETURN:
         return ReturnStatement();
+    default:
+        break;        
     }
 
     assert(0);

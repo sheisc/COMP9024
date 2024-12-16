@@ -681,6 +681,8 @@ void EmitAstExprNode(AstExprNodePtr pNode) {
                 EmitAssembly("idivq %%rdi");
                 EmitAssembly("movq %%rax, %s", GetNodeNameInAssembly(pNode));
                 break;
+            default:
+                break;
             }
         }
     }
