@@ -33,7 +33,7 @@ struct BTreeNode *CreateBTree(void) {
 void ReleaseBTree(struct BTreeNode *root) {
     if (root) {
         long nk = root->nk;
-        for (long i = 0; i < nk; i++) {
+        for (long i = 0; i <= nk; i++) {
             ReleaseBTree(root->children[i]);            
         }
         free(root);
