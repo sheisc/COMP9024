@@ -120,6 +120,9 @@ LargeAssignment
 │   └── TestSccHeap.c                      // For testing our heap allocator
 ├── Makefile                               // Makefile for our large assignment
 ├── README.md
+|
+├── Factorial.scc.S                        // x86_64 assembly code generated for the source code in tests/Factorial.scc
+| 
 ├── src                                    // The source code of SCC
 │   ├── decl.c                             // Declaration, only supporting 'long'
 │   ├── decl.h                             
