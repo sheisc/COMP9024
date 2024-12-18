@@ -11,7 +11,7 @@ static struct BPlusTreeNode * BPlusTreeNodeGetPredecessor(struct BPlusTreeNode *
 static struct BPlusTreeNode * BPlusTreeNodeGetSuccessor(struct BPlusTreeNode *pNode, long i);
 static void BPlusTreeNodeMerge(struct BPlusTreeNode *pNode, long index);
 
-#define ENABLE_TEST_OUTPUT
+
 
 #ifdef ENABLE_TEST_OUTPUT
 static long imgCount = 0;
@@ -105,6 +105,16 @@ static long BPlusTreeNodeFindKeyInCurNode(struct BPlusTreeNode *pNode, BPlusTree
     }
 }
 
+static void PrintKV(BPlusTreeKeyTy k, BPlusTreeValueTy v) {
+#ifdef ENABLE_TEST_OUTPUT             
+            printf("%9ld  %9ld \n", (long) k, (long) v);
+#endif
+
+#ifdef USE_KEY_VALUE_GAP_FOR_TESTING         
+            assert(((long) v) == ((long) k) + KEY_VALUE_GAP_FOR_TESTING); 
+#endif 
+}
+
 static long BPlusTreeNodeIsFull(struct BPlusTreeNode *pNode) {
     assert(pNode);
     return pNode->nk == 2 * pNode->md - 1;
@@ -119,10 +129,8 @@ static void BPlusTreeNodeTraverse(struct BPlusTreeNode *pNode) {
             }
             BPlusTreeKeyTy k = pNode->keys[i];
             BPlusTreeValueTy v = GetValue(pNode, i);
-#ifdef ENABLE_TEST_OUTPUT             
-            printf("%9ld  %9ld \n", (long) k, (long) v);
-#endif            
-            assert(((long) v) == ((long) k) + KEY_VALUE_GAP_FOR_TESTING);            
+            PrintKV(k, v);
+          
         }
         // right-most child
         if (!pNode->isLeaf) {
@@ -640,10 +648,7 @@ void BPlusTreeRangeQuery(struct BPlusTree *pBPlusTree, BPlusTreeKeyTy startKey, 
             }
             if (k >= startKey && k <= endKey) {
                 BPlusTreeValueTy v = GetValue(curNode, i);
-#ifdef ENABLE_TEST_OUTPUT                
-                printf("%9ld  %9ld \n", (long) k, (long) v);
-#endif                
-                assert(((long) v) == ((long) k) + KEY_VALUE_GAP_FOR_TESTING);
+                PrintKV(k, v);                
             }
         }
         curNode = curNode->next;

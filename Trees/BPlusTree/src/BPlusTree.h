@@ -18,6 +18,12 @@
 
 #define UNUSED_SLOT_KEY_VALUE              (-1)
 
+//#define   ENABLE_OUT_OF_ORDER_TEST 
+
+#define ENABLE_TEST_OUTPUT
+
+#define USE_KEY_VALUE_GAP_FOR_TESTING
+
 #define KEY_VALUE_GAP_FOR_TESTING           9
 
 // for BPlusTree-related API, visible to users

@@ -8,7 +8,7 @@
 // At least md-way 
 #define   BPlusTree_MINIMUM_DEGREE  2
 
-//#define   ENABLE_OUT_OF_ORDER_TEST 
+
 
 static void Swap(long *pa, long *pb) {
     long tmp = *pa;
@@ -42,7 +42,11 @@ static void TestBPlusTree(long md, long *randKeys1, long *randKeys2, long n) {
     long max = 0;
     // insert + traverse + range query
     for (long i = 0; i < n; i++) {
-        BPlusTreeInsert(pBPlusTree, randKeys1[i], randKeys1[i] + KEY_VALUE_GAP_FOR_TESTING); 
+#ifdef USE_KEY_VALUE_GAP_FOR_TESTING         
+        BPlusTreeInsert(pBPlusTree, randKeys1[i], randKeys1[i] + KEY_VALUE_GAP_FOR_TESTING);
+#else
+        BPlusTreeInsert(pBPlusTree, randKeys1[i], randKeys1[i]);         
+#endif        
         BPlusTreeTraverse(pBPlusTree);
         if (max < randKeys1[i]) {
             max = randKeys1[i];
