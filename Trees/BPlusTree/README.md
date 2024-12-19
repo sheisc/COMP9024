@@ -19,7 +19,7 @@ In contrast, a node in a binary search tree (e.g., [AVL](../SelfBalancingBST/REA
 
 
 Except for the root node, an internal node in a B+ tree must have at least md branches and (md - 1) keys, where md ≥ 2.
-<!-- As md increases (for example, from 2 to 128), the height of the tree can be reduced, thereby decreasing I/O operations on the block device and improving system performance. -->
+As md increases (for example, from 2 to 128), the height of the tree can be reduced.
 An internal node can have no more than (2 * md - 1) keys and (2 * md) branches, subtrees, or children.
 This design means that a block (or page) in memory should be filled at least halfway with data. If a block is underutilized, the I/O operations would be inefficient because many blocks might need to be read, and the effective use of each read would be lower.
 
@@ -29,6 +29,7 @@ An additional slot (mark in green color) in a leaf node can store a key-value pa
 In a leaf node, there can be at most 2 * md keys (plus the key from its ancestor) and 
 2 * md data pointers pointing to the data records.
 All the leaf nodes of a B+ tree can be linked together to efficiently support range queries.
+The linked list of leaf nodes can be maintained through two basic operations: merge() and split().
 Since only the leaf nodes store actual data, range queries can efficiently access and return the necessary records.
 
 ### Two basic operations merge() and split() for maintaining the balance of a B+ tree during insertions and deletions.
