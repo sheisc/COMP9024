@@ -88,6 +88,7 @@ static void ReleaseBPlusTreeNode(struct BPlusTreeNode *pNode) {
     }
 }
 
+#if 0
 /*
     This function returns 0 if k is not found.
     It returns 1 if k exists.
@@ -104,6 +105,43 @@ static long BPlusTreeNodeFindKeyInCurNode(struct BPlusTreeNode *pNode, BPlusTree
         return 1;
     }
 }
+#else
+/*
+    Binary search.
+
+    The array elements pNode->keys[0 .. pNode->nk - 1] are in ascending order.
+
+    This function returns 1 when @k is found,
+    *pIndex is the index of the found element.
+    If there are more than one @k in pNode->keys[], it returns the leftmost one.
+
+    Otherwise it returns 0, with *pIndex being either pNode->nk or the index of 
+    the first element in pNode->keys[] which is larger than @k.
+ */
+static long BPlusTreeNodeFindKeyInCurNode(struct BPlusTreeNode *pNode, BPlusTreeKeyTy k, long *pIndex) {
+    // [left, right]
+    long left = 0;
+    long right = pNode->nk - 1;
+    while (left <= right) {
+        long mid = (left + right) / 2;
+        if (pNode->keys[mid] == k) {   
+            // find the leftmost target         
+            while (mid - 1 >= 0 && pNode->keys[mid - 1] == k) {
+                mid--;
+            }
+            *pIndex = mid;
+            return 1;
+        } else if (pNode->keys[mid] < k) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }                       
+    }
+    assert(left >= pNode->nk || pNode->keys[left] > k);
+    *pIndex = left;
+    return 0;      
+}
+#endif
 
 static void PrintKV(BPlusTreeKeyTy k, BPlusTreeValueTy v) {
 #ifdef ENABLE_TEST_OUTPUT             
@@ -262,7 +300,6 @@ void BPlusTreeNodeInsertNonFull(struct BPlusTree *pBPlusTree, struct BPlusTreeNo
 
  */
 void BPlusTreeNodeDeleteFromLeafNode(struct BPlusTreeNode *pNode, long i) {
-    //assert(pNode->nk >= pNode->md);
     assert(pNode->isLeaf);
     // FIXME: B+ Tree
     for (long j = i + 1; j <= pNode->nk; j++) {
@@ -283,7 +320,6 @@ void BPlusTreeNodeDeleteFromLeafNode(struct BPlusTreeNode *pNode, long i) {
         Then recursively delete the key from pNode->pChildren[i].
  */
 void BPlusTreeNodeDeleteFromNonLeafNode(struct BPlusTreeNode *pNode, long i) {
-    //assert(pNode->nk >= pNode->md);
     assert(!pNode->isLeaf);
 
     BPlusTreeKeyTy k = pNode->keys[i];
