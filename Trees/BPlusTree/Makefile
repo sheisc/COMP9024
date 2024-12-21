@@ -34,7 +34,9 @@ CC= gcc
 #CFLAGS = -g -no-pie --save-temps -I $(PROJ_ROOT_PATH)/src
 #CFLAGS = -no-pie --save-temps -fno-asynchronous-unwind-tables -I $(PROJ_ROOT_PATH)/src 
 #CFLAGS = -g -Wall -fsanitize=address -static-libasan -I $(PROJ_ROOT_PATH)/src
-CFLAGS = -g -Wall -fsanitize=address -I $(PROJ_ROOT_PATH)/src
+#==9942==HINT: LeakSanitizer does not work under ptrace (strace, gdb, etc)
+#CFLAGS = -g -Wall -fsanitize=address -I $(PROJ_ROOT_PATH)/src
+CFLAGS = -g -Wall -I $(PROJ_ROOT_PATH)/src
 
 # create a directory  
 $(shell mkdir -p $(BUILD_DIR))
