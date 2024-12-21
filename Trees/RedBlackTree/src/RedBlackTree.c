@@ -433,7 +433,7 @@ static void RecursiveRBTreeInsert(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
             pNode->visited = 0;
             return;
         }
-        // The inserted node is RED node. We don't update its black height here.
+        // The inserted node is RED node. We will update black heights in FixViolationsInInsertion().
         GEN_ONE_IMAGE();
         FixViolationsInInsertion(pRoot, pNodePtr, pCnt, graphName, fileName);
         GEN_ONE_IMAGE();

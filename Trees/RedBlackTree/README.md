@@ -191,7 +191,7 @@ static void RecursiveRBTreeInsert(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
             // If numVal is already in the binary search tree, do nothing.
             return;
         }
-        // The inserted node is RED node. We don't update its black height here.
+        // The inserted node is RED node. We will update black heights in FixViolationsInInsertion().
         FixViolationsInInsertion(pRoot, pNodePtr, pCnt, graphName, fileName);
     }
 }
