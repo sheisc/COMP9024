@@ -18,11 +18,11 @@ but potentially more complex insertions due to its balancing constraints.
 
 | Initial (Red-Black Tree) | Insert | Self-Balancing (recoloring or rotation) |
 |:-------------:|:-------------:|:-------------:|
-| <img src="diagrams/RBTree1.png" width="60%" height="60%"> | <img src="diagrams/RBTree2.png" width="60%" height="60%"> |<img src="diagrams/RBTree3.png" width="60%" height="60%"> |
+| <img src="diagrams/RBTree1.png" width="80%" height="80%"> | <img src="diagrams/RBTree2.png" width="80%" height="80%"> |<img src="diagrams/RBTree3.png" width="80%" height="80%"> |
 
 | Initial (AVL Tree) | Insert | Self-Balancing (Rotation) |
 |:-------------:|:-------------:|:-------------:|
-| <img src="diagrams/AVLTree1.png" width="60%" height="60%"> | <img src="diagrams/AVLTree2.png" width="60%" height="60%"> |<img src="diagrams/AVLTree3.png" width="60%" height="60%"> |
+| <img src="diagrams/AVLTree1.png" width="80%" height="80%"> | <img src="diagrams/AVLTree2.png" width="80%" height="80%"> |<img src="diagrams/AVLTree3.png" width="80%" height="80%"> |
 
 As a result, Red-Black trees do not need to be as tightly balanced as AVL Trees, meaning they can be more flexible when adjusting to changes (insertions and deletions). This relaxation reduces the overhead of maintaining strict balance.
 
@@ -152,13 +152,13 @@ In the following red-black trees,
 | <img src="diagrams/RBTree1Insert_0001.png" width="30%" height="30%"> | <img src="diagrams/RBTree3BTree_0001.png" width="30%" height="30%"> |
 | <img src="diagrams/RBTree1Insert_0002.png" width="40%" height="40%"> | <img src="diagrams/RBTree3BTree_0002.png" width="40%" height="40%"> |
 | <img src="diagrams/RBTree1Insert_0003.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0003.png" width="50%" height="50%"> |
-| <img src="diagrams/RBTree1Insert_0004.png" width="60%" height="60%"> | <img src="diagrams/RBTree3BTree_0004.png" width="60%" height="60%"> |
-| <img src="diagrams/RBTree1Insert_0005.png" width="60%" height="60%"> | <img src="diagrams/RBTree3BTree_0005.png" width="60%" height="60%"> |
-| <img src="diagrams/RBTree1Insert_0006.png" width="60%" height="60%"> | <img src="diagrams/RBTree3BTree_0006.png" width="60%" height="60%"> |
-| <img src="diagrams/RBTree1Insert_0007.png" width="60%" height="60%"> | <img src="diagrams/RBTree3BTree_0007.png" width="60%" height="60%"> |
-| <img src="diagrams/RBTree1Insert_0008.png" width="60%" height="60%"> | <img src="diagrams/RBTree3BTree_0008.png" width="60%" height="60%"> |
-| <img src="diagrams/RBTree1Insert_0009.png" width="60%" height="60%"> | <img src="diagrams/RBTree3BTree_0009.png" width="60%" height="60%"> |
-| <img src="diagrams/RBTree1Insert_0010.png" width="60%" height="60%"> | <img src="diagrams/RBTree3BTree_0010.png" width="60%" height="60%"> |
+| <img src="diagrams/RBTree1Insert_0004.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0004.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1Insert_0005.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0005.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1Insert_0006.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0006.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1Insert_0007.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0007.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1Insert_0008.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0008.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1Insert_0009.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0009.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1Insert_0010.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0010.png" width="80%" height="80%"> |
 
 ### How to insert a node (as a red leaf) into a red-black tree
 
@@ -318,404 +318,13 @@ static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
 }
 ```
 
-### make view
 
-```sh
-RedBlackTree$ make view
-```
-
-**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
-
-
-### RBTreeInsert(): {50, 20, 10, 30, 40, 70, 60, 100, 90, 80}
-
-| Insert 50 | 
-|:-------------:|
-| <img src="images/RBTree1Insert_0001.png" width="60%" height="60%"> |
-
-| Insert 20 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0002.png" width="60%" height="60%"> |
-
-
-| Insert 20 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0004.png" width="60%" height="60%"> |
-
-
-| Insert 10 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0005.png" width="60%" height="60%"> |
-
-
-
-| Insert 10 (red parent + black uncle + left child, right rotation at 50 and recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0007.png" width="60%" height="60%"> |
-
-| Insert 10 | 
-|:-------------:|
-|  <img src="images/RBTree1Insert_0008.png" width="60%" height="60%"> |
-
-| Insert 10 | 
-|:-------------:|
-| <img src="images/RBTree1Insert_0009.png" width="60%" height="60%"> |
-
-| Insert 30 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0010.png" width="60%" height="60%"> |
-
-
-
-| Insert 30 (red uncle + red parent, recoloring)|
-|:-------------:|
-| <img src="images/RBTree1Insert_0012.png" width="60%" height="60%"> |
-
-| Insert 30  (recoloring root, with the black height of the tree increased by one) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0013.png" width="60%" height="60%"> |
-
-| Insert 30  |
-|:-------------:|
-| <img src="images/RBTree1Insert_0014.png" width="60%" height="60%"> |
-
-| Insert 40 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0015.png" width="60%" height="60%"> |
-
-
-| Insert 40 (red parent + black uncle + right child, left rotation at 30) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0017.png" width="60%" height="60%"> |
-
-
-| Insert 40 (red parent + black uncle + left child, right rotation at 50 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0018.png" width="60%" height="60%"> |
-
-
-
-| Insert 40  |
-|:-------------:|
-| <img src="images/RBTree1Insert_0020.png" width="60%" height="60%"> |
-
-
-| Insert 40 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0022.png" width="60%" height="60%"> |
-
-| Insert 70 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0023.png" width="60%" height="60%"> |
-
-
-
-| Insert 70 (red uncle + red parent, recoloring)|
-|:-------------:|
-| <img src="images/RBTree1Insert_0025.png" width="60%" height="60%"> |
-
-| Insert 70  |
-|:-------------:|
-| <img src="images/RBTree1Insert_0026.png" width="60%" height="60%"> |
-
-| Insert 70 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0027.png" width="60%" height="60%"> |
-
-
-| Insert 70 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0029.png" width="60%" height="60%"> |
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0030.png" width="60%" height="60%"> |
-
-
-| Insert 60 (black uncle + red parent + left child, right rotation at 70)|
-|:-------------:|
-| <img src="images/RBTree1Insert_0032.png" width="60%" height="60%"> |
-
-| Insert 60  (black uncle + red parent + right child, left rotation at 50 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0033.png" width="60%" height="60%"> |
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0034.png" width="60%" height="60%"> |
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0035.png" width="60%" height="60%"> |
-
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0038.png" width="60%" height="60%"> |
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0039.png" width="60%" height="60%"> |
-
-| Insert 100 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0040.png" width="60%" height="60%"> |
-
-
-
-| Insert 100 (red uncle + red parent, recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0042.png" width="60%" height="60%"> |
-
-| Insert 100 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0043.png" width="60%" height="60%"> |
-
-| Insert 100 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0045.png" width="60%" height="60%"> |
-
-| Insert 100 (black uncle + red parent + right child, left rotation at 20 + recoloring)|
-|:-------------:|
-| <img src="images/RBTree1Insert_0046.png" width="60%" height="60%"> |
-
-| Insert 100  |
-|:-------------:|
-| <img src="images/RBTree1Insert_0047.png" width="60%" height="60%"> |
-
-
-| Insert 100 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0048.png" width="60%" height="60%"> |
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0049.png" width="60%" height="60%"> |
-
-
-
-| Insert 90 (black uncle + red parent + left child, right rotation at 100) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0051.png" width="60%" height="60%"> |
-
-
-| Insert 90 ((black uncle + red parent + right child, left rotation at 70 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0052.png" width="60%" height="60%"> |
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0053.png" width="60%" height="60%"> |
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0054.png" width="60%" height="60%"> |
-
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0056.png" width="60%" height="60%"> |
-
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0058.png" width="60%" height="60%"> |
-
-
-| Insert 80 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0059.png" width="60%" height="60%"> |
-
-
-| Insert 80 (red parent + red uncle, recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0061.png" width="60%" height="60%"> |
-
-| Insert 80 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0062.png" width="60%" height="60%"> |
-
-
-| Insert 80 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0064.png" width="60%" height="60%"> |
-
-| Insert 80 (red uncle + red parent, recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0065.png" width="60%" height="60%"> |
-
-| Insert 80 (recoloring root, with the black height of the tree increased by one) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0066.png" width="60%" height="60%"> |
-
-| Insert 80 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0067.png" width="60%" height="60%"> |
-
-
-### RBTreeDelete(): {50, 20, 10, 30, 40, 70, 60, 100, 90, 80}
-
-| Delete 50 (red sibling + 2 black nephews, left rotation at 60 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0068.png" width="60%" height="60%"> |
-
-| Delete 50 (black sibling + right red nephew, left rotation at 60 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0069.png" width="60%" height="60%"> |
-
-| Delete 50 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0070.png" width="60%" height="60%"> |
-
-
-
-
-| Delete 50 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0072.png" width="60%" height="60%"> |
-
-| Delete 50 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0073.png" width="60%" height="60%"> |
-
-| Delete 20 (swap 10 and 20) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0074.png" width="60%" height="60%"> |
-
-
-| Delete 20 (black sibling at 30 + two black nephews, recoloring)|
-|:-------------:|
-| <img src="images/RBTree2Delete_0075.png" width="60%" height="60%"> |
-
-| Delete 20 (black sibling at 90 + left red nephew at 70, right rotation at 90)|
-|:-------------:|
-| <img src="images/RBTree2Delete_0076.png" width="60%" height="60%"> |
-
-
-
-| Delete 20 (black sibling at 90 + two black nephews, left rotation at 40 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0078.png" width="60%" height="60%"> |
-
-| Delete 20 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0079.png" width="60%" height="60%"> |
-
-| Delete 20 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0080.png" width="60%" height="60%"> |
-
-
-| Delete 10 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0081.png" width="60%" height="60%"> |
-
-
-| Delete 10 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0085.png" width="60%" height="60%"> |
-
-
-| Delete 10 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0087.png" width="60%" height="60%"> |
-
-
-| Delete 30 (black sibling at 60 + two black nephews, recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0088.png" width="60%" height="60%"> |
-
-| Delete 30 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0089.png" width="60%" height="60%"> |
-
-
-| Delete 30 (black sibling at 90 + two black nephews, recoloring)|
-|:-------------:|
-| <img src="images/RBTree2Delete_0090.png" width="60%" height="60%"> |
-
-
-| Delete 30 (the black height of the tree decreased by 1) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0091.png" width="60%" height="60%"> |
-
-
-| Delete 30 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0092.png" width="60%" height="60%"> |
-
-| Delete 40 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0093.png" width="60%" height="60%"> |
-
-
-| Delete 40 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0097.png" width="60%" height="60%"> |
-
-
-| Delete 70 (swap 70 and 60) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0098.png" width="60%" height="60%"> |
-
-
-| Delete 70 (red sibling at 90, left rotation at 60 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0099.png" width="60%" height="60%"> |
-
-| Delete 70 (black sibling at 80 + two black nephews, recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0100.png" width="60%" height="60%"> |
-
-| Delete 70 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0101.png" width="60%" height="60%"> |
-
-| Delete 70 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0102.png" width="60%" height="60%"> |
-
-| Delete 60 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0103.png" width="60%" height="60%"> |
-
-
-| Delete 60 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0107.png" width="60%" height="60%"> |
-
-| Delete 100 (black sibling at 80 + two black nephews, recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0108.png" width="60%" height="60%"> |
-
-| Delete 100 (the black height of the tree decreased by 1)|
-|:-------------:|
-| <img src="images/RBTree2Delete_0109.png" width="60%" height="60%"> |
-
-
-| Delete 100 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0110.png" width="60%" height="60%"> |
-
-
-| Delete 90 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0111.png" width="60%" height="60%"> |
-
-
-| Delete 80 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0114.png" width="60%" height="60%"> |
-
-
-
-
-### RBTreeTo234Tree(): convert a red-black tree into a 2-3-4 tree
+### How to convert a red-black tree into a 2-3-4 tree
 
 
 | Red-Black Tree | 2-3-4 Tree |
 |:-------------:|:-------------:|
-| <img src="diagrams/RBTree1Insert_0008.png" width="60%" height="60%"> | <img src="diagrams/RBTree3BTree_0008.png" width="60%" height="60%"> |
+| <img src="diagrams/RBTree1Insert_0008.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0008.png" width="80%" height="80%"> |
 
 
 ```C
@@ -829,4 +438,397 @@ struct BTreeNode *RBTreeTo234Tree(RBTreeNodePtr root) {
 }
 
 ```
+
+
+### make view
+
+```sh
+RedBlackTree$ make view
+```
+
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
+
+
+### RBTreeInsert(): {50, 20, 10, 30, 40, 70, 60, 100, 90, 80}
+
+| Insert 50 | 
+|:-------------:|
+| <img src="images/RBTree1Insert_0001.png" width="80%" height="80%"> |
+
+| Insert 20 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0002.png" width="80%" height="80%"> |
+
+
+| Insert 20 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0004.png" width="80%" height="80%"> |
+
+
+| Insert 10 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0005.png" width="80%" height="80%"> |
+
+
+
+| Insert 10 (red parent + black uncle + left child, right rotation at 50 and recoloring) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0007.png" width="80%" height="80%"> |
+
+| Insert 10 | 
+|:-------------:|
+|  <img src="images/RBTree1Insert_0008.png" width="80%" height="80%"> |
+
+| Insert 10 | 
+|:-------------:|
+| <img src="images/RBTree1Insert_0009.png" width="80%" height="80%"> |
+
+| Insert 30 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0010.png" width="80%" height="80%"> |
+
+
+
+| Insert 30 (red uncle + red parent, recoloring)|
+|:-------------:|
+| <img src="images/RBTree1Insert_0012.png" width="80%" height="80%"> |
+
+| Insert 30  (recoloring root, with the black height of the tree increased by one) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0013.png" width="80%" height="80%"> |
+
+| Insert 30  |
+|:-------------:|
+| <img src="images/RBTree1Insert_0014.png" width="80%" height="80%"> |
+
+| Insert 40 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0015.png" width="80%" height="80%"> |
+
+
+| Insert 40 (red parent + black uncle + right child, left rotation at 30) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0017.png" width="80%" height="80%"> |
+
+
+| Insert 40 (red parent + black uncle + left child, right rotation at 50 + recoloring) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0018.png" width="80%" height="80%"> |
+
+
+
+| Insert 40  |
+|:-------------:|
+| <img src="images/RBTree1Insert_0020.png" width="80%" height="80%"> |
+
+
+| Insert 40 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0022.png" width="80%" height="80%"> |
+
+| Insert 70 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0023.png" width="80%" height="80%"> |
+
+
+
+| Insert 70 (red uncle + red parent, recoloring)|
+|:-------------:|
+| <img src="images/RBTree1Insert_0025.png" width="80%" height="80%"> |
+
+| Insert 70  |
+|:-------------:|
+| <img src="images/RBTree1Insert_0026.png" width="80%" height="80%"> |
+
+| Insert 70 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0027.png" width="80%" height="80%"> |
+
+
+| Insert 70 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0029.png" width="80%" height="80%"> |
+
+| Insert 60 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0030.png" width="80%" height="80%"> |
+
+
+| Insert 60 (black uncle + red parent + left child, right rotation at 70)|
+|:-------------:|
+| <img src="images/RBTree1Insert_0032.png" width="80%" height="80%"> |
+
+| Insert 60  (black uncle + red parent + right child, left rotation at 50 + recoloring) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0033.png" width="80%" height="80%"> |
+
+| Insert 60 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0034.png" width="80%" height="80%"> |
+
+| Insert 60 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0035.png" width="80%" height="80%"> |
+
+
+| Insert 60 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0038.png" width="80%" height="80%"> |
+
+| Insert 60 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0039.png" width="80%" height="80%"> |
+
+| Insert 100 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0040.png" width="80%" height="80%"> |
+
+
+
+| Insert 100 (red uncle + red parent, recoloring) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0042.png" width="80%" height="80%"> |
+
+| Insert 100 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0043.png" width="80%" height="80%"> |
+
+| Insert 100 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0045.png" width="80%" height="80%"> |
+
+| Insert 100 (black uncle + red parent + right child, left rotation at 20 + recoloring)|
+|:-------------:|
+| <img src="images/RBTree1Insert_0046.png" width="80%" height="80%"> |
+
+| Insert 100  |
+|:-------------:|
+| <img src="images/RBTree1Insert_0047.png" width="80%" height="80%"> |
+
+
+| Insert 100 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0048.png" width="80%" height="80%"> |
+
+| Insert 90 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0049.png" width="80%" height="80%"> |
+
+
+
+| Insert 90 (black uncle + red parent + left child, right rotation at 100) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0051.png" width="80%" height="80%"> |
+
+
+| Insert 90 ((black uncle + red parent + right child, left rotation at 70 + recoloring) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0052.png" width="80%" height="80%"> |
+
+| Insert 90 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0053.png" width="80%" height="80%"> |
+
+| Insert 90 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0054.png" width="80%" height="80%"> |
+
+
+| Insert 90 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0056.png" width="80%" height="80%"> |
+
+
+| Insert 90 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0058.png" width="80%" height="80%"> |
+
+
+| Insert 80 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0059.png" width="80%" height="80%"> |
+
+
+| Insert 80 (red parent + red uncle, recoloring) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0061.png" width="80%" height="80%"> |
+
+| Insert 80 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0062.png" width="80%" height="80%"> |
+
+
+| Insert 80 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0064.png" width="80%" height="80%"> |
+
+| Insert 80 (red uncle + red parent, recoloring) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0065.png" width="80%" height="80%"> |
+
+| Insert 80 (recoloring root, with the black height of the tree increased by one) |
+|:-------------:|
+| <img src="images/RBTree1Insert_0066.png" width="80%" height="80%"> |
+
+| Insert 80 |
+|:-------------:|
+| <img src="images/RBTree1Insert_0067.png" width="80%" height="80%"> |
+
+
+### RBTreeDelete(): {50, 20, 10, 30, 40, 70, 60, 100, 90, 80}
+
+| Delete 50 (red sibling + 2 black nephews, left rotation at 60 + recoloring) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0068.png" width="80%" height="80%"> |
+
+| Delete 50 (black sibling + right red nephew, left rotation at 60 + recoloring) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0069.png" width="80%" height="80%"> |
+
+| Delete 50 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0070.png" width="80%" height="80%"> |
+
+
+
+
+| Delete 50 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0072.png" width="80%" height="80%"> |
+
+| Delete 50 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0073.png" width="80%" height="80%"> |
+
+| Delete 20 (swap 10 and 20) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0074.png" width="80%" height="80%"> |
+
+
+| Delete 20 (black sibling at 30 + two black nephews, recoloring)|
+|:-------------:|
+| <img src="images/RBTree2Delete_0075.png" width="80%" height="80%"> |
+
+| Delete 20 (black sibling at 90 + left red nephew at 70, right rotation at 90)|
+|:-------------:|
+| <img src="images/RBTree2Delete_0076.png" width="80%" height="80%"> |
+
+
+
+| Delete 20 (black sibling at 90 + two black nephews, left rotation at 40 + recoloring) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0078.png" width="80%" height="80%"> |
+
+| Delete 20 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0079.png" width="80%" height="80%"> |
+
+| Delete 20 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0080.png" width="80%" height="80%"> |
+
+
+| Delete 10 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0081.png" width="80%" height="80%"> |
+
+
+| Delete 10 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0085.png" width="80%" height="80%"> |
+
+
+| Delete 10 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0087.png" width="80%" height="80%"> |
+
+
+| Delete 30 (black sibling at 60 + two black nephews, recoloring) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0088.png" width="80%" height="80%"> |
+
+| Delete 30 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0089.png" width="80%" height="80%"> |
+
+
+| Delete 30 (black sibling at 90 + two black nephews, recoloring)|
+|:-------------:|
+| <img src="images/RBTree2Delete_0090.png" width="80%" height="80%"> |
+
+
+| Delete 30 (the black height of the tree decreased by 1) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0091.png" width="80%" height="80%"> |
+
+
+| Delete 30 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0092.png" width="80%" height="80%"> |
+
+| Delete 40 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0093.png" width="80%" height="80%"> |
+
+
+| Delete 40 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0097.png" width="80%" height="80%"> |
+
+
+| Delete 70 (swap 70 and 60) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0098.png" width="80%" height="80%"> |
+
+
+| Delete 70 (red sibling at 90, left rotation at 60 + recoloring) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0099.png" width="80%" height="80%"> |
+
+| Delete 70 (black sibling at 80 + two black nephews, recoloring) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0100.png" width="80%" height="80%"> |
+
+| Delete 70 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0101.png" width="80%" height="80%"> |
+
+| Delete 70 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0102.png" width="80%" height="80%"> |
+
+| Delete 60 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0103.png" width="80%" height="80%"> |
+
+
+| Delete 60 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0107.png" width="80%" height="80%"> |
+
+| Delete 100 (black sibling at 80 + two black nephews, recoloring) |
+|:-------------:|
+| <img src="images/RBTree2Delete_0108.png" width="80%" height="80%"> |
+
+| Delete 100 (the black height of the tree decreased by 1)|
+|:-------------:|
+| <img src="images/RBTree2Delete_0109.png" width="80%" height="80%"> |
+
+
+| Delete 100 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0110.png" width="80%" height="80%"> |
+
+
+| Delete 90 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0111.png" width="80%" height="80%"> |
+
+
+| Delete 80 |
+|:-------------:|
+| <img src="images/RBTree2Delete_0114.png" width="80%" height="80%"> |
+
+
+
 
