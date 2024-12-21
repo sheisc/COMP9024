@@ -1,12 +1,12 @@
 #include <stdio.h>    // printf() and snprintf()
 #include <stdlib.h>   // system()
-#include "BiTree.h"
+#include "RedBlackTree.h"
 #include "BTree.h"
 #include "Queue.h"
 
 #define FILE_NAME_LEN  255
 
-void RBTreeGenOneImage(BiTreeNodePtr root, char *graphName, char *fileName, long seqNo) {
+void RBTreeGenOneImage(RBTreeNodePtr root, char *graphName, char *fileName, long seqNo) {
     char dotFileName[FILE_NAME_LEN+1] = {0};
     char pngFileName[FILE_NAME_LEN+1] = {0};
     char command[(FILE_NAME_LEN+1)*4] = {0};
@@ -14,7 +14,7 @@ void RBTreeGenOneImage(BiTreeNodePtr root, char *graphName, char *fileName, long
     snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
     snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
 
-    BiTree2Dot(root, dotFileName, graphName, 1);
+    RedBlackTree2Dot(root, dotFileName, graphName, 1);
 
     snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
 
@@ -25,7 +25,7 @@ void RBTreeGenOneImage(BiTreeNodePtr root, char *graphName, char *fileName, long
 
 }
 
-static void DisplayVisited(FILE *dotFile, BiTreeNodePtr root) {
+static void DisplayVisited(FILE *dotFile, RBTreeNodePtr root) {
     if (root) {
         char *visitedShape = "";
         if (root->visited) {
@@ -37,14 +37,14 @@ static void DisplayVisited(FILE *dotFile, BiTreeNodePtr root) {
                     "\"%s_H=%d_B=%d\" [color=orangered] [style=filled] %s\n", 
                     root->value.name, 
                     root->blackHeight,
-                    BiTreeBalanceFactor(root), 
+                    RBTreeBalanceFactor(root), 
                     visitedShape);
         } else {
             fprintf(dotFile, 
                     "\"%s_H=%d_B=%d\" [color=grey] [style=filled] %s\n", 
                     root->value.name, 
                     root->blackHeight,
-                    BiTreeBalanceFactor(root), 
+                    RBTreeBalanceFactor(root), 
                     visitedShape);                
         }
 
@@ -54,35 +54,12 @@ static void DisplayVisited(FILE *dotFile, BiTreeNodePtr root) {
 }
 
 /*
-    Dot Files
-
-    We assume each node has a distinct key value.
-
-   
-          100
-         /   \
-       98    101
-      /  \
-    97    99
-    
-
-    digraph OutBiTree {    
-    "100" -> {"98"} [label="L"]
-    "100" -> {"101"} [label="R"]
-    "98" -> {"97"} [label="L"]
-    "98" -> {"99"} [label="R"]
-    "97" [color=red]
-    }  
-
-    Force the left to right order of nodes.
-
-    https://stackoverflow.com/questions/29864726/force-the-left-to-right-order-of-nodes-in-graphviz
+    Convert a reg-black tree to a dot file
  */
-
-void BiTree2Dot(BiTreeNodePtr root, 
-               char *filePath,
-               char *graphName,
-               int displayVisited) {
+void RedBlackTree2Dot(RBTreeNodePtr root, 
+                      char *filePath,
+                      char *graphName,
+                      int displayVisited) {
 
     FILE *dotFile = fopen(filePath, "w");
     /*
@@ -98,26 +75,26 @@ void BiTree2Dot(BiTreeNodePtr root,
         if (root) {
             QueueEnqueue(pQueue, root);
             while (!QueueIsEmpty(pQueue)) {
-                BiTreeNodePtr curNode = (BiTreeNodePtr) QueueDequeue(pQueue);
+                RBTreeNodePtr curNode = (RBTreeNodePtr) QueueDequeue(pQueue);
                 if (!curNode->leftChild && !curNode->rightChild) {
                     continue;
                 }
-
+                // edges
                 if (curNode->leftChild) {
                     fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s_H=%d_B=%d\"} [label=\"L\"]\n",
                             curNode->value.name,
                             curNode->blackHeight,
-                            BiTreeBalanceFactor(curNode),
+                            RBTreeBalanceFactor(curNode),
                             edgeConnectorStr,                         
                             curNode->leftChild->value.name,
                             curNode->leftChild->blackHeight,
-                            BiTreeBalanceFactor(curNode->leftChild));
+                            RBTreeBalanceFactor(curNode->leftChild));
                     QueueEnqueue(pQueue, curNode->leftChild);
                 } else {
                     fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s%ld\"} [label=\"L\"] [style=invis]\n",
                             curNode->value.name,
                             curNode->blackHeight,
-                            BiTreeBalanceFactor(curNode),
+                            RBTreeBalanceFactor(curNode),
                             edgeConnectorStr,                         
                             hiddenNodePrefix,
                             hiddenNodeCnt);
@@ -129,17 +106,17 @@ void BiTree2Dot(BiTreeNodePtr root,
                     fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s_H=%d_B=%d\"} [label=\"R\"]\n",                        
                             curNode->value.name,
                             curNode->blackHeight, 
-                            BiTreeBalanceFactor(curNode),
+                            RBTreeBalanceFactor(curNode),
                             edgeConnectorStr,
                             curNode->rightChild->value.name,
                             curNode->rightChild->blackHeight,
-                            BiTreeBalanceFactor(curNode->rightChild));
+                            RBTreeBalanceFactor(curNode->rightChild));
                     QueueEnqueue(pQueue, curNode->rightChild);
                 } else {
                     fprintf(dotFile, "\"%s_H=%d_B=%d\" %s {\"%s%ld\"} [label=\"L\"] [style=invis]\n",
                             curNode->value.name,
                             curNode->blackHeight,
-                            BiTreeBalanceFactor(curNode),
+                            RBTreeBalanceFactor(curNode),
                             edgeConnectorStr,                         
                             hiddenNodePrefix,
                             hiddenNodeCnt);
@@ -150,12 +127,7 @@ void BiTree2Dot(BiTreeNodePtr root,
             }
         }
         ReleaseQueue(pQueue);
-        /*
-        "0" [color=red]
-         */
-        // if (displayVisited) {
-        //     DisplayVisited(dotFile, root);
-        // }
+        // nodes
         DisplayVisited(dotFile, root); 
         fprintf(dotFile, "}\n");
         fclose(dotFile);

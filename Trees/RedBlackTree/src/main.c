@@ -2,25 +2,20 @@
 #include <stdlib.h>     // srandom(), random()
 #include <time.h>       // time()
 #include <assert.h>
-#include "BiTree.h"
+#include "RedBlackTree.h"
 #include "BTree.h"
 #include "BTree2Dot.h"
 
-
-void PrintNodeInfo(BiTreeNodePtr pNode) {
+void PrintNodeInfo(RBTreeNodePtr pNode) {
     printf("%s ", pNode->value.name);
     // For debugging
     fflush(stdout);
     //pNode->visited = 1;
 }
 
-
-
-
-
 static void TestRBTree(long *nums, long n, long *pCnt) {
     // Create an empty binary tree
-    BiTreeNodePtr root = NULL;
+    RBTreeNodePtr root = NULL;
     long errCnt = 0;
     assert(pCnt);
     long btreeCnt = 0;
@@ -75,14 +70,12 @@ static void TestRBTree(long *nums, long n, long *pCnt) {
 
     assert(errCnt == 0);
     // Free the heap memory
-    ReleaseBinaryTree(root);       
+    ReleaseRBTree(root);       
 }
-
-
 
 int main(void) {
     long cnt = 0;
-    srandom(time(NULL));
+    //srandom(time(NULL));
 
     system("mkdir -p diagrams");
     // create a sub-directory 'images' (if it is not present) in the current directory
@@ -93,8 +86,6 @@ int main(void) {
     long nums[] = {50, 20, 10, 30, 40, 70, 60, 100, 90, 80};
     TestRBTree(nums, sizeof(nums)/sizeof(nums[0]), &cnt);
 
-
-    
     return 0;
 }
 

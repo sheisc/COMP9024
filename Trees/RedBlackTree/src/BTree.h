@@ -1,7 +1,7 @@
 #ifndef BTREE_H
 #define BTREE_H
 
-// 2-3-4 Tree:  a special order-4 case of a B-tree
+// 2-3-4 Tree:  a special case of a B-tree
 #define  NUM_OF_KEYS      3
 #define  NUM_OF_CHILDREN  4
 
@@ -10,9 +10,9 @@
 typedef long TreeNodeKeyTy;
 
 struct BTreeNode {
-    // one slot more than NUM_OF_KEYS, used when the page or BTreeNode is full
+    // one slot more than NUM_OF_KEYS
     TreeNodeKeyTy keys[NUM_OF_KEYS+1];
-    struct BTreeNode *children[NUM_OF_CHILDREN+1];
+    struct BTreeNode *children[NUM_OF_CHILDREN];
     // the number of keys stored in this node
     long nk;    
     // whether this node is the leaf node

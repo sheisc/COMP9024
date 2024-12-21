@@ -1,6 +1,6 @@
 #include <stdio.h>    // printf() and snprintf()
 #include <stdlib.h>   // system()
-#include "BiTree.h"
+#include "RedBlackTree.h"
 #include "BTree.h"
 #include "BTree2Dot.h"
 #include "Queue.h"
@@ -29,7 +29,7 @@ void BTreeGenOneImage(struct BTreeNode *root, char *graphName, char *fileName, l
 
 
 /*
-    Dot Files
+    Convert a B-tree to a dot file
  */
 void BTree2Dot(struct BTreeNode *root, 
                char *filePath,
@@ -74,7 +74,7 @@ void BTree2Dot(struct BTreeNode *root,
                         "\"%s\" %s\n", 
                         nodeName, 
                         visitedShape);                                  
-                }
+            }
         }
         ReleaseQueue(pQueue);
         fprintf(dotFile, "}\n");

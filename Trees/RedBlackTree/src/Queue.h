@@ -1,6 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
-#include "BiTree.h"
+#include "RedBlackTree.h"
 
 typedef void *QUEUE_ITEM_T;
 

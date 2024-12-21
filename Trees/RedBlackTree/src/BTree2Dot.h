@@ -1,7 +1,7 @@
 #ifndef BTREE2DOT_H
 #define BTREE2DOT_H
 
-#include "BiTree.h"
+#include "RedBlackTree.h"
 
 
 
