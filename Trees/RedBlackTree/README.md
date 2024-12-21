@@ -266,9 +266,46 @@ static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
                         leftChild != NULL && rightChild != NULL    // case 11
 
              **************************************************************************/
+            if (pNode->leftChild == NULL) {   
+                // case 00 and case 01
+                RBTreeNodePtr tmp = pNode->rightChild;
+                /*
+                    If the node to be deleted is RED, nothing to do.
+                 */
+                if ((pNode->color == BLACK) && (pNode->rightChild)) {
+                    // This coloring operation can increase the black height of the subtree.
+                    pNode->rightChild->color = BLACK;
+                }
+                free(pNode);
+                *pNodePtr = tmp;
+            } else if (pNode->rightChild == NULL) {   
+                // case 10
+                RBTreeNodePtr tmp = pNode->leftChild;
+                /*
+                    If the node to be deleted is RED, nothing to do.
+                 */
+                if ((pNode->color == BLACK) && (pNode->leftChild)) {
+                    pNode->leftChild->color = BLACK;
+                }
+                free(pNode);
+                *pNodePtr = tmp;
+            } else {
+                // case 11:  with two children
+                // Get pNode's in-order pPredecessor, which is right-most node in its left sub-tree.
+                RBTreeNodePtr pPredecessor = BiTreeMaxValueNode(pNode->leftChild);
 
-            ...
+                // (Swapping is done for clearer debugging output)
+                // Swap the values of the node pointed to by pNode and its in-order predecessor
+                NodeValue val = pNode->value;
+                // Copy the predecessor's value (this copy is necessary)
+                pNode->value = pPredecessor->value;
+                pPredecessor->value = val;
 
+                // Now, numVal is in left sub-tree. Let us recursively delete it.
+                // Temporarily, the whole binary search tree is at an inconsistent state.
+                // It will become consistent when the deletion is really done.
+                RecursiveRBTreeDelete(pRoot, &pNode->leftChild, pPredecessor->value.numVal, pCnt);
+            }
         }
         //
         pNode = *pNodePtr;
