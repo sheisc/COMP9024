@@ -24,7 +24,7 @@ but potentially more complex insertions due to its balancing constraints.
 |:-------------:|:-------------:|:-------------:|
 | <img src="diagrams/AVLTree1.png" width="80%" height="80%"> | <img src="diagrams/AVLTree2.png" width="80%" height="80%"> |<img src="diagrams/AVLTree3.png" width="80%" height="80%"> |
 
-As a result, Red-Black trees do not need to be as tightly balanced as AVL Trees, meaning they can be more flexible when adjusting to changes (insertions and deletions). This relaxation reduces the overhead of maintaining strict balance.
+
 
 
 <!-- (A dichromatic framework for balanced trees) -->
