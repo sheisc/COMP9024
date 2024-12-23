@@ -48,23 +48,6 @@ static struct RBTreeNode *RBTreeNodeGetSuccessor(struct RBTreeNode *pNode) {
     return cur;
 }
 
-// Get the node which will replace pNode which is to be deleted.
-struct RBTreeNode *RBTreeNodeGetReplacement(struct RBTreeNode *pNode) {
-    if (pNode->left && pNode->right) {
-        return RBTreeNodeGetSuccessor(pNode->right);
-    }
-
-    if (pNode->left == NULL && pNode->right == NULL) {
-        return NULL;
-    }
-
-    if (pNode->left) {
-        return pNode->left;
-    } else {
-        return pNode->right;
-    }
-}
-
 static struct RBTreeNode *RBTreeNodeGetSibling(struct RBTreeNode *pNode) {
     if (pNode->parent == NULL) {
         return NULL;
