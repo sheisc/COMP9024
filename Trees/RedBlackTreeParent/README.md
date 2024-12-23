@@ -28,6 +28,8 @@ A Red-Black Tree is a self-balancing [binary search tree](../BinarySearchTree/RE
 ## Fix red-red violations in insertions
 
 A red-red violation occurs when a newly inserted red node has a red parent.
+When the imbalance cannot be fixed locally through rotations and recoloring, 
+it will be propagated from bottom to up, with its grandparent node marked as red.
 
 | Case| Node |Parent |Uncle | Grandparent | How to restore balance|
 | :---|:---|:---|:---|:---|:---|
@@ -35,7 +37,8 @@ A red-red violation occurs when a newly inserted red node has a red parent.
 |  | | |      |  |  Recursively fix the possible red-red violation in grandparent. |
 |  | | |      |  |  The root node of a red-black tree is set to be black. |
 | black-uncle | red| red|  black    | black | Fixed locally (Left-left, left-right, right-left, or right-right rotations + recoloring). |
-|  | | |      |  |  Note that the black uncle can be NULL |
+|  | | |      |  |  Note that the black uncle can be NULL. The current red node is either the newly-inserted red node|
+|  | | |      |  |  or a grandparent converted from black to red in fixing its grandchild's red-uncle red-red violation. |
 
 Refer to [RBTreeFixRedRed()](./src/RedBlackTree.c) for more details.
 

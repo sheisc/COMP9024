@@ -195,6 +195,10 @@ static void RBTreeRightRotate(struct RBTree *pRBTree, struct RBTreeNode *pNode) 
     rightRotationCount++;
 }
 
+/*
+    pNode is either the newly-inserted red node or a grandparent converted from black to red 
+    in fixing its grandchild's red-uncle red-red violation.
+ */
 static void RBTreeFixRedRed(struct RBTree *pRBTree, struct RBTreeNode *pNode) {
     if (pNode == pRBTree->root) {
         pNode->color = BLACK;
@@ -202,11 +206,11 @@ static void RBTreeFixRedRed(struct RBTree *pRBTree, struct RBTreeNode *pNode) {
     }
 
     struct RBTreeNode *parent = pNode->parent;
-    struct RBTreeNode *grandParent = pNode->parent->parent;
-    struct RBTreeNode *uncle = RBTreeNodeGetUncle(pNode);
 
     if (parent->color == RED) {
-        if (uncle && uncle->color == RED) {
+        struct RBTreeNode *grandParent = pNode->parent->parent;
+        struct RBTreeNode *uncle = RBTreeNodeGetUncle(pNode);        
+        if (uncle && uncle->color == RED) { // red uncle
             parent->color = BLACK;
             uncle->color = BLACK;
             grandParent->color = RED;
@@ -226,6 +230,7 @@ static void RBTreeFixRedRed(struct RBTree *pRBTree, struct RBTreeNode *pNode) {
                          pNode (red)                            
                         ------------------------------------------------------------------------               
                      */
+                    RBTreeRightRotate(pRBTree, grandParent);
                     parent->color = BLACK;
                     grandParent->color = RED;
                 } else {
@@ -242,10 +247,10 @@ static void RBTreeFixRedRed(struct RBTree *pRBTree, struct RBTreeNode *pNode) {
                         ------------------------------------------------------------------------               
                      */
                     RBTreeLeftRotate(pRBTree, parent);
+                    RBTreeRightRotate(pRBTree, grandParent);
                     pNode->color = BLACK;
                     grandParent->color = RED;
                 }
-                RBTreeRightRotate(pRBTree, grandParent);
             } else {
                 if (RBTreeNodeIsOnLeft(pNode)) {
                     /*
@@ -261,6 +266,7 @@ static void RBTreeFixRedRed(struct RBTree *pRBTree, struct RBTreeNode *pNode) {
                         ------------------------------------------------------------------------               
                      */
                     RBTreeRightRotate(pRBTree, parent);
+                    RBTreeLeftRotate(pRBTree, grandParent);
                     pNode->color = BLACK;
                     grandParent->color = RED;
                 } else {
@@ -276,10 +282,10 @@ static void RBTreeFixRedRed(struct RBTree *pRBTree, struct RBTreeNode *pNode) {
                                     pNode (red)                            
                         ------------------------------------------------------------------------               
                      */
+                    RBTreeLeftRotate(pRBTree, grandParent);
                     parent->color = BLACK;
                     grandParent->color = RED;
                 }
-                RBTreeLeftRotate(pRBTree, grandParent);
             }
         }
     }
