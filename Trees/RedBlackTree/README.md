@@ -1,5 +1,7 @@
 # Red-Black Tree
 
+In this project, each node in the red-black tree does not include a parent field, whereas the red-black tree nodes in the project [RedBlackTreeParent](../RedBlackTreeParent/README.md) have a parent field.
+Using the parent field allows for more concise code when accessing a node's uncle and sibling. However, it introduces additional complexity in the handling of rotations.
 
 [AVL Trees](../SelfBalancingBST/README.md) require a strict balancing condition: the height difference between the left and right subtrees of any node (called the balance factor) must be at most 1 (i.e., -1, 0, and 1). Rotations are performed to maintain balance of an AVL tree.
 Red-Black Trees, on the other hand, use color-based balancing with a much more relaxed set of rules and lighter operations (i.e., recoloring) to maintain balance. The key balancing rules for Red-Black Trees are:
