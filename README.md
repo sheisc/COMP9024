@@ -36,11 +36,12 @@ It means:
 
 A picture is more than a thousand words.
 
-To aid understanding, we have visualized most of the algorithms (e.g., [COMP9024/Trees/Ast2Dot](./Trees/Ast2Dot/README.md)) discussed in COMP9024.
+To aid understanding, we have visualized most of the algorithms (e.g., [Trees/Ast2Dot](./Trees/Ast2Dot/README.md), [Trees/RedBlackTree](./Trees/RedBlackTree/README.md), and [Randomised/Maze](./Randomised/Maze/README.md)) discussed in COMP9024.
 
-|EvalExpression("3000 + (1000 + 2000) * 2 + 6 * 4")|
-|:-------------:|
-| <img src="./Trees/Ast2Dot/diagrams/main.gif" width="80%" height="80%"> |
+|EvalExpression("3000 + (1000 + 2000) * 2 + 6 * 4")| Red-Black Tree | Maze |
+|:-------------:|:-------------:|:-------------:|
+| <img src="./Trees/Ast2Dot/diagrams/main.gif" width="100%" height="100%"> |<img src="./Trees/RedBlackTree/diagrams/main.gif" width="100%" height="100%"> | <img src="./Randomised/Maze/diagrams/main.gif" width="100%" height="100%"> |
+
 
 ## [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
 
