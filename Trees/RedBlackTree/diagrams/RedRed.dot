@@ -1,0 +1,14 @@
+digraph RBTree {
+"0x0001" [label="red node + red parent + black grandparent"] [color=orangered] [style=filled] 
+"0x0001" -> {"0x0002"} [label="red uncle"]
+"0x0001" -> {"0x0003"} [label="black uncle"]
+"0x0002" [label="Propagated upwards: 
+     after coloring both parent and uncle as black but grandparent as red,
+     recursively fix the grandparent"] [shape="box"]  [color=yellow] [style=filled] 
+"0x0003" [label="Fixed locally: 
+     LL, LR, RL, or RR rotations + coloring"] [shape="box"] [color=green] [style=filled] 
+
+label="
+
+Fix red-red violations during insertions in red-black trees"
+}

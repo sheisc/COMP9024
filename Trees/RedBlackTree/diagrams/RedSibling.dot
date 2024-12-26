@@ -1,0 +1,15 @@
+digraph RBTree {
+"0x0001" [label="red-sibling + black parent"] [color=orangered] [style=filled] 
+"0x0002" [label="black-sibling + red parent"] [color=grey] [style=filled] 
+"0x0001" -> {"0x0002"} [label="After one rotation + coloring"]
+"0x0002" -> {"0x0003"} [label="has 1 or 2 red nephews"]
+"0x0003" [label="Fixed locally: 
+     LL, LR, RL, or RR rotations + coloring"] [shape="box"] [color=green] [style=filled] 
+"0x0002" -> {"0x0004"} [label="has 0 red nephews"]
+"0x0004" [label="Fixed locally: 
+     mark parent as black and sibling as red"] [shape="box"]  [color=green] [style=filled] 
+
+label="
+
+Fix violations with a red sibling during deletions in red-black trees"
+}

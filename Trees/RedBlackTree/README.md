@@ -11,7 +11,7 @@ Red-Black Trees, on the other hand, use color-based balancing with a much more r
 
 Together, these two rules ensure that the longest path in a Red-Black tree from the root to any leaf is no more than twice the length of the shortest path. 
 
-| Number of random keys| Black height | Real height (ignoring node color) |
+| Number of random keys| Black height (encountered during testing, not as constants) | Real height (ignoring node color) |
 |:----:|:----:|:----:| 
 | $2^{4}$ | 3 | 5 |
 | $2^{6}$ | 4 | 8 |
@@ -174,6 +174,10 @@ Two steps are needed:
 
 - Fix any violations of the Red-Black Tree properties that may arise
 
+|  | 
+|:-------------:|
+| <img src="diagrams/RedRed.png" width="80%" height="80%"> |
+
 ```C
 
 static void RecursiveRBTreeInsert(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, long numVal, char *nodeName, long *pCnt) {
@@ -239,6 +243,14 @@ Two steps are needed:
 - Perform the standard [Binary Search Tree](../BinarySearchTree/README.md) deletion
 
 - Fix any violations of the Red-Black Tree properties that may arise
+
+| A violation with a red sibling is converted to a violation with a black sibling | 
+|:-------------:|
+| <img src="diagrams/RedSibling.png" width="80%" height="80%"> |
+
+| Handle a violation with a black sibling | 
+|:-------------:|
+| <img src="diagrams/BlackSibling.png" width="80%" height="80%"> |
 
 ```C
 // The parameter pRoot is only used for generating the image of the binary search tree.
