@@ -166,7 +166,7 @@ The converted 2-3-4 tree can be used to explain the height of a Red-Black Tree. 
 | <img src="diagrams/RBTree1Insert_0009.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0009.png" width="50%" height="50%"> |
 | <img src="diagrams/RBTree1Insert_0010.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0010.png" width="50%" height="50%"> |
 
-### How to insert a node (as a red leaf) into a red-black tree
+### How to insert a new node (as a red node) into a red-black tree
 
 Two steps are needed:
 
