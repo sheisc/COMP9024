@@ -114,11 +114,21 @@ Ast2Dot$ ./main
 ```sh
 Ast2Dot$ make view
 ```
+|EvalExpression("3000 + (1000 + 2000) * 2 + 6 * 4")|
+|:-------------:|
+| <img src="images/BiTree_0000.png" width="80%" height="80%"> |
 
-Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
+### 3.3 make animation
 
-**EvalExpression("3000 + (1000 + 2000) * 2 + 6 * 4")**
+```sh
+Ast2Dot$ make animation
+```
 
+
+|EvalExpression("3000 + (1000 + 2000) * 2 + 6 * 4")|
+|:-------------:|
+| <img src="diagrams/main.gif" width="80%" height="80%"> |
+<!-- 
 ||
 |:-------------:|
 | <img src="images/BiTree_0000.png" width="80%" height="80%"> |
@@ -230,5 +240,5 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 
 ||
 |:-------------:|
-| <img src="images/BiTree_0026.png" width="80%" height="80%"> |
+| <img src="images/BiTree_0026.png" width="80%" height="80%"> | -->
 

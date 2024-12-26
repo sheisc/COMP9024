@@ -57,9 +57,15 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 view:
 	find ./images -name "*.png" | sort | xargs feh -g 1024x768  &
 
+normalize:
+	find ./images -name "*.png" | xargs -I {} convert -resize 1024x768\> -gravity center -background white {} {}
+	
+animation:	
+	convert -extent 1024x768 -gravity center -background white -delay 50 -loop 0 images/*.png $(TARGET_EXE).gif
+
 # clean all the files generated	
 clean:
-	rm -rf $(TARGET_EXE) $(BUILD_DIR) 
+	rm -rf $(TARGET_EXE) $(BUILD_DIR) $(TARGET_EXE).gif
 	find . -name "*.o" | xargs rm -f
 	find . -name "*.s" | xargs rm -f
 	find . -name "*.i" | xargs rm -f
