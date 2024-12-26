@@ -111,14 +111,14 @@ struct BTreeNode *RBTreeTo234Tree(RBTreeNodePtr root) {
                   /   \    /   \                  r1L     r1R      r2L    r2R                     
                 r1L   r1R r2L   r2R
              */
-            struct BTreeNode *red1Left = RBTreeTo234Tree(root->leftChild->leftChild);            
-            struct BTreeNode *red1Right = RBTreeTo234Tree(root->leftChild->rightChild);
-            struct BTreeNode *red2Left = RBTreeTo234Tree(root->rightChild->leftChild);
-            struct BTreeNode *red2Right = RBTreeTo234Tree(root->rightChild->rightChild);            
+            struct BTreeNode *red1Left = RBTreeTo234Tree(root->left->left);            
+            struct BTreeNode *red1Right = RBTreeTo234Tree(root->left->right);
+            struct BTreeNode *red2Left = RBTreeTo234Tree(root->right->left);
+            struct BTreeNode *red2Right = RBTreeTo234Tree(root->right->right);            
             //
-            SetKeyAtIndex(pNode, root->leftChild->value.numVal, 0);
+            SetKeyAtIndex(pNode, root->left->value.numVal, 0);
             SetKeyAtIndex(pNode, root->value.numVal, 1);
-            SetKeyAtIndex(pNode, root->rightChild->value.numVal, 2);
+            SetKeyAtIndex(pNode, root->right->value.numVal, 2);
 
             SetNumberOfKeys(pNode, 3);
 
@@ -139,11 +139,11 @@ struct BTreeNode *RBTreeTo234Tree(RBTreeNodePtr root) {
                    /   \                           r1L      r1R      black2                          
                  r1L   r1R                                                                                      
              */          
-            struct BTreeNode *red1Left = RBTreeTo234Tree(root->leftChild->leftChild);            
-            struct BTreeNode *red1Right = RBTreeTo234Tree(root->leftChild->rightChild);
-            struct BTreeNode *black2 = RBTreeTo234Tree(root->rightChild);
+            struct BTreeNode *red1Left = RBTreeTo234Tree(root->left->left);            
+            struct BTreeNode *red1Right = RBTreeTo234Tree(root->left->right);
+            struct BTreeNode *black2 = RBTreeTo234Tree(root->right);
 
-            SetKeyAtIndex(pNode, root->leftChild->value.numVal, 0);
+            SetKeyAtIndex(pNode, root->left->value.numVal, 0);
             SetKeyAtIndex(pNode, root->value.numVal, 1);
 
             SetNumberOfKeys(pNode, 2);
@@ -165,12 +165,12 @@ struct BTreeNode *RBTreeTo234Tree(RBTreeNodePtr root) {
                             /   \                    black1    r2L      r2R                                    
                           r2L   r2R                                                                       
              */
-            struct BTreeNode *black1 = RBTreeTo234Tree(root->leftChild);
-            struct BTreeNode *red2Left = RBTreeTo234Tree(root->rightChild->leftChild);
-            struct BTreeNode *red2Right = RBTreeTo234Tree(root->rightChild->rightChild);
+            struct BTreeNode *black1 = RBTreeTo234Tree(root->left);
+            struct BTreeNode *red2Left = RBTreeTo234Tree(root->right->left);
+            struct BTreeNode *red2Right = RBTreeTo234Tree(root->right->right);
 
             SetKeyAtIndex(pNode, root->value.numVal, 0);
-            SetKeyAtIndex(pNode, root->rightChild->value.numVal, 1);
+            SetKeyAtIndex(pNode, root->right->value.numVal, 1);
 
             SetNumberOfKeys(pNode, 2);
 
@@ -187,8 +187,8 @@ struct BTreeNode *RBTreeTo234Tree(RBTreeNodePtr root) {
                       /     \                         /      \                         
                    black1    black2                 black1    black2                                                  
              */
-            struct BTreeNode *black1 = RBTreeTo234Tree(root->leftChild);
-            struct BTreeNode *black2 = RBTreeTo234Tree(root->rightChild);
+            struct BTreeNode *black1 = RBTreeTo234Tree(root->left);
+            struct BTreeNode *black2 = RBTreeTo234Tree(root->right);
 
             SetKeyAtIndex(pNode, root->value.numVal, 0);
 

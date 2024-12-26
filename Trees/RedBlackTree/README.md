@@ -11,6 +11,20 @@ Red-Black Trees, on the other hand, use color-based balancing with a much more r
 
 Together, these two rules ensure that the longest path in a Red-Black tree from the root to any leaf is no more than twice the length of the shortest path. 
 
+| Number of random keys| Black height | Real height (ignoring node color) |
+|:----:|:----:|:----:| 
+| $2^{4}$ | 3 | 5 |
+| $2^{6}$ | 4 | 8 |
+| $2^{8}$ | 5 | 10 |
+| $2^{10}$ | 6 | 12 |
+| $2^{12}$ | 8 | 15 |
+| $2^{14}$ | 9 | 17 |
+| $2^{16}$ | 10 | 20 |
+| $2^{18}$ | 11 | 22 |
+| $2^{20}$ | 13 | 25 |
+| $2^{22}$ | 14 | 27 |
+| $2^{24}$ | 15 | 29 |
+
 For example, in the following diagram, 
 the Red-Black tree uses the recoloring operation to restore its balance, but it tends to have a taller tree structure. 
 The AVL Tree maintain a stricter balance, resulting in a generally shorter tree (i.e., shorter search time), 
@@ -20,11 +34,11 @@ but potentially more complex insertions due to its balancing constraints.
 
 | Initial (Red-Black Tree) | Insert | Self-Balancing (recoloring or rotation) |
 |:-------------:|:-------------:|:-------------:|
-| <img src="diagrams/RBTree1.png" width="80%" height="80%"> | <img src="diagrams/RBTree2.png" width="80%" height="80%"> |<img src="diagrams/RBTree3.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1.png" width="50%" height="50%"> | <img src="diagrams/RBTree2.png" width="50%" height="50%"> |<img src="diagrams/RBTree3.png" width="50%" height="50%"> |
 
 | Initial (AVL Tree) | Insert | Self-Balancing (Rotation) |
 |:-------------:|:-------------:|:-------------:|
-| <img src="diagrams/AVLTree1.png" width="80%" height="80%"> | <img src="diagrams/AVLTree2.png" width="80%" height="80%"> |<img src="diagrams/AVLTree3.png" width="80%" height="80%"> |
+| <img src="diagrams/AVLTree1.png" width="50%" height="50%"> | <img src="diagrams/AVLTree2.png" width="50%" height="50%"> |<img src="diagrams/AVLTree3.png" width="50%" height="50%"> |
 
 
 
@@ -102,37 +116,27 @@ int hasBlackRight(BiTreeNodePtr pNode) {
 
 ### RBTreeBlackHeight()
 ```C
-static int GetMax(int h1, int h2) {
-    return (h1 > h2) ? h1: h2;
-}
-
-static int RBTreeBlackHeight(BiTreeNodePtr root) {
-    if (root) {
-        return root->blackHeight;
-    } else {
-        return 0;
-    }
-}
-
-static void UpdateBlackHeight(BiTreeNodePtr root) {
-    if (root) {
-        int max = GetMax(RBTreeBlackHeight(root->leftChild), RBTreeBlackHeight(root->rightChild));
-        if (root->color == BLACK) {
-            root->blackHeight = max + 1;
+int RBTreeBlackHeight(struct RBTreeNode *pNode) {
+    if (pNode) {
+        if (pNode->blackHeight != ILLEGAL_TREE_HEIGHT) {
+            return pNode->blackHeight;
+        }        
+        int leftLen = RBTreeBlackHeight(pNode->left);
+        int rightLen = RBTreeBlackHeight(pNode->right);
+        assert(leftLen == rightLen);
+        if (pNode->color == BLACK) {
+            pNode->blackHeight = 1 + leftLen;
+            return 1 + leftLen;
         } else {
-            root->blackHeight = max;
+            pNode->blackHeight = leftLen;
+            return leftLen;
         }
-    }
-}
-
-int RBTreeBalanceFactor(RBTreeNodePtr root) {
-    if (root) {
-        return RBTreeBlackHeight(root->leftChild) - RBTreeBlackHeight(root->rightChild);
     } else {
         return 0;
     }
 }
 ```
+
 
 
 
@@ -142,11 +146,11 @@ A 2-3-4 Tree is a type of self-balancing search tree and a specific form of a [B
 A Red-Black Tree can be converted to a 2-3-4 Tree.
 The converted 2-3-4 tree can be used to explain the height of a Red-Black Tree. The correspondence between a Red-Black Tree and a 2-3-4 Tree provides a simple and intuitive way to understand the height properties of a Red-Black Tree.
 
-In the following red-black trees, 
+<!-- In the following red-black trees, 
 
 - **H** is short for the black height of a tree node, returned by **RBTreeBlackHeight()**
 
-- **B** stands for the balance factor of the tree node, calculated at run time via  **RBTreeBalanceFactor()**
+- **B** stands for the balance factor of the tree node, calculated at run time via  **RBTreeBalanceFactor()** -->
 
 
 | Red-Black Tree | 2-3-4 Tree |
@@ -154,13 +158,13 @@ In the following red-black trees,
 | <img src="diagrams/RBTree1Insert_0001.png" width="30%" height="30%"> | <img src="diagrams/RBTree3BTree_0001.png" width="30%" height="30%"> |
 | <img src="diagrams/RBTree1Insert_0002.png" width="40%" height="40%"> | <img src="diagrams/RBTree3BTree_0002.png" width="40%" height="40%"> |
 | <img src="diagrams/RBTree1Insert_0003.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0003.png" width="50%" height="50%"> |
-| <img src="diagrams/RBTree1Insert_0004.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0004.png" width="80%" height="80%"> |
-| <img src="diagrams/RBTree1Insert_0005.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0005.png" width="80%" height="80%"> |
-| <img src="diagrams/RBTree1Insert_0006.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0006.png" width="80%" height="80%"> |
-| <img src="diagrams/RBTree1Insert_0007.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0007.png" width="80%" height="80%"> |
-| <img src="diagrams/RBTree1Insert_0008.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0008.png" width="80%" height="80%"> |
-| <img src="diagrams/RBTree1Insert_0009.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0009.png" width="80%" height="80%"> |
-| <img src="diagrams/RBTree1Insert_0010.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0010.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1Insert_0004.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0004.png" width="50%" height="50%"> |
+| <img src="diagrams/RBTree1Insert_0005.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0005.png" width="50%" height="50%"> |
+| <img src="diagrams/RBTree1Insert_0006.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0006.png" width="50%" height="50%"> |
+| <img src="diagrams/RBTree1Insert_0007.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0007.png" width="50%" height="50%"> |
+| <img src="diagrams/RBTree1Insert_0008.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0008.png" width="50%" height="50%"> |
+| <img src="diagrams/RBTree1Insert_0009.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0009.png" width="50%" height="50%"> |
+| <img src="diagrams/RBTree1Insert_0010.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0010.png" width="50%" height="50%"> |
 
 ### How to insert a node (as a red leaf) into a red-black tree
 
@@ -237,64 +241,56 @@ Two steps are needed:
 - Fix any violations of the Red-Black Tree properties that may arise
 
 ```C
-static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, long numVal, long *pCnt) {
+// The parameter pRoot is only used for generating the image of the binary search tree.
+// In this recursive function, *pNodePtr might point to a sub-tree in the BST.
+static DoubleBlackState RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
+                                              long numVal, long *pCnt, TraversalDirection direction) {
     // static long cnt = 0;
     assert(pCnt);
     char *graphName = "RBTree";
     char *fileName = "images/RBTree2Delete";
     RBTreeNodePtr pNode = *pNodePtr;
+
+    DoubleBlackState dbState = NO_DOUBLE_BACK;
+    
     if (pNode) {
+        // It is on stack
+        pNode->visited = 1;
+
         if (numVal < pNode->value.numVal) {
-            RecursiveRBTreeDelete(pRoot, &(pNode->leftChild), numVal, pCnt);
+            dbState = RecursiveRBTreeDelete(pRoot, &(pNode->left), numVal, pCnt, TURN_LEFT);
         } else if (numVal > pNode->value.numVal) {
-            RecursiveRBTreeDelete(pRoot, &(pNode->rightChild), numVal, pCnt);
+            dbState = RecursiveRBTreeDelete(pRoot, &(pNode->right), numVal, pCnt, TURN_RIGHT);
         } else {
-            /************************************************************************
-                If the node (to be deleted) has:
-
-                    0 child:
-
-                        leftChild == NULL && rightChild == NULL    // case 00
-
-                    1 child:
-
-                        leftChild == NULL && rightChild != NULL    // case 01
-
-                        or
-                        leftChild != NULL && rightChild == NULL    // case 10
-
-                    2 children:
-
-                        leftChild != NULL && rightChild != NULL    // case 11
-
-             **************************************************************************/
-            if (pNode->leftChild == NULL) {   
-                // case 00 and case 01
-                RBTreeNodePtr tmp = pNode->rightChild;
-                /*
-                    If the node to be deleted is RED, nothing to do.
-                 */
-                if ((pNode->color == BLACK) && (pNode->rightChild)) {
-                    // This coloring operation can increase the black height of the subtree.
-                    pNode->rightChild->color = BLACK;
+            if (pNode->left == NULL && pNode->right == NULL) {   //// case 00: no child
+                if (pNode->color == BLACK) {
+                    if (direction == TURN_LEFT) {
+                        dbState = DOUBLE_BLACK_FROM_LEFT;
+                    } else {
+                        dbState = DOUBLE_BLACK_FROM_RIGHT;
+                    }
                 }
                 free(pNode);
-                *pNodePtr = tmp;
-            } else if (pNode->rightChild == NULL) {   
+                *pNodePtr = NULL;   
+                return dbState;  
+            } else if (pNode->left == NULL && pNode->right != NULL) { // case 01: only right  
+                RBTreeNodePtr tmp = pNode->right;
+                assert(pNode->color == BLACK && pNode->right->color == RED);
+                pNode->right->color = BLACK;
+                free(pNode);
+                *pNodePtr = tmp; 
+                pNode = tmp;               
+            } else if (pNode->left != NULL && pNode->right == NULL) { // case 10: only left
                 // case 10
-                RBTreeNodePtr tmp = pNode->leftChild;
-                /*
-                    If the node to be deleted is RED, nothing to do.
-                 */
-                if ((pNode->color == BLACK) && (pNode->leftChild)) {
-                    pNode->leftChild->color = BLACK;
-                }
+                RBTreeNodePtr tmp = pNode->left;
+                assert(pNode->color == BLACK && pNode->left->color == RED);
+                pNode->left->color = BLACK;
                 free(pNode);
                 *pNodePtr = tmp;
-            } else {
-                // case 11:  with two children
+                pNode = tmp;
+            } else { // case 11:  with two children                
                 // Get pNode's in-order pPredecessor, which is right-most node in its left sub-tree.
-                RBTreeNodePtr pPredecessor = BiTreeMaxValueNode(pNode->leftChild);
+                RBTreeNodePtr pPredecessor = BiTreeMaxValueNode(pNode->left);
 
                 // (Swapping is done for clearer debugging output)
                 // Swap the values of the node pointed to by pNode and its in-order predecessor
@@ -303,24 +299,24 @@ static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
                 pNode->value = pPredecessor->value;
                 pPredecessor->value = val;
 
+                GEN_ONE_IMAGE("After swapping, recursively delete", pNode->left->value.numVal);
+
                 // Now, numVal is in left sub-tree. Let us recursively delete it.
                 // Temporarily, the whole binary search tree is at an inconsistent state.
                 // It will become consistent when the deletion is really done.
-                RecursiveRBTreeDelete(pRoot, &pNode->leftChild, pPredecessor->value.numVal, pCnt);
+                dbState = RecursiveRBTreeDelete(pRoot, &pNode->left, pPredecessor->value.numVal, pCnt, TURN_LEFT);
             }
         }
-        //
-        pNode = *pNodePtr;
-        // If it is NULL, just return.
-        if (pNode == NULL) {
-            return;
-        }
-        // recalculate and store its height
-        UpdateBlackHeight(pNode);
-
-        int bFactor = RBTreeBalanceFactor(pNode);
-
-        if (bFactor < 0) {
+        assert(pNode);
+        // The deleted node has been replaced with a non-null node. 
+        // If no double black or already fixed in lower tree nodes, return NO_DOUBLE_BACK
+        if (dbState == NO_DOUBLE_BACK) {
+            pNode->visited = 0;
+            return NO_DOUBLE_BACK;            
+        } 
+        // Try to fix the double black propagated from downwards
+        int fixed = 0;
+        if (dbState == DOUBLE_BLACK_FROM_LEFT) { // from its left child
             /*
                       (*pNodePtr)
                           |
@@ -330,30 +326,51 @@ static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
                         /      \
                        /        \
                 Deleted (B)    Sibling (R or B)
-             */
+             */            
             if (hasRedRight(pNode)) {
-                FixRedRightSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
-            } else if (hasBlackRight(pNode) && pNode->rightChild) {
-                FixBlackRightSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
-            }
-        } else if (bFactor > 0) {
+                fixed = FixRedRightSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
+            } else if (hasBlackRight(pNode) && pNode->right) {
+                fixed = FixBlackRightSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
+            } 
+        } else if (dbState == DOUBLE_BLACK_FROM_RIGHT) { // from its right child
             /*
                           (*pNodePtr)
                               |
                               |
-                              V
+                              v
                              Node
                             /      \
                            /        \
                 Sibling (R or B)    Deleted (B)
-             */
+             */            
             if (hasRedLeft(pNode)) {
-                FixRedLeftSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
-            } else if (hasBlackLeft(pNode) && pNode->leftChild) {
-                FixBlackLeftSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
-            }
+                fixed = FixRedLeftSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
+            } else if (hasBlackLeft(pNode) && pNode->left) {
+                fixed = FixBlackLeftSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
+            }            
+        } 
+        // If fixed, reset the state to be NO_DOUBLE_BACK
+        if (fixed) {
+            dbState = NO_DOUBLE_BACK;
         }
+        // For algorithm visualization
+        if (dbState != NO_DOUBLE_BACK) {
+            GEN_ONE_IMAGE("Propagate double black upwards from", pNode->value.numVal);
+        } else {
+            GEN_ONE_IMAGE("After fixing double black at", pNode->value.numVal);
+        }
+        // The violation cannot be fixed, propagate it upwards.
+        if (!fixed) {
+            if (direction == TURN_LEFT) {
+                dbState = DOUBLE_BLACK_FROM_LEFT;
+            } else {
+                dbState = DOUBLE_BLACK_FROM_RIGHT;
+            }
+        }     
+        // It is not on stack
+        pNode->visited = 0;        
     }
+    return dbState;     
 }
 ```
 
@@ -363,7 +380,7 @@ static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
 
 | Red-Black Tree | 2-3-4 Tree |
 |:-------------:|:-------------:|
-| <img src="diagrams/RBTree1Insert_0008.png" width="80%" height="80%"> | <img src="diagrams/RBTree3BTree_0008.png" width="80%" height="80%"> |
+| <img src="diagrams/RBTree1Insert_0008.png" width="50%" height="50%"> | <img src="diagrams/RBTree3BTree_0008.png" width="50%" height="50%"> |
 
 
 ```C
@@ -484,390 +501,16 @@ struct BTreeNode *RBTreeTo234Tree(RBTreeNodePtr root) {
 ```sh
 RedBlackTree$ make view
 ```
-
-**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
-
-
-### RBTreeInsert(): {50, 20, 10, 30, 40, 70, 60, 100, 90, 80}
-
-| Insert 50 | 
-|:-------------:|
-| <img src="images/RBTree1Insert_0001.png" width="80%" height="80%"> |
-
-| Insert 20 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0002.png" width="80%" height="80%"> |
-
-
-| Insert 20 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0004.png" width="80%" height="80%"> |
-
-
-| Insert 10 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0005.png" width="80%" height="80%"> |
-
-
-
-| Insert 10 (red parent + black uncle + left child, right rotation at 50 and recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0007.png" width="80%" height="80%"> |
-
-| Insert 10 | 
-|:-------------:|
-|  <img src="images/RBTree1Insert_0008.png" width="80%" height="80%"> |
-
-| Insert 10 | 
-|:-------------:|
-| <img src="images/RBTree1Insert_0009.png" width="80%" height="80%"> |
-
-| Insert 30 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0010.png" width="80%" height="80%"> |
-
-
-
-| Insert 30 (red uncle + red parent, recoloring)|
-|:-------------:|
-| <img src="images/RBTree1Insert_0012.png" width="80%" height="80%"> |
-
-| Insert 30  (recoloring root, with the black height of the tree increased by one) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0013.png" width="80%" height="80%"> |
-
-| Insert 30  |
-|:-------------:|
-| <img src="images/RBTree1Insert_0014.png" width="80%" height="80%"> |
-
-| Insert 40 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0015.png" width="80%" height="80%"> |
-
-
-| Insert 40 (red parent + black uncle + right child, left rotation at 30) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0017.png" width="80%" height="80%"> |
-
-
-| Insert 40 (red parent + black uncle + left child, right rotation at 50 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0018.png" width="80%" height="80%"> |
-
-
-
-| Insert 40  |
-|:-------------:|
-| <img src="images/RBTree1Insert_0020.png" width="80%" height="80%"> |
-
-
-| Insert 40 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0022.png" width="80%" height="80%"> |
-
-| Insert 70 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0023.png" width="80%" height="80%"> |
-
-
-
-| Insert 70 (red uncle + red parent, recoloring)|
-|:-------------:|
-| <img src="images/RBTree1Insert_0025.png" width="80%" height="80%"> |
-
-| Insert 70  |
-|:-------------:|
-| <img src="images/RBTree1Insert_0026.png" width="80%" height="80%"> |
-
-| Insert 70 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0027.png" width="80%" height="80%"> |
-
-
-| Insert 70 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0029.png" width="80%" height="80%"> |
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0030.png" width="80%" height="80%"> |
-
-
-| Insert 60 (black uncle + red parent + left child, right rotation at 70)|
-|:-------------:|
-| <img src="images/RBTree1Insert_0032.png" width="80%" height="80%"> |
-
-| Insert 60  (black uncle + red parent + right child, left rotation at 50 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0033.png" width="80%" height="80%"> |
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0034.png" width="80%" height="80%"> |
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0035.png" width="80%" height="80%"> |
-
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0038.png" width="80%" height="80%"> |
-
-| Insert 60 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0039.png" width="80%" height="80%"> |
-
-| Insert 100 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0040.png" width="80%" height="80%"> |
-
-
-
-| Insert 100 (red uncle + red parent, recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0042.png" width="80%" height="80%"> |
-
-| Insert 100 |
+|  | 
 |:-------------:|
 | <img src="images/RBTree1Insert_0043.png" width="80%" height="80%"> |
 
-| Insert 100 |
+### make animation
+
+```sh
+RedBlackTree$ make animation
+```
+
+|  | 
 |:-------------:|
-| <img src="images/RBTree1Insert_0045.png" width="80%" height="80%"> |
-
-| Insert 100 (black uncle + red parent + right child, left rotation at 20 + recoloring)|
-|:-------------:|
-| <img src="images/RBTree1Insert_0046.png" width="80%" height="80%"> |
-
-| Insert 100  |
-|:-------------:|
-| <img src="images/RBTree1Insert_0047.png" width="80%" height="80%"> |
-
-
-| Insert 100 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0048.png" width="80%" height="80%"> |
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0049.png" width="80%" height="80%"> |
-
-
-
-| Insert 90 (black uncle + red parent + left child, right rotation at 100) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0051.png" width="80%" height="80%"> |
-
-
-| Insert 90 ((black uncle + red parent + right child, left rotation at 70 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0052.png" width="80%" height="80%"> |
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0053.png" width="80%" height="80%"> |
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0054.png" width="80%" height="80%"> |
-
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0056.png" width="80%" height="80%"> |
-
-
-| Insert 90 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0058.png" width="80%" height="80%"> |
-
-
-| Insert 80 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0059.png" width="80%" height="80%"> |
-
-
-| Insert 80 (red parent + red uncle, recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0061.png" width="80%" height="80%"> |
-
-| Insert 80 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0062.png" width="80%" height="80%"> |
-
-
-| Insert 80 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0064.png" width="80%" height="80%"> |
-
-| Insert 80 (red uncle + red parent, recoloring) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0065.png" width="80%" height="80%"> |
-
-| Insert 80 (recoloring root, with the black height of the tree increased by one) |
-|:-------------:|
-| <img src="images/RBTree1Insert_0066.png" width="80%" height="80%"> |
-
-| Insert 80 |
-|:-------------:|
-| <img src="images/RBTree1Insert_0067.png" width="80%" height="80%"> |
-
-
-### RBTreeDelete(): {50, 20, 10, 30, 40, 70, 60, 100, 90, 80}
-
-| Delete 50 (red sibling + 2 black nephews, left rotation at 60 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0068.png" width="80%" height="80%"> |
-
-| Delete 50 (black sibling + right red nephew, left rotation at 60 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0069.png" width="80%" height="80%"> |
-
-| Delete 50 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0070.png" width="80%" height="80%"> |
-
-
-
-
-| Delete 50 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0072.png" width="80%" height="80%"> |
-
-| Delete 50 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0073.png" width="80%" height="80%"> |
-
-| Delete 20 (swap 10 and 20) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0074.png" width="80%" height="80%"> |
-
-
-| Delete 20 (black sibling at 30 + two black nephews, recoloring)|
-|:-------------:|
-| <img src="images/RBTree2Delete_0075.png" width="80%" height="80%"> |
-
-| Delete 20 (black sibling at 90 + left red nephew at 70, right rotation at 90)|
-|:-------------:|
-| <img src="images/RBTree2Delete_0076.png" width="80%" height="80%"> |
-
-
-
-| Delete 20 (black sibling at 90 + two black nephews, left rotation at 40 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0078.png" width="80%" height="80%"> |
-
-| Delete 20 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0079.png" width="80%" height="80%"> |
-
-| Delete 20 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0080.png" width="80%" height="80%"> |
-
-
-| Delete 10 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0081.png" width="80%" height="80%"> |
-
-
-| Delete 10 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0085.png" width="80%" height="80%"> |
-
-
-| Delete 10 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0087.png" width="80%" height="80%"> |
-
-
-| Delete 30 (black sibling at 60 + two black nephews, recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0088.png" width="80%" height="80%"> |
-
-| Delete 30 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0089.png" width="80%" height="80%"> |
-
-
-| Delete 30 (black sibling at 90 + two black nephews, recoloring)|
-|:-------------:|
-| <img src="images/RBTree2Delete_0090.png" width="80%" height="80%"> |
-
-
-| Delete 30 (the black height of the tree decreased by 1) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0091.png" width="80%" height="80%"> |
-
-
-| Delete 30 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0092.png" width="80%" height="80%"> |
-
-| Delete 40 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0093.png" width="80%" height="80%"> |
-
-
-| Delete 40 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0097.png" width="80%" height="80%"> |
-
-
-| Delete 70 (swap 70 and 60) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0098.png" width="80%" height="80%"> |
-
-
-| Delete 70 (red sibling at 90, left rotation at 60 + recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0099.png" width="80%" height="80%"> |
-
-| Delete 70 (black sibling at 80 + two black nephews, recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0100.png" width="80%" height="80%"> |
-
-| Delete 70 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0101.png" width="80%" height="80%"> |
-
-| Delete 70 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0102.png" width="80%" height="80%"> |
-
-| Delete 60 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0103.png" width="80%" height="80%"> |
-
-
-| Delete 60 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0107.png" width="80%" height="80%"> |
-
-| Delete 100 (black sibling at 80 + two black nephews, recoloring) |
-|:-------------:|
-| <img src="images/RBTree2Delete_0108.png" width="80%" height="80%"> |
-
-| Delete 100 (the black height of the tree decreased by 1)|
-|:-------------:|
-| <img src="images/RBTree2Delete_0109.png" width="80%" height="80%"> |
-
-
-| Delete 100 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0110.png" width="80%" height="80%"> |
-
-
-| Delete 90 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0111.png" width="80%" height="80%"> |
-
-
-| Delete 80 |
-|:-------------:|
-| <img src="images/RBTree2Delete_0114.png" width="80%" height="80%"> |
-
-
-
-
+| <img src="diagrams/main.gif" width="80%" height="80%"> |

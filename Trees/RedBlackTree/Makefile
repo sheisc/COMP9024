@@ -36,6 +36,7 @@ CC= gcc
 #==9942==HINT: LeakSanitizer does not work under ptrace (strace, gdb, etc) 
 #CFLAGS = -g -Wall -fsanitize=address -I $(PROJ_ROOT_PATH)/src
 CFLAGS = -g -Wall -I $(PROJ_ROOT_PATH)/src
+LDFLAGS= -lm
 
 # create a directory  
 $(shell mkdir -p $(BUILD_DIR))
@@ -46,7 +47,7 @@ all:
 
 # generate the target, which depends on the "build/*.o" files
 $(TARGET_EXE):  $(OBJ_FILES_IN_BUILD) 	
-	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD)
+	$(CC) $(CFLAGS) -o $(TARGET_EXE) $(OBJ_FILES_IN_BUILD) ${LDFLAGS}
 
 # How to generate a "build/*.o" from a "src/*.c"
 # To generate prerequisites automatically, please see COMP9024/C/HowToMake/Makefile.V2
@@ -56,11 +57,17 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 	${CC} ${CFLAGS} -c $< -o $@
 
 view:
-	find ./images -name "*.png" | sort | xargs feh -g 1024x768  &	
+	find ./images -name "*.png" | sort | xargs feh --scale-down -g 1024x768  &	
+
+normalize:
+	find ./images -name "*.png" | xargs -I {} convert -resize 1024x768\> -gravity center -background white {} {}
+	
+animation:	
+	convert -extent 1024x768 -gravity center -background white -delay 200 -loop 0 images/*.png $(TARGET_EXE).gif
 
 # clean all the files generated	
 clean:
-	rm -rf $(TARGET_EXE) $(BUILD_DIR)
+	rm -rf $(TARGET_EXE) $(BUILD_DIR) $(TARGET_EXE).gif
 	find . -name "*.o" | xargs rm -f
 	find . -name "*.s" | xargs rm -f
 	find . -name "*.i" | xargs rm -f

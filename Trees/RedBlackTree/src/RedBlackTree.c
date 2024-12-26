@@ -3,27 +3,48 @@
 #include <stdlib.h> // malloc() and free()
 #include <string.h> // memset()
 #include "RedBlackTree.h"
+#include "RBTree2Dot.h"
 #include "Queue.h"
 
-// whether to use the in-order successor or predecessor in red-black tree deletion
-// #define  SWAP_IN_ORDER_SUCCESSOR
+// 
+typedef enum {
+    // no violation in deletion or fixed
+    NO_DOUBLE_BACK = 0,
+    // violation in deletion generated
+    DOUBLE_BLACK_GENERATED = 1,
+    // violation in deletion propagated from its left child
+    DOUBLE_BLACK_FROM_LEFT = 2,
+    // violation in deletion propagated from its right child
+    DOUBLE_BLACK_FROM_RIGHT = 3,
+} DoubleBlackState;
+
+typedef enum {
+    // the node being visited is a left node
+    TURN_LEFT = 2,
+    // the node being visited is a right node
+    TURN_RIGHT = 3
+} TraversalDirection;
 
 // whether to generate intermediate images in inserting or deleting nodes
 #define ENABLE_GEN_INTERMEDIATE_IMAGES
 
 #ifdef ENABLE_GEN_INTERMEDIATE_IMAGES
-#define GEN_ONE_IMAGE()                                        \
-    do                                                         \
-    {                                                          \
-        (*pCnt)++;                                             \
-        RBTreeGenOneImage(*pRoot, graphName, fileName, *pCnt); \
+#define GEN_ONE_IMAGE(comment, nodeKey)                         \
+    do                                                          \
+    {                                                           \
+        if (hasIntermediateImages) {                            \
+            (*pCnt)++;                                                                   \
+            RBTreeGenOneImage(*pRoot, graphName, fileName, *pCnt, (comment), (nodeKey)); \
+        }                                                                                \
     } while (0)
 #else
-#define GEN_ONE_IMAGE() \
+#define GEN_ONE_IMAGE(comment, nodeKey) \
     do                  \
     {                   \
     } while (0)
 #endif
+
+#define  ILLEGAL_TREE_HEIGHT        -1
 
 /*
     The cases in FixViolationsInInsertion():
@@ -53,49 +74,56 @@ typedef enum {
     OtherRBState,
 } RBTreeNodeState;
 
+
+static long hasIntermediateImages = 0;
+
+void SetIntermediateImages(long enableState) {
+    hasIntermediateImages = enableState;
+}
+
 static void SetTreeNodeColor(RBTreeNodePtr pNode, NodeColor color) {
     pNode->color = color;
 }
 
 int hasRedLeft(RBTreeNodePtr pNode) {
-    return pNode->leftChild && pNode->leftChild->color == RED;
+    return pNode->left && pNode->left->color == RED;
 }
 
 int hasBlackLeft(RBTreeNodePtr pNode) {
-    return (!pNode->leftChild) || (pNode->leftChild->color == BLACK);
+    return (!pNode->left) || (pNode->left->color == BLACK);
 }
 
 int hasRedRight(RBTreeNodePtr pNode) {
-    return pNode->rightChild && pNode->rightChild->color == RED;
+    return pNode->right && pNode->right->color == RED;
 }
 
 int hasBlackRight(RBTreeNodePtr pNode) {
-    return (!pNode->rightChild) || (pNode->rightChild->color == BLACK);
+    return (!pNode->right) || (pNode->right->color == BLACK);
 }
 
 static RBTreeNodeState GetRBTreeNodeState(RBTreeNodePtr pNode) {
     assert(pNode);
 
     if (hasRedLeft(pNode) && hasRedRight(pNode)) {
-        if (hasRedLeft(pNode->leftChild)) {
+        if (hasRedLeft(pNode->left)) {
             return RedParentRedUncle_RXXX;
-        } else if (hasRedRight(pNode->leftChild)) {
+        } else if (hasRedRight(pNode->left)) {
             return RedParentRedUncle_XRXX;
-        } else if (hasRedLeft(pNode->rightChild)) {
+        } else if (hasRedLeft(pNode->right)) {
             return RedUncleRedParent_XXRX;
-        } else if (hasRedRight(pNode->rightChild)) {
+        } else if (hasRedRight(pNode->right)) {
             return RedUncleRedParent_XXXR;
         }
     } else if (hasRedLeft(pNode) && hasBlackRight(pNode)) {
-        if (hasRedLeft(pNode->leftChild)) {
+        if (hasRedLeft(pNode->left)) {
             return RedParentBlackUncle_RXXX;
-        } else if (hasRedRight(pNode->leftChild)) {
+        } else if (hasRedRight(pNode->left)) {
             return RedParentBlackUncle_XRXX;
         }
     } else if (hasBlackLeft(pNode) && hasRedRight(pNode)) {
-        if (hasRedLeft(pNode->rightChild)) {
+        if (hasRedLeft(pNode->right)) {
             return BlackUncleRedParent_XXRX;
-        } else if (hasRedRight(pNode->rightChild)) {
+        } else if (hasRedRight(pNode->right)) {
             return BlackUncleRedParent_XXXR;
         }
     }
@@ -104,86 +132,76 @@ static RBTreeNodeState GetRBTreeNodeState(RBTreeNodePtr pNode) {
 
 /////////////////////////////////// Red-Black Tree ///////////////////////////////////////////
 
-static int GetMax(int h1, int h2) {
-    return (h1 > h2) ? h1 : h2;
-}
-
-static int RBTreeBlackHeight(RBTreeNodePtr root) {
-    if (root) {
-        return root->blackHeight;
-    } else {
-        return 0;
+void RBTreeResetBlackHeight(struct RBTreeNode *pNode) {
+    if (pNode) {
+        pNode->blackHeight = ILLEGAL_TREE_HEIGHT;
+        RBTreeResetBlackHeight(pNode->left);
+        RBTreeResetBlackHeight(pNode->right);
     }
 }
 
-static void UpdateBlackHeight(RBTreeNodePtr root) {
-    if (root) {
-        int max = GetMax(RBTreeBlackHeight(root->leftChild), RBTreeBlackHeight(root->rightChild));
-        if (root->color == BLACK) {
-            root->blackHeight = max + 1;
+long RBTreeBlackHeight(struct RBTreeNode *pNode) {
+    if (pNode) {
+        if (pNode->blackHeight != ILLEGAL_TREE_HEIGHT) {
+            return pNode->blackHeight;
+        }        
+        long leftLen = RBTreeBlackHeight(pNode->left);
+        long rightLen = RBTreeBlackHeight(pNode->right);
+        assert(leftLen == rightLen);
+        if (pNode->color == BLACK) {
+            pNode->blackHeight = 1 + leftLen;
+            return 1 + leftLen;
         } else {
-            root->blackHeight = max;
+            pNode->blackHeight = leftLen;
+            return leftLen;
         }
-    }
-}
-
-int RBTreeBalanceFactor(RBTreeNodePtr root) {
-    if (root) {
-        return RBTreeBlackHeight(root->leftChild) - RBTreeBlackHeight(root->rightChild);
     } else {
         return 0;
     }
 }
 
-RBTreeNodePtr CreateRBTreeNode(long numVal, char *nodeName, RBTreeNodePtr left, RBTreeNodePtr right) {
+// Ignore node color
+long RBTreeGetRealHeight(struct RBTreeNode *pNode) {
+    if (pNode) {
+        long leftLen = RBTreeGetRealHeight(pNode->left);
+        long rightLen = RBTreeGetRealHeight(pNode->right);
+        return leftLen > rightLen ? (leftLen + 1) : (rightLen + 1);     
+    } else {
+        return 0;
+    }
+}
+
+static RBTreeNodePtr CreateRBTreeNode(long numVal, char *nodeName, RBTreeNodePtr left, RBTreeNodePtr right) {
     RBTreeNodePtr pNode = (RBTreeNodePtr)malloc(sizeof(struct RBTreeNode));
     assert(pNode != NULL);
 
     memset(pNode, 0, sizeof(*pNode));
     pNode->value.numVal = numVal;
-    // If nodeName is not specified, we use the string representation of numVal as its node name.
-    if (nodeName == NULL) {
-        snprintf(pNode->value.name, MAX_ID_LEN, "%ld", numVal);
-    } else {
-        snprintf(pNode->value.name, MAX_ID_LEN, "%s", nodeName);
-    }
-    pNode->leftChild = left;
-    pNode->rightChild = right;
+    pNode->left = left;
+    pNode->right = right;
     pNode->visited = 0;
-    pNode->blackHeight = 0;
+    pNode->blackHeight = ILLEGAL_TREE_HEIGHT;
     SetTreeNodeColor(pNode, RED);
     return pNode;
 }
 
-void ReleaseRBTree(RBTreeNodePtr root) {
-    if (root) {
-        ReleaseRBTree(root->leftChild);
-        ReleaseRBTree(root->rightChild);
-        free(root);
-    }
+RBTreeNodePtr CreateRBTree(void) {
+    return NULL;
 }
 
-void PreOrderTraversal(RBTreeNodePtr root, NodeVisitor visit) {
+void ReleaseRBTree(RBTreeNodePtr root) {
     if (root) {
-        visit(root);
-        PreOrderTraversal(root->leftChild, visit);
-        PreOrderTraversal(root->rightChild, visit);
+        ReleaseRBTree(root->left);
+        ReleaseRBTree(root->right);
+        free(root);
     }
 }
 
 void InOrderTraversal(RBTreeNodePtr root, NodeVisitor visit) {
     if (root) {
-        InOrderTraversal(root->leftChild, visit);
+        InOrderTraversal(root->left, visit);
         visit(root);
-        InOrderTraversal(root->rightChild, visit);
-    }
-}
-
-void PostOrderTraversal(RBTreeNodePtr root, NodeVisitor visit) {
-    if (root) {
-        PostOrderTraversal(root->leftChild, visit);
-        PostOrderTraversal(root->rightChild, visit);
-        visit(root);
+        InOrderTraversal(root->right, visit);
     }
 }
 
@@ -205,11 +223,11 @@ void PostOrderTraversal(RBTreeNodePtr root, NodeVisitor visit) {
  */
 static void RBTreeRightRotate(RBTreeNodePtr *pNodePtr) {
     RBTreeNodePtr pNodeC = *pNodePtr;
-    RBTreeNodePtr pNodeA = pNodeC->leftChild;
-    RBTreeNodePtr pNodeB = pNodeA->rightChild;
+    RBTreeNodePtr pNodeA = pNodeC->left;
+    RBTreeNodePtr pNodeB = pNodeA->right;
 
-    pNodeA->rightChild = pNodeC;
-    pNodeC->leftChild = pNodeB;
+    pNodeA->right = pNodeC;
+    pNodeC->left = pNodeB;
     *pNodePtr = pNodeA;
 }
 
@@ -232,13 +250,15 @@ static void RBTreeRightRotate(RBTreeNodePtr *pNodePtr) {
  */
 static void RBTreeLeftRotate(RBTreeNodePtr *pNodePtr) {
     RBTreeNodePtr pNodeA = *pNodePtr;
-    RBTreeNodePtr pNodeC = pNodeA->rightChild;
-    RBTreeNodePtr pNodeB = pNodeC->leftChild;
+    RBTreeNodePtr pNodeC = pNodeA->right;
+    RBTreeNodePtr pNodeB = pNodeC->left;
 
-    pNodeC->leftChild = pNodeA;
-    pNodeA->rightChild = pNodeB;
+    pNodeC->left = pNodeA;
+    pNodeA->right = pNodeB;
     *pNodePtr = pNodeC;
 }
+
+//////////////////////////////////////////  RBTreeInsert() //////////////////////////////////////////////
 
 /*
     The unbalance might be propagated upward.
@@ -249,6 +269,10 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
     assert(pNode);
 
     RBTreeNodeState state = GetRBTreeNodeState(pNode);
+    if (state == OtherRBState) {
+        return;
+    }
+    GEN_ONE_IMAGE("Before FixViolationsInInsertion()", (*pNodePtr)->value.numVal);
     switch (state){
     case RedParentRedUncle_RXXX:
     case RedParentRedUncle_XRXX:
@@ -277,12 +301,9 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
             -----------------------------------------------------------------------
          */
         SetTreeNodeColor(pNode, RED);
-        SetTreeNodeColor(pNode->leftChild, BLACK);
-        SetTreeNodeColor(pNode->rightChild, BLACK);
+        SetTreeNodeColor(pNode->left, BLACK);
+        SetTreeNodeColor(pNode->right, BLACK);
 
-        UpdateBlackHeight(pNode->leftChild);
-        UpdateBlackHeight(pNode->rightChild);
-        UpdateBlackHeight(pNode);
         break;
     case RedParentBlackUncle_RXXX:
         /*
@@ -307,10 +328,8 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
         RBTreeRightRotate(pNodePtr);
 
         SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor((*pNodePtr)->rightChild, RED);
+        SetTreeNodeColor((*pNodePtr)->right, RED);
 
-        UpdateBlackHeight((*pNodePtr)->rightChild);
-        UpdateBlackHeight(*pNodePtr);
         break;
     case RedParentBlackUncle_XRXX:
         /*  
@@ -333,16 +352,14 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
                   (inserted)
             ------------------------------------------------------------------------------------------------------
          */
-        RBTreeLeftRotate(&pNode->leftChild);
-        GEN_ONE_IMAGE();
+        RBTreeLeftRotate(&pNode->left);
+        GEN_ONE_IMAGE("After RBTreeLeftRotate()", pNode->left->value.numVal);
 
         RBTreeRightRotate(pNodePtr);
 
         SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor((*pNodePtr)->rightChild, RED);
+        SetTreeNodeColor((*pNodePtr)->right, RED);
 
-        UpdateBlackHeight((*pNodePtr)->rightChild);
-        UpdateBlackHeight(*pNodePtr);
         break;
     case BlackUncleRedParent_XXRX:
         /*
@@ -364,16 +381,14 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
                      (inserted)                                                  (null)
             ------------------------------------------------------------------------------------------------------
          */
-        RBTreeRightRotate(&pNode->rightChild);
-        GEN_ONE_IMAGE();
+        RBTreeRightRotate(&pNode->right);
+        GEN_ONE_IMAGE("After RBTreeRightRotate()", pNode->right->value.numVal);
 
         RBTreeLeftRotate(pNodePtr);
 
         SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor((*pNodePtr)->leftChild, RED);
+        SetTreeNodeColor((*pNodePtr)->left, RED);
 
-        UpdateBlackHeight((*pNodePtr)->leftChild);
-        UpdateBlackHeight(*pNodePtr);
         break;
     case BlackUncleRedParent_XXXR:
         /*
@@ -398,14 +413,13 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
         RBTreeLeftRotate(pNodePtr);
 
         SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor((*pNodePtr)->leftChild, RED);
+        SetTreeNodeColor((*pNodePtr)->left, RED);
 
-        UpdateBlackHeight((*pNodePtr)->leftChild);
-        UpdateBlackHeight(*pNodePtr);
         break;
     default:
         break;
     }
+    GEN_ONE_IMAGE("After FixViolationsInInsertion()", (pNode)->value.numVal);
 }
 
 static void RecursiveRBTreeInsert(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, long numVal, char *nodeName, long *pCnt) {
@@ -424,19 +438,17 @@ static void RecursiveRBTreeInsert(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
         // on stack
         pNode->visited = 1;
         if (numVal < pNode->value.numVal) {
-            RecursiveRBTreeInsert(pRoot, &pNode->leftChild, numVal, nodeName, pCnt);
+            RecursiveRBTreeInsert(pRoot, &pNode->left, numVal, nodeName, pCnt);
         } else if (numVal > pNode->value.numVal) {
-            RecursiveRBTreeInsert(pRoot, &pNode->rightChild, numVal, nodeName, pCnt);
+            RecursiveRBTreeInsert(pRoot, &pNode->right, numVal, nodeName, pCnt);
         } else {
             // If numVal is already in the binary search tree, do nothing.
             // off stack
             pNode->visited = 0;
             return;
         }
-        // The inserted node is RED node. We will update black heights in FixViolationsInInsertion().
-        GEN_ONE_IMAGE();
+        // The inserted node is RED node. We will update black heights in FixViolationsInInsertion().        
         FixViolationsInInsertion(pRoot, pNodePtr, pCnt, graphName, fileName);
-        GEN_ONE_IMAGE();
         // off stack
         pNode->visited = 0;
     }
@@ -446,14 +458,15 @@ void RBTreeInsert(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, long numVal, ch
     RecursiveRBTreeInsert(pRoot, pNodePtr, numVal, nodeName, pCnt);
     RBTreeNodePtr pNode = *pNodePtr;
     pNode->color = BLACK;
-    UpdateBlackHeight(pNode);
 }
+
+//////////////////////////////////////////  RBTreeDelete() //////////////////////////////////////////////
 
 static RBTreeNodePtr BiTreeMaxValueNode(RBTreeNodePtr root) {
     RBTreeNodePtr cur = root;
     // Get the right-most node
-    while ((cur != NULL) && (cur->rightChild != NULL)) {
-        cur = cur->rightChild;
+    while ((cur != NULL) && (cur->right != NULL)) {
+        cur = cur->right;
     }
     return cur;
 }
@@ -461,7 +474,7 @@ static RBTreeNodePtr BiTreeMaxValueNode(RBTreeNodePtr root) {
 /*
     The unbalance can be fixed in this function.
  */
-static void FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
+static int FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
                                          char *graphName, char *fileName, long *pCnt) {
     RBTreeNodePtr pNode = *pNodePtr;
     /*
@@ -489,7 +502,7 @@ static void FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
         -----------------------------------------------------------------------
      */
     RBTreeLeftRotate(pNodePtr);
-    GEN_ONE_IMAGE();
+    GEN_ONE_IMAGE("After RBTreeLeftRotate()", (*pNodePtr)->value.numVal);
     /*
                             WARNING
 
@@ -498,7 +511,7 @@ static void FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
         (*pNodePtr) and pNode might not point to the same node any more.
 
      */
-    if (hasBlackLeft(pNode->rightChild) && hasBlackRight(pNode->rightChild))
+    if (hasBlackLeft(pNode->right) && hasBlackRight(pNode->right))
     {
         /*
 
@@ -525,13 +538,10 @@ static void FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
             -----------------------------------------------------------------------||------------------------------------
          */
         SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor(pNode->rightChild, RED);
+        SetTreeNodeColor(pNode->right, RED);
 
-        UpdateBlackHeight(pNode->rightChild);
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight(*pNodePtr);
     }
-    else if (hasRedRight(pNode->rightChild)) {
+    else if (hasRedRight(pNode->right)) {
         /*
              Case 2: After left rotation, black sibling (Black1) and the red right nephew node (Red2) exist
 
@@ -555,17 +565,13 @@ static void FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
                              Red2                                   Red2       ||       Deleted (B)
             -------------------------------------------------------------------||----------------------------------------
          */
-        RBTreeLeftRotate(&(*pNodePtr)->leftChild);
+        RBTreeLeftRotate(&(*pNodePtr)->left);
 
         SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor((*pNodePtr)->leftChild, RED);
-        SetTreeNodeColor((*pNodePtr)->leftChild->rightChild, BLACK);
+        SetTreeNodeColor((*pNodePtr)->left, RED);
+        SetTreeNodeColor((*pNodePtr)->left->right, BLACK);
 
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight((*pNodePtr)->leftChild->rightChild);
-        UpdateBlackHeight((*pNodePtr)->leftChild);
-        UpdateBlackHeight(*pNodePtr);
-    } else if (hasRedLeft(pNode->rightChild)) {
+    } else if (hasRedLeft(pNode->right)) {
         /*
              Case 3: After left rotation, black sibling (Black1) and the left red nephew node (Red1) exist,
                      but the right red nephew node (Red2) does not exist.
@@ -590,23 +596,21 @@ static void FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
                     Red1                                   Red1               ||                 Black1           Deleted (B)
             ------------------------------------------------------------------||---------------------------------------------------------------------
          */
-        RBTreeRightRotate(&pNode->rightChild);
-        GEN_ONE_IMAGE();
+        RBTreeRightRotate(&pNode->right);
+        GEN_ONE_IMAGE("After RBTreeRightRotate()", pNode->right->value.numVal);
 
-        RBTreeLeftRotate(&(*pNodePtr)->leftChild);
+        RBTreeLeftRotate(&(*pNodePtr)->left);
 
         SetTreeNodeColor(*pNodePtr, BLACK);
 
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight((*pNodePtr)->leftChild);
-        UpdateBlackHeight(*pNodePtr);
     }
+    return 1;
 }
 
 /*
     The unbalance can be fixed in this function.
  */
-static void FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
+static int FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
                                         char *graphName, char *fileName, long *pCnt) {
     RBTreeNodePtr pNode = *pNodePtr;
     /*
@@ -633,7 +637,7 @@ static void FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNo
     -----------------------------------------------------------------------
      */
     RBTreeRightRotate(pNodePtr);
-    GEN_ONE_IMAGE();
+    GEN_ONE_IMAGE("After RBTreeRightRotate()", (*pNodePtr)->value.numVal);
     /*
                             WARNING
 
@@ -642,7 +646,7 @@ static void FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNo
         (*pNodePtr) and pNode might not point to the same node any more.
 
      */
-    if (hasBlackLeft(pNode->leftChild) && hasBlackRight(pNode->leftChild)) {
+    if (hasBlackLeft(pNode->left) && hasBlackRight(pNode->left)) {
         /*
 
             Case 1:  After right rotation, black sibling (Black2) and two black nephews (e.g., two null nodes) exist
@@ -669,12 +673,9 @@ static void FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNo
          */
 
         SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor(pNode->leftChild, RED);
+        SetTreeNodeColor(pNode->left, RED);
 
-        UpdateBlackHeight(pNode->leftChild);
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight(*pNodePtr);
-    } else if (hasRedRight(pNode->leftChild)) {
+    } else if (hasRedRight(pNode->left)) {
         /*
 
             Case 2: After right rotation, black sibling (Black2) and the red right nephew node (Red2) exist
@@ -700,17 +701,14 @@ static void FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNo
             ----------------------------------------------------------------||-----------------------------------------------------------------
          */
 
-        RBTreeLeftRotate(&pNode->leftChild);
-        GEN_ONE_IMAGE();
+        RBTreeLeftRotate(&pNode->left);
+        GEN_ONE_IMAGE("After RBTreeLeftRotate()", pNode->left->value.numVal);
 
-        RBTreeRightRotate(&(*pNodePtr)->rightChild);
+        RBTreeRightRotate(&(*pNodePtr)->right);
 
         SetTreeNodeColor(*pNodePtr, BLACK);
 
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight((*pNodePtr)->rightChild);
-        UpdateBlackHeight(*pNodePtr);
-    } else if (hasRedLeft(pNode->leftChild)) {
+    } else if (hasRedLeft(pNode->left)) {
         /*
 
             Case 3: After right rotation, black sibling (Black2) and the red left nephew node (Red1) exist,
@@ -737,27 +735,24 @@ static void FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNo
             ---------------------------------------------------------------||--------------------------------------
          */
 
-        RBTreeRightRotate(&(*pNodePtr)->rightChild);
+        RBTreeRightRotate(&(*pNodePtr)->right);
 
         SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor((*pNodePtr)->rightChild, RED);
-        SetTreeNodeColor((*pNodePtr)->rightChild->leftChild, BLACK);
+        SetTreeNodeColor((*pNodePtr)->right, RED);
+        SetTreeNodeColor((*pNodePtr)->right->left, BLACK);
 
-        UpdateBlackHeight((*pNodePtr)->rightChild->leftChild);
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight((*pNodePtr)->rightChild);
-        UpdateBlackHeight(*pNodePtr);
     }
+    return 1;
 }
 
 /*
     The unbalance might be propagated upward.
  */
-static void FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
+static int FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
                                            char *graphName, char *fileName, long *pCnt) {
     RBTreeNodePtr pNode = *pNodePtr;
 
-    if (hasBlackLeft(pNode->rightChild) && hasBlackRight(pNode->rightChild)) {
+    if (hasBlackLeft(pNode->right) && hasBlackRight(pNode->right)) {
         /*
             Case 1:  black right sibling + two black nephews
 
@@ -781,12 +776,15 @@ static void FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *
             We propagate the 'double black' (i.e., Deleted (B)) upwards if 'Node' was BLACK before recoloring.
             But if 'Node' was RED, then the red-black tree is balanced after recoloring.
          */
-        SetTreeNodeColor(pNode->rightChild, RED);
+        int fixed = 0;
+        if (pNode->color == RED) {
+            fixed = 1;
+        }
+        SetTreeNodeColor(pNode->right, RED);
         SetTreeNodeColor(pNode, BLACK);
 
-        UpdateBlackHeight(pNode->rightChild);
-        UpdateBlackHeight(pNode);
-    } else if (hasRedRight(pNode->rightChild)) {
+        return fixed;
+    } else if (hasRedRight(pNode->right)) {
         NodeColor rootColor = pNode->color;
         /*
             Case 2: black right sibling + red right nephew (Red2)
@@ -811,13 +809,10 @@ static void FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *
         RBTreeLeftRotate(pNodePtr);
 
         SetTreeNodeColor(pNode, BLACK);
-        SetTreeNodeColor((*pNodePtr)->rightChild, BLACK);
+        SetTreeNodeColor((*pNodePtr)->right, BLACK);
         SetTreeNodeColor(*pNodePtr, rootColor);
 
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight((*pNodePtr)->rightChild);
-        UpdateBlackHeight(*pNodePtr);
-    } else if (hasRedLeft(pNode->rightChild)) {
+    } else if (hasRedLeft(pNode->right)) {
         NodeColor rootColor = pNode->color;
         /*
             Case 3: black right sibling + red left nephew (Red1), but no red right nephew (Red2)
@@ -839,28 +834,27 @@ static void FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *
                          Red1   null                             Sibling (B)      Deleted (B)
             ---------------------------------------------------------------------------------------------------------------
          */
-        RBTreeRightRotate(&(*pNodePtr)->rightChild);
+        RBTreeRightRotate(&(*pNodePtr)->right);
 
-        GEN_ONE_IMAGE();
+        GEN_ONE_IMAGE("After RBTreeRightRotate()", (*pNodePtr)->right->value.numVal);
 
         RBTreeLeftRotate(pNodePtr);
 
         SetTreeNodeColor(pNode, BLACK);
         SetTreeNodeColor(*pNodePtr, rootColor);
-
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight(*pNodePtr);
+   
     }
+    return 1;
 }
 
 /*
     The unbalance might be propagated upward.
  */
-static void FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
+static int FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
                                           char *graphName, char *fileName, long *pCnt) {
     RBTreeNodePtr pNode = *pNodePtr;
     NodeColor rootColor = pNode->color;
-    if (hasBlackLeft(pNode->leftChild) && hasBlackRight(pNode->leftChild)) {
+    if (hasBlackLeft(pNode->left) && hasBlackRight(pNode->left)) {
         /*
             Case 1:  black left sibling + two black nephews
 
@@ -884,11 +878,14 @@ static void FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *p
             We propagate the 'double black' (i.e., Deleted (B)) upwards if 'Node' was BLACK before recoloring.
             But if 'Node' was RED, then the red-black tree is balanced after recoloring.
          */
-        SetTreeNodeColor(pNode->leftChild, RED);
+        int fixed = 0;
+        if (pNode->color == RED) {
+            fixed = 1;
+        }
+        SetTreeNodeColor(pNode->left, RED);
         SetTreeNodeColor(pNode, BLACK);
-        UpdateBlackHeight(pNode->leftChild);
-        UpdateBlackHeight(pNode);
-    } else if (hasRedRight(pNode->leftChild)) {
+        return fixed;
+    } else if (hasRedRight(pNode->left)) {
         /*
             Case 2: black left sibling + red right nephew (Red2)
 
@@ -909,17 +906,15 @@ static void FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *p
                     Red2                   Sibling (B)                                              Deleted (B)
             ---------------------------------------------------------------------------------------------------------------
          */
-        RBTreeLeftRotate(&(*pNodePtr)->leftChild);
-        GEN_ONE_IMAGE();
+        RBTreeLeftRotate(&(*pNodePtr)->left);
+        GEN_ONE_IMAGE("After RBTreeLeftRotate()", (*pNodePtr)->left->value.numVal);
 
         RBTreeRightRotate(pNodePtr);
 
         SetTreeNodeColor(pNode, BLACK);
         SetTreeNodeColor(*pNodePtr, rootColor);
 
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight(*pNodePtr);
-    } else if (hasRedLeft(pNode->leftChild)) {
+    } else if (hasRedLeft(pNode->left)) {
         /*
             Case 3: black left sibling + red left nephew (Red1), but no red right nephew (Red2)
 
@@ -942,80 +937,64 @@ static void FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *p
          */
         RBTreeRightRotate(pNodePtr);
 
-        SetTreeNodeColor((*pNodePtr)->leftChild, BLACK);
+        SetTreeNodeColor((*pNodePtr)->left, BLACK);
         SetTreeNodeColor(pNode, BLACK);
         SetTreeNodeColor(*pNodePtr, rootColor);
 
-        UpdateBlackHeight((*pNodePtr)->leftChild);
-        UpdateBlackHeight(pNode);
-        UpdateBlackHeight(*pNodePtr);
     }
+    return 1;
 }
 
 // The parameter pRoot is only used for generating the image of the binary search tree.
 // In this recursive function, *pNodePtr might point to a sub-tree in the BST.
-static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, long numVal, long *pCnt) {
+static DoubleBlackState RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
+                                              long numVal, long *pCnt, TraversalDirection direction) {
     // static long cnt = 0;
     assert(pCnt);
     char *graphName = "RBTree";
     char *fileName = "images/RBTree2Delete";
     RBTreeNodePtr pNode = *pNodePtr;
+
+    DoubleBlackState dbState = NO_DOUBLE_BACK;
+    
     if (pNode) {
         // It is on stack
         pNode->visited = 1;
 
         if (numVal < pNode->value.numVal) {
-            RecursiveRBTreeDelete(pRoot, &(pNode->leftChild), numVal, pCnt);
+            dbState = RecursiveRBTreeDelete(pRoot, &(pNode->left), numVal, pCnt, TURN_LEFT);
         } else if (numVal > pNode->value.numVal) {
-            RecursiveRBTreeDelete(pRoot, &(pNode->rightChild), numVal, pCnt);
+            dbState = RecursiveRBTreeDelete(pRoot, &(pNode->right), numVal, pCnt, TURN_RIGHT);
         } else {
-            /************************************************************************
-                If the node (to be deleted) has:
-
-                    0 child:
-
-                        leftChild == NULL && rightChild == NULL    // case 00
-
-                    1 child:
-
-                        leftChild == NULL && rightChild != NULL    // case 01
-
-                        or
-                        leftChild != NULL && rightChild == NULL    // case 10
-
-                    2 children:
-
-                        leftChild != NULL && rightChild != NULL    // case 11
-
-             **************************************************************************/
-
-            if (pNode->leftChild == NULL) {   
-                // case 00 and case 01
-                RBTreeNodePtr tmp = pNode->rightChild;
-                /*
-                    If the node to be deleted is RED, nothing to do.
-                 */
-                if ((pNode->color == BLACK) && (pNode->rightChild)) {
-                    // This coloring operation can increase the black height of the subtree.
-                    pNode->rightChild->color = BLACK;
+            if (pNode->left == NULL && pNode->right == NULL) {   //// case 00: no child
+                if (pNode->color == BLACK) {
+                    if (direction == TURN_LEFT) {
+                        dbState = DOUBLE_BLACK_FROM_LEFT;
+                    } else {
+                        dbState = DOUBLE_BLACK_FROM_RIGHT;
+                    }
                 }
                 free(pNode);
-                *pNodePtr = tmp;
-            } else if (pNode->rightChild == NULL) {   
+                *pNodePtr = NULL;   
+                return dbState;  
+            } else if (pNode->left == NULL && pNode->right != NULL) { // case 01: only right  
+                RBTreeNodePtr tmp = pNode->right;
+                assert(pNode->color == BLACK && pNode->right->color == RED);
+                pNode->right->color = BLACK;
+                free(pNode);
+                *pNodePtr = tmp; 
+                pNode = tmp;               
+            } else if (pNode->left != NULL && pNode->right == NULL) { // case 10: only left
                 // case 10
-                RBTreeNodePtr tmp = pNode->leftChild;
-                /*
-                    If the node to be deleted is RED, nothing to do.
-                 */
-                if ((pNode->color == BLACK) && (pNode->leftChild)) {
-                    pNode->leftChild->color = BLACK;
-                }
+                RBTreeNodePtr tmp = pNode->left;
+                assert(pNode->color == BLACK && pNode->left->color == RED);
+                pNode->left->color = BLACK;
                 free(pNode);
                 *pNodePtr = tmp;
-            } else {
-                // case 11:  with two children
+                pNode = tmp;
+            } else { // case 11:  with two children                
                 // Get pNode's in-order pPredecessor, which is right-most node in its left sub-tree.
-                RBTreeNodePtr pPredecessor = BiTreeMaxValueNode(pNode->leftChild);
+                RBTreeNodePtr pPredecessor = BiTreeMaxValueNode(pNode->left);
 
                 // (Swapping is done for clearer debugging output)
                 // Swap the values of the node pointed to by pNode and its in-order predecessor
@@ -1024,28 +1003,24 @@ static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
                 pNode->value = pPredecessor->value;
                 pPredecessor->value = val;
 
-                GEN_ONE_IMAGE();
+                GEN_ONE_IMAGE("After swapping, recursively delete", pNode->left->value.numVal);
 
                 // Now, numVal is in left sub-tree. Let us recursively delete it.
                 // Temporarily, the whole binary search tree is at an inconsistent state.
                 // It will become consistent when the deletion is really done.
-                RecursiveRBTreeDelete(pRoot, &pNode->leftChild, pPredecessor->value.numVal, pCnt);
+                dbState = RecursiveRBTreeDelete(pRoot, &pNode->left, pPredecessor->value.numVal, pCnt, TURN_LEFT);
             }
         }
-        //
-        pNode = *pNodePtr;
-        // If it is NULL, just return.
-        if (pNode == NULL) {
-            return;
-        }
-        // recalculate and store its height
-        UpdateBlackHeight(pNode);
-
-        GEN_ONE_IMAGE();
-
-        int bFactor = RBTreeBalanceFactor(pNode);
-
-        if (bFactor < 0) {
+        assert(pNode);
+        // The deleted node has been replaced with a non-null node. 
+        // If no double black or already fixed in lower tree nodes, return NO_DOUBLE_BACK
+        if (dbState == NO_DOUBLE_BACK) {
+            pNode->visited = 0;
+            return NO_DOUBLE_BACK;            
+        } 
+        // Try to fix the double black propagated from downwards
+        int fixed = 0;
+        if (dbState == DOUBLE_BLACK_FROM_LEFT) { // from its left child
             /*
                       (*pNodePtr)
                           |
@@ -1055,13 +1030,13 @@ static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
                         /      \
                        /        \
                 Deleted (B)    Sibling (R or B)
-             */
+             */            
             if (hasRedRight(pNode)) {
-                FixRedRightSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
-            } else if (hasBlackRight(pNode) && pNode->rightChild) {
-                FixBlackRightSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
-            }
-        } else if (bFactor > 0) {
+                fixed = FixRedRightSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
+            } else if (hasBlackRight(pNode) && pNode->right) {
+                fixed = FixBlackRightSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
+            } 
+        } else if (dbState == DOUBLE_BLACK_FROM_RIGHT) { // from its right child
             /*
                           (*pNodePtr)
                               |
@@ -1071,28 +1046,46 @@ static void RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr,
                             /      \
                            /        \
                 Sibling (R or B)    Deleted (B)
-             */
+             */            
             if (hasRedLeft(pNode)) {
-                FixRedLeftSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
-            } else if (hasBlackLeft(pNode) && pNode->leftChild) {
-                FixBlackLeftSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
-            }
+                fixed = FixRedLeftSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
+            } else if (hasBlackLeft(pNode) && pNode->left) {
+                fixed = FixBlackLeftSiblingInDeletion(pRoot, pNodePtr, graphName, fileName, pCnt);
+            }            
+        } 
+        // If fixed, reset the state to be NO_DOUBLE_BACK
+        if (fixed) {
+            dbState = NO_DOUBLE_BACK;
         }
-
-        GEN_ONE_IMAGE();
+        // For algorithm visualization
+        if (dbState != NO_DOUBLE_BACK) {
+            GEN_ONE_IMAGE("Propagate double black upwards from", pNode->value.numVal);
+        } else {
+            GEN_ONE_IMAGE("After fixing double black at", pNode->value.numVal);
+        }
+        // The violation cannot be fixed, propagate it upwards.
+        if (!fixed) {
+            if (direction == TURN_LEFT) {
+                dbState = DOUBLE_BLACK_FROM_LEFT;
+            } else {
+                dbState = DOUBLE_BLACK_FROM_RIGHT;
+            }
+        }     
         // It is not on stack
-        pNode->visited = 0;
+        pNode->visited = 0;        
     }
+    return dbState;     
 }
 
 void RBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, long numVal, long *pCnt) {
-    RecursiveRBTreeDelete(pRoot, pNodePtr, numVal, pCnt);
+    RecursiveRBTreeDelete(pRoot, pNodePtr, numVal, pCnt, TURN_LEFT);
     RBTreeNodePtr pNode = *pNodePtr;
     if (pNode) {
         pNode->color = BLACK;
-        UpdateBlackHeight(pNode);
     }
 }
+
+//////////////////////////////////////////  IsRBTree() //////////////////////////////////////////////
 
 static int CheckRBTree(RBTreeNodePtr pNode) {
     if (pNode) {
@@ -1109,18 +1102,18 @@ static int CheckRBTree(RBTreeNodePtr pNode) {
         }
 
         // Property 4: The left and right subtrees have the same black height.
-        if (RBTreeBlackHeight(pNode->leftChild) != RBTreeBlackHeight(pNode->rightChild)) {
+        if (RBTreeBlackHeight(pNode->left) != RBTreeBlackHeight(pNode->right)) {
             return 0;
         }
 
         // Property 5: All null nodes are black.  See hasBlackLeft() and hasBlackRight()
 
         // Recursively check left and right subtrees
-        if (CheckRBTree(pNode->leftChild) == 0) {
+        if (CheckRBTree(pNode->left) == 0) {
             return 0;
         }
 
-        if (CheckRBTree(pNode->rightChild) == 0) {
+        if (CheckRBTree(pNode->right) == 0) {
             return 0;
         }
     }
@@ -1137,9 +1130,11 @@ int IsRBTree(RBTreeNodePtr root) {
         if (root->color != BLACK) {
             return 0;
         }
+        RBTreeResetBlackHeight(root);
         // Check other properties
         return CheckRBTree(root);
     } else {
         return 1;
     }
 }
+
