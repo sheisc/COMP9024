@@ -63,7 +63,7 @@ $(BUILD_DIR)/%.o: src/%.c $(H_SRC_FILES)
 
 # clean all the files generated	
 clean:
-	rm -rf $(TARGET_EXE) CounterLock CounterNoLock AccessImage ASLR $(BUILD_DIR) 
+	rm -rf $(TARGET_EXE) CounterLock CounterNoLock AccessImage ASLR $(BUILD_DIR) $(TARGET_EXE).gif
 	find . -name "*.o" | xargs rm -f
 	find . -name "*.s" | xargs rm -f
 	find . -name "*.i" | xargs rm -f
@@ -73,4 +73,10 @@ clean:
 
 view:
 	find ./images -name "*.png" | sort | xargs feh -g 720x540 &
+
+normalize:
+	find ./images -name "*.png" | xargs -I {} convert -resize 720x540\> -gravity center -background white {} {}
+	
+animation:	
+	convert -extent 720x540 -gravity center -background white -delay 30 -loop 0 images/*.png $(TARGET_EXE).gif
 
