@@ -74,6 +74,11 @@ typedef enum {
     OtherRBState,
 } RBTreeNodeState;
 
+static int FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
+                                           char *graphName, char *fileName, long *pCnt);
+
+static int FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
+                                           char *graphName, char *fileName, long *pCnt);                                          
 
 static long hasIntermediateImages = 0;
 
@@ -272,12 +277,15 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
     if (state == OtherRBState) {
         return;
     }
-    GEN_ONE_IMAGE("Before FixViolationsInInsertion()", (*pNodePtr)->value.numVal);
+    //GEN_ONE_IMAGE("Before FixViolationsInInsertion()", (*pNodePtr)->value.numVal);
     switch (state){
     case RedParentRedUncle_RXXX:
     case RedParentRedUncle_XRXX:
     case RedUncleRedParent_XXRX:
     case RedUncleRedParent_XXXR:
+        GEN_ONE_IMAGE("red uncle + black grandparent:\n"
+                    "after coloring, propagate it upwards to", 
+                    pNode->value.numVal);    
         /*
             RedParentRedUncle_RXXX:
             (Other three cases omitted)
@@ -306,6 +314,9 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
 
         break;
     case RedParentBlackUncle_RXXX:
+        GEN_ONE_IMAGE("black right uncle + black grandparent:\n"
+                    "right rotation and coloring, to fix the red-red violation at the RXXX grandchild of", 
+                    pNode->value.numVal);      
         /*
             -----------------------------------------------------------------------
                   Initial                   After right rotation and recoloring
@@ -332,6 +343,9 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
 
         break;
     case RedParentBlackUncle_XRXX:
+        GEN_ONE_IMAGE("black right uncle + black grandparent:\n"
+                    "LR rotations and coloring, to fix the red-red violation at the XRXX grandchild of", 
+                    pNode->value.numVal);      
         /*  
 
             ------------------------------------------------------------------------------------------------------
@@ -353,7 +367,7 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
             ------------------------------------------------------------------------------------------------------
          */
         RBTreeLeftRotate(&pNode->left);
-        GEN_ONE_IMAGE("After RBTreeLeftRotate()", pNode->left->value.numVal);
+        GEN_ONE_IMAGE("After left rotation", pNode->left->value.numVal);
 
         RBTreeRightRotate(pNodePtr);
 
@@ -362,6 +376,9 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
 
         break;
     case BlackUncleRedParent_XXRX:
+        GEN_ONE_IMAGE("black left uncle + black grandparent:\n"
+                    "RL rotations and coloring, to fix the red-red violation at the XXRX grandchild of", 
+                    pNode->value.numVal);      
         /*
             ------------------------------------------------------------------------------------------------------
                   Initial                       After right rotation          After left rotation and recoloring
@@ -382,7 +399,7 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
             ------------------------------------------------------------------------------------------------------
          */
         RBTreeRightRotate(&pNode->right);
-        GEN_ONE_IMAGE("After RBTreeRightRotate()", pNode->right->value.numVal);
+        GEN_ONE_IMAGE("After right rotation", pNode->right->value.numVal);
 
         RBTreeLeftRotate(pNodePtr);
 
@@ -391,6 +408,9 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
 
         break;
     case BlackUncleRedParent_XXXR:
+        GEN_ONE_IMAGE("black left uncle + black grandparent:\n"
+                    "left rotation and coloring, to fix the red-red violation at the XXXR grandchild of", 
+                    pNode->value.numVal);      
         /*
             -----------------------------------------------------------------------
                   Initial                    After left rotation and recoloring
@@ -419,7 +439,7 @@ static void FixViolationsInInsertion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodeP
     default:
         break;
     }
-    GEN_ONE_IMAGE("After FixViolationsInInsertion()", (pNode)->value.numVal);
+    GEN_ONE_IMAGE("After fixing the red-red violation at the grandchild of", (pNode)->value.numVal);
 }
 
 static void RecursiveRBTreeInsert(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, long numVal, char *nodeName, long *pCnt) {
@@ -477,20 +497,26 @@ static RBTreeNodePtr BiTreeMaxValueNode(RBTreeNodePtr root) {
 static int FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
                                          char *graphName, char *fileName, long *pCnt) {
     RBTreeNodePtr pNode = *pNodePtr;
+    GEN_ONE_IMAGE("red right sibling + black parent:\n"
+                  "left rotation and coloring, to convert it into a black-sibling-red-parent violation", 
+                  pNode->value.numVal);    
+    // sibling will become a black grandparent
+    SetTreeNodeColor(pNode->right, BLACK);
+    SetTreeNodeColor(pNode, RED);
     /*
 
         -----------------------------------------------------------------------
-                  Initial                            After left rotation
+                  Initial                      After left rotation + coloring
         -----------------------------------------------------------------------
 
                   (*pNodePtr)                              (*pNodePtr)
                       |                                        |
                       |                                        |
                       V                                        V
-                  Node (B)                                Sibling (R)
+                  Node (B)                                Sibling (B)
                   /      \                                 /        \
                  /        \                               /          \
-        Deleted (B)     Sibling (R)                  Node (B)      Black2
+        Deleted (B)     Sibling (R)                  Node (R)      Black2
                          /      \                    /     \
                         /        \                  /       \
                     Black1       Black2       Deleted (B)    Black1
@@ -502,109 +528,11 @@ static int FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNo
         -----------------------------------------------------------------------
      */
     RBTreeLeftRotate(pNodePtr);
-    GEN_ONE_IMAGE("After RBTreeLeftRotate()", (*pNodePtr)->value.numVal);
-    /*
-                            WARNING
+    GEN_ONE_IMAGE("After left rotation and coloring,\n"
+                  "a black-sibling-red-parent violation at the left child of", 
+                  pNode->value.numVal);
 
-        The structure of the red-black tree has been changed after a rotation.
-
-        (*pNodePtr) and pNode might not point to the same node any more.
-
-     */
-    if (hasBlackLeft(pNode->right) && hasBlackRight(pNode->right))
-    {
-        /*
-
-            Case 1:  After left rotation, black sibling (Black1) and two black nephews (e.g, two null nodes) exist
-
-            -----------------------------------------------------------------------||------------------------------------
-                        Initial                        After left rotation (done)  ||           After recoloring
-            -----------------------------------------------------------------------||------------------------------------
-                                                                                   ||
-                      (*pNodePtr)                              (*pNodePtr)         ||                 (*pNodePtr)
-                          |                                        |               ||                     |
-                          |                                        |               ||                     |
-                          V                                        V               ||                     V
-                      Node (B)                                Sibling (R)          ||                Sibling (B)
-                      /      \                                 /        \          ||                 /        \
-                     /        \                               /          \         ||                /          \
-            Deleted (B)     Sibling (R)                  Node (B)      Black2      ||           Node (B)      Black2
-                             /      \                    /     \                   ||           /     \
-                            /        \                  /       \                  ||          /       \
-                        Black1       Black2       Deleted (B)    Black1            ||    Deleted (B)   Black1 (R)
-                        /  \                                      /  \             ||                    /  \
-                       /    \                                    /    \            ||                   /    \
-                      null  null                                null  null         ||                  null  null
-            -----------------------------------------------------------------------||------------------------------------
-         */
-        SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor(pNode->right, RED);
-
-    }
-    else if (hasRedRight(pNode->right)) {
-        /*
-             Case 2: After left rotation, black sibling (Black1) and the red right nephew node (Red2) exist
-
-            -------------------------------------------------------------------||----------------------------------------
-                        Initial                     After left rotation (done) ||    After left rotation and recoloring
-            -------------------------------------------------------------------||----------------------------------------
-                                                                               ||
-                      (*pNodePtr)                            (*pNodePtr)       ||                      (*pNodePtr)
-                          |                                      |             ||                          |
-                          |                                      |             ||                          |
-                          V                                      V             ||                          V
-                      Node (B)                              Sibling (R)        ||                     Sibling (B)
-                      /      \                               /        \        ||                      /        \
-                     /        \                             /          \       ||                     /          \
-            Deleted (B)     Sibling (R)                Node (B)      Black2    ||               Black1 (R)      Black2
-                             /      \                  /     \                 ||                /     \
-                            /        \                /       \                ||               /       \
-                        Black1       Black2     Deleted (B)    Black1          ||         Node (B)      Red2 (B)
-                            \                                      \           ||             /
-                             \                                      \          ||            /
-                             Red2                                   Red2       ||       Deleted (B)
-            -------------------------------------------------------------------||----------------------------------------
-         */
-        RBTreeLeftRotate(&(*pNodePtr)->left);
-
-        SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor((*pNodePtr)->left, RED);
-        SetTreeNodeColor((*pNodePtr)->left->right, BLACK);
-
-    } else if (hasRedLeft(pNode->right)) {
-        /*
-             Case 3: After left rotation, black sibling (Black1) and the left red nephew node (Red1) exist,
-                     but the right red nephew node (Red2) does not exist.
-
-            ------------------------------------------------------------------||---------------------------------------------------------------------
-                        Initial                   After left rotation (done)  ||     After right rotation         After left rotation and recoloring
-            ------------------------------------------------------------------||---------------------------------------------------------------------
-                                                                              ||
-                      (*pNodePtr)                            (*pNodePtr)      ||              (*pNodePtr)                          (*pNodePtr)
-                          |                                      |            ||                  |                                    |
-                          |                                      |            ||                  |                                    |
-                          V                                      V            ||                  V                                    V
-                      Node (B)                              Sibling (R)       ||             Sibling (R)                          Sibling (B)
-                      /      \                               /        \       ||              /        \                           /        \
-                     /        \                             /          \      ||             /          \                         /          \
-            Deleted (B)     Sibling (R)                Node (B)      Black2   ||        Node (B)      Black2                 Red1 (R)      Black2
-                             /      \                  /     \                ||        /     \                              /     \
-                            /        \                /       \               ||       /       \                            /       \
-                        Black1       Black2     Deleted (B)    Black1         || Deleted (B)    Red1                  Node (B)      Black1
-                        /                                      /              ||                 \                       /
-                       /                                      /               ||                  \                     /
-                    Red1                                   Red1               ||                 Black1           Deleted (B)
-            ------------------------------------------------------------------||---------------------------------------------------------------------
-         */
-        RBTreeRightRotate(&pNode->right);
-        GEN_ONE_IMAGE("After RBTreeRightRotate()", pNode->right->value.numVal);
-
-        RBTreeLeftRotate(&(*pNodePtr)->left);
-
-        SetTreeNodeColor(*pNodePtr, BLACK);
-
-    }
-    return 1;
+    return FixBlackRightSiblingInDeletion(pRoot, &((*pNodePtr)->left), graphName, fileName, pCnt);  
 }
 
 /*
@@ -613,6 +541,12 @@ static int FixRedRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNo
 static int FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNodePtr, 
                                         char *graphName, char *fileName, long *pCnt) {
     RBTreeNodePtr pNode = *pNodePtr;
+    GEN_ONE_IMAGE("red left sibling + black parent:\n"
+                  "right rotation and coloring, to convert it into a black-sibling-red-parent violation", 
+                  pNode->value.numVal);      
+    // sibling will become a black grandparent
+    SetTreeNodeColor(pNode->left, BLACK);
+    SetTreeNodeColor(pNode, RED);  
     /*
         -----------------------------------------------------------------------
                      Initial               After right rotation and recoloring
@@ -622,10 +556,10 @@ static int FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNod
                          |                                   |
                          |                                   |
                          V                                   V
-                      Node (B)                           Sibling (R)
+                      Node (B)                           Sibling (B)
                       /      \                           /     \
                      /        \                         /       \
-             Sibling (R)     Deleted (B)             Black1    Node (B)
+             Sibling (R)     Deleted (B)             Black1    Node (R)
                 /      \                                       /   \
                /        \                                     /     \
            Black1       Black2                            Black2     Deleted (B)
@@ -637,112 +571,10 @@ static int FixRedLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pNod
     -----------------------------------------------------------------------
      */
     RBTreeRightRotate(pNodePtr);
-    GEN_ONE_IMAGE("After RBTreeRightRotate()", (*pNodePtr)->value.numVal);
-    /*
-                            WARNING
-
-        The structure of the red-black tree has been changed after a rotation.
-
-        (*pNodePtr) and pNode might not point to the same node any more.
-
-     */
-    if (hasBlackLeft(pNode->left) && hasBlackRight(pNode->left)) {
-        /*
-
-            Case 1:  After right rotation, black sibling (Black2) and two black nephews (e.g., two null nodes) exist
-
-            -----------------------------------------------------------------||----------------------------------
-                      Initial                   After right rotation (done)  ||         After recoloring
-            -----------------------------------------------------------------||----------------------------------
-                                                                             ||
-                       (*pNodePtr)                  (*pNodePtr)              ||         (*pNodePtr)
-                           |                            |                    ||             |
-                           |                            |                    ||             |
-                           V                            V                    ||             V
-                        Node (B)                    Sibling (R)              ||         Sibling (B)
-                        /      \                    /     \                  ||         /     \
-                       /        \                  /       \                 ||        /       \
-               Sibling (R)     Deleted (B)      Black1    Node (B)           ||     Black1    Node (B)
-                  /      \                                /   \              ||               /   \
-                 /        \                              /     \             ||              /     \
-             Black1       Black2                     Black2     Deleted (B)  ||        Black2 (R)   Deleted (B)
-                           /  \                       /  \                   ||           /  \
-                          /    \                     /    \                  ||          /    \
-                        null   null                null   null               ||        null   null
-            -----------------------------------------------------------------||------------------------------------
-         */
-
-        SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor(pNode->left, RED);
-
-    } else if (hasRedRight(pNode->left)) {
-        /*
-
-            Case 2: After right rotation, black sibling (Black2) and the red right nephew node (Red2) exist
-
-            ----------------------------------------------------------------||------------------------------------------------------------------
-                     Initial                  After right rotation (done)   ||    After left rotation      After right rotation and recoloring
-            ----------------------------------------------------------------||------------------------------------------------------------------
-                                                                            ||
-                       (*pNodePtr)                 (*pNodePtr)              ||       (*pNodePtr)                   (*pNodePtr)
-                           |                           |                    ||           |                             |
-                           |                           |                    ||           |                             |
-                           V                           V                    ||           V                             V
-                        Node (B)                   Sibling (R)              ||       Sibling (R)                   Sibling (B)
-                        /      \                   /     \                  ||       /     \                       /     \
-                       /        \                 /       \                 ||      /       \                     /       \
-               Sibling (R)     Deleted (B)     Black1    Node (B)           ||   Black1    Node (B)            Black1     Red2
-                  /      \                               /   \              ||             /   \                         /   \
-                 /        \                             /     \             ||            /     \                       /     \
-             Black1       Black2                    Black2     Deleted (B)  ||         Red2     Deleted (B)        Black2     Node (B)
-                               \                         \                  ||          /                                        \
-                                \                         \                 ||         /                                          \
-                                Red2                      Red2              ||      Black2                                      Deleted (B)
-            ----------------------------------------------------------------||-----------------------------------------------------------------
-         */
-
-        RBTreeLeftRotate(&pNode->left);
-        GEN_ONE_IMAGE("After RBTreeLeftRotate()", pNode->left->value.numVal);
-
-        RBTreeRightRotate(&(*pNodePtr)->right);
-
-        SetTreeNodeColor(*pNodePtr, BLACK);
-
-    } else if (hasRedLeft(pNode->left)) {
-        /*
-
-            Case 3: After right rotation, black sibling (Black2) and the red left nephew node (Red1) exist,
-                    but the red right nephew node (Red2) does not exist.
-
-            ---------------------------------------------------------------||--------------------------------------
-                      Initial                After right rotation (done)   || After right rotation and recoloring
-            ---------------------------------------------------------------||--------------------------------------
-                                                                           ||
-                       (*pNodePtr)                (*pNodePtr)              ||           (*pNodePtr)
-                           |                          |                    ||               |
-                           |                          |                    ||               |
-                           V                          V                    ||               V
-                        Node (B)                  Sibling (R)              ||           Sibling (B)
-                        /      \                  /     \                  ||           /     \
-                       /        \                /       \                 ||          /       \
-               Sibling (R)     Deleted (B)    Black1    Node (B)           ||       Black1    Black2 (R)
-                  /      \                              /   \              ||                 /   \
-                 /        \                            /     \             ||                /     \
-             Black1       Black2                   Black2     Deleted (B)  ||           Red1 (B)   Node (B)
-                            /                       /                      ||                        \
-                           /                       /                       ||                         \
-                         Red1                    Red1                      ||                       Deleted (B)
-            ---------------------------------------------------------------||--------------------------------------
-         */
-
-        RBTreeRightRotate(&(*pNodePtr)->right);
-
-        SetTreeNodeColor(*pNodePtr, BLACK);
-        SetTreeNodeColor((*pNodePtr)->right, RED);
-        SetTreeNodeColor((*pNodePtr)->right->left, BLACK);
-
-    }
-    return 1;
+    GEN_ONE_IMAGE("After right rotation and coloring,\n"
+                  "a black-sibling-red-parent violation at the right child of", 
+                  pNode->value.numVal);
+    return FixBlackLeftSiblingInDeletion(pRoot, &((*pNodePtr)->right), graphName, fileName, pCnt);  
 }
 
 /*
@@ -753,6 +585,13 @@ static int FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *p
     RBTreeNodePtr pNode = *pNodePtr;
 
     if (hasBlackLeft(pNode->right) && hasBlackRight(pNode->right)) {
+        if (pNode->color == RED) {
+            GEN_ONE_IMAGE("black right sibling + two black nephews + red parent:\n"
+                          "coloring, to fix double black at the left child of ", pNode->value.numVal);
+        } else {
+            GEN_ONE_IMAGE("black right sibling + two black nephews + black parent:\n"
+                          "after coloring, propagate the double black upwards from the left child of", pNode->value.numVal);
+        }
         /*
             Case 1:  black right sibling + two black nephews
 
@@ -785,6 +624,8 @@ static int FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *p
 
         return fixed;
     } else if (hasRedRight(pNode->right)) {
+        GEN_ONE_IMAGE("black right sibling + red right nephew:\n"
+                      "left rotation and coloring, to fix the double black at the left child of", pNode->value.numVal);
         NodeColor rootColor = pNode->color;
         /*
             Case 2: black right sibling + red right nephew (Red2)
@@ -813,6 +654,8 @@ static int FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *p
         SetTreeNodeColor(*pNodePtr, rootColor);
 
     } else if (hasRedLeft(pNode->right)) {
+        GEN_ONE_IMAGE("black right sibling + red left nephew:\n"
+                      "RL rotations and coloring, to fix the double black at the left child of", pNode->value.numVal);
         NodeColor rootColor = pNode->color;
         /*
             Case 3: black right sibling + red left nephew (Red1), but no red right nephew (Red2)
@@ -836,7 +679,7 @@ static int FixBlackRightSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *p
          */
         RBTreeRightRotate(&(*pNodePtr)->right);
 
-        GEN_ONE_IMAGE("After RBTreeRightRotate()", (*pNodePtr)->right->value.numVal);
+        GEN_ONE_IMAGE("After right rotation", (*pNodePtr)->right->value.numVal);
 
         RBTreeLeftRotate(pNodePtr);
 
@@ -855,6 +698,13 @@ static int FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
     RBTreeNodePtr pNode = *pNodePtr;
     NodeColor rootColor = pNode->color;
     if (hasBlackLeft(pNode->left) && hasBlackRight(pNode->left)) {
+        if (pNode->color == RED) {
+            GEN_ONE_IMAGE("black left sibling + two black nephews + red parent:\n "
+                          "coloring, to fix the double black at the right child of", pNode->value.numVal);
+        } else {
+            GEN_ONE_IMAGE("black left sibling + two black nephews + black parent:\n"
+                          "after coloring, propagate the double black upwards from the right child of", pNode->value.numVal);
+        }        
         /*
             Case 1:  black left sibling + two black nephews
 
@@ -886,6 +736,8 @@ static int FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
         SetTreeNodeColor(pNode, BLACK);
         return fixed;
     } else if (hasRedRight(pNode->left)) {
+        GEN_ONE_IMAGE("black left sibling + red right nephew:\n"
+                      "LR rotations and coloring, to fix the double black at the right child of", pNode->value.numVal);
         /*
             Case 2: black left sibling + red right nephew (Red2)
 
@@ -907,7 +759,7 @@ static int FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
             ---------------------------------------------------------------------------------------------------------------
          */
         RBTreeLeftRotate(&(*pNodePtr)->left);
-        GEN_ONE_IMAGE("After RBTreeLeftRotate()", (*pNodePtr)->left->value.numVal);
+        GEN_ONE_IMAGE("After left rotation", (*pNodePtr)->left->value.numVal);
 
         RBTreeRightRotate(pNodePtr);
 
@@ -915,6 +767,8 @@ static int FixBlackLeftSiblingInDeletion(RBTreeNodePtr *pRoot, RBTreeNodePtr *pN
         SetTreeNodeColor(*pNodePtr, rootColor);
 
     } else if (hasRedLeft(pNode->left)) {
+        GEN_ONE_IMAGE("black left sibling + red left nephew:\n"
+                      "right rotation and coloring, to fix the double black at the right child of", pNode->value.numVal);
         /*
             Case 3: black left sibling + red left nephew (Red1), but no red right nephew (Red2)
 
@@ -975,7 +829,8 @@ static DoubleBlackState RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePt
                     }
                 }
                 free(pNode);
-                *pNodePtr = NULL;   
+                *pNodePtr = NULL;
+                GEN_ONE_IMAGE("After deleting", numVal);   
                 return dbState;  
             } else if (pNode->left == NULL && pNode->right != NULL) { // case 01: only right  
                 RBTreeNodePtr tmp = pNode->right;
@@ -1003,7 +858,7 @@ static DoubleBlackState RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePt
                 pNode->value = pPredecessor->value;
                 pPredecessor->value = val;
 
-                GEN_ONE_IMAGE("After swapping, recursively delete", pNode->left->value.numVal);
+                GEN_ONE_IMAGE("After swapping, recursively delete", pPredecessor->value.numVal);
 
                 // Now, numVal is in left sub-tree. Let us recursively delete it.
                 // Temporarily, the whole binary search tree is at an inconsistent state.
@@ -1059,9 +914,10 @@ static DoubleBlackState RecursiveRBTreeDelete(RBTreeNodePtr *pRoot, RBTreeNodePt
         }
         // For algorithm visualization
         if (dbState != NO_DOUBLE_BACK) {
-            GEN_ONE_IMAGE("Propagate double black upwards from", pNode->value.numVal);
+            // double black's view point
+            GEN_ONE_IMAGE("Propagate the double black upwards to", pNode->value.numVal);
         } else {
-            GEN_ONE_IMAGE("After fixing double black at", pNode->value.numVal);
+            GEN_ONE_IMAGE("After fixing the double black at the child of ", pNode->value.numVal);
         }
         // The violation cannot be fixed, propagate it upwards.
         if (!fixed) {

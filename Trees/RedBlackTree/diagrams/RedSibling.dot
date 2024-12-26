@@ -1,6 +1,6 @@
 digraph RBTree {
 "0x0001" [label="red-sibling + black parent"] [color=orangered] [style=filled] 
-"0x0002" [label="black-sibling + red parent"] [color=grey] [style=filled] 
+"0x0002" [label="black-sibling + red parent + black grandparent"] [color=grey] [style=filled] 
 "0x0001" -> {"0x0002"} [label="After one rotation + coloring"]
 "0x0002" -> {"0x0003"} [label="has 1 or 2 red nephews"] [color=red]
 "0x0003" [label="Fixed locally: 
