@@ -1,6 +1,6 @@
 digraph RBTree {
 "0x0001" [label="red node + red parent + black grandparent"] [color=orangered] [style=filled] 
-"0x0001" -> {"0x0002"} [label="red uncle"]
+"0x0001" -> {"0x0002"} [label="red uncle"]  [color=red]
 "0x0001" -> {"0x0003"} [label="black uncle"]
 "0x0002" [label="Propagated upwards: 
      after coloring both parent and uncle as black but grandparent as red,
