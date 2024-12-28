@@ -20,21 +20,33 @@ pattern:
 
 ### Motivation for avoiding unnecessary comparisons when a mismatch occurs
 
-Case 1: // pattern[0] does not skip over text[i+j]
+When a mismatch occurs, we will shift the whole pattern to the right.
 
+Case 1:  pattern[0] does not skip over text[i+j] 
+
+        // (i.e., after shifting, pattern[0] is not on the right of the text[i+j])
+```sh
     Try to find another occurrence of the substring pattern[j+1 .. m-1] in the pattern, but preceded by a character
     which is different from pattern[j].
 
     Since another occurrence of pattern[j] pattern[j+1 .. m-1] will cause another mismatch.
+```
 
-Case 2: // pattern[0] skips over text[i+j], but not over text[i+m-1]
+Case 2:  pattern[0] skips over text[i+j], but not over text[i+m-1] 
 
+        // (i.e., after shifting, pattern[0] is on the right of the text[i+j])
+
+```sh
     When case 1 fails, find a prefix of the pattern (starting at index 0), which matches with a suffix of pattern[j+1 .. m-1].
+```
 
-Case 3: // pattern[0] skips over text[i+m-1],  
+Case 3:  pattern[0] skips over text[i+m-1] 
 
+        // (i.e., after shifting, pattern[0] is at text[i+m])
+
+```sh
     When both case 1 and case 2 fail, skip text[i+j+1 .. i+m-1].
-
+```
 
 ### longestBP[m]
 
@@ -162,7 +174,7 @@ static void PreprocessLongestBP(long *shiftTable,
 
 Based on longestBP[m], 
 the Boyer-Moore algorithm further constructs a shiftTable[m+1] to determine the shift value 
-for a mismatch at text[i+j] != text[j].
+for a mismatch at text[i+j] != pattern[j].
 
 #### Its implementation is very tricky.
 
@@ -243,7 +255,7 @@ If the shfit value 3 is used, there will be another mismatch at pattern[1] != te
 Note that both pattern[1] and pattern[4] are 'a'.
 ```
 
-### When a mismatch occurs (text[i+j] != text[j])
+### When a mismatch occurs (text[i+j] != pattern[j])
 
 ```C
     i += shiftTable[j+1];
@@ -251,7 +263,7 @@ Note that both pattern[1] and pattern[4] are 'a'.
     // j is reset to be m-1, where m is the length of the pattern    
 ```
 
-### When a match occurs (text[i+j] == text[j])
+### When a match occurs (text[i+j] == pattern[j])
 
 ```C
     j--;
