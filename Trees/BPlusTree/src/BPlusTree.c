@@ -119,27 +119,19 @@ static long BPlusTreeNodeFindKeyInCurNode(struct BPlusTreeNode *pNode, BPlusTree
     the first element in pNode->keys[] which is larger than @k.
  */
 static long BPlusTreeNodeFindKeyInCurNode(struct BPlusTreeNode *pNode, BPlusTreeKeyTy k, long *pIndex) {
-    // [left, right]
+    //[left, right)
     long left = 0;
-    long right = pNode->nk - 1;
-    while (left <= right) {
-        long mid = (left + right) / 2;
-        if (pNode->keys[mid] == k) {   
-            // find the leftmost target         
-            while (mid - 1 >= 0 && pNode->keys[mid - 1] == k) {
-                mid--;
-            }
-            *pIndex = mid;
-            return 1;
-        } else if (pNode->keys[mid] < k) {
+    long right = pNode->nk;
+    while (left < right) {
+        long mid = left + (right - left) / 2;
+        if (pNode->keys[mid] < k) {
             left = mid + 1;
         } else {
-            right = mid - 1;
-        }                       
+            right = mid;
+        }
     }
-    assert(left >= pNode->nk || pNode->keys[left] > k);
-    *pIndex = left;
-    return 0;      
+    *pIndex = right;
+    return right < pNode->nk && pNode->keys[right] == k;      
 }
 #endif
 
