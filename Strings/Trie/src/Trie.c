@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 #include "Trie.h"
-#include "Queue.h"
+
 
 // from '0' to 'z'
 // (from 48  to  122)
@@ -216,7 +216,7 @@ int LongestPrefixMatch(Trie t, char *key, ValueType *pVal) {
 
 #define FILE_NAME_LEN  255
 
-void GenOneImage(Trie root, char *graphName, char *fileName, long seqNo) {
+void TrieGenOneImage(Trie root, char *graphName, char *fileName, long seqNo) {
     char dotFileName[FILE_NAME_LEN+1] = {0};
     char pngFileName[FILE_NAME_LEN+1] = {0};
     char command[(FILE_NAME_LEN+1)*4] = {0};
@@ -243,6 +243,25 @@ static void PrintOneNode(FILE *dotFile, Trie curNode, char ch) {
     fprintf(dotFile, "\"%p\" [label=\"%c\"] %s\n", curNode, ch, wordEndStr);   
 }
 
+static void PrintTrieInDot(FILE *dotFile, Trie curNode, Trie parent) {
+    
+    if (curNode) {
+        if (parent == NULL) {
+            PrintOneNode(dotFile, curNode, ' ');
+        }        
+        for (int i = 0; i < ALPHABET_SIZE; i++) {
+            if (curNode->kids[i]) {
+                PrintOneNode(dotFile, curNode->kids[i], FIRST_CHAR + i);             
+                // Print one edge
+                fprintf(dotFile, "\"%p\" -> {\"%p\"}\n",
+                        curNode,                     
+                        curNode->kids[i]);
+                PrintTrieInDot(dotFile, curNode->kids[i], curNode);                        
+            }
+        }       
+    }   
+}
+
 /*
     digraph TrieInsert {
     "0x587a961a42a0" -> {"0x587a961a4390"}
@@ -259,33 +278,13 @@ void Trie2Dot(Trie root, char *filePath, char *graphName) {
         FIXME:  check sanity of the parameters.
      */
     if (dotFile) {
-        char *edgeConnectorStr = "->";
         fprintf(dotFile, "digraph %s {\n", graphName);
         
-        struct Queue *pQueue = CreateQueue();
-        if (root) {
-            QueueEnqueue(pQueue, root);
-            PrintOneNode(dotFile, root, ' ');
-            while (!QueueIsEmpty(pQueue)) {
-                Trie curNode = QueueDequeue(pQueue);
-                // output the directed edge
-                for (int i = 0; i < ALPHABET_SIZE; i++) {
-                    if (curNode->kids[i]) {
-                        PrintOneNode(dotFile, curNode->kids[i], FIRST_CHAR + i);
-                        // Print one edge
-                        fprintf(dotFile, "\"%p\" %s {\"%p\"}\n",
-                                curNode,
-                                edgeConnectorStr,                         
-                                curNode->kids[i]);
-                        QueueEnqueue(pQueue, curNode->kids[i]);                        
-                    }
-                }                
-            }
-        }
-        ReleaseQueue(pQueue);     
+        PrintTrieInDot(dotFile, root, NULL);
         fprintf(dotFile, "}\n");
         fclose(dotFile);
     }                
 }
+
 
 

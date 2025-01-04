@@ -24,7 +24,7 @@ int LongestPrefixMatch(Trie t, char *key, ValueType *pVal);
 
 // For visualizing the data structure
 void Trie2Dot(Trie root, char *filePath, char *graphName);
-void GenOneImage(Trie root, char *graphName, char *fileName, long seqNo);
+void TrieGenOneImage(Trie root, char *graphName, char *fileName, long seqNo);
 
 #endif
 

@@ -31,7 +31,7 @@ void TestDictionary(void) {
     int n = sizeof(words)/sizeof(words[0]);   
     for (int i = 0; i < n; i++) {
         t = TrieInsert(t, words[i], meanings[i]);
-        GenOneImage(t, "TrieInsert", "images/TrieInsert", imgCount);
+        TrieGenOneImage(t, "TrieInsert", "images/TrieInsert", imgCount);
         imgCount++;
     }
     
@@ -75,7 +75,7 @@ void TestLongestPrefixMatch(void) {
     int n = sizeof(ipPrefix)/sizeof(ipPrefix[0]);   
     for (int i = 0; i < n; i++) {
         t = TrieInsert(t, ipPrefix[i], actions[i]);
-        GenOneImage(t, "TrieInsert", "images/TrieInsert", imgCount);
+        TrieGenOneImage(t, "TrieInsert", "images/TrieInsert", imgCount);
         imgCount++;
     }
     // To be simple, only 8 bits are used here, rather than 32 bits in IPv4
