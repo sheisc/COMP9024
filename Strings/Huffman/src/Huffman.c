@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "Queue.h"
 #include "Huffman.h"
 
 // ASCII table
@@ -23,7 +22,7 @@
 
 typedef struct {
     // e.g, "9000", "Node A", "Node B"
-    char name[MAX_ID_LEN + 1];
+    //char name[MAX_ID_LEN + 1];
     // value of an integer, e.g., 2024
     long frequency;
     //
@@ -86,15 +85,6 @@ static void InitBinaryTreeNode(struct BiTreeNode *pNode,
 
     pNode->value.charValue = charValue;
     pNode->value.frequency = frequency;
-    if (nodeName == NULL) {
-        if (charValue != INTERNAL_NODE_CHARVAL) {
-            snprintf(pNode->value.name, MAX_ID_LEN, "\'%c\'_%ld", (char) charValue, frequency);
-        } else {
-            snprintf(pNode->value.name, MAX_ID_LEN, "%ld", frequency);
-        }
-    } else {
-        snprintf(pNode->value.name, MAX_ID_LEN, "%s", nodeName);
-    }
     pNode->leftChild = left;
     pNode->rightChild = right;
     // for visualizing the algorithm
@@ -149,7 +139,7 @@ static struct BiTreeNode *BuildHuffmanTree(struct HuffmanInfo *pHuffmanInfo) {
 
     InsertionSort(pNode, 1, nodeCount);
     while (nodeCount > 1) {
-        GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount);
+        GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount, "");
         imgCount++;
 
         long sum = pNode[0].value.frequency + pNode[1].value.frequency;
@@ -162,14 +152,14 @@ static struct BiTreeNode *BuildHuffmanTree(struct HuffmanInfo *pHuffmanInfo) {
         // 
         pHuffmanInfo->n++;
 
-        GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount);
+        GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount, "");
         imgCount++;
                 
         // The first (nodeCount-1) elements are sorted
         InsertionSort(pNode, nodeCount-1, nodeCount);
     }
 
-    GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount);
+    GenOneImage(pHuffmanInfo, "Huffman", "images/Huffman", imgCount, "");
     imgCount++;
     
     return pNode;
@@ -360,7 +350,7 @@ void ReleaseHuffmanInfo(struct HuffmanInfo *pHuffmanInfo) {
 
 #define FILE_NAME_LEN  255
 
-void GenOneImage(struct HuffmanInfo *pHuffmanInfo, char *graphName, char *fileName, long seqNo) {
+void GenOneImage(struct HuffmanInfo *pHuffmanInfo, char *graphName, char *fileName, long seqNo, char *comments) {
     char dotFileName[FILE_NAME_LEN+1] = {0};
     char pngFileName[FILE_NAME_LEN+1] = {0};
     char command[(FILE_NAME_LEN+1)*4] = {0};
@@ -368,7 +358,7 @@ void GenOneImage(struct HuffmanInfo *pHuffmanInfo, char *graphName, char *fileNa
     snprintf(dotFileName, FILE_NAME_LEN, "%s_%04ld.dot", fileName, seqNo);
     snprintf(pngFileName, FILE_NAME_LEN, "%s_%04ld.png", fileName, seqNo);
 
-    HuffmanInfo2Dot(pHuffmanInfo, dotFileName, graphName, 1);
+    HuffmanInfo2Dot(pHuffmanInfo, dotFileName, graphName, 1, comments);
 
     snprintf(command, FILE_NAME_LEN*4, "dot -T png %s -o %s", dotFileName, pngFileName);
 
@@ -379,53 +369,67 @@ void GenOneImage(struct HuffmanInfo *pHuffmanInfo, char *graphName, char *fileNa
 
 }
 
+static long hiddenNodeId;
+
+static void PrintBinaryTreeInDot(FILE *dotFile, struct BiTreeNode *root) {
+    
+    if (root) {
+        // node
+        if (root->value.charValue != INTERNAL_NODE_CHARVAL) {
+            fprintf(dotFile, 
+                    "\"%p\"  [label=\"\'%c\'_%ld\"] \n", 
+                    root, (char) (root->value.charValue), root->value.frequency);
+        } else {
+            fprintf(dotFile, 
+                    "\"%p\"  [label=\"%ld\"] \n", 
+                    root, root->value.frequency);            
+        }
+
+        if (!root->leftChild && !root->rightChild) {
+            return;
+        }        
+        // left edge
+        if (root->leftChild) {
+            fprintf(dotFile, "\"%p\" -> {\"%p\"} [label=\"0\"]\n", root, root->leftChild);
+        } else {
+            hiddenNodeId++;
+            fprintf(dotFile, "\"%p\" -> {\"%p\"} [label=\"0\"] [style=invis]\n", root, (void *) hiddenNodeId);            
+            fprintf(dotFile, "\"%p\" [style=invis]\n", (void *) hiddenNodeId);            
+        }
+        // right edge
+        if (root->rightChild) {
+            fprintf(dotFile, "\"%p\" -> {\"%p\"} [label=\"1\"]\n", root, root->rightChild);
+        } else {
+            hiddenNodeId++;
+            fprintf(dotFile, "\"%p\" -> {\"%p\"} [label=\"1\"] [style=invis]\n", root, (void *) hiddenNodeId);
+            fprintf(dotFile, "\"%p\" [style=invis]\n", (void *) hiddenNodeId);            
+        }
+
+        PrintBinaryTreeInDot(dotFile, root->leftChild);
+        PrintBinaryTreeInDot(dotFile, root->rightChild);
+    }   
+}
 
 void HuffmanInfo2Dot(struct HuffmanInfo *pHuffmanInfo, 
                      char *filePath,
                      char *graphName,
-                     int displayVisited) {
+                     int displayVisited,
+                     char *comments) {
 
     FILE *dotFile = fopen(filePath, "w");
     /*
         FIXME:  check sanity of the parameters.
      */
     if (dotFile) {
-        char *edgeConnectorStr = "->";
+        //char *edgeConnectorStr = "->";
         fprintf(dotFile, "digraph %s {\n", graphName);
-        
-        struct Queue *pQueue = CreateQueue();
+
         for (long i = 0; i < pHuffmanInfo->n; i++) {
             if (pHuffmanInfo->nodes[i].isRoot) {
-                QueueEnqueue(pQueue, &(pHuffmanInfo->nodes[i]));
-                while (!QueueIsEmpty(pQueue)) {
-                    BiTreeNodePtr curNode = QueueDequeue(pQueue);
-                    // node
-                    if (curNode->visited && displayVisited) {
-                        fprintf(dotFile, "\"%p\" [label=\"%s\"] [color=red] \n", curNode, curNode->value.name);
-                    } else {
-                        fprintf(dotFile, "\"%p\" [label=\"%s\"] \n", curNode, curNode->value.name);
-                    }
-                    
-                    // two edges
-                    if (curNode->leftChild) {
-                        fprintf(dotFile, "\"%p\" %s {\"%p\"} [label=\"0\"]\n",
-                                curNode,
-                                edgeConnectorStr,                         
-                                curNode->leftChild);
-                        QueueEnqueue(pQueue, curNode->leftChild);
-                    }
-                    if (curNode->rightChild) {
-                        fprintf(dotFile, "\"%p\" %s {\"%p\"} [label=\"1\"]\n",                        
-                                curNode, 
-                                edgeConnectorStr,
-                                curNode->rightChild);
-                        QueueEnqueue(pQueue, curNode->rightChild);
-                    }            
-                    
-                }
+                PrintBinaryTreeInDot(dotFile, &(pHuffmanInfo->nodes[i]));
             }
-        }
-        ReleaseQueue(pQueue);     
+        }        
+        
         fprintf(dotFile, "}\n");
         fclose(dotFile);
     }                

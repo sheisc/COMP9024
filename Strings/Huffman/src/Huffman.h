@@ -28,9 +28,10 @@ void ReleaseHuffmanInfo(struct HuffmanInfo *pHuffmanInfo);
 void HuffmanInfo2Dot(struct HuffmanInfo *pHuffmanInfo, 
                      char *filePath,
                      char *graphName,
-                     int displayVisited);
+                     int displayVisited,
+                     char *comments);
 
 // Based on HuffmanInfo2Dot()
-void GenOneImage(struct HuffmanInfo *pHuffmanInfo, char *graphName, char *fileName, long seqNo);
+void GenOneImage(struct HuffmanInfo *pHuffmanInfo, char *graphName, char *fileName, long seqNo, char *comments);
 
 #endif
