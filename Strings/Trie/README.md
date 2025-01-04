@@ -569,7 +569,7 @@ int LongestPrefixMatch(Trie t, char *key, ValueType *pVal) {
     }
 }
 ```
-
+<!--
 ### 5.5 Trie2Dot()
 
 ```C
@@ -651,3 +651,5 @@ void GenOneImage(Trie root, char *graphName, char *fileName, long seqNo) {
 }
 
 ```
+
+-->
