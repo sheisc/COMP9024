@@ -41,8 +41,8 @@ $(shell mkdir -p $(BUILD_DIR))
 # the default target
 all: 
 	make $(TARGET_EXE)
-	gcc -g -Wall -lpthread CounterLock.c -o CounterLock
-	gcc -g -Wall -lpthread CounterNoLock.c -o CounterNoLock
+	gcc -g -Wall CounterLock.c -o CounterLock -lpthread
+	gcc -g -Wall CounterNoLock.c -o CounterNoLock -lpthread
 	gcc AccessImage.c -o AccessImage
 	gcc ASLR.c -o ASLR
 
