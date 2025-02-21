@@ -19,28 +19,41 @@ struct LfuNode {
     long freq;
 };
 
-// ItemNode, which is in a bucket, and the Lfu list
+// ItemNode, which is in both a hashtable bucket and the listWithSameFreq
 struct ItemNode {
     long key;
     long value;
-    long freq; // access frequency
+    long freq;                  // access frequency, increase by 1 after put() and get()
 
-    struct ListHead bucketLink; // in the bucket
+    struct ListHead bucketLink; // in the hash bucket
     struct ListHead freqLink;   // in the the list which has nodes with the same frequency
 
-    struct LfuNode *pLfuNode; // points to the Lfu node which contains the list
+    struct LfuNode *pLfuNode;   // points to the Lfu node which contains the listWithSameFreq
 };
 
+// LfuCache: Doubly linked list + Hashtable
 struct LfuCache {
-    long capacity;
-    long num_of_keys;
+    long capacity;              // the capacity of the LfuCache
+    long num_of_keys;           // the current number of keys stored in the LfuCache
 
-    struct ListHead lfuList;
-    struct ListHead buckets[];
+    struct ListHead lfuList;    // the least frequently used list, each entry of which is a listWithSameFreq.
+    struct ListHead buckets[];  // buckets of hastable. TBD: Its size should be determined by loadfactor.
 };
 
+/*
+    @ptr points to a @member field in a struct @type.
+    this macro returns the pointer to the struct object which contains the @member field.
+ */
 #define container_of(ptr, type, member) (type *)((char *)(ptr) - (size_t)(&((type *)0)->member))
 
+/*
+    @pList is the head node of a doubly linked list.
+    @member is the field name in a struct ST. 
+    Both @pCur and @pNext pointers to ST.
+    So, the type of the struct ST is __typeof(*(pCur)).
+
+    This macro allows deletion of the current node when traversing the doubly linked list.
+ */
 #define for_each_entry_safe(pCur, pNext, pList, member)                           \
     for ((pCur) = container_of((pList)->next, __typeof(*(pCur)), member),         \
         (pNext) = container_of(((pCur)->member).next, __typeof(*(pCur)), member); \
@@ -55,6 +68,9 @@ static void InitListHead(struct ListHead *list) {
     list->next = list;
 }
 
+/*
+    Test whether @pEntry is the tail node of the list.
+ */
 static int IsTailNode(struct ListHead *list, struct ListHead *pEntry) {
     return pEntry->next == list;
 }
@@ -93,6 +109,9 @@ static void RemoveFromList(struct ListHead *pNode) {
     pNode->next->prev = pNode->prev;
 }
 
+/*
+    Create the LfuCache: doubly linked list + hashtable
+ */
 struct LfuCache *CreateLfuCache(long capacity) {
     assert(capacity > 0);
     long nBytes = sizeof(struct LfuCache) + sizeof(struct ListHead) * capacity;
@@ -106,6 +125,11 @@ struct LfuCache *CreateLfuCache(long capacity) {
     return cache;
 }
 
+/*
+    Release the LfuCache:
+    (1) Free all ItemNodes.
+    (2) Free all LfuNodes in the lfuList.
+ */
 void ReleaseLfuCache(struct LfuCache *cache) {
     struct LfuNode *pCurLfuNode, *pNextLfuNode;
     struct ListHead *plfuList = &(cache->lfuList);
@@ -125,6 +149,15 @@ void ReleaseLfuCache(struct LfuCache *cache) {
     free(cache);
 }
 
+// TBD: a better hash function needed
+static long GetHashValue(long key) {
+    return key;
+}
+
+/*
+    Create a LfuNode, which is a node in the lfuList.
+    Each lfuNode itself has a list which contains the ItemNodes with the same access frequency.
+ */
 static struct LfuNode *CreateLfuNode(long freq) {
     struct LfuNode *newLfuNode = (struct LfuNode *)malloc(sizeof(struct LfuNode));
     assert(newLfuNode);
@@ -136,6 +169,11 @@ static struct LfuNode *CreateLfuNode(long freq) {
     return newLfuNode;
 }
 
+/*
+    Add a new ItemNode into the LfuCache.
+    (1) Insert it at the front of the listWithSameFreq where freq is 1.
+    (2) Insert it at the front of its corresponding hashtable bucket.
+ */
 static void AddNewItemNode(struct LfuCache *cache, long key, long value, struct LfuNode *pLfuNode) {
     struct ItemNode *pItemNode = (struct ItemNode *)malloc(sizeof(struct ItemNode));
     assert(pItemNode);
@@ -148,13 +186,16 @@ static void AddNewItemNode(struct LfuCache *cache, long key, long value, struct 
     AddToFront(&pLfuNode->listWithSameFreq, &pItemNode->freqLink);
     pLfuNode->n++;
     assert(pLfuNode->freq == 1);
-    long i = key % cache->capacity;
+    long i = GetHashValue(key) % cache->capacity;
     AddToFront(&cache->buckets[i], &pItemNode->bucketLink);
     cache->num_of_keys++;
 }
 
 /*
-
+    Increase the access frequency fo pCur by 1. 
+    Remove it from its current listWithSameFreq. 
+    Move it to the listWithSameFreq which has the frequency (old freq of pCur + 1).
+    Create a new LfuNode if needed.
  */
 static void UpdateLfuList(struct ListHead *lfuList, struct ItemNode *pCur) {
     // curList is the head node of the list with the same frequency
@@ -187,6 +228,11 @@ static void UpdateLfuList(struct ListHead *lfuList, struct ItemNode *pCur) {
     }
 }
 
+/*
+    Remove one ItemNode from the cache.
+    (1) Remove it from the listWithSameSeq. 
+    (2) Remove it from the hashtable bucket.
+ */
 static void RemoveOneKeyFromCache(struct LfuCache *cache)
 {
     // the first LfuNode in Lfulist, in ascending order by frequency
@@ -205,6 +251,11 @@ static void RemoveOneKeyFromCache(struct LfuCache *cache)
     cache->num_of_keys--;
 }
 
+/*
+    Print the lfuList in the Lfu Cache.
+
+    TBD: print the hashtable.
+ */
 void PrintLfuCache(struct LfuCache *cache, const char *info) {
     struct LfuNode *pCurLfuNode, *pNextLfuNode;
     struct ListHead *plfuList = &(cache->lfuList);
@@ -221,14 +272,24 @@ void PrintLfuCache(struct LfuCache *cache, const char *info) {
     }
 }
 
+/*
+    Put a pair of (key, value) into the hashtable. 
+    If @key exists, both its value and access frequency are updated. 
+
+    If the cache is full, remove one ItemNode which has the least access frequency. 
+    If there is a tie, remove the Tail node (least recently used) in the listWithSameFreq.
+
+    Add new ItemNode and update the lfuList. 
+ */
 void LfuCachePut(struct LfuCache *cache, long key, long value) {
-    long index = key % cache->capacity;
+    long index = GetHashValue(key) % cache->capacity;
 
     struct ItemNode *pCur, *pNext;
     struct ListHead *pList = &(cache->buckets[index]);
     //
     for_each_entry_safe(pCur, pNext, pList, bucketLink) {
         if (pCur->key == key) {
+            pCur->value = value;
             UpdateLfuList(&cache->lfuList, pCur);
             return;
         }
@@ -257,12 +318,13 @@ void LfuCachePut(struct LfuCache *cache, long key, long value) {
 /*
     If found
         *pValue = foundValue
+        update the access frequency.
         return 1
     else
         return 0
  */
 int LfuCacheGet(struct LfuCache *cache, long key, long *pValue) {
-    long index = key % cache->capacity;
+    long index = GetHashValue(key) % cache->capacity;
 
     struct ItemNode *pCur, *pNext;
     struct ListHead *pList = &(cache->buckets[index]);
