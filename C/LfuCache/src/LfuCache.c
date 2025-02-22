@@ -42,14 +42,14 @@ struct LfuCache {
 
 /*
     @ptr points to a @member field in a struct @type.
-    this macro returns the pointer to the struct object which contains the @member field.
+    This macro returns the pointer to the struct object which contains the @member field.
  */
 #define container_of(ptr, type, member) (type *)((char *)(ptr) - (size_t)(&((type *)0)->member))
 
 /*
     @pList is the head node of a doubly linked list.
     @member is the field name in a struct ST. 
-    Both @pCur and @pNext pointers to ST.
+    Both @pCur and @pNext are pointers pointing to ST.
     So, the type of the struct ST is __typeof(*(pCur)).
 
     This macro allows deletion of the current node when traversing the doubly linked list.
