@@ -5,13 +5,7 @@ Doubly linked list + Hashtable
 ### How to use
 
 ```sh
-LfuCache$ make CFLAGS="-fsanitize=address -O3 -Wall"
-
-make main
-make[1]: Entering directory '/home/iron/Downloads/LfuCache'
-gcc -fsanitize=address -O3 -Wall -c src/main.c -o build/main.o
-gcc -fsanitize=address -O3 -Wall -o main ./build/LfuCache.o ./build/main.o
-make[1]: Leaving directory '/home/iron/Downloads/LfuCache'
+LfuCache$ make CFLAGS="-fsanitize=address -O3 -Wall -g"
 
 LfuCache$ ./main
 
